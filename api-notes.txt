@@ -1,0 +1,11 @@
+Ordinance Survey: Coordinates -> Address, Classification code
+	fields: ADDRESS, X_COORDINATE, Y_COORDINATE, CLASSIFICATION_CODE, CLASSIFICATION_CODE_DESCRIPTION
+Business rates (in theory): Address -> Further commercial classification, Floorspace info
+Planit: Coordinates -> Planning history
+
+Aggregating touch points into locus:
+	Headline type: Commercial, Mixed-use, Residential
+	Individual buildings within locus have (via address)
+		additional business rates & planning permission streams integrated
+	Planning only locus have headline type: Development
+	Planning only points are called Sites
