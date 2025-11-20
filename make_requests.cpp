@@ -38,22 +38,7 @@ struct PlanningApplication {
 	float x;
 	float y;
 };
-
-struct PairHash {
-	template <class T>
-	size_t operator()(const pair<T, T> &p) const {
-		return std::hash<T>{}(p.first) ^ std::hash<T>{}(p.second);
-	}
-};
-struct PairEq {
-	template <class T>
-	bool operator()(const pair<T, T> &p1, const pair<T, T> &p2) const {
-		return p1.first == p2.first && p1.second == p2.second;
-	}
-};
-typedef unordered_map<
-	pair<float, float>, vector<PlanningApplication>, PairHash, PairEq
-> ApplicationRegister;
+typedef unordered_map<string, vector<PlanningApplication>> ApplicationRegister;
 
 struct SubUnit {
 	string address;
@@ -115,32 +100,6 @@ void make_get_request(CURL *handle, char *url, string &data) {
 	curl_easy_perform(handle);
 }
 
-bool is_comma(char c) { return c == ','; }
-
-/*
- * Strip the business name and commas from an address to match
- * planning permissions address format
- */
-string get_plain_addr(string addr, string classification) {
-	string plain_addr;
-	string::iterator beg, sep = find(addr.begin(), addr.end(), ',');
-	bool is_residential = classification[0] == 'R';
-	// sep-1 => 19A, is still valid
-	if (is_residential || all_of(addr.begin(), sep-1, isdigit)) {
-		beg = addr.begin();
-	} else {
-		beg = sep+2;
-	}
-	remove_copy_if(beg, addr.end(), back_inserter(plain_addr), is_comma);
-	return std::move(plain_addr);
-}
-
-void make_lowercase(string &s) {
-	transform(s.begin(), s.end(), s.begin(), [](char c) {
-		return std::tolower(c);
-	});
-}
-
 vector<SubUnit> get_subunits(CURL *handle, int x, int y, int radius) {
 	string data;
 	char url[500];
@@ -191,8 +150,7 @@ ApplicationRegister get_planning_apps(CURL *handle, double lat, double lng, int 
 				continue;
 			}
 		}
-		cout << "x = " << x << " y = " << y << endl;
-		addr2apps[{x, y}].push_back({
+		addr2apps[app["address"]].push_back({
 			std::move(app["address"]),
 			std::move(app["description"]),
 			std::move(app["app_size"]),
@@ -230,11 +188,11 @@ void get_tobs(double lat, double lng) {
 	});
 	cout << endl << endl << endl << endl;
 	cout << "Planning apps" << endl;
-	cout << "Size = " << plan_apps.size() << endl;
 	for (auto &p: plan_apps) {
-		cout << p.first.first << "," << p.first.second << ": ";
+		cout << p.first << ":" << endl;
+		cout << string(p.first.size()+1, '-') << endl;
 		for (PlanningApplication &app: p.second) {
-			cout << app.address << ",";
+			cout << app.description << endl;
 		}
 		cout << endl;
 	}
