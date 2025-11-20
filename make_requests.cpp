@@ -10,22 +10,38 @@
 #include <vector>
 #include <iterator>
 #include <cstdio>
+#include <nlohmann/json.hpp>
 
 using std::cout; using std::endl; using std::cerr;
 using std::string; using std::ifstream; using std::find;
 using std::unordered_map; using std::copy; using std::back_inserter;
+using std::vector;
+using json = nlohmann::json;
 
 const string API_CONFIG_FILE="api_keys.txt";
-const char *PLACES_RADIUS_URL = "https://api.os.uk/search/places/v1/radius";
-string OS_PROJECT_API_KEY;
+unordered_map<string, string> configs;
 
-struct Building {
-	string address;
-	float x_coordinate;
-	float y_coordinate;
-	string classification_code;
-	string classification_code_description;
+struct PlanningApplication {
+	string description;
+	string size;
+	string state;
+	string date_received;
+	string date_validated;
+	string date_decision;
+	string date_decisison_issued;
+	float x;
+	float y;
 };
+
+struct SubUnit {
+	string address;
+	float x;
+	float y;
+	string code;
+	string description;
+	vector<PlanningApplication> plan_apps;
+};
+typedef unordered_map<string, SubUnit> AddressRegister;
 
 /*
  * Converts latitude and longitude to British National Grid coords
@@ -53,7 +69,6 @@ int global_to_nat_grid(double lat, double lng, int &x, int &y) {
 }
 
 void load_configs() {
-	unordered_map<string, string> confs_m;
 	string::iterator eq_sign;
 	string line, conf_key, conf_val;
 	ifstream confs_f = ifstream(API_CONFIG_FILE);
@@ -61,9 +76,8 @@ void load_configs() {
 		eq_sign = find(line.begin(), line.end(), '=');
 		conf_key = string(line.begin(), eq_sign);
 		conf_val = string(eq_sign+1, line.end());
-		confs_m[conf_key] = conf_val;
+		configs[conf_key] = conf_val;
 	}
-	OS_PROJECT_API_KEY = std::move(confs_m["OS_PROJECT_API_KEY"]);
 }
 
 size_t write_callback(char *ptr, size_t size, size_t nmemb, void *userdata) {
@@ -72,16 +86,42 @@ size_t write_callback(char *ptr, size_t size, size_t nmemb, void *userdata) {
 	return nmemb;
 }
 
-void get_buildings(int x, int y, int radius, CURL *handle) {
+AddressRegister get_subunits(int x, int y, int radius, CURL *handle) {
 	string data;
 	char url[500];
+	AddressRegister addr2unit;
 	snprintf(url, 500, "%s?key=%s&point=%d,%d&radius=%d", 
-			 PLACES_RADIUS_URL, OS_PROJECT_API_KEY.c_str(), x, y, radius);
+			 configs["PLACES_RADIUS_URL"].c_str(), configs["OS_PROJECT_API_KEY"].c_str(), 
+			 x, y, radius);
 	curl_easy_setopt(handle, CURLOPT_URL, url);
 	curl_easy_setopt(handle, CURLOPT_WRITEFUNCTION, write_callback);
 	curl_easy_setopt(handle, CURLOPT_WRITEDATA, &data);
 	curl_easy_setopt(handle, CURLOPT_HTTPGET, 1);
+
 	curl_easy_perform(handle);
+	json jdata = json::parse(data);
+	for (json &jb: jdata["results"]) {
+		addr2unit[jb["DPA"]["ADDRESS"]] = {
+			std::move(jb["DPA"]["ADDRESS"]),
+			jb["DPA"]["X_COORDINATE"],
+			jb["DPA"]["Y_COORDINATE"],
+			std::move(jb["DPA"]["CLASSIFICATION_CODE"]),
+			std::move(jb["DPA"]["CLASSIFICATION_CODE_DESCRIPTION"]),
+		};
+	}
+	return std::move(addr2unit);
+}
+
+vector<PlanningApplication> get_planning_apps(double lat, double lng, int radius) {
+	float krad = radius / 1000.0;
+	vector<PlanningApplication> apps;
+	string data;
+	char fields[] = "address,description,app_size,app_state,other_fields,start_date";
+	char url[500];
+	snprintf(url, 500, "%s?lat=%.9f&lng=%.9f&krad=%.3f&select=%s&sort=-start_date", 
+			 configs["PLANIT_URL"].c_str(), lat, lng, krad, fields);
+	cout << url << endl;
+	return apps;
 }
 
 void get_tobs(double lat, double lng) {
@@ -98,7 +138,8 @@ void get_tobs(double lat, double lng) {
 		cerr << "Failed to setup easy curl" << endl;
 		exit(1);
 	}
-	get_buildings(x, y, search_radius, handle);
+	AddressRegister addr2unit = get_subunits(x, y, search_radius, handle);
+	vector<PlanningApplication> plan_apps = get_planning_apps(lat, lng, search_radius);
 	curl_easy_cleanup(handle);
 }
 
