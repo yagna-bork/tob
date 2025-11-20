@@ -12,17 +12,22 @@
 #include <cstdio>
 #include <nlohmann/json.hpp>
 #include <utility>
+#include <locale>
+#include <cstddef>
+#include <functional>
 
 using std::cout; using std::endl; using std::cerr;
 using std::string; using std::ifstream; using std::find;
 using std::unordered_map; using std::copy; using std::back_inserter;
-using std::vector; using std::pair;
+using std::vector; using std::pair; using std::ostream_iterator;
+using std::transform; using std::all_of; using std::remove_copy_if;
 using json = nlohmann::json;
 
 const string API_CONFIG_FILE="api_keys.txt";
 unordered_map<string, string> configs;
 
 struct PlanningApplication {
+	string address;
 	string description;
 	string size;
 	string state;
@@ -33,7 +38,22 @@ struct PlanningApplication {
 	float x;
 	float y;
 };
-typedef unordered_map<string, vector<PlanningApplication>> ApplicationRegister;
+
+struct PairHash {
+	template <class T>
+	size_t operator()(const pair<T, T> &p) const {
+		return std::hash<T>{}(p.first) ^ std::hash<T>{}(p.second);
+	}
+};
+struct PairEq {
+	template <class T>
+	bool operator()(const pair<T, T> &p1, const pair<T, T> &p2) const {
+		return p1.first == p2.first && p1.second == p2.second;
+	}
+};
+typedef unordered_map<
+	pair<float, float>, vector<PlanningApplication>, PairHash, PairEq
+> ApplicationRegister;
 
 struct SubUnit {
 	string address;
@@ -43,7 +63,6 @@ struct SubUnit {
 	string description;
 	vector<PlanningApplication> plan_apps;
 };
-typedef unordered_map<string, SubUnit> AddressRegister;
 
 /*
  * Converts latitude and longitude to British National Grid coords
@@ -96,62 +115,96 @@ void make_get_request(CURL *handle, char *url, string &data) {
 	curl_easy_perform(handle);
 }
 
-AddressRegister get_subunits(int x, int y, int radius, CURL *handle) {
+bool is_comma(char c) { return c == ','; }
+
+/*
+ * Strip the business name and commas from an address to match
+ * planning permissions address format
+ */
+string get_plain_addr(string addr, string classification) {
+	string plain_addr;
+	string::iterator beg, sep = find(addr.begin(), addr.end(), ',');
+	bool is_residential = classification[0] == 'R';
+	// sep-1 => 19A, is still valid
+	if (is_residential || all_of(addr.begin(), sep-1, isdigit)) {
+		beg = addr.begin();
+	} else {
+		beg = sep+2;
+	}
+	remove_copy_if(beg, addr.end(), back_inserter(plain_addr), is_comma);
+	return std::move(plain_addr);
+}
+
+void make_lowercase(string &s) {
+	transform(s.begin(), s.end(), s.begin(), [](char c) {
+		return std::tolower(c);
+	});
+}
+
+vector<SubUnit> get_subunits(CURL *handle, int x, int y, int radius) {
 	string data;
 	char url[500];
-	AddressRegister addr2unit;
+	vector<SubUnit> subunits;
 	snprintf(url, 500, "%s?key=%s&point=%d,%d&radius=%d", 
 			 configs["PLACES_RADIUS_URL"].c_str(), configs["OS_PROJECT_API_KEY"].c_str(), 
 			 x, y, radius);
 	make_get_request(handle, url, data);
 	json jdata = json::parse(data);
 	for (json &jb: jdata["results"]) {
-		addr2unit[jb["DPA"]["ADDRESS"]] = {
+		subunits.push_back({
 			std::move(jb["DPA"]["ADDRESS"]),
 			jb["DPA"]["X_COORDINATE"],
 			jb["DPA"]["Y_COORDINATE"],
 			std::move(jb["DPA"]["CLASSIFICATION_CODE"]),
 			std::move(jb["DPA"]["CLASSIFICATION_CODE_DESCRIPTION"]),
-		};
+		});
 	}
-	return std::move(addr2unit);
+	return std::move(subunits);
 }
 
 ApplicationRegister get_planning_apps(CURL *handle, double lat, double lng, int radius) {
 	float krad = radius / 1000.0;
-	ApplicationRegister addr2app;
+	ApplicationRegister addr2apps;
 	string data;
-	char fields[] = "address,description,app_size,app_state,other_fields,start_date";
+	char fields[] = "address,description,app_size,app_state,other_fields,start_date,location_x,location_y";
 	char url[500];
 	snprintf(url, 500, "%s?lat=%.9f&lng=%.9f&krad=%.3f&select=%s&sort=-start_date", 
 			 configs["PLANIT_URL"].c_str(), lat, lng, krad, fields);
+	cout << url << endl;
 	make_get_request(handle, url, data);
 	json jdata = json::parse(data);
 
-	for (json &japp: jdata["records"]) {
+	double app_lat, app_lng;
+	for (json &app: jdata["records"]) {
 		float x, y;
-		if (!japp.contains("northing") || !japp.contains("easting")) {
-			if(!global_to_nat_grid(lat, lng, x, y)) {
+		if (app["other_fields"].contains("northing") &&
+			app["other_fields"].contains("easting")) 
+		{
+			x = app["other_fields"]["easting"];
+			y = app["other_fields"]["northing"];
+		} else {
+			app_lat = app["location_y"];
+			app_lng = app["location_x"];
+			if(!global_to_nat_grid(app_lat, app_lng, x, y)) {
 				cerr << "Failed to get BNG for (" 
 					 << lat << ", " << lng << ")" << endl;
 				continue;
 			}
-		} else {
-			x = japp["easting"];
-			y = japp["northing"];
 		}
-		addr2app[japp["address"]].push_back({
-			japp["description"],
-			japp["app_size"],
-			japp["app_state"],
-			japp["other_fields"]["date_received"],
-			japp["other_fields"]["date_validated"],
-			japp["other_fields"]["decision_date"],
-			japp["other_fields"]["decision_issued_date"],
+		cout << "x = " << x << " y = " << y << endl;
+		addr2apps[{x, y}].push_back({
+			std::move(app["address"]),
+			std::move(app["description"]),
+			std::move(app["app_size"]),
+			std::move(app["app_state"]),
+			std::move(app["other_fields"]["date_received"]),
+			std::move(app["other_fields"]["date_validated"]),
+			std::move(app["other_fields"]["decision_date"]),
+			std::move(app["other_fields"]["decision_issued_date"]),
 			x, y
 		});
 	}
-	return addr2app;
+	return std::move(addr2apps);
 }
 
 void get_tobs(double lat, double lng) {
@@ -168,8 +221,23 @@ void get_tobs(double lat, double lng) {
 		cerr << "Failed to setup easy curl" << endl;
 		exit(1);
 	}
-	AddressRegister addr2unit = get_subunits(x, y, search_radius, handle);
+	vector<SubUnit> subunits = get_subunits(handle, x, y, search_radius);
 	ApplicationRegister plan_apps = get_planning_apps(handle, lat, lng, search_radius);
+	ostream_iterator<string> out(cout, "\n");
+	cout << "Sub units" << endl;
+	transform(subunits.begin(), subunits.end(), out, [](SubUnit &su) {
+		return su.address;
+	});
+	cout << endl << endl << endl << endl;
+	cout << "Planning apps" << endl;
+	cout << "Size = " << plan_apps.size() << endl;
+	for (auto &p: plan_apps) {
+		cout << p.first.first << "," << p.first.second << ": ";
+		for (PlanningApplication &app: p.second) {
+			cout << app.address << ",";
+		}
+		cout << endl;
+	}
 	curl_easy_cleanup(handle);
 }
 
