@@ -1,6 +1,7 @@
 Ordinance Survey: Coordinates -> Address, Classification code
 	fields: ADDRESS, X_COORDINATE, Y_COORDINATE, CLASSIFICATION_CODE, CLASSIFICATION_CODE_DESCRIPTION
 Business rates (in theory): Address -> Further commercial classification, Floorspace info
+	Primary description codes are very detailed about the type of business
 Planit: Coordinates -> Planning history
 
 Aggregating touch points into locus:
@@ -9,3 +10,7 @@ Aggregating touch points into locus:
 		additional business rates & planning permission streams integrated
 	Planning only locus have headline type: Development
 	Planning only points are called Sites
+
+Business rates database:
+List entries (P+S description code, p+s description text, full identifier, firm name, rateable value)
+Summary valuations (Total area, total units, total value, total rateable value)
