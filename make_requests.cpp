@@ -177,39 +177,51 @@ T get_json_field(json &obj, string key, string alt_key = "", const T &default_va
 	return default_val;
 }
 
-vector<SubUnit> get_subunits(CURL *handle, int x, int y, int radius) {
-	string data;
-	char url[500];
-	vector<SubUnit> subunits;
-	snprintf(url, 500, "%s?key=%s&point=%d,%d&radius=%d", 
+void get_os_radius_url(char *url_buff, size_t url_buff_sz, float x, float y, 
+					   int radius, int offset) 
+{
+	snprintf(url_buff, url_buff_sz, "%s?key=%s&point=%.2f,%.2f&radius=%d&offset=%d", 
 			 configs["PLACES_RADIUS_URL"].c_str(), 
 			 configs["OS_PROJECT_API_KEY"].c_str(), 
-			 x, y, radius);
-	cout << url << endl;
-	make_get_request(handle, url, data);
-	json jdata = json::parse(data);
+			 x, y, radius, offset);
+}
 
+vector<SubUnit> get_subunits(CURL *handle, float x, float y, int radius) {
+	int offset = 0;
+	string data, classification_code;
+	char url[500];
+	vector<SubUnit> subunits;
+	json jdata, header;
 	bool is_commercial;
-	string classification_code;
-	for (json &jb: jdata["results"]) {
-		classification_code = std::move(jb["DPA"]["CLASSIFICATION_CODE"]);
-		is_commercial = classification_code[0] == 'C';
-		subunits.push_back({
-			get_json_field<string>(jb["DPA"], "ORGANISATION_NAME"),
-			get_json_field<string>(jb["DPA"], "BUILDING_NUMBER", 
-				/*alt_key=*/"BUILDING_NAME",
-				/*default_val=*/get_json_field<string>(jb["DPA"], "DEPENDENT_THOROUGHFARE_NAME")),
-			std::move(jb["DPA"]["THOROUGHFARE_NAME"]),
-			std::move(jb["DPA"]["POST_TOWN"]),
-			std::move(jb["DPA"]["POSTCODE"]),
-			jb["DPA"]["X_COORDINATE"],
-			jb["DPA"]["Y_COORDINATE"],
-			classification_code,
-			std::move(jb["DPA"]["CLASSIFICATION_CODE_DESCRIPTION"]),
-			is_commercial
-		});
-	}
-	return std::move(subunits);
+	do {
+		data.clear();
+		get_os_radius_url(url, 500, x, y, radius, offset);
+		cout << url << endl;
+		make_get_request(handle, url, data);
+		jdata = json::parse(data);
+
+		for (json &jb: jdata["results"]) {
+			classification_code = std::move(jb["DPA"]["CLASSIFICATION_CODE"]);
+			is_commercial = classification_code[0] == 'C';
+			subunits.push_back({
+				get_json_field<string>(jb["DPA"], "ORGANISATION_NAME"),
+				get_json_field<string>(jb["DPA"], "BUILDING_NUMBER", 
+					/*alt_key=*/"BUILDING_NAME",
+					/*default_val=*/get_json_field<string>(jb["DPA"], "DEPENDENT_THOROUGHFARE_NAME")),
+				std::move(jb["DPA"]["THOROUGHFARE_NAME"]),
+				std::move(jb["DPA"]["POST_TOWN"]),
+				std::move(jb["DPA"]["POSTCODE"]),
+				jb["DPA"]["X_COORDINATE"],
+				jb["DPA"]["Y_COORDINATE"],
+				classification_code,
+				std::move(jb["DPA"]["CLASSIFICATION_CODE_DESCRIPTION"]),
+				is_commercial
+			});
+		}
+		header = jdata["header"];
+		offset += header["maxresults"].get<int>();
+	} while (offset < header["totalresults"]);
+	return subunits;
 }
 
 ApplicationRegister get_planning_apps(CURL *handle, double lat, double lng, int radius) {
@@ -446,9 +458,8 @@ vector<Building> get_buildings(vector<SubUnit> &subunit) {
 	return buildings;
 }
 
-void get_tobs(double lat, double lng) {
+void get_tobs(double lat, double lng, int radius) {
 	float x, y;
-	int search_radius = 30; // in meters
 	load_configs();
 	if (!global_to_nat_grid(lat, lng, x, y)) {
 		cerr << "Failed to get BNG for (" 
@@ -460,8 +471,8 @@ void get_tobs(double lat, double lng) {
 		cerr << "Failed to setup easy curl" << endl;
 		exit(1);
 	}
-	vector<SubUnit> subunits = get_subunits(handle, x, y, search_radius);
-	ApplicationRegister plan_apps = get_planning_apps(handle, lat, lng, search_radius);
+	vector<SubUnit> subunits = get_subunits(handle, x, y, radius);
+	ApplicationRegister plan_apps = get_planning_apps(handle, lat, lng, radius);
 	ostream_iterator<string> out(cout, "\n");
 	cout << "Sub units" << endl;
 	transform(subunits.begin(), subunits.end(), out, [](const SubUnit &su) {
@@ -483,8 +494,12 @@ void get_tobs(double lat, double lng) {
 }
 
 int main(int argc, char *argv[]) {
-	double lat = atof(argv[1]);
-	double lng = atof(argv[2]);
-	get_tobs(lat, lng);
+	int radius = 30; // in meters
+	if (strcmp(argv[1], "-r") == 0 || strcmp(argv[1], "--radius") == 0) {
+		radius = atoi(argv[2]);
+	}
+	double lat = atof(argv[argc-2]);
+	double lng = atof(argv[argc-1]);
+	get_tobs(lat, lng, radius);
 	return 0;
 }
