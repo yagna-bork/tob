@@ -1,11 +1,12 @@
+-- TABLES
 CREATE TABLE IF NOT EXISTS list_entries (
-	entryno INTEGER PRIMARY KEY,
+	entryno INTEGER,
 	billing_authority_code CHAR(4),
 	ndr_community_code CHAR(6),
 	ba_reference_number CHAR(25),
 	primary_secondary_description_code VARCHAR(5),
 	primary_description_text VARCHAR(60),
-	uarn INTEGER UNIQUE,
+	uarn INTEGER PRIMARY KEY,
 	full_property_identifier VARCHAR(416),
 	firm_name VARCHAR(50),
 	number_or_name VARCHAR(72),
@@ -35,7 +36,7 @@ CREATE TABLE IF NOT EXISTS list_entries_historic (
 	ba_reference_no VARCHAR(25),
 	primary_secondary_description_code VARCHAR(5),
 	primary_description_text VARCHAR(60),
-	uarn INTEGER UNIQUE,
+	uarn INTEGER PRIMARY KEY,
 	effective_date CHAR(11),
 	composite_indicator CHAR(1),
 	rateable_value NUMERIC,
@@ -96,10 +97,8 @@ CREATE TABLE IF NOT EXISTS line_items (
 CREATE TABLE IF NOT EXISTS additional_items (
 	assessment_reference INTEGER,
 	record_type INTERGER,
-	other_additional_oa_description VARCHAR(240),
+	oa_description VARCHAR(240),
 	oa_size REAL,
-	oa_price REAL,
-	oa_value INTERGER,
 	FOREIGN KEY (assessment_reference) REFERENCES related_list_entries(assessment_reference)
 );
 
@@ -135,4 +134,9 @@ CREATE TABLE IF NOT EXISTS adjustment_totals (
 	total_before_adj INTERGER,
 	total_adj INTEGER,
 	FOREIGN KEY (assessment_reference) REFERENCES related_list_entries(assessment_reference)
+);
+
+CREATE TABLE IF NOT EXISTS scat_codes (
+	scat_code_and_suffix CHAR(4) PRIMARY KEY,
+	description_text VARCHAR(120)
 );
