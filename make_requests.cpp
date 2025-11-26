@@ -76,7 +76,7 @@ struct Valuation {
 				 plants_machinery_value, parking.spaces, parking.value);
 		copy(buff, buff+chars_written, std::back_inserter(res));
 		for (const LineItem &item: line_items) {
-			chars_written = snprintf(buff, 500, "\n\t%s, %s, %.2f, %ld", 
+			chars_written = snprintf(buff, 500, "\n\t\t%s, %s, %.2f, %ld", 
 									 item.floor.c_str(), item.description.c_str(), 
 									 item.area, item.value);
 			copy(buff, buff+chars_written, std::back_inserter(res));
@@ -88,32 +88,78 @@ struct Valuation {
 typedef unordered_map<long, Valuation> ValuationRegister;
 
 struct SubUnit {
-	string organisation;
-	string number;
-	string street;
-	string town;
-	string postcode;
-	float x;
-	float y;
+	string sub_building_name;
 	string code;
 	string description;
 	bool is_commercial;
-	std::optional<Valuation> valuation;
 
-	string address() const {
-		string addr = !organisation.empty() ? organisation + ", " : "";
-		char buff[300];
-		size_t buff_size = snprintf(buff, 300, "%s, %s, %s, %s",
-				 number.c_str(), street.c_str(), town.c_str(), 
-				 postcode.c_str());
-		copy(buff, buff+buff_size, back_inserter(addr));
-		return addr;
+	string to_string() const {
+		string res;
+		if (!sub_building_name.empty()) {
+			res += sub_building_name;
+			res += ", ";
+		}
+		res += code;
+		res += ", ";
+		res += description;
+		res += ", ";
+		res += is_commercial ? "Commercial" : "Residential";
+		return res;
 	}
 };
 
-struct Building {
-	std::vector<SubUnit> subunits;
+enum TypeOfBuilding {
+	COMMERCIAL = 0,
+	RESIDENTIAL = 1,
+	MIXED = 2
 };
+vector<std::string> tob_to_str = {"Commercial", "Residential", "Mixed"};
+
+struct Building {
+	std::string name;
+	std::string street;
+	std::string town;
+	std::string postcode;
+	float x;
+	float y;
+	std::vector<SubUnit> subunits;
+	std::vector<Valuation> valuations;
+	TypeOfBuilding tob;
+
+	std::string to_string() const {
+		string res = name;
+		res += ", ";
+		res += street;
+		res += ", ";
+		res += town;
+		res += ", ";
+		res += postcode;
+		res += ", ";
+		res += tob_to_str[tob];
+		for (const SubUnit& unit: subunits) {
+			res += "\n\t";
+			res += unit.to_string();
+		}
+		for (const Valuation& val: valuations) {
+			res += "\n\t";
+			res += val.to_string();
+		}
+		return res;
+	}
+
+	void set_tob() {
+		tob = subunits[0].is_commercial ? TypeOfBuilding::COMMERCIAL 
+										: TypeOfBuilding::RESIDENTIAL;
+		bool is_commercial = tob == TypeOfBuilding::COMMERCIAL;
+		for (int i = 1; i != subunits.size(); i++) {
+			if (is_commercial != subunits[i].is_commercial) {
+				tob = TypeOfBuilding::MIXED;
+				return;
+			}
+		}
+	}
+};
+typedef unordered_map<string, Building> BuildingRegister;
 
 /*
  * Converts latitude and longitude to British National Grid coords
@@ -186,13 +232,16 @@ void get_os_radius_url(char *url_buff, size_t url_buff_sz, float x, float y,
 			 x, y, radius, offset);
 }
 
-vector<SubUnit> get_subunits(CURL *handle, float x, float y, int radius) {
+vector<Building> get_buildings(CURL *handle, float x, float y, int radius) {
+	vector<Building> buildings;
+	unordered_map<string, size_t> idxs;
 	int offset = 0;
-	string data, classification_code;
+	string data, classification_code, building_name, street, key;
 	char url[500];
-	vector<SubUnit> subunits;
 	json jdata, header;
 	bool is_commercial;
+	size_t building_idx;
+
 	do {
 		data.clear();
 		get_os_radius_url(url, 500, x, y, radius, offset);
@@ -201,27 +250,33 @@ vector<SubUnit> get_subunits(CURL *handle, float x, float y, int radius) {
 		jdata = json::parse(data);
 
 		for (json &jb: jdata["results"]) {
-			classification_code = std::move(jb["DPA"]["CLASSIFICATION_CODE"]);
+			building_name = get_json_field<string>(jb["DPA"], "BUILDING_NUMBER", "BUILDING_NAME", 
+												   get_json_field<string>(jb["DPA"], "DEPENDENT_THOROUGHFARE_NAME"));
+			street = jb["DPA"]["THOROUGHFARE_NAME"];
+			key = building_name+street;
+			if (!idxs.contains(key)) { 
+				buildings.push_back({
+					building_name,
+					street,
+					jb["DPA"]["POST_TOWN"],
+					jb["DPA"]["POSTCODE"],
+					jb["DPA"]["X_COORDINATE"],
+					jb["DPA"]["Y_COORDINATE"]
+				});
+				idxs[key] = buildings.size()-1;
+			}
+			classification_code = jb["DPA"]["CLASSIFICATION_CODE"];
 			is_commercial = classification_code[0] == 'C';
-			subunits.push_back({
-				get_json_field<string>(jb["DPA"], "ORGANISATION_NAME"),
-				get_json_field<string>(jb["DPA"], "BUILDING_NUMBER", 
-					/*alt_key=*/"BUILDING_NAME",
-					/*default_val=*/get_json_field<string>(jb["DPA"], "DEPENDENT_THOROUGHFARE_NAME")),
-				std::move(jb["DPA"]["THOROUGHFARE_NAME"]),
-				std::move(jb["DPA"]["POST_TOWN"]),
-				std::move(jb["DPA"]["POSTCODE"]),
-				jb["DPA"]["X_COORDINATE"],
-				jb["DPA"]["Y_COORDINATE"],
+			buildings[idxs[key]].subunits.push_back({
+				get_json_field<string>(jb["DPA"], "ORGANISATION_NAME", "SUB_BUILDING_NAME"),
 				classification_code,
-				std::move(jb["DPA"]["CLASSIFICATION_CODE_DESCRIPTION"]),
+				jb["DPA"]["CLASSIFICATION_CODE_DESCRIPTION"],
 				is_commercial
 			});
 		}
-		header = jdata["header"];
-		offset += header["maxresults"].get<int>();
-	} while (offset < header["totalresults"]);
-	return subunits;
+		offset += jdata["header"]["maxresults"].get<int>();
+	} while (offset < jdata["header"]["totalresults"]);
+	return buildings;
 }
 
 ApplicationRegister get_planning_apps(CURL *handle, double lat, double lng, int radius) {
@@ -268,7 +323,7 @@ ApplicationRegister get_planning_apps(CURL *handle, double lat, double lng, int 
 	return std::move(addr2apps);
 }
 
-int get_list_entries_select(SubUnit &subunit, char *buff, size_t buff_size) {
+int get_list_entries_select(Building &building, char *buff, size_t buff_size) {
 	return snprintf(buff, buff_size,
 	   "SELECT rle.assessment_reference, le.primary_description_text, sc.description_text, "
 	   		  "le.composite_indicator, le.rateable_value, le.uarn "
@@ -282,23 +337,23 @@ int get_list_entries_select(SubUnit &subunit, char *buff, size_t buff_size) {
 		  "le.number_or_name = '%s' OR le.number_or_name LIKE '%% %s'  "
 		  "OR le.number_or_name LIKE '%s %%' OR le.number_or_name LIKE '%% %s %%' "
 		"); ", 
-		subunit.postcode.c_str(), subunit.street.c_str(), subunit.number.c_str(), 
-		subunit.number.c_str(), subunit.number.c_str(), 
-		subunit.number.c_str()
+		building.postcode.c_str(), building.street.c_str(), building.name.c_str(), 
+		building.name.c_str(), building.name.c_str(), 
+		building.name.c_str()
 	);
 }
 
-void init_valuations(ValuationRegister &ref2val, unordered_map<long, SubUnit *> &uarn2unit, 
-					 vector<SubUnit> &subunits, char *stmt_str, size_t stmt_str_size, sqlite3 *db) 
+void init_valuations(ValuationRegister &ref2val, unordered_map<long, Building *> &uarn_to_building, 
+					 vector<Building> &buildings, char *stmt_str, size_t stmt_str_size, sqlite3 *db) 
 {
 	sqlite3_stmt *stmt;
 	long ref;
 	const char *primary_desc_col, *secondary_desc_col, *composite_col;
-	for (SubUnit &unit: subunits) {
-		if (!unit.is_commercial) {
+	for (Building &building: buildings) {
+		if (building.tob == TypeOfBuilding::RESIDENTIAL) {
 			continue;
 		}
-		get_list_entries_select(unit, stmt_str, stmt_str_size);
+		get_list_entries_select(building, stmt_str, stmt_str_size);
 		sqlite3_prepare_v2(db, stmt_str, stmt_str_size, &stmt, NULL);
 		if (stmt == nullptr) {
 			cerr << "Failed to prepare list entries select statement" << endl;
@@ -316,7 +371,7 @@ void init_valuations(ValuationRegister &ref2val, unordered_map<long, SubUnit *> 
 			val.is_composite = strcmp(composite_col, "C") == 0;
 			val.rateable_value = sqlite3_column_int(stmt, 4);
 			val.uarn = sqlite3_column_int64(stmt, 5);
-			uarn2unit[val.uarn] = &unit;
+			uarn_to_building[val.uarn] = &building;
 		}
 		sqlite3_finalize(stmt);
 	}
@@ -416,8 +471,7 @@ void get_parking_spaces(ValuationRegister &ref2val, char *stmt_buff,
 	sqlite3_finalize(stmt);
 }
 
-// TODO return type
-void get_valuations(vector<SubUnit> &subunits) {
+void get_valuations(vector<Building> &buildings) {
 	size_t buff_sz = 1000;
 	char stmt[buff_sz];
 	sqlite3 *db;
@@ -426,8 +480,8 @@ void get_valuations(vector<SubUnit> &subunits) {
 		return;
 	}
 	ValuationRegister assessment_ref2valuation;
-	unordered_map<long, SubUnit *> uarn2subunit;
-	init_valuations(assessment_ref2valuation, uarn2subunit, subunits, 
+	unordered_map<long, Building *> uarn_to_building;
+	init_valuations(assessment_ref2valuation, uarn_to_building, buildings, 
 					stmt, buff_sz, db);
 	// no commerical buildings in current search
 	if (assessment_ref2valuation.empty()) {
@@ -437,24 +491,22 @@ void get_valuations(vector<SubUnit> &subunits) {
 	get_line_items(assessment_ref2valuation, stmt, buff_sz, db);
 	get_plant_machinery_value(assessment_ref2valuation, stmt, buff_sz, db);
 	get_parking_spaces(assessment_ref2valuation, stmt, buff_sz, db);
-	SubUnit *unitp;
+	Building *buildingp;
 	for (const pair<long, Valuation> &p: assessment_ref2valuation) {
 		const Valuation &val = p.second;
-		unitp = uarn2subunit[val.uarn];
-		unitp->valuation = std::move(val);
+		buildingp = uarn_to_building[val.uarn];
+		buildingp->valuations.push_back(std::move(val));
 	}
-	for (const SubUnit &unit: subunits) {
-		cout << unit.address();
-		if (unit.valuation) {
-			cout << ", " << unit.valuation->to_string();
+	for (const Building &building: buildings) {
+		cout << building.to_string() << endl;
+		for (const Valuation &valuation: building.valuations) {
+			cout << valuation.to_string() << endl;
 		}
-		cout << endl;
 	}
 	sqlite3_close(db);
 }
 
-vector<Building> get_buildings(vector<SubUnit> &subunit) {
-	vector<Building> buildings;
+vector<Building> get_buildings(vector<Building> &buildings) {
 	return buildings;
 }
 
@@ -471,13 +523,16 @@ void get_tobs(double lat, double lng, int radius) {
 		cerr << "Failed to setup easy curl" << endl;
 		exit(1);
 	}
-	vector<SubUnit> subunits = get_subunits(handle, x, y, radius);
+	vector<Building> buildings = get_buildings(handle, x, y, radius);
+	cout << "Buildings = " << endl;
+	for (Building &b: buildings) {
+		b.set_tob();
+	}
+	for (const Building &b: buildings) {
+		cout << b.to_string() << endl;
+	}
 	ApplicationRegister plan_apps = get_planning_apps(handle, lat, lng, radius);
 	ostream_iterator<string> out(cout, "\n");
-	cout << "Sub units" << endl;
-	transform(subunits.begin(), subunits.end(), out, [](const SubUnit &su) {
-		return su.address() + " X, Y = " + std::to_string(su.x) + "," + std::to_string(su.y);
-	});
 	/*cout << endl << endl << endl << endl;
 	cout << "Planning apps" << endl;
 	for (auto &p: plan_apps) {
@@ -488,8 +543,8 @@ void get_tobs(double lat, double lng, int radius) {
 		}
 		cout << endl;
 	}*/
-	get_valuations(subunits);
-	get_buildings(subunits);
+	get_valuations(buildings);
+	get_buildings(buildings);
 	curl_easy_cleanup(handle);
 }
 
