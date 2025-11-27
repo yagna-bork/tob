@@ -19,6 +19,7 @@
 #include <cstring>
 #include <optional>
 #include <format>
+#include "include/longest_common_substr.h"
 
 using std::cout; using std::endl; using std::cerr;
 using std::string; using std::ifstream; using std::find;
@@ -58,6 +59,7 @@ struct Parking {
 };
 
 struct Valuation {
+	string building_name;
 	string primary_description;
 	string secondary_description;
 	bool is_composite;
@@ -71,8 +73,8 @@ struct Valuation {
 		string res;
 		char buff[500];
 		size_t chars_written;
-		chars_written = snprintf(buff, 500, "%s, %s, pm_value=%ld, cp_spaces=%d, cp_value=%ld", 
-				 primary_description.c_str(), secondary_description.c_str(), 
+		chars_written = snprintf(buff, 500, "%s, %s, %s, pm_value=%ld, cp_spaces=%d, cp_value=%ld", 
+				 building_name.c_str(), primary_description.c_str(), secondary_description.c_str(), 
 				 plants_machinery_value, parking.spaces, parking.value);
 		copy(buff, buff+chars_written, std::back_inserter(res));
 		for (const LineItem &item: line_items) {
@@ -89,6 +91,9 @@ typedef unordered_map<long, Valuation> ValuationRegister;
 
 struct SubUnit {
 	string sub_building_name;
+	// Keeping this around so old name info isn't lost 
+	// when two buildings are combined
+	string building_name; 
 	string code;
 	string description;
 	bool is_commercial;
@@ -99,6 +104,8 @@ struct SubUnit {
 			res += sub_building_name;
 			res += ", ";
 		}
+		res += building_name;
+		res += ", ";
 		res += code;
 		res += ", ";
 		res += description;
@@ -215,10 +222,10 @@ void make_get_request(CURL *handle, char *url, string &data) {
 template <class T>
 T get_json_field(json &obj, string key, string alt_key = "", const T &default_val = T()) {
 	if (obj.contains(key)) {
-		return obj[key].get<T>();
+		return obj[key].is_null() ? default_val : obj[key].get<T>();
 	}
 	if (alt_key != "" && obj.contains(alt_key)) {
-		return obj[alt_key].get<T>();
+		return obj[alt_key].is_null() ? default_val : obj[alt_key].get<T>();
 	}
 	return default_val;
 }
@@ -254,7 +261,7 @@ vector<Building> get_buildings(CURL *handle, float x, float y, int radius) {
 												   get_json_field<string>(jb["DPA"], "DEPENDENT_THOROUGHFARE_NAME"));
 			street = jb["DPA"]["THOROUGHFARE_NAME"];
 			key = building_name+street;
-			if (!idxs.contains(key)) { 
+			if (!idxs.count(key)) { 
 				buildings.push_back({
 					building_name,
 					street,
@@ -269,6 +276,7 @@ vector<Building> get_buildings(CURL *handle, float x, float y, int radius) {
 			is_commercial = classification_code[0] == 'C';
 			buildings[idxs[key]].subunits.push_back({
 				get_json_field<string>(jb["DPA"], "ORGANISATION_NAME", "SUB_BUILDING_NAME"),
+				std::move(building_name),
 				classification_code,
 				jb["DPA"]["CLASSIFICATION_CODE_DESCRIPTION"],
 				is_commercial
@@ -285,48 +293,55 @@ ApplicationRegister get_planning_apps(CURL *handle, double lat, double lng, int 
 	string data;
 	char fields[] = "address,description,app_size,app_state,other_fields,start_date,location_x,location_y";
 	char url[500];
-	snprintf(url, 500, "%s?lat=%.9f&lng=%.9f&krad=%.3f&select=%s&sort=-start_date", 
-			 configs["PLANIT_URL"].c_str(), lat, lng, krad, fields);
-	cout << url << endl;
-	make_get_request(handle, url, data);
-	json jdata = json::parse(data);
-
+	int index = 0;
+	json jdata;
 	double app_lat, app_lng;
 	float x, y;
-	for (json &app: jdata["records"]) {
-		if (app["other_fields"].contains("northing") &&
-			app["other_fields"].contains("easting")) 
-		{
-			x = app["other_fields"]["easting"];
-			y = app["other_fields"]["northing"];
-		} else {
-			app_lat = app["location_y"];
-			app_lng = app["location_x"];
-			if(!global_to_nat_grid(app_lat, app_lng, x, y)) {
-				cerr << "Failed to get BNG for (" 
-					 << lat << ", " << lng << ")" << endl;
-				continue;
+
+	do {
+		data.clear();
+		snprintf(url, 500, "%s?lat=%.9f&lng=%.9f&krad=%.3f&select=%s&sort=-start_date&index=%d", 
+				 configs["PLANIT_URL"].c_str(), lat, lng, krad, fields, index);
+		cout << url << endl;
+		make_get_request(handle, url, data);
+		jdata = json::parse(data);
+
+		for (json &app: jdata["records"]) {
+			if (app["other_fields"].contains("northing") &&
+				app["other_fields"].contains("easting")) 
+			{
+				x = app["other_fields"]["easting"];
+				y = app["other_fields"]["northing"];
+			} else {
+				app_lat = app["location_y"];
+				app_lng = app["location_x"];
+				if(!global_to_nat_grid(app_lat, app_lng, x, y)) {
+					cerr << "Failed to get BNG for (" 
+						 << lat << ", " << lng << ")" << endl;
+					continue;
+				}
 			}
+			addr2apps[app["address"]].push_back({
+				std::move(app["address"]),
+				std::move(app["description"]),
+				get_json_field<string>(app, "app_size"),
+				get_json_field<string>(app, "app_state"),
+				get_json_field<string>(app["other_fields"], "date_received"),
+				get_json_field<string>(app["other_fields"], "date_validated"),
+				get_json_field<string>(app["other_fields"], "decision_date"),
+				get_json_field<string>(app["other_fields"], "decision_issued_date"),
+				x, y
+			});
 		}
-		addr2apps[app["address"]].push_back({
-			std::move(app["address"]),
-			std::move(app["description"]),
-			get_json_field<string>(app, "app_size"),
-			get_json_field<string>(app, "app_state"),
-			get_json_field<string>(app["other_fields"], "date_received"),
-			get_json_field<string>(app["other_fields"], "date_validated"),
-			get_json_field<string>(app["other_fields"], "decision_date"),
-			get_json_field<string>(app["other_fields"], "decision_issued_date"),
-			x, y
-		});
-	}
+		index = jdata["to"].get<int>()+1;
+	} while (index < jdata["total"]);
 	return std::move(addr2apps);
 }
 
 int get_list_entries_select(Building &building, char *buff, size_t buff_size) {
 	return snprintf(buff, buff_size,
 	   "SELECT rle.assessment_reference, le.primary_description_text, sc.description_text, "
-	   		  "le.composite_indicator, le.rateable_value, le.uarn "
+	   		  "le.composite_indicator, le.rateable_value, le.uarn, le.number_or_name "
 		"FROM list_entries le "
 		  "INNER JOIN related_list_entries rle "
 		  "ON le.uarn = rle.uarn AND rle.from_date = ( "
@@ -348,7 +363,7 @@ void init_valuations(ValuationRegister &ref2val, unordered_map<long, Building *>
 {
 	sqlite3_stmt *stmt;
 	long ref;
-	const char *primary_desc_col, *secondary_desc_col, *composite_col;
+	const char *primary_desc_col, *secondary_desc_col, *composite_col, *building_name_col;
 	for (Building &building: buildings) {
 		if (building.tob == TypeOfBuilding::RESIDENTIAL) {
 			continue;
@@ -365,12 +380,14 @@ void init_valuations(ValuationRegister &ref2val, unordered_map<long, Building *>
 			primary_desc_col = (const char *)sqlite3_column_text(stmt, 1);
 			secondary_desc_col = (const char *)sqlite3_column_text(stmt, 2);
 			composite_col = (const char *)sqlite3_column_text(stmt, 3);
+			building_name_col = (const char *)sqlite3_column_text(stmt, 6);
 
 			val.primary_description = primary_desc_col;
 			val.secondary_description = secondary_desc_col;
 			val.is_composite = strcmp(composite_col, "C") == 0;
 			val.rateable_value = sqlite3_column_int(stmt, 4);
 			val.uarn = sqlite3_column_int64(stmt, 5);
+			val.building_name = building_name_col;
 			uarn_to_building[val.uarn] = &building;
 		}
 		sqlite3_finalize(stmt);
@@ -506,8 +523,40 @@ void get_valuations(vector<Building> &buildings) {
 	sqlite3_close(db);
 }
 
-vector<Building> get_buildings(vector<Building> &buildings) {
-	return buildings;
+string get_location_key(float x, float y) {
+	x *= 100;
+	y *= 100;
+	return std::to_string(static_cast<int>(x)) 
+		 + std::to_string(static_cast<int>(y));
+}
+
+void combine_buildings(Building &x, Building &y) {
+	std::move(y.subunits.begin(), y.subunits.end(), std::back_inserter(x.subunits));
+	std::move(y.valuations.begin(), y.valuations.end(), std::back_inserter(x.valuations));
+	if (x.tob != y.tob) {
+		x.tob = TypeOfBuilding::MIXED;
+	}
+	x.name = longest_common_substr(x.name, y.name);
+	if (x.name.empty()) {
+		x.name = "Building Shell";
+	}
+}
+
+vector<Building> cluster_buildings(vector<Building> &buildings) {
+	vector<Building> combined_buildings;
+	unordered_map<string, vector<Building *>> clusters;
+	for (Building &b: buildings) {
+		clusters[get_location_key(b.x, b.y)].push_back(&b);
+	}
+	for (const std::pair<string, vector<Building *>> &p: clusters) {
+		const vector<Building *> &cluster = p.second;
+		Building *combined_building = cluster[0];
+		for (int i = 1; i != cluster.size(); i++) {
+			combine_buildings(*combined_building, *cluster[i]);
+		}
+		combined_buildings.push_back(std::move(*combined_building));
+	}
+	return combined_buildings;
 }
 
 void get_tobs(double lat, double lng, int radius) {
@@ -524,16 +573,15 @@ void get_tobs(double lat, double lng, int radius) {
 		exit(1);
 	}
 	vector<Building> buildings = get_buildings(handle, x, y, radius);
-	cout << "Buildings = " << endl;
 	for (Building &b: buildings) {
 		b.set_tob();
 	}
+	cout << "Buildings = " << endl;
 	for (const Building &b: buildings) {
 		cout << b.to_string() << endl;
 	}
 	ApplicationRegister plan_apps = get_planning_apps(handle, lat, lng, radius);
-	ostream_iterator<string> out(cout, "\n");
-	/*cout << endl << endl << endl << endl;
+	cout << endl << endl << endl << endl;
 	cout << "Planning apps" << endl;
 	for (auto &p: plan_apps) {
 		cout << p.first << ":" << endl;
@@ -542,9 +590,13 @@ void get_tobs(double lat, double lng, int radius) {
 			cout << app.description << endl;
 		}
 		cout << endl;
-	}*/
+	}
 	get_valuations(buildings);
-	get_buildings(buildings);
+	vector<Building> clustered = cluster_buildings(buildings);
+	cout << "Clustered buildings = " << endl;
+	for (const Building &b: clustered) {
+		cout << b.to_string() << endl;
+	}
 	curl_easy_cleanup(handle);
 }
 

@@ -1,0 +1,3 @@
+#!/usr/bin/env zsh
+# TODO setup cmake instead
+g++ -I/usr/local/opt/proj/include -L/usr/local/opt/proj/lib -lproj -I/usr/local/opt/curl/include -L/usr/local/opt/curl/lib -lcurl -I/usr/local/opt/nlohmann-json/include -I/usr/local/opt/sqlite/include -L/usr/local/opt/sqlite/lib -lsqlite3 -o build/make_requests -std=c++11 make_requests.cpp 

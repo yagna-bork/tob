@@ -19,3 +19,17 @@ Aggregating touch points into locus:
 Business rates database:
 List entries (P+S description code, p+s description text, full identifier, firm name, rateable value)
 Summary valuations (Total area, total units, total value, total rateable value)
+
+Further:
+Setup endpoint and serve json data as is
+Combine planning apps into Building data as much as possible
+	OS titles stuff
+
+Look at domestics rates database
+	That's private information. Not possible to access the database
+
+Restructing make_requests:
+Building structs in one file with code to build them (OS Radius API call) & combine them
+Database code in a seperate class
+PlanningApplication structs and planit calls in seperate file
+http-server main file outside of include folder
