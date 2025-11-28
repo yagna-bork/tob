@@ -66,15 +66,15 @@ struct Valuation {
 
 class ValuationDB {
 public:
-	typedef std::vector<Valuation> QueryResult;
-
 	struct QueryParam {
 		const char *building_name;
 		const char *street;
 		const char *postcode;
+		bool ignore;
 	};
+	typedef std::vector<Valuation> QueryResult;
 private:
-	typedef std::unordered_map<long, Valuation *> PKToValuationMap;
+	typedef std::unordered_map<long, Valuation *> PkToValuationMap;
 
 public:
 	ValuationDB()
@@ -101,9 +101,11 @@ public:
 	 */
 	std::vector<QueryResult> get_valuations(std::vector<QueryParam> &params) {
 		std::vector<QueryResult> results(params.size());
-		PKToValuationMap pk_to_valuation;
+		PkToValuationMap pk_to_valuation;
 		for (int i = 0; i != params.size(); i++) {
-			get_valuations(params[i], results[i], pk_to_valuation);
+			if (!params[i].ignore) {
+				get_valuations(params[i], results[i], pk_to_valuation);
+			}
 		}
 
 		std::string pks_str;
@@ -116,6 +118,8 @@ public:
 		};
 
 		get_line_items(pks_str, pk_to_valuation);
+		get_plants_machinery_value(pks_str, pk_to_valuation);
+		get_car_parking(pks_str, pk_to_valuation);
 		return results;
 	}
 
@@ -132,7 +136,7 @@ private:
 	size_t query_buff_sz;
 	bool conn_success;
 
-	void get_valuations(const QueryParam &param, QueryResult &result, PKToValuationMap &pk_to_valuation) {
+	void get_valuations(const QueryParam &param, QueryResult &result, PkToValuationMap &pk_to_valuation) {
 		long primary_key;
 		const char *primary_desc_col, *secondary_desc_col, *composite_col, *building_name_col;
 		int query_sz = make_valuations_select(param);
@@ -179,7 +183,7 @@ private:
 		);
 	}
 
-	void get_line_items(std::string &references, PKToValuationMap &ref_to_valuation) {
+	void get_line_items(const std::string &references, PkToValuationMap &ref_to_valuation) {
 		int query_sz = make_line_items_select(references);
 		sqlite3_prepare_v2(db, query_buff, query_sz, &stmt, NULL);
 		if (stmt == nullptr) {
@@ -198,7 +202,7 @@ private:
 		sqlite3_finalize(stmt);
 	}
 
-	int make_line_items_select(std::string &references) {
+	int make_line_items_select(const std::string &references) {
 		return snprintf(query_buff, query_buff_sz, 
 			"SELECT assessment_reference, floor, description, area, value "
 			"FROM line_items WHERE assessment_reference IN (%s) "
@@ -207,6 +211,53 @@ private:
 			"oa_size area, oa_value value "
 			"FROM additional_items "
 			"WHERE assessment_reference IN (%s); ", references.c_str(), references.c_str()
+		);
+	}
+
+	void get_plants_machinery_value(const std::string &references, PkToValuationMap &ref_to_valuation) {
+		int query_sz = make_plants_machinery_select(references);
+		sqlite3_prepare_v2(db, query_buff, query_sz, &stmt, NULL);
+		if (stmt == nullptr) {
+			std::cerr << "Failed to prepare plants_and_machinery statement" << std::endl;
+			return;
+		}
+		while (sqlite3_step(stmt) == SQLITE_ROW) {
+			Valuation &valuation = *ref_to_valuation[sqlite3_column_int64(stmt, 0)];
+			valuation.plants_machinery_value = sqlite3_column_int64(stmt, 1);
+		}
+		sqlite3_finalize(stmt);
+	}
+
+	int make_plants_machinery_select(const std::string &references) {
+		return snprintf(query_buff, query_buff_sz, 
+			"SELECT assessment_reference, pm_value "
+			"FROM plant_and_machinery "
+			"WHERE assessment_reference IN (%s); ", 
+			references.c_str()
+		);
+	}
+
+	void get_car_parking(const std::string &references, PkToValuationMap &ref_to_valuation) {
+		int query_sz = make_car_parks_select(references);
+		sqlite3_prepare_v2(db, query_buff, query_sz, &stmt, NULL);
+		if (stmt == nullptr) {
+			std::cerr << "Failed to prepare car_parks statement" << std::endl;
+			return;
+		}
+		while (sqlite3_step(stmt) == SQLITE_ROW) {
+			Valuation &valuation = *ref_to_valuation[sqlite3_column_int64(stmt, 0)];
+			valuation.parking.spaces = sqlite3_column_int(stmt, 1);
+			valuation.parking.value = sqlite3_column_int64(stmt, 2);
+		}
+		sqlite3_finalize(stmt);
+	}
+
+	int make_car_parks_select(const std::string &references) {
+		return snprintf(query_buff, query_buff_sz, 
+			"SELECT assessment_reference, cp_spaces, cp_total "
+			"FROM car_parks "
+			"WHERE assessment_reference IN (%s);",
+			references.c_str()
 		);
 	}
 };

@@ -78,7 +78,7 @@ T get_json_field(nlohmann::json &obj, std::string key) {
 
 template <class T>
 T get_json_fields(nlohmann::json &obj, std::vector<std::string> attempt_keys) {
-	for (std::string &key: attempt_keys) {
+	for (const std::string &key: attempt_keys) {
 		if (!obj.contains(key)) {
 			continue;
 		}

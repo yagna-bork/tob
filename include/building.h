@@ -10,10 +10,8 @@
 #include "util.h"
 #include "longest_common_substr.h"
 
-// Helper function to set TOB -- TODO: this in the generator function instead
-// Helper function to convert Building obj into Address that valuation_util understands
-// Helper function to cluster buildings (only primitive location check for now)
-// Probably a helper function to combine planning application data into Building objs
+// TODO: a helper function to combine planning application data into Building objs
+
 struct SubUnit {
 	std::string sub_building_name;
 	// Keeping this around so old name info isn't lost 
@@ -23,8 +21,8 @@ struct SubUnit {
 	std::string description;
 	bool is_commercial;
 
-	std::string to_string() const {
-		std::string res;
+	std::string to_string(int tablevel = 0) const {
+		std::string res = tabs(tablevel);
 		if (!sub_building_name.empty()) {
 			res += sub_building_name;
 			res += ", ";
@@ -63,8 +61,9 @@ struct Building {
 	std::vector<Valuation> valuations;
 	TypeOfBuilding tob;
 
-	std::string to_string() const {
-		std::string res = name;
+	std::string to_string(int tablevel = 0) const {
+		std::string res = tabs(tablevel);
+		res += name;
 		res += ", ";
 		res += street;
 		res += ", ";
@@ -74,12 +73,12 @@ struct Building {
 		res += ", ";
 		res += tob_to_string(tob);
 		for (const SubUnit& unit: subunits) {
-			res += "\n\t";
-			res += unit.to_string();
+			res += "\n";
+			res += unit.to_string(tablevel+1);
 		}
 		for (const Valuation& val: valuations) {
-			res += "\n\t";
-			res += val.to_string();
+			res += "\n";
+			res += val.to_string(tablevel+1);
 		}
 		return res;
 	}
@@ -125,7 +124,7 @@ std::vector<Building> fetch_buildings(CURL *handle, float x, float y, int radius
 
 		for (nlohmann::json &jb: jdata["results"]) {
 			std::string building_name = get_json_fields<std::string>(jb["DPA"], {
-				"BUILDING_NUMBER", "BUILING_NAME", "DEPENDENT_THOROUGHFARE_NAME"
+				"BUILDING_NUMBER", "BUILDING_NAME", "DEPENDENT_THOROUGHFARE_NAME"
 			});
 			std::string street = get_json_field<std::string>(jb["DPA"], "THOROUGHFARE_NAME");
 			std::string key = building_name+street;
@@ -198,6 +197,7 @@ std::vector<Building> cluster_buildings(std::vector<Building> &buildings) {
 }
 
 ValuationDB::QueryParam get_query_param(const Building &b) {
-	return {b.name.c_str(), b.street.c_str(), b.postcode.c_str()};
+	return {b.name.c_str(), b.street.c_str(), b.postcode.c_str(), 
+			b.tob==TypeOfBuilding::RESIDENTIAL};
 }
 #endif
