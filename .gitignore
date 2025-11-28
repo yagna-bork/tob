@@ -1,5 +1,5 @@
 api-request-examples/
 api_keys.txt
-build/make_requests
+build/
 db/extra/
 include/httplib.h

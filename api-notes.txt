@@ -32,4 +32,8 @@ Restructing make_requests:
 Building structs in one file with code to build them (OS Radius API call) & combine them
 Database code in a seperate class
 PlanningApplication structs and planit calls in seperate file
-http-server main file outside of include folder
+http-server main file outside of include folder w/ 2 endpoints: for buildings and for planning applications
+	while they're still seperate for the moment
+
+cmake -- finally:
+pass
