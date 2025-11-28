@@ -18,7 +18,7 @@ void get_tobs(double lat, double lng, int radius) {
 		exit(1);
 	}
 	std::vector<Building> buildings = fetch_buildings(handle, x, y, radius);
-	std::vector<PlanningApplication> applications = get_planning_apps(handle, lat, lng, radius);
+	std::vector<PlanningApplication> applications = fetch_planning_apps(handle, lat, lng, radius);
 	ValuationDB db;
 	if (!db.connected()) {
 		return;

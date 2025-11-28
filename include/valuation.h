@@ -96,9 +96,6 @@ public:
 
 	bool connected() { return conn_success; }
 
-	/*
-	 * Only provide QueryParams for commercial buildings.
-	 */
 	std::vector<QueryResult> get_valuations(std::vector<QueryParam> &params) {
 		std::vector<QueryResult> results(params.size());
 		PkToValuationMap pk_to_valuation;

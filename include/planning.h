@@ -31,7 +31,7 @@ struct PlanningApplication {
 	}
 };
 
-std::vector<PlanningApplication> get_planning_apps(CURL *handle, double lat, double lng, int radius) {
+std::vector<PlanningApplication> fetch_planning_apps(CURL *handle, double lat, double lng, int radius) {
 	std::vector<PlanningApplication> applications;
 	float krad = radius / 1000.0;
 	std::string data;

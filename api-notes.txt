@@ -37,3 +37,7 @@ http-server main file outside of include folder w/ 2 endpoints: for buildings an
 
 cmake -- finally:
 pass
+
+http server:
+http://url/building?lat=&long= (optional radius)
+http://url/planning?lat=&long= (optional radius)
