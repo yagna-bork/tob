@@ -42,7 +42,6 @@ struct Valuation {
 	std::string secondary_description;
 	bool is_composite;
 	long rateable_value;
-	long uarn; // TODO remove
 	long plants_machinery_value = 0;
 	std::vector<LineItem> line_items;
 	Parking parking;
@@ -258,4 +257,11 @@ private:
 		);
 	}
 };
+
+// serialisation code
+NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(LineItem, floor, description, area, value)
+NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(Parking, spaces, value)
+NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(Valuation, building_name, primary_description, 
+								   secondary_description, is_composite, rateable_value, 
+								   plants_machinery_value, line_items, parking)
 #endif

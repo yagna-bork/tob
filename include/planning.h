@@ -80,4 +80,7 @@ std::vector<PlanningApplication> fetch_planning_apps(CURL *handle, double lat, d
 	} while (index < jdata["total"]);
 	return applications;
 }
+NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(PlanningApplication, address, description, size, state, 
+								   date_received, date_validated, date_decision, 
+								   date_decisison_issued, x, y)
 #endif

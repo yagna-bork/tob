@@ -200,4 +200,15 @@ ValuationDB::QueryParam get_query_param(const Building &b) {
 	return {b.name.c_str(), b.street.c_str(), b.postcode.c_str(), 
 			b.tob==TypeOfBuilding::RESIDENTIAL};
 }
+
+// serialisation
+NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(SubUnit, sub_building_name, building_name, 
+								   code, description, is_commercial)
+NLOHMANN_JSON_SERIALIZE_ENUM(TypeOfBuilding, {
+	{MIXED, "MIXED"}, 
+	{RESIDENTIAL, "RESIDENTIAL"},
+	{COMMERCIAL, "COMMERCIAL"}
+})
+NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(Building, name, street, town, postcode, 
+								   x, y, subunits, valuations, tob)
 #endif
