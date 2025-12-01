@@ -1,1 +1,4 @@
+# Ignore everything
+*
+# except this file. So empty direction is included in repo
 !.gitignore
