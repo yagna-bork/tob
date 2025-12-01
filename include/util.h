@@ -9,8 +9,7 @@
 #include <proj.h>
 #include <curl/curl.h>
 
-// TODO what if script called from somewhere else???
-static const std::string CONFIG_FILE="build/config.txt";
+static const std::string CONFIG_FILE="config.txt";
 std::unordered_map<std::string, std::string> g_config;
 
 /*

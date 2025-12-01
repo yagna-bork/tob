@@ -1,4 +1,3 @@
--- TABLES
 CREATE TABLE IF NOT EXISTS list_entries (
 	entryno INTEGER,
 	billing_authority_code CHAR(4),

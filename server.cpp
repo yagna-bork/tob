@@ -9,6 +9,7 @@
 #include "include/valuation.h"
 #include "include/longest_common_substr.h"
 #include "include/planning.h"
+#include "include/util.h"
 
 using nlohmann::json;
 
@@ -52,6 +53,8 @@ void building_endpoint(const httplib::Request &req, httplib::Response &resp) {
 	curl_easy_cleanup(handle);
 	ValuationDB db;
 	if (!db.connected()) {
+		resp.set_content("Failed to connect to db", "text/plain");
+		resp.status = httplib::StatusCode::InternalServerError_500;
 		return;
 	}
 	std::vector<ValuationDB::QueryParam> params;
@@ -90,14 +93,12 @@ void planning_endpoint(const httplib::Request &req, httplib::Response &resp) {
 int main(int argc, char *argv[]) {
 	init_config();
 	httplib::Server server;
+	std::string url = g_config["SERVER_URL"];
+	int port = atoi(g_config["SERVER_PORT"].c_str());
 
 	server.Get("/building", building_endpoint);
 	server.Get("/planning", planning_endpoint);
-
-	std::string url = g_config["SERVER_URL"];
-	int port = atoi(g_config["SERVER_PORT"].c_str());
 	std::cout << "Starting server on " << url << ":" << port << std::endl;
-
 	server.listen(url, port);
 	return 0;
 }
