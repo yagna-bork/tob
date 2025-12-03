@@ -1,6 +1,11 @@
 INCLUDE_FILES=include/building.h include/longest_common_substr.h include/planning.h include/util.h include/valuation.h
 EXE_FILE=bin/server
 
+all:
+	make clean
+	mkdir bin obj
+	make exe
+
 exe: $(EXE_FILE)
 
 $(EXE_FILE): obj/server.o
@@ -14,5 +19,5 @@ obj/server.o: $(INCLUDE_FILES)
 
 clean:
 	@ echo "Removing generated files"
-	- rm obj/*
-	- rm bin/*
+	- rm -rf obj/*
+	- rm -rf bin/*
