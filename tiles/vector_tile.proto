@@ -80,11 +80,11 @@ message Tile {
         extensions 16 to 8191;
 }
 
-message TileBuildings {
-    message BuildingFeature {
+message BuildingShapes {
+    message BuildingShape {
         repeated int32 approx_centre = 1;
         repeated int32 edges = 2;
     }
 
-    repeated BuildingFeature building_features = 1;
+    repeated BuildingShape building_shapes = 1;
 }

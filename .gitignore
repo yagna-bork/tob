@@ -1,6 +1,5 @@
 api-request-examples/
 db/extra/
-include/httplib.h
 config.txt
-obj/*
-bin/*
+obj/
+bin/

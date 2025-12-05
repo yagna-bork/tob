@@ -56,18 +56,18 @@ extern const ::google::protobuf::internal::DescriptorTable descriptor_table_vect
 namespace vector_tile {
 enum Tile_GeomType : int;
 extern const uint32_t Tile_GeomType_internal_data_[];
+class BuildingShapes;
+struct BuildingShapesDefaultTypeInternal;
+extern BuildingShapesDefaultTypeInternal _BuildingShapes_default_instance_;
+extern const ::google::protobuf::internal::ClassDataFull BuildingShapes_class_data_;
+class BuildingShapes_BuildingShape;
+struct BuildingShapes_BuildingShapeDefaultTypeInternal;
+extern BuildingShapes_BuildingShapeDefaultTypeInternal _BuildingShapes_BuildingShape_default_instance_;
+extern const ::google::protobuf::internal::ClassDataFull BuildingShapes_BuildingShape_class_data_;
 class Tile;
 struct TileDefaultTypeInternal;
 extern TileDefaultTypeInternal _Tile_default_instance_;
 extern const ::google::protobuf::internal::ClassDataFull Tile_class_data_;
-class TileBuildings;
-struct TileBuildingsDefaultTypeInternal;
-extern TileBuildingsDefaultTypeInternal _TileBuildings_default_instance_;
-extern const ::google::protobuf::internal::ClassDataFull TileBuildings_class_data_;
-class TileBuildings_BuildingFeature;
-struct TileBuildings_BuildingFeatureDefaultTypeInternal;
-extern TileBuildings_BuildingFeatureDefaultTypeInternal _TileBuildings_BuildingFeature_default_instance_;
-extern const ::google::protobuf::internal::ClassDataFull TileBuildings_BuildingFeature_class_data_;
 class Tile_Feature;
 struct Tile_FeatureDefaultTypeInternal;
 extern Tile_FeatureDefaultTypeInternal _Tile_Feature_default_instance_;
@@ -128,224 +128,6 @@ inline bool Tile_GeomType_Parse(
 // ===================================================================
 
 
-// -------------------------------------------------------------------
-
-class TileBuildings_BuildingFeature final : public ::google::protobuf::Message
-/* @@protoc_insertion_point(class_definition:vector_tile.TileBuildings.BuildingFeature) */ {
- public:
-  inline TileBuildings_BuildingFeature() : TileBuildings_BuildingFeature(nullptr) {}
-  ~TileBuildings_BuildingFeature() PROTOBUF_FINAL;
-
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-  void operator delete(TileBuildings_BuildingFeature* PROTOBUF_NONNULL msg, ::std::destroying_delete_t) {
-    SharedDtor(*msg);
-    ::google::protobuf::internal::SizedDelete(msg, sizeof(TileBuildings_BuildingFeature));
-  }
-#endif
-
-  template <typename = void>
-  explicit PROTOBUF_CONSTEXPR TileBuildings_BuildingFeature(::google::protobuf::internal::ConstantInitialized);
-
-  inline TileBuildings_BuildingFeature(const TileBuildings_BuildingFeature& from) : TileBuildings_BuildingFeature(nullptr, from) {}
-  inline TileBuildings_BuildingFeature(TileBuildings_BuildingFeature&& from) noexcept
-      : TileBuildings_BuildingFeature(nullptr, ::std::move(from)) {}
-  inline TileBuildings_BuildingFeature& operator=(const TileBuildings_BuildingFeature& from) {
-    CopyFrom(from);
-    return *this;
-  }
-  inline TileBuildings_BuildingFeature& operator=(TileBuildings_BuildingFeature&& from) noexcept {
-    if (this == &from) return *this;
-    if (::google::protobuf::internal::CanMoveWithInternalSwap(GetArena(), from.GetArena())) {
-      InternalSwap(&from);
-    } else {
-      CopyFrom(from);
-    }
-    return *this;
-  }
-
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
-      ABSL_ATTRIBUTE_LIFETIME_BOUND {
-    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
-  }
-  inline ::google::protobuf::UnknownFieldSet* PROTOBUF_NONNULL mutable_unknown_fields()
-      ABSL_ATTRIBUTE_LIFETIME_BOUND {
-    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
-  }
-
-  static const ::google::protobuf::Descriptor* PROTOBUF_NONNULL descriptor() {
-    return GetDescriptor();
-  }
-  static const ::google::protobuf::Descriptor* PROTOBUF_NONNULL GetDescriptor() {
-    return default_instance().GetMetadata().descriptor;
-  }
-  static const ::google::protobuf::Reflection* PROTOBUF_NONNULL GetReflection() {
-    return default_instance().GetMetadata().reflection;
-  }
-  static const TileBuildings_BuildingFeature& default_instance() {
-    return *reinterpret_cast<const TileBuildings_BuildingFeature*>(
-        &_TileBuildings_BuildingFeature_default_instance_);
-  }
-  static constexpr int kIndexInFileMessages = 4;
-  friend void swap(TileBuildings_BuildingFeature& a, TileBuildings_BuildingFeature& b) { a.Swap(&b); }
-  inline void Swap(TileBuildings_BuildingFeature* PROTOBUF_NONNULL other) {
-    if (other == this) return;
-    if (::google::protobuf::internal::CanUseInternalSwap(GetArena(), other->GetArena())) {
-      InternalSwap(other);
-    } else {
-      ::google::protobuf::internal::GenericSwap(this, other);
-    }
-  }
-  void UnsafeArenaSwap(TileBuildings_BuildingFeature* PROTOBUF_NONNULL other) {
-    if (other == this) return;
-    ABSL_DCHECK(GetArena() == other->GetArena());
-    InternalSwap(other);
-  }
-
-  // implements Message ----------------------------------------------
-
-  TileBuildings_BuildingFeature* PROTOBUF_NONNULL New(::google::protobuf::Arena* PROTOBUF_NULLABLE arena = nullptr) const {
-    return ::google::protobuf::Message::DefaultConstruct<TileBuildings_BuildingFeature>(arena);
-  }
-  using ::google::protobuf::Message::CopyFrom;
-  void CopyFrom(const TileBuildings_BuildingFeature& from);
-  using ::google::protobuf::Message::MergeFrom;
-  void MergeFrom(const TileBuildings_BuildingFeature& from) { TileBuildings_BuildingFeature::MergeImpl(*this, from); }
-
-  private:
-  static void MergeImpl(::google::protobuf::MessageLite& to_msg,
-                        const ::google::protobuf::MessageLite& from_msg);
-
-  public:
-  bool IsInitialized() const {
-    return true;
-  }
-  ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
-  #if defined(PROTOBUF_CUSTOM_VTABLE)
-  private:
-  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
-  static ::uint8_t* PROTOBUF_NONNULL _InternalSerialize(
-      const ::google::protobuf::MessageLite& msg, ::uint8_t* PROTOBUF_NONNULL target,
-      ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream);
-
-  public:
-  ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
-  ::uint8_t* PROTOBUF_NONNULL _InternalSerialize(
-      ::uint8_t* PROTOBUF_NONNULL target,
-      ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) const {
-    return _InternalSerialize(*this, target, stream);
-  }
-  #else   // PROTOBUF_CUSTOM_VTABLE
-  ::size_t ByteSizeLong() const final;
-  ::uint8_t* PROTOBUF_NONNULL _InternalSerialize(
-      ::uint8_t* PROTOBUF_NONNULL target,
-      ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) const final;
-  #endif  // PROTOBUF_CUSTOM_VTABLE
-  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
-
-  private:
-  void SharedCtor(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
-  static void SharedDtor(MessageLite& self);
-  void InternalSwap(TileBuildings_BuildingFeature* PROTOBUF_NONNULL other);
- private:
-  template <typename T>
-  friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "vector_tile.TileBuildings.BuildingFeature"; }
-
-  explicit TileBuildings_BuildingFeature(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
-  TileBuildings_BuildingFeature(::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const TileBuildings_BuildingFeature& from);
-  TileBuildings_BuildingFeature(
-      ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, TileBuildings_BuildingFeature&& from) noexcept
-      : TileBuildings_BuildingFeature(arena) {
-    *this = ::std::move(from);
-  }
-  const ::google::protobuf::internal::ClassData* PROTOBUF_NONNULL GetClassData() const PROTOBUF_FINAL;
-  static void* PROTOBUF_NONNULL PlacementNew_(
-      const void* PROTOBUF_NONNULL, void* PROTOBUF_NONNULL mem,
-      ::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
-  static constexpr auto InternalNewImpl_();
-
- public:
-  static constexpr auto InternalGenerateClassData_();
-
-  ::google::protobuf::Metadata GetMetadata() const;
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-  enum : int {
-    kApproxCentreFieldNumber = 1,
-    kEdgesFieldNumber = 2,
-  };
-  // repeated int32 approx_centre = 1;
-  int approx_centre_size() const;
-  private:
-  int _internal_approx_centre_size() const;
-
-  public:
-  void clear_approx_centre() ;
-  ::int32_t approx_centre(int index) const;
-  void set_approx_centre(int index, ::int32_t value);
-  void add_approx_centre(::int32_t value);
-  const ::google::protobuf::RepeatedField<::int32_t>& approx_centre() const;
-  ::google::protobuf::RepeatedField<::int32_t>* PROTOBUF_NONNULL mutable_approx_centre();
-
-  private:
-  const ::google::protobuf::RepeatedField<::int32_t>& _internal_approx_centre() const;
-  ::google::protobuf::RepeatedField<::int32_t>* PROTOBUF_NONNULL _internal_mutable_approx_centre();
-
-  public:
-  // repeated int32 edges = 2;
-  int edges_size() const;
-  private:
-  int _internal_edges_size() const;
-
-  public:
-  void clear_edges() ;
-  ::int32_t edges(int index) const;
-  void set_edges(int index, ::int32_t value);
-  void add_edges(::int32_t value);
-  const ::google::protobuf::RepeatedField<::int32_t>& edges() const;
-  ::google::protobuf::RepeatedField<::int32_t>* PROTOBUF_NONNULL mutable_edges();
-
-  private:
-  const ::google::protobuf::RepeatedField<::int32_t>& _internal_edges() const;
-  ::google::protobuf::RepeatedField<::int32_t>* PROTOBUF_NONNULL _internal_mutable_edges();
-
-  public:
-  // @@protoc_insertion_point(class_scope:vector_tile.TileBuildings.BuildingFeature)
- private:
-  class _Internal;
-  friend class ::google::protobuf::internal::TcParser;
-  static const ::google::protobuf::internal::TcParseTable<1, 2,
-                                   0, 0,
-                                   2>
-      _table_;
-
-  friend class ::google::protobuf::MessageLite;
-  friend class ::google::protobuf::Arena;
-  template <typename T>
-  friend class ::google::protobuf::Arena::InternalHelper;
-  using InternalArenaConstructable_ = void;
-  using DestructorSkippable_ = void;
-  struct Impl_ {
-    inline explicit constexpr Impl_(::google::protobuf::internal::ConstantInitialized) noexcept;
-    inline explicit Impl_(
-        ::google::protobuf::internal::InternalVisibility visibility,
-        ::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
-    inline explicit Impl_(
-        ::google::protobuf::internal::InternalVisibility visibility,
-        ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const Impl_& from,
-        const TileBuildings_BuildingFeature& from_msg);
-    ::google::protobuf::internal::HasBits<1> _has_bits_;
-    ::google::protobuf::internal::CachedSize _cached_size_;
-    ::google::protobuf::RepeatedField<::int32_t> approx_centre_;
-    ::google::protobuf::RepeatedField<::int32_t> edges_;
-    PROTOBUF_TSAN_DECLARE_MEMBER
-  };
-  union { Impl_ _impl_; };
-  friend struct ::TableStruct_vector_5ftile_2eproto;
-};
-
-extern const ::google::protobuf::internal::ClassDataFull TileBuildings_BuildingFeature_class_data_;
 // -------------------------------------------------------------------
 
 class Tile_Value final : public ::google::protobuf::Message
@@ -1059,30 +841,30 @@ class Tile_Feature final : public ::google::protobuf::Message
 extern const ::google::protobuf::internal::ClassDataFull Tile_Feature_class_data_;
 // -------------------------------------------------------------------
 
-class TileBuildings final : public ::google::protobuf::Message
-/* @@protoc_insertion_point(class_definition:vector_tile.TileBuildings) */ {
+class BuildingShapes_BuildingShape final : public ::google::protobuf::Message
+/* @@protoc_insertion_point(class_definition:vector_tile.BuildingShapes.BuildingShape) */ {
  public:
-  inline TileBuildings() : TileBuildings(nullptr) {}
-  ~TileBuildings() PROTOBUF_FINAL;
+  inline BuildingShapes_BuildingShape() : BuildingShapes_BuildingShape(nullptr) {}
+  ~BuildingShapes_BuildingShape() PROTOBUF_FINAL;
 
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-  void operator delete(TileBuildings* PROTOBUF_NONNULL msg, ::std::destroying_delete_t) {
+  void operator delete(BuildingShapes_BuildingShape* PROTOBUF_NONNULL msg, ::std::destroying_delete_t) {
     SharedDtor(*msg);
-    ::google::protobuf::internal::SizedDelete(msg, sizeof(TileBuildings));
+    ::google::protobuf::internal::SizedDelete(msg, sizeof(BuildingShapes_BuildingShape));
   }
 #endif
 
   template <typename = void>
-  explicit PROTOBUF_CONSTEXPR TileBuildings(::google::protobuf::internal::ConstantInitialized);
+  explicit PROTOBUF_CONSTEXPR BuildingShapes_BuildingShape(::google::protobuf::internal::ConstantInitialized);
 
-  inline TileBuildings(const TileBuildings& from) : TileBuildings(nullptr, from) {}
-  inline TileBuildings(TileBuildings&& from) noexcept
-      : TileBuildings(nullptr, ::std::move(from)) {}
-  inline TileBuildings& operator=(const TileBuildings& from) {
+  inline BuildingShapes_BuildingShape(const BuildingShapes_BuildingShape& from) : BuildingShapes_BuildingShape(nullptr, from) {}
+  inline BuildingShapes_BuildingShape(BuildingShapes_BuildingShape&& from) noexcept
+      : BuildingShapes_BuildingShape(nullptr, ::std::move(from)) {}
+  inline BuildingShapes_BuildingShape& operator=(const BuildingShapes_BuildingShape& from) {
     CopyFrom(from);
     return *this;
   }
-  inline TileBuildings& operator=(TileBuildings&& from) noexcept {
+  inline BuildingShapes_BuildingShape& operator=(BuildingShapes_BuildingShape&& from) noexcept {
     if (this == &from) return *this;
     if (::google::protobuf::internal::CanMoveWithInternalSwap(GetArena(), from.GetArena())) {
       InternalSwap(&from);
@@ -1110,13 +892,13 @@ class TileBuildings final : public ::google::protobuf::Message
   static const ::google::protobuf::Reflection* PROTOBUF_NONNULL GetReflection() {
     return default_instance().GetMetadata().reflection;
   }
-  static const TileBuildings& default_instance() {
-    return *reinterpret_cast<const TileBuildings*>(
-        &_TileBuildings_default_instance_);
+  static const BuildingShapes_BuildingShape& default_instance() {
+    return *reinterpret_cast<const BuildingShapes_BuildingShape*>(
+        &_BuildingShapes_BuildingShape_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 5;
-  friend void swap(TileBuildings& a, TileBuildings& b) { a.Swap(&b); }
-  inline void Swap(TileBuildings* PROTOBUF_NONNULL other) {
+  static constexpr int kIndexInFileMessages = 4;
+  friend void swap(BuildingShapes_BuildingShape& a, BuildingShapes_BuildingShape& b) { a.Swap(&b); }
+  inline void Swap(BuildingShapes_BuildingShape* PROTOBUF_NONNULL other) {
     if (other == this) return;
     if (::google::protobuf::internal::CanUseInternalSwap(GetArena(), other->GetArena())) {
       InternalSwap(other);
@@ -1124,7 +906,7 @@ class TileBuildings final : public ::google::protobuf::Message
       ::google::protobuf::internal::GenericSwap(this, other);
     }
   }
-  void UnsafeArenaSwap(TileBuildings* PROTOBUF_NONNULL other) {
+  void UnsafeArenaSwap(BuildingShapes_BuildingShape* PROTOBUF_NONNULL other) {
     if (other == this) return;
     ABSL_DCHECK(GetArena() == other->GetArena());
     InternalSwap(other);
@@ -1132,13 +914,13 @@ class TileBuildings final : public ::google::protobuf::Message
 
   // implements Message ----------------------------------------------
 
-  TileBuildings* PROTOBUF_NONNULL New(::google::protobuf::Arena* PROTOBUF_NULLABLE arena = nullptr) const {
-    return ::google::protobuf::Message::DefaultConstruct<TileBuildings>(arena);
+  BuildingShapes_BuildingShape* PROTOBUF_NONNULL New(::google::protobuf::Arena* PROTOBUF_NULLABLE arena = nullptr) const {
+    return ::google::protobuf::Message::DefaultConstruct<BuildingShapes_BuildingShape>(arena);
   }
   using ::google::protobuf::Message::CopyFrom;
-  void CopyFrom(const TileBuildings& from);
+  void CopyFrom(const BuildingShapes_BuildingShape& from);
   using ::google::protobuf::Message::MergeFrom;
-  void MergeFrom(const TileBuildings& from) { TileBuildings::MergeImpl(*this, from); }
+  void MergeFrom(const BuildingShapes_BuildingShape& from) { BuildingShapes_BuildingShape::MergeImpl(*this, from); }
 
   private:
   static void MergeImpl(::google::protobuf::MessageLite& to_msg,
@@ -1174,17 +956,17 @@ class TileBuildings final : public ::google::protobuf::Message
   private:
   void SharedCtor(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
   static void SharedDtor(MessageLite& self);
-  void InternalSwap(TileBuildings* PROTOBUF_NONNULL other);
+  void InternalSwap(BuildingShapes_BuildingShape* PROTOBUF_NONNULL other);
  private:
   template <typename T>
   friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "vector_tile.TileBuildings"; }
+  static ::absl::string_view FullMessageName() { return "vector_tile.BuildingShapes.BuildingShape"; }
 
-  explicit TileBuildings(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
-  TileBuildings(::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const TileBuildings& from);
-  TileBuildings(
-      ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, TileBuildings&& from) noexcept
-      : TileBuildings(arena) {
+  explicit BuildingShapes_BuildingShape(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+  BuildingShapes_BuildingShape(::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const BuildingShapes_BuildingShape& from);
+  BuildingShapes_BuildingShape(
+      ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, BuildingShapes_BuildingShape&& from) noexcept
+      : BuildingShapes_BuildingShape(arena) {
     *this = ::std::move(from);
   }
   const ::google::protobuf::internal::ClassData* PROTOBUF_NONNULL GetClassData() const PROTOBUF_FINAL;
@@ -1198,35 +980,54 @@ class TileBuildings final : public ::google::protobuf::Message
 
   ::google::protobuf::Metadata GetMetadata() const;
   // nested types ----------------------------------------------------
-  using BuildingFeature = TileBuildings_BuildingFeature;
 
   // accessors -------------------------------------------------------
   enum : int {
-    kBuildingFeaturesFieldNumber = 1,
+    kApproxCentreFieldNumber = 1,
+    kEdgesFieldNumber = 2,
   };
-  // repeated .vector_tile.TileBuildings.BuildingFeature building_features = 1;
-  int building_features_size() const;
+  // repeated int32 approx_centre = 1;
+  int approx_centre_size() const;
   private:
-  int _internal_building_features_size() const;
+  int _internal_approx_centre_size() const;
 
   public:
-  void clear_building_features() ;
-  ::vector_tile::TileBuildings_BuildingFeature* PROTOBUF_NONNULL mutable_building_features(int index);
-  ::google::protobuf::RepeatedPtrField<::vector_tile::TileBuildings_BuildingFeature>* PROTOBUF_NONNULL mutable_building_features();
+  void clear_approx_centre() ;
+  ::int32_t approx_centre(int index) const;
+  void set_approx_centre(int index, ::int32_t value);
+  void add_approx_centre(::int32_t value);
+  const ::google::protobuf::RepeatedField<::int32_t>& approx_centre() const;
+  ::google::protobuf::RepeatedField<::int32_t>* PROTOBUF_NONNULL mutable_approx_centre();
 
   private:
-  const ::google::protobuf::RepeatedPtrField<::vector_tile::TileBuildings_BuildingFeature>& _internal_building_features() const;
-  ::google::protobuf::RepeatedPtrField<::vector_tile::TileBuildings_BuildingFeature>* PROTOBUF_NONNULL _internal_mutable_building_features();
+  const ::google::protobuf::RepeatedField<::int32_t>& _internal_approx_centre() const;
+  ::google::protobuf::RepeatedField<::int32_t>* PROTOBUF_NONNULL _internal_mutable_approx_centre();
+
   public:
-  const ::vector_tile::TileBuildings_BuildingFeature& building_features(int index) const;
-  ::vector_tile::TileBuildings_BuildingFeature* PROTOBUF_NONNULL add_building_features();
-  const ::google::protobuf::RepeatedPtrField<::vector_tile::TileBuildings_BuildingFeature>& building_features() const;
-  // @@protoc_insertion_point(class_scope:vector_tile.TileBuildings)
+  // repeated int32 edges = 2;
+  int edges_size() const;
+  private:
+  int _internal_edges_size() const;
+
+  public:
+  void clear_edges() ;
+  ::int32_t edges(int index) const;
+  void set_edges(int index, ::int32_t value);
+  void add_edges(::int32_t value);
+  const ::google::protobuf::RepeatedField<::int32_t>& edges() const;
+  ::google::protobuf::RepeatedField<::int32_t>* PROTOBUF_NONNULL mutable_edges();
+
+  private:
+  const ::google::protobuf::RepeatedField<::int32_t>& _internal_edges() const;
+  ::google::protobuf::RepeatedField<::int32_t>* PROTOBUF_NONNULL _internal_mutable_edges();
+
+  public:
+  // @@protoc_insertion_point(class_scope:vector_tile.BuildingShapes.BuildingShape)
  private:
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
-  static const ::google::protobuf::internal::TcParseTable<0, 1,
-                                   1, 0,
+  static const ::google::protobuf::internal::TcParseTable<1, 2,
+                                   0, 0,
                                    2>
       _table_;
 
@@ -1244,17 +1045,18 @@ class TileBuildings final : public ::google::protobuf::Message
     inline explicit Impl_(
         ::google::protobuf::internal::InternalVisibility visibility,
         ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const Impl_& from,
-        const TileBuildings& from_msg);
+        const BuildingShapes_BuildingShape& from_msg);
     ::google::protobuf::internal::HasBits<1> _has_bits_;
     ::google::protobuf::internal::CachedSize _cached_size_;
-    ::google::protobuf::RepeatedPtrField< ::vector_tile::TileBuildings_BuildingFeature > building_features_;
+    ::google::protobuf::RepeatedField<::int32_t> approx_centre_;
+    ::google::protobuf::RepeatedField<::int32_t> edges_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
   union { Impl_ _impl_; };
   friend struct ::TableStruct_vector_5ftile_2eproto;
 };
 
-extern const ::google::protobuf::internal::ClassDataFull TileBuildings_class_data_;
+extern const ::google::protobuf::internal::ClassDataFull BuildingShapes_BuildingShape_class_data_;
 // -------------------------------------------------------------------
 
 class Tile_Layer final : public ::google::protobuf::Message
@@ -1730,6 +1532,204 @@ class Tile_Layer final : public ::google::protobuf::Message
 };
 
 extern const ::google::protobuf::internal::ClassDataFull Tile_Layer_class_data_;
+// -------------------------------------------------------------------
+
+class BuildingShapes final : public ::google::protobuf::Message
+/* @@protoc_insertion_point(class_definition:vector_tile.BuildingShapes) */ {
+ public:
+  inline BuildingShapes() : BuildingShapes(nullptr) {}
+  ~BuildingShapes() PROTOBUF_FINAL;
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+  void operator delete(BuildingShapes* PROTOBUF_NONNULL msg, ::std::destroying_delete_t) {
+    SharedDtor(*msg);
+    ::google::protobuf::internal::SizedDelete(msg, sizeof(BuildingShapes));
+  }
+#endif
+
+  template <typename = void>
+  explicit PROTOBUF_CONSTEXPR BuildingShapes(::google::protobuf::internal::ConstantInitialized);
+
+  inline BuildingShapes(const BuildingShapes& from) : BuildingShapes(nullptr, from) {}
+  inline BuildingShapes(BuildingShapes&& from) noexcept
+      : BuildingShapes(nullptr, ::std::move(from)) {}
+  inline BuildingShapes& operator=(const BuildingShapes& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline BuildingShapes& operator=(BuildingShapes&& from) noexcept {
+    if (this == &from) return *this;
+    if (::google::protobuf::internal::CanMoveWithInternalSwap(GetArena(), from.GetArena())) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
+  }
+  inline ::google::protobuf::UnknownFieldSet* PROTOBUF_NONNULL mutable_unknown_fields()
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
+  }
+
+  static const ::google::protobuf::Descriptor* PROTOBUF_NONNULL descriptor() {
+    return GetDescriptor();
+  }
+  static const ::google::protobuf::Descriptor* PROTOBUF_NONNULL GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::google::protobuf::Reflection* PROTOBUF_NONNULL GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const BuildingShapes& default_instance() {
+    return *reinterpret_cast<const BuildingShapes*>(
+        &_BuildingShapes_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages = 5;
+  friend void swap(BuildingShapes& a, BuildingShapes& b) { a.Swap(&b); }
+  inline void Swap(BuildingShapes* PROTOBUF_NONNULL other) {
+    if (other == this) return;
+    if (::google::protobuf::internal::CanUseInternalSwap(GetArena(), other->GetArena())) {
+      InternalSwap(other);
+    } else {
+      ::google::protobuf::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(BuildingShapes* PROTOBUF_NONNULL other) {
+    if (other == this) return;
+    ABSL_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  BuildingShapes* PROTOBUF_NONNULL New(::google::protobuf::Arena* PROTOBUF_NULLABLE arena = nullptr) const {
+    return ::google::protobuf::Message::DefaultConstruct<BuildingShapes>(arena);
+  }
+  using ::google::protobuf::Message::CopyFrom;
+  void CopyFrom(const BuildingShapes& from);
+  using ::google::protobuf::Message::MergeFrom;
+  void MergeFrom(const BuildingShapes& from) { BuildingShapes::MergeImpl(*this, from); }
+
+  private:
+  static void MergeImpl(::google::protobuf::MessageLite& to_msg,
+                        const ::google::protobuf::MessageLite& from_msg);
+
+  public:
+  bool IsInitialized() const {
+    return true;
+  }
+  ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
+  #if defined(PROTOBUF_CUSTOM_VTABLE)
+  private:
+  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
+  static ::uint8_t* PROTOBUF_NONNULL _InternalSerialize(
+      const ::google::protobuf::MessageLite& msg, ::uint8_t* PROTOBUF_NONNULL target,
+      ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream);
+
+  public:
+  ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
+  ::uint8_t* PROTOBUF_NONNULL _InternalSerialize(
+      ::uint8_t* PROTOBUF_NONNULL target,
+      ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) const {
+    return _InternalSerialize(*this, target, stream);
+  }
+  #else   // PROTOBUF_CUSTOM_VTABLE
+  ::size_t ByteSizeLong() const final;
+  ::uint8_t* PROTOBUF_NONNULL _InternalSerialize(
+      ::uint8_t* PROTOBUF_NONNULL target,
+      ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) const final;
+  #endif  // PROTOBUF_CUSTOM_VTABLE
+  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+  static void SharedDtor(MessageLite& self);
+  void InternalSwap(BuildingShapes* PROTOBUF_NONNULL other);
+ private:
+  template <typename T>
+  friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
+  static ::absl::string_view FullMessageName() { return "vector_tile.BuildingShapes"; }
+
+  explicit BuildingShapes(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+  BuildingShapes(::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const BuildingShapes& from);
+  BuildingShapes(
+      ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, BuildingShapes&& from) noexcept
+      : BuildingShapes(arena) {
+    *this = ::std::move(from);
+  }
+  const ::google::protobuf::internal::ClassData* PROTOBUF_NONNULL GetClassData() const PROTOBUF_FINAL;
+  static void* PROTOBUF_NONNULL PlacementNew_(
+      const void* PROTOBUF_NONNULL, void* PROTOBUF_NONNULL mem,
+      ::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+  static constexpr auto InternalNewImpl_();
+
+ public:
+  static constexpr auto InternalGenerateClassData_();
+
+  ::google::protobuf::Metadata GetMetadata() const;
+  // nested types ----------------------------------------------------
+  using BuildingShape = BuildingShapes_BuildingShape;
+
+  // accessors -------------------------------------------------------
+  enum : int {
+    kBuildingShapesFieldNumber = 1,
+  };
+  // repeated .vector_tile.BuildingShapes.BuildingShape building_shapes = 1;
+  int building_shapes_size() const;
+  private:
+  int _internal_building_shapes_size() const;
+
+  public:
+  void clear_building_shapes() ;
+  ::vector_tile::BuildingShapes_BuildingShape* PROTOBUF_NONNULL mutable_building_shapes(int index);
+  ::google::protobuf::RepeatedPtrField<::vector_tile::BuildingShapes_BuildingShape>* PROTOBUF_NONNULL mutable_building_shapes();
+
+  private:
+  const ::google::protobuf::RepeatedPtrField<::vector_tile::BuildingShapes_BuildingShape>& _internal_building_shapes() const;
+  ::google::protobuf::RepeatedPtrField<::vector_tile::BuildingShapes_BuildingShape>* PROTOBUF_NONNULL _internal_mutable_building_shapes();
+  public:
+  const ::vector_tile::BuildingShapes_BuildingShape& building_shapes(int index) const;
+  ::vector_tile::BuildingShapes_BuildingShape* PROTOBUF_NONNULL add_building_shapes();
+  const ::google::protobuf::RepeatedPtrField<::vector_tile::BuildingShapes_BuildingShape>& building_shapes() const;
+  // @@protoc_insertion_point(class_scope:vector_tile.BuildingShapes)
+ private:
+  class _Internal;
+  friend class ::google::protobuf::internal::TcParser;
+  static const ::google::protobuf::internal::TcParseTable<0, 1,
+                                   1, 0,
+                                   2>
+      _table_;
+
+  friend class ::google::protobuf::MessageLite;
+  friend class ::google::protobuf::Arena;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
+  using InternalArenaConstructable_ = void;
+  using DestructorSkippable_ = void;
+  struct Impl_ {
+    inline explicit constexpr Impl_(::google::protobuf::internal::ConstantInitialized) noexcept;
+    inline explicit Impl_(
+        ::google::protobuf::internal::InternalVisibility visibility,
+        ::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+    inline explicit Impl_(
+        ::google::protobuf::internal::InternalVisibility visibility,
+        ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const Impl_& from,
+        const BuildingShapes& from_msg);
+    ::google::protobuf::internal::HasBits<1> _has_bits_;
+    ::google::protobuf::internal::CachedSize _cached_size_;
+    ::google::protobuf::RepeatedPtrField< ::vector_tile::BuildingShapes_BuildingShape > building_shapes_;
+    PROTOBUF_TSAN_DECLARE_MEMBER
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_vector_5ftile_2eproto;
+};
+
+extern const ::google::protobuf::internal::ClassDataFull BuildingShapes_class_data_;
 // -------------------------------------------------------------------
 
 class Tile final : public ::google::protobuf::Message
@@ -2945,166 +2945,166 @@ Tile::_internal_mutable_layers() {
 
 // -------------------------------------------------------------------
 
-// TileBuildings_BuildingFeature
+// BuildingShapes_BuildingShape
 
 // repeated int32 approx_centre = 1;
-inline int TileBuildings_BuildingFeature::_internal_approx_centre_size() const {
+inline int BuildingShapes_BuildingShape::_internal_approx_centre_size() const {
   return _internal_approx_centre().size();
 }
-inline int TileBuildings_BuildingFeature::approx_centre_size() const {
+inline int BuildingShapes_BuildingShape::approx_centre_size() const {
   return _internal_approx_centre_size();
 }
-inline void TileBuildings_BuildingFeature::clear_approx_centre() {
+inline void BuildingShapes_BuildingShape::clear_approx_centre() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.approx_centre_.Clear();
   ClearHasBitForRepeated(_impl_._has_bits_[0],
                   0x00000001U);
 }
-inline ::int32_t TileBuildings_BuildingFeature::approx_centre(int index) const {
-  // @@protoc_insertion_point(field_get:vector_tile.TileBuildings.BuildingFeature.approx_centre)
+inline ::int32_t BuildingShapes_BuildingShape::approx_centre(int index) const {
+  // @@protoc_insertion_point(field_get:vector_tile.BuildingShapes.BuildingShape.approx_centre)
   return _internal_approx_centre().Get(index);
 }
-inline void TileBuildings_BuildingFeature::set_approx_centre(int index, ::int32_t value) {
+inline void BuildingShapes_BuildingShape::set_approx_centre(int index, ::int32_t value) {
   _internal_mutable_approx_centre()->Set(index, value);
-  // @@protoc_insertion_point(field_set:vector_tile.TileBuildings.BuildingFeature.approx_centre)
+  // @@protoc_insertion_point(field_set:vector_tile.BuildingShapes.BuildingShape.approx_centre)
 }
-inline void TileBuildings_BuildingFeature::add_approx_centre(::int32_t value) {
+inline void BuildingShapes_BuildingShape::add_approx_centre(::int32_t value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _internal_mutable_approx_centre()->Add(value);
   SetHasBitForRepeated(_impl_._has_bits_[0], 0x00000001U);
-  // @@protoc_insertion_point(field_add:vector_tile.TileBuildings.BuildingFeature.approx_centre)
+  // @@protoc_insertion_point(field_add:vector_tile.BuildingShapes.BuildingShape.approx_centre)
 }
-inline const ::google::protobuf::RepeatedField<::int32_t>& TileBuildings_BuildingFeature::approx_centre() const
+inline const ::google::protobuf::RepeatedField<::int32_t>& BuildingShapes_BuildingShape::approx_centre() const
     ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_list:vector_tile.TileBuildings.BuildingFeature.approx_centre)
+  // @@protoc_insertion_point(field_list:vector_tile.BuildingShapes.BuildingShape.approx_centre)
   return _internal_approx_centre();
 }
-inline ::google::protobuf::RepeatedField<::int32_t>* PROTOBUF_NONNULL TileBuildings_BuildingFeature::mutable_approx_centre()
+inline ::google::protobuf::RepeatedField<::int32_t>* PROTOBUF_NONNULL BuildingShapes_BuildingShape::mutable_approx_centre()
     ABSL_ATTRIBUTE_LIFETIME_BOUND {
   SetHasBitForRepeated(_impl_._has_bits_[0], 0x00000001U);
-  // @@protoc_insertion_point(field_mutable_list:vector_tile.TileBuildings.BuildingFeature.approx_centre)
+  // @@protoc_insertion_point(field_mutable_list:vector_tile.BuildingShapes.BuildingShape.approx_centre)
   ::google::protobuf::internal::TSanWrite(&_impl_);
   return _internal_mutable_approx_centre();
 }
 inline const ::google::protobuf::RepeatedField<::int32_t>&
-TileBuildings_BuildingFeature::_internal_approx_centre() const {
+BuildingShapes_BuildingShape::_internal_approx_centre() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
   return _impl_.approx_centre_;
 }
 inline ::google::protobuf::RepeatedField<::int32_t>* PROTOBUF_NONNULL
-TileBuildings_BuildingFeature::_internal_mutable_approx_centre() {
+BuildingShapes_BuildingShape::_internal_mutable_approx_centre() {
   ::google::protobuf::internal::TSanRead(&_impl_);
   return &_impl_.approx_centre_;
 }
 
 // repeated int32 edges = 2;
-inline int TileBuildings_BuildingFeature::_internal_edges_size() const {
+inline int BuildingShapes_BuildingShape::_internal_edges_size() const {
   return _internal_edges().size();
 }
-inline int TileBuildings_BuildingFeature::edges_size() const {
+inline int BuildingShapes_BuildingShape::edges_size() const {
   return _internal_edges_size();
 }
-inline void TileBuildings_BuildingFeature::clear_edges() {
+inline void BuildingShapes_BuildingShape::clear_edges() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.edges_.Clear();
   ClearHasBitForRepeated(_impl_._has_bits_[0],
                   0x00000002U);
 }
-inline ::int32_t TileBuildings_BuildingFeature::edges(int index) const {
-  // @@protoc_insertion_point(field_get:vector_tile.TileBuildings.BuildingFeature.edges)
+inline ::int32_t BuildingShapes_BuildingShape::edges(int index) const {
+  // @@protoc_insertion_point(field_get:vector_tile.BuildingShapes.BuildingShape.edges)
   return _internal_edges().Get(index);
 }
-inline void TileBuildings_BuildingFeature::set_edges(int index, ::int32_t value) {
+inline void BuildingShapes_BuildingShape::set_edges(int index, ::int32_t value) {
   _internal_mutable_edges()->Set(index, value);
-  // @@protoc_insertion_point(field_set:vector_tile.TileBuildings.BuildingFeature.edges)
+  // @@protoc_insertion_point(field_set:vector_tile.BuildingShapes.BuildingShape.edges)
 }
-inline void TileBuildings_BuildingFeature::add_edges(::int32_t value) {
+inline void BuildingShapes_BuildingShape::add_edges(::int32_t value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _internal_mutable_edges()->Add(value);
   SetHasBitForRepeated(_impl_._has_bits_[0], 0x00000002U);
-  // @@protoc_insertion_point(field_add:vector_tile.TileBuildings.BuildingFeature.edges)
+  // @@protoc_insertion_point(field_add:vector_tile.BuildingShapes.BuildingShape.edges)
 }
-inline const ::google::protobuf::RepeatedField<::int32_t>& TileBuildings_BuildingFeature::edges() const
+inline const ::google::protobuf::RepeatedField<::int32_t>& BuildingShapes_BuildingShape::edges() const
     ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_list:vector_tile.TileBuildings.BuildingFeature.edges)
+  // @@protoc_insertion_point(field_list:vector_tile.BuildingShapes.BuildingShape.edges)
   return _internal_edges();
 }
-inline ::google::protobuf::RepeatedField<::int32_t>* PROTOBUF_NONNULL TileBuildings_BuildingFeature::mutable_edges()
+inline ::google::protobuf::RepeatedField<::int32_t>* PROTOBUF_NONNULL BuildingShapes_BuildingShape::mutable_edges()
     ABSL_ATTRIBUTE_LIFETIME_BOUND {
   SetHasBitForRepeated(_impl_._has_bits_[0], 0x00000002U);
-  // @@protoc_insertion_point(field_mutable_list:vector_tile.TileBuildings.BuildingFeature.edges)
+  // @@protoc_insertion_point(field_mutable_list:vector_tile.BuildingShapes.BuildingShape.edges)
   ::google::protobuf::internal::TSanWrite(&_impl_);
   return _internal_mutable_edges();
 }
 inline const ::google::protobuf::RepeatedField<::int32_t>&
-TileBuildings_BuildingFeature::_internal_edges() const {
+BuildingShapes_BuildingShape::_internal_edges() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
   return _impl_.edges_;
 }
 inline ::google::protobuf::RepeatedField<::int32_t>* PROTOBUF_NONNULL
-TileBuildings_BuildingFeature::_internal_mutable_edges() {
+BuildingShapes_BuildingShape::_internal_mutable_edges() {
   ::google::protobuf::internal::TSanRead(&_impl_);
   return &_impl_.edges_;
 }
 
 // -------------------------------------------------------------------
 
-// TileBuildings
+// BuildingShapes
 
-// repeated .vector_tile.TileBuildings.BuildingFeature building_features = 1;
-inline int TileBuildings::_internal_building_features_size() const {
-  return _internal_building_features().size();
+// repeated .vector_tile.BuildingShapes.BuildingShape building_shapes = 1;
+inline int BuildingShapes::_internal_building_shapes_size() const {
+  return _internal_building_shapes().size();
 }
-inline int TileBuildings::building_features_size() const {
-  return _internal_building_features_size();
+inline int BuildingShapes::building_shapes_size() const {
+  return _internal_building_shapes_size();
 }
-inline void TileBuildings::clear_building_features() {
+inline void BuildingShapes::clear_building_shapes() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.building_features_.Clear();
+  _impl_.building_shapes_.Clear();
   ClearHasBitForRepeated(_impl_._has_bits_[0],
                   0x00000001U);
 }
-inline ::vector_tile::TileBuildings_BuildingFeature* PROTOBUF_NONNULL TileBuildings::mutable_building_features(int index)
+inline ::vector_tile::BuildingShapes_BuildingShape* PROTOBUF_NONNULL BuildingShapes::mutable_building_shapes(int index)
     ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_mutable:vector_tile.TileBuildings.building_features)
-  return _internal_mutable_building_features()->Mutable(index);
+  // @@protoc_insertion_point(field_mutable:vector_tile.BuildingShapes.building_shapes)
+  return _internal_mutable_building_shapes()->Mutable(index);
 }
-inline ::google::protobuf::RepeatedPtrField<::vector_tile::TileBuildings_BuildingFeature>* PROTOBUF_NONNULL TileBuildings::mutable_building_features()
+inline ::google::protobuf::RepeatedPtrField<::vector_tile::BuildingShapes_BuildingShape>* PROTOBUF_NONNULL BuildingShapes::mutable_building_shapes()
     ABSL_ATTRIBUTE_LIFETIME_BOUND {
   SetHasBitForRepeated(_impl_._has_bits_[0], 0x00000001U);
-  // @@protoc_insertion_point(field_mutable_list:vector_tile.TileBuildings.building_features)
+  // @@protoc_insertion_point(field_mutable_list:vector_tile.BuildingShapes.building_shapes)
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  return _internal_mutable_building_features();
+  return _internal_mutable_building_shapes();
 }
-inline const ::vector_tile::TileBuildings_BuildingFeature& TileBuildings::building_features(int index) const
+inline const ::vector_tile::BuildingShapes_BuildingShape& BuildingShapes::building_shapes(int index) const
     ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:vector_tile.TileBuildings.building_features)
-  return _internal_building_features().Get(index);
+  // @@protoc_insertion_point(field_get:vector_tile.BuildingShapes.building_shapes)
+  return _internal_building_shapes().Get(index);
 }
-inline ::vector_tile::TileBuildings_BuildingFeature* PROTOBUF_NONNULL TileBuildings::add_building_features()
+inline ::vector_tile::BuildingShapes_BuildingShape* PROTOBUF_NONNULL BuildingShapes::add_building_shapes()
     ABSL_ATTRIBUTE_LIFETIME_BOUND {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  ::vector_tile::TileBuildings_BuildingFeature* _add =
-      _internal_mutable_building_features()->InternalAddWithArena(
+  ::vector_tile::BuildingShapes_BuildingShape* _add =
+      _internal_mutable_building_shapes()->InternalAddWithArena(
           ::google::protobuf::MessageLite::internal_visibility(), GetArena());
   SetHasBitForRepeated(_impl_._has_bits_[0], 0x00000001U);
-  // @@protoc_insertion_point(field_add:vector_tile.TileBuildings.building_features)
+  // @@protoc_insertion_point(field_add:vector_tile.BuildingShapes.building_shapes)
   return _add;
 }
-inline const ::google::protobuf::RepeatedPtrField<::vector_tile::TileBuildings_BuildingFeature>& TileBuildings::building_features() const
+inline const ::google::protobuf::RepeatedPtrField<::vector_tile::BuildingShapes_BuildingShape>& BuildingShapes::building_shapes() const
     ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_list:vector_tile.TileBuildings.building_features)
-  return _internal_building_features();
+  // @@protoc_insertion_point(field_list:vector_tile.BuildingShapes.building_shapes)
+  return _internal_building_shapes();
 }
-inline const ::google::protobuf::RepeatedPtrField<::vector_tile::TileBuildings_BuildingFeature>&
-TileBuildings::_internal_building_features() const {
+inline const ::google::protobuf::RepeatedPtrField<::vector_tile::BuildingShapes_BuildingShape>&
+BuildingShapes::_internal_building_shapes() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
-  return _impl_.building_features_;
+  return _impl_.building_shapes_;
 }
-inline ::google::protobuf::RepeatedPtrField<::vector_tile::TileBuildings_BuildingFeature>* PROTOBUF_NONNULL
-TileBuildings::_internal_mutable_building_features() {
+inline ::google::protobuf::RepeatedPtrField<::vector_tile::BuildingShapes_BuildingShape>* PROTOBUF_NONNULL
+BuildingShapes::_internal_mutable_building_shapes() {
   ::google::protobuf::internal::TSanRead(&_impl_);
-  return &_impl_.building_features_;
+  return &_impl_.building_shapes_;
 }
 
 #ifdef __GNUC__
