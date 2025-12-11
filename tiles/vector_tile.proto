@@ -5,7 +5,7 @@ syntax = "proto2";
 
 package vector_tile;
 
-message Tile {
+message FullTile {
 
         // GeomType is described in section 4.3.4 of the specification
         enum GeomType {
@@ -80,11 +80,11 @@ message Tile {
         extensions 16 to 8191;
 }
 
-message BuildingShapes {
+message Tile {
     message BuildingShape {
-        repeated int32 approx_centre = 1;
-        repeated int32 edges = 2;
+        required string osid = 1;
+        repeated int32 approx_centre = 2;
+        repeated int32 edges = 3;
     }
-
-    repeated BuildingShape building_shapes = 1;
+    repeated BuildingShape shapes = 1;
 }

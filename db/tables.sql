@@ -1,4 +1,4 @@
--- Business rates tables
+-- Business rates
 CREATE TABLE IF NOT EXISTS list_entries (
 	entryno INTEGER,
 	billing_authority_code CHAR(4),
@@ -141,12 +141,14 @@ CREATE TABLE IF NOT EXISTS scat_codes (
 	description_text VARCHAR(120)
 );
 
--- Building shapes tables
-CREATE TABLE IF NOT EXISTS building_shapes (
-	grid_row INTEGER,
-	grid_col INTEGER,
-	data BLOB,
-	CONSTRAINT building_shapes_grid_row_grid_col_pk PRIMARY KEY (
-		grid_row, grid_col
-	)
+
+
+
+
+-- Tiles
+CREATE TABLE IF NOT EXISTS tiles_grid (
+	row INTEGER,
+	col INTEGER,
+	tile BLOB,
+	CONSTRAINT tiles_grid_row_col_pk PRIMARY KEY (row, col)
 );

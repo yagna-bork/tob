@@ -21,7 +21,7 @@
 #include "sqlitedb.h"
 
 using namespace vector_tile;
-using BuildingShape = BuildingShapes::BuildingShape;
+using BuildingShape = Tile_BuildingShape;
 
 enum CommandType {
 	MOVE = 0,
@@ -147,7 +147,7 @@ public:
 	BuildingShapesDB& operator=(const BuildingShapesDB &other) = delete;
 	BuildingShapesDB& operator=(BuildingShapesDB &&other) = delete;
 
-	std::vector<GridPos> missing_building_shapes(const std::vector<GridPos> &positions) {
+	std::vector<GridPos> missing_tiles(const std::vector<GridPos> &positions) {
 		std::vector<GridPos> res;
 		int query_sz = make_missing_shapes_select(positions);
 		sqlite3_prepare_v2(db, query_buff, query_sz, &stmt, NULL);
@@ -170,7 +170,7 @@ public:
 		int query_sz = make_insert(pos);
 		sqlite3_prepare_v2(db, query_buff, query_sz, &stmt, NULL);
 		if (stmt == nullptr) {
-			std::cerr << "Failed to prepare building_shapes insert" << std::endl;
+			std::cerr << "Failed to prepare tiles_grid insert" << std::endl;
 			return;
 		}
 		sqlite3_bind_blob(stmt, /*idx*/1, data.data(), data.size(), SQLITE_STATIC);
@@ -178,9 +178,9 @@ public:
 		sqlite3_finalize(stmt);
 	}
 
-	BuildingShapes building_shapes(const GridPos &pos) {
-		BuildingShapes res;
-		int query_sz = make_building_shapes_select(pos);
+	Tile tile(const GridPos &pos) {
+		Tile res;
+		int query_sz = make_tiles_grid_select(pos);
 		sqlite3_prepare_v2(db, query_buff, query_sz, &stmt, NULL);
 		if (stmt == nullptr) {
 			std::cerr << "Failed to prepare building shapes select" << std::endl;
@@ -210,25 +210,25 @@ private:
 		}
 		return snprintf(query_buff, query_buff_sz, 
 			"SELECT inp.grid_row, inp.grid_col "
-			"FROM (%s) inp"
-			"  LEFT JOIN building_shapes bs "
-			"  ON inp.grid_row = bs.grid_row AND inp.grid_col = bs.grid_col "
-			"WHERE bs.grid_row IS NULL AND bs.grid_col IS NULL; ",
+			"FROM (%s) inp "
+			"  LEFT JOIN tiles_grid gd "
+			"  ON inp.grid_row = gd.row AND inp.grid_col = gd.col "
+			"WHERE gd.row IS NULL AND gd.col IS NULL; ",
 			inputs_tbl.c_str()
 		);
 	}
 
 	int make_insert(const GridPos &pos) {
 		return snprintf(query_buff, query_buff_sz, 
-			"INSERT INTO building_shapes VALUES(%d, %d, ?);",
+			"INSERT INTO tiles_grid VALUES(%d, %d, ?);",
 			pos.first, pos.second);
 	}
 
-	int make_building_shapes_select(const GridPos &pos) {
+	int make_tiles_grid_select(const GridPos &pos) {
 		return snprintf(query_buff, query_buff_sz, 
-			"SELECT data "
-			"FROM building_shapes "
-			"WHERE grid_row = %d AND grid_col = %d;",
+			"SELECT tile "
+			"FROM tiles_grid "
+			"WHERE row = %d AND col = %d;",
 			pos.first, pos.second);
 	}
 };
@@ -285,7 +285,25 @@ bool decode_command(unsigned int cmd, CommandType &type, unsigned int &count) {
 	return true;
 }
 
-bool decode_feature(const Tile_Feature &feat, BuildingShape &res) {
+std::string value_to_string(const FullTile_Value &val) {
+	if (val.has_string_value()) {
+		return val.string_value();
+	} else if (val.has_float_value()) {
+		return std::to_string(val.float_value());
+	} else if (val.has_double_value()) {
+		return std::to_string(val.double_value());
+	} else if (val.has_int_value()) {
+		return std::to_string(val.int_value());
+	} else if (val.has_uint_value()) {
+		return std::to_string(val.has_uint_value());
+	} else if (val.has_sint_value()) {
+		return std::to_string(val.sint_value());
+	} else {
+		return std::to_string(val.bool_value());
+	}
+}
+
+bool decode_feature(const FullTile_Feature &feat, const FullTile_Layer &layer, BuildingShape &res) {
 	int geometry_sz = feat.geometry_size();
 	int i = 0;
 	unsigned int cmd, count;
@@ -297,6 +315,7 @@ bool decode_feature(const Tile_Feature &feat, BuildingShape &res) {
 	while (i < geometry_sz) {
 		cmd = feat.geometry(i++);
 		if(!decode_command(cmd, type, count)) {
+			std::cerr << "Failed to decode command: " << cmd << std::endl;
 			res.Clear();
 			return false;
 		}
@@ -334,32 +353,54 @@ bool decode_feature(const Tile_Feature &feat, BuildingShape &res) {
 	max_y = std::max(max_y, start.y);
 	res.add_approx_centre((min_x + max_x) / 2);
 	res.add_approx_centre((min_y + max_y) / 2);
+
+	for (int i = 0; i+1 < feat.tags_size(); i += 2) {
+		if (layer.keys(feat.tags(i)) == "osid") {
+			FullTile_Value val = layer.values(feat.tags(i+1));
+			res.set_osid(value_to_string(val));
+		}
+	}
+	if (!res.has_osid()) {
+		std::cerr << "Couldn't find osid" << std::endl;
+		res.Clear();
+		return false;
+	}
 	return true;
 }
 
-BuildingShapes parse_building_shapes(std::string &tile_data) 
-{
-	BuildingShapes res;
-	Tile tile;
-	tile.ParseFromString(tile_data);
-	Tile_Layer *buildings_layer_p;
-	for (Tile_Layer &layer: *tile.mutable_layers()) {
-		if (layer.name() == "bld_fts_buildingpart") {
-			buildings_layer_p = &layer;
-		}
+/*
+ * Only for debugging. Ignore.
+ */
+void print_tags(const FullTile_Feature &feat, const FullTile_Layer &layer) {
+	for (int i = 0; i != feat.tags_size(); i += 2) {
+		std::cout << layer.keys(feat.tags(i)) << ": "
+				  << value_to_string(layer.values(feat.tags(i+1))) 
+				  << std::endl;
 	}
-	if (!buildings_layer_p) {
+}
+
+Tile parse_tile(std::string &tile_data) 
+{
+	Tile res;
+	FullTile ftile;
+	ftile.ParseFromString(tile_data);
+	auto it = std::find_if(ftile.layers().begin(), ftile.layers().end(), 
+		[](const FullTile_Layer &layer) {
+			return layer.name() == "bld_fts_buildingpart";
+		});
+	if (it == ftile.layers().end()) {
+		std::cerr << "Couldn't find bld_fts_buildingpart layer" << std::endl;
 		return res;
 	}
-	const Tile_Layer& buildings_layer = *buildings_layer_p;
+	const FullTile_Layer& buildings_layer = *it;
 
-	BuildingShape *buildingp = res.add_building_shapes();
-	for (const Tile_Feature &feat: buildings_layer.features()) {
-		if (decode_feature(feat, *buildingp)) {
-			buildingp = res.add_building_shapes();
+	BuildingShape *buildingp = res.add_shapes();
+	for (const FullTile_Feature &feat: buildings_layer.features()) {
+		if (decode_feature(feat, buildings_layer, *buildingp)) {
+			buildingp = res.add_shapes();
 		}
 	}
-	res.mutable_building_shapes()->RemoveLast();
+	res.mutable_shapes()->RemoveLast();
 	return res;
 }
 
@@ -370,40 +411,48 @@ int get_tiles_api_url(char url_buff[], size_t buff_sz, int grid_row, int grid_co
 					g_config["OS_PROJECT_API_KEY"].c_str());
 }
 
-void fetch_missing_buildings(CURL *handle, char url_buff[], size_t buff_sz,
+void fetch_missing_tiles(CURL *handle, char url_buff[], size_t buff_sz,
 							 BuildingShapesDB &db,
 							 std::vector<GridPos> &missing) 
 {
-	std::string tile_data;
-	std::string building_shapes_data;
+	std::string full_tile_data; // full tile data directly from api
+	std::string tile_data; // tile data filtered with only the info we need
 	for (const GridPos &pos: missing) {
+		full_tile_data.clear();
 		tile_data.clear();
-		building_shapes_data.clear();
 		get_tiles_api_url(url_buff, buff_sz, pos.first, pos.second);
-		make_get_request(handle, url_buff, tile_data);
-		BuildingShapes bs = parse_building_shapes(tile_data);
-		bs.SerializeToString(&building_shapes_data);
-		db.insert(pos, building_shapes_data);
+		make_get_request(handle, url_buff, full_tile_data);
+		Tile tile = parse_tile(full_tile_data);
+		tile.SerializeToString(&tile_data);
+		db.insert(pos, tile_data);
 	}
 }
 
-BuildingShapes get_building_shapes(CURL *handle, const std::vector<GridPos> &positions, 
-								   int centre_row, int centre_col) 
+// Change in .proto, change db table name, change in this file, change DB class, change in test file
+/*
+ * Get a single tile representing all of the 
+ * individual tiles in `positions`. Cell coordinates
+ * in the result are relative to the centre tile at
+ * (`centre_row`,`centre_col`).
+ */
+Tile get_combined_tile(CURL *handle, const std::vector<GridPos> &positions, 
+					   int centre_row, int centre_col) 
 {
-	BuildingShapes res;
+	Tile res, intermediate_res;
 	BuildingShape *added;
 	char url[500];
 	BuildingShapesDB db;
 	int x_shift, y_shift;
 
-	std::vector<GridPos> missing = db.missing_building_shapes(positions);
-	fetch_missing_buildings(handle, url, 500, db, missing);
+	std::vector<GridPos> missing = db.missing_tiles(positions);
+	fetch_missing_tiles(handle, url, 500, db, missing);
 	for (const GridPos &pos: positions) {
-		BuildingShapes buildings = db.building_shapes(pos);
+		Tile tile = db.tile(pos);
 		y_shift = (pos.first - centre_row) * 512;
 		x_shift = (pos.second - centre_col) * 512;
-		for (const BuildingShape &building: buildings.building_shapes()) {
-			added = res.add_building_shapes();
+		for (const BuildingShape &building: tile.shapes()) {
+			added = intermediate_res.add_shapes();
+			added->set_osid(building.osid());
 			added->add_approx_centre(building.approx_centre(0) + x_shift);
 			added->add_approx_centre(building.approx_centre(1) + y_shift);
 			for (int i = 0; i+1 < building.edges_size(); i += 2) {
@@ -422,10 +471,10 @@ BuildingShapes get_building_shapes(CURL *handle, const std::vector<GridPos> &pos
  * https://en.wikipedia.org/wiki/Point_in_polygon#Ray_casting_algorithm
  */
 // TODO?: make into conversion table class?
-void translate_point_to_building_centre(Point &p, const BuildingShapes &buildings) {
+void translate_point_to_building_centre(Point &p, const Tile &tile) {
 	int x1, y1, x2, y2, edges_passed_thru;
 	float gradient, contact_y;
-	for (const BuildingShape &building: buildings.building_shapes()) {
+	for (const BuildingShape &building: tile.shapes()) {
 		edges_passed_thru = 0;
 		for (int i = 0; i != building.edges_size(); i += 4) {
 			x1 = building.edges(i);

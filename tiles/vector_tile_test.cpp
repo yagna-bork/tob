@@ -8,7 +8,7 @@
 #include "../include/util.h"
 
 static const std::string TEST_TILE_PATH="tiles/extra/test_tile.mvt";
-static const std::string BUILDING_SHAPES_PATH="tiles/extra/building_shapes.bin";
+static const std::string TILE_PATH="tiles/extra/tile.bin";
 static const std::string CLUSTERING_TEST_INP_PATH="tiles/extra/test_input.csv";
 static const std::string CLUSTERING_TEST_OUT_PATH="tiles/extra/test_output.csv";
 static const std::string BNG_TEST_INP_PATH="tiles/extra/bng_test_input.csv";
@@ -50,13 +50,13 @@ void test_translate_single_point() {
 		test_inp << p.x << "," << p.y << std::endl;
 	}
 
-	BuildingShapes buildings;
+	Tile tile;
 	{
-		std::ifstream input(BUILDING_SHAPES_PATH, std::ios::in | std::ios::binary);
-		buildings.ParseFromIstream(&input);
+		std::ifstream input(TILE_PATH, std::ios::in | std::ios::binary);
+		tile.ParseFromIstream(&input);
 	}
 
-	translate_point_to_building_centre(p, buildings);
+	translate_point_to_building_centre(p, tile);
 	{
 		std::ofstream test_out(CLUSTERING_TEST_OUT_PATH, std::ios::out);
 		test_out << p.x << "," << p.y << std::endl;
@@ -102,17 +102,17 @@ void test_translate_multiple_points() {
 			set.insert(gp);
 		}
 	}
-	auto buildings = get_building_shapes(
+	Tile tile = get_combined_tile(
 		CURL_HANDLE, grid_positions, cc.get_centre_row(), cc.get_centre_col()
 	);
 	{
-		std::ofstream output(BUILDING_SHAPES_PATH, std::ios::out | std::ios::binary);
-		buildings.SerializeToOstream(&output);
+		std::ofstream output(TILE_PATH, std::ios::out | std::ios::binary);
+		tile.SerializeToOstream(&output);
 	}
 
 	std::ofstream test_out(CLUSTERING_TEST_OUT_PATH, std::ios::out);
 	for (Point &p: cell_points) {
-		translate_point_to_building_centre(p, buildings);
+		translate_point_to_building_centre(p, tile);
 		test_out << p.x << "," << p.y << std::endl;
 	}
 	std::cout << "test_translate_multiple_points(): Done" << std::endl;
@@ -203,19 +203,19 @@ void test_get_tile_rows_cols() {
 	}
 }
 
-void test_get_building_shapes() {
+void test_get_combined_tile() {
 	std::vector<GridPos> grid_positions;
 	grid_positions.push_back({21303, 14613});
 	grid_positions.push_back({21302, 14613}); // above
 	grid_positions.push_back({21303, 14614}); // right
 	grid_positions.push_back({21302, 14614}); // right and above
-	BuildingShapes buildings = get_building_shapes(
+	Tile tile = get_combined_tile(
 		CURL_HANDLE, grid_positions, /*centre_row=*/21303, /*centre_col=*/14613);
 	{
-		std::ofstream output(BUILDING_SHAPES_PATH, std::ios::trunc | std::ios::binary);
-		buildings.SerializeToOstream(&output);
+		std::ofstream output(TILE_PATH, std::ios::trunc | std::ios::binary);
+		tile.SerializeToOstream(&output);
 	}
-	std::cout << "test_get_building_shapes(): Done" << std::endl;
+	std::cout << "test_get_combined_tile(): Done" << std::endl;
 }
 
 int main() {
@@ -225,6 +225,6 @@ int main() {
 	test_coord_converter();
 	test_get_tile_row_col();
 	test_get_tile_rows_cols();
-	test_get_building_shapes();
+	test_get_combined_tile();
 	return 0;
 }
