@@ -1,3 +1,4 @@
+-- Business rates tables
 CREATE TABLE IF NOT EXISTS list_entries (
 	entryno INTEGER,
 	billing_authority_code CHAR(4),
@@ -138,4 +139,14 @@ CREATE TABLE IF NOT EXISTS adjustment_totals (
 CREATE TABLE IF NOT EXISTS scat_codes (
 	scat_code_and_suffix CHAR(4) PRIMARY KEY,
 	description_text VARCHAR(120)
+);
+
+-- Building shapes tables
+CREATE TABLE IF NOT EXISTS building_shapes (
+	grid_row INTEGER,
+	grid_col INTEGER,
+	data BLOB,
+	CONSTRAINT building_shapes_grid_row_grid_col_pk PRIMARY KEY (
+		grid_row, grid_col
+	)
 );

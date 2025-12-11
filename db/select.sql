@@ -79,6 +79,21 @@ SELECT assessment_reference, cp_spaces, cp_area, cp_total
 FROM car_parks
 WHERE assessment_reference IN (27841034000, 30336030000, 26418543000);
 
+--Building shapes
+SELECT inp.grid_row, inp.grid_col
+FROM (
+	SELECT 21304 grid_row, 16350 grid_col
+  ) inp
+  LEFT JOIN building_shapes bs
+  ON inp.grid_row = bs.grid_row AND inp.grid_col = bs.grid_col
+WHERE bs.grid_row IS NULL AND bs.grid_col IS NULL;
+
+INSERT INTO building_shapes VALUES(12345, 12345, :0);
+
+SELECT grid_row, grid_col, data
+FROM building_shapes
+WHERE grid_row = AND grid_col = ;
+
 --Debugging
 SELECT le.uarn, rle.assessment_reference
 FROM list_entries le

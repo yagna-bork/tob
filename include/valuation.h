@@ -63,6 +63,7 @@ struct Valuation {
 	}
 };
 
+// TODO inherit from base SQLiteDB instead
 class ValuationDB {
 public:
 	struct QueryParam {
@@ -88,10 +89,10 @@ public:
 		}
 	}
 
-	ValuationDB(const Valuation &other) = delete;
-	ValuationDB(Valuation &&other) = delete;
-	Valuation& operator=(const Valuation &other) = delete;
-	Valuation& operator=(Valuation &&other) = delete;
+	ValuationDB(const ValuationDB &other) = delete;
+	ValuationDB(ValuationDB &&other) = delete;
+	ValuationDB& operator=(const ValuationDB &other) = delete;
+	ValuationDB& operator=(ValuationDB &&other) = delete;
 
 	bool connected() { return conn_success; }
 

@@ -1,5 +1,7 @@
 #ifndef UTIL_H
 #define UTIL_H
+#include <iterator>
+#include <filesystem>
 #include <algorithm>
 #include <string>
 #include <unordered_map>
@@ -65,7 +67,6 @@ void make_get_request(CURL *handle, char *url, std::string &data) {
 	curl_easy_setopt(handle, CURLOPT_HTTPGET, 1);
 	curl_easy_perform(handle);
 }
-
 
 template <class T>
 T get_json_field(nlohmann::json &obj, std::string key) {

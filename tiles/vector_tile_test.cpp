@@ -1,208 +1,19 @@
+#include <utility>
+#include <iterator>
 #include <cstddef>
-#include <cmath>
 #include <algorithm>
-#include <limits.h>
-#include <iostream>
-#include <string>
 #include <fstream>
-#include <ios>
-#include "../include/vector_tile.pb.h"
+#include <curl/curl.h>
+#include "../include/building_shape.h"
 #include "../include/util.h"
 
-/*
- * Conversion:
- * lat, long = 51.51955586617442, 0.5931578991618254
- * online conversion
- * easting, northing = 580009, 183258
- * dist from pointOfOrigin
- * dx, dy = 818384, -1192998
- * (magnitude of dist) / (512 * cell_size)
- * grid_dx, grid_dy = 913, 1331
- * swap
- * tile_row, tile_col = 1331, 913
- */
+static const std::string TEST_TILE_PATH="tiles/extra/test_tile.mvt";
+static const std::string BUILDING_SHAPES_PATH="tiles/extra/building_shapes.bin";
+static const std::string CLUSTERING_TEST_INP_PATH="tiles/extra/test_input.csv";
+static const std::string CLUSTERING_TEST_OUT_PATH="tiles/extra/test_output.csv";
+static const std::string BNG_TEST_INP_PATH="tiles/extra/bng_test_input.csv";
 
-/*
- * 
- * lat, long = 51.544452858065306, 0.7125439099096778
- * easting, northing = 579911, 186026
- * dx, dy = 818286, -1190230
- * dx_grid, dy_grid = 913, 1328
- * tile_row, tile_col = 1328, 913
- */
-
-using namespace vector_tile;
-using BuildingShape = BuildingShapes::BuildingShape;
-
-enum CommandType {
-	MOVE = 0,
-	LINE = 1,
-	CLOSE = 2
-};
-
-struct Point {
-	int x;
-	int y;
-};
-
-bool get_local_buildings_layer(const Tile& tile, Tile_Layer &res) {
-	for (int i = 0; i != tile.layers_size(); i++) {
-		res = tile.layers(i);
-		if (res.name() == "Local_buildings") {
-			return true;
-		}
-	}
-	res.Clear();
-	return false;
-}
-
-std::string geomtype_to_string(Tile_GeomType gt) {
-	switch (gt) {
-		case Tile_GeomType::Tile_GeomType_UNKNOWN:
-			return "UNKNOWN";
-		case Tile_GeomType::Tile_GeomType_POINT:
-			return "POINT";
-		case Tile_GeomType::Tile_GeomType_LINESTRING:
-			return "LINE_STRING";
-		case Tile_GeomType::Tile_GeomType_POLYGON:
-			return "PLOYGON";
-		default:
-			return "UNKNOWN";
-	}
-}
-
-bool decode_command(unsigned int cmd, CommandType &type, unsigned int &count) {
-	unsigned int type_val = cmd & 0x7; // least significant 3 digits represent type
-	switch (type_val) {
-		case 1:
-			type = CommandType::MOVE;
-			break;
-		case 2:
-			type = CommandType::LINE;
-			break;
-		case 7:
-			type = CommandType::CLOSE;
-			break;
-		default:
-			return false;
-	}
-	count = cmd >> 3; // rest are the param count
-	return true;
-}
-
-int decode_param(unsigned int param) {
-	// see 4.3.2 of the spec
-	return (param >> 1) ^ (-(param & 1));
-}
-
-bool is_building_shape_valid(const BuildingShape &b) {
-	return b.approx_centre_size() == 2;
-}
-
-std::string edges_to_string(const BuildingShape &building) {
-	if (!is_building_shape_valid(building)) {
-		return "";
-	}
-	std::string res;
-	size_t edges_sz = building.edges_size();
-	Point beg, end;
-	for (size_t i = 0; i != edges_sz; i += 4) {
-		if (i != 0) {
-			res += ", ";
-		}
-		res += "(";
-		res += std::to_string(building.edges(i));
-		res += ",";
-		res += std::to_string(building.edges(i+1));
-		res += ") -> (";
-		res += std::to_string(building.edges(i+2));
-		res += ",";
-		res += std::to_string(building.edges(i+3));
-		res += ")";
-	}
-	return res;
-}
-
-bool decode_feature(const Tile_Feature &feat, BuildingShape &res) {
-	size_t geometry_sz = feat.geometry_size();
-	size_t i = 0;
-	unsigned int cmd, count;
-	CommandType type;
-	Point cursor = {0, 0};
-	Point start = {INT_MAX, INT_MAX};
-	int min_x = INT_MAX, min_y = INT_MAX, max_x = INT_MIN, max_y = INT_MIN;
-
-	while (i != geometry_sz) {
-		cmd = feat.geometry(i++);
-		if(!decode_command(cmd, type, count)) {
-			res.Clear();
-			return false;
-		}
-		for (; count > 0; count--) {
-			if (type == CommandType::MOVE) {
-				cursor.x += decode_param(feat.geometry(i));
-				cursor.y += decode_param(feat.geometry(i+1));
-				i += 2;
-			} else if (type == CommandType::LINE) {
-				if (start.x == INT_MAX && start.y == INT_MAX) {
-					start = cursor;
-				}
-				res.add_edges(cursor.x);
-				res.add_edges(cursor.y);
-				cursor.x += decode_param(feat.geometry(i));
-				cursor.y += decode_param(feat.geometry(i+1));
-				res.add_edges(cursor.x);
-				res.add_edges(cursor.y);
-				min_x = std::min(min_x, cursor.x);
-				min_y = std::min(min_y, cursor.y);
-				max_x = std::max(max_x, cursor.x);
-				max_y = std::max(max_y, cursor.y);
-				i += 2;
-			} else {
-				res.add_edges(cursor.x);
-				res.add_edges(cursor.y);
-				res.add_edges(start.x);
-				res.add_edges(start.y);
-			}
-		}
-	}
-	min_x = std::min(min_x, start.x);
-	min_y = std::min(min_y, start.y);
-	max_x = std::max(max_x, start.x);
-	max_y = std::max(max_y, start.y);
-
-	res.add_approx_centre((min_x + max_x) / 2);
-	res.add_approx_centre((min_y + max_y) / 2);
-	return true;
-}
-
-void test_get_tile() {
-	init_config();
-	Tile tile;
-	{
-		std::ifstream tile_f(g_config["TEST_TILE_PATH"], std::ios::in | std::ios::binary);
-		tile.ParseFromIstream(&tile_f);
-	}
-	Tile_Layer layer;
-	if (!get_local_buildings_layer(tile, layer)) {
-		return;
-	}
-
-	BuildingShapes buildings;
-	BuildingShape *buildingp = buildings.add_building_shapes();
-	for (int i = 0; i != layer.features_size(); i++) {
-		const Tile_Feature &feat = layer.features(i);
-		if (decode_feature(feat, *buildingp)) {
-			buildingp = buildings.add_building_shapes();
-		}
-	}
-	buildings.mutable_building_shapes()->RemoveLast();
-
-	std::ofstream output(g_config["BUILDING_SHAPES_PATH"], 
-						 std::ios::out | std::ios::trunc | std::ios::binary);
-	buildings.SerializeToOstream(&output);
-	google::protobuf::ShutdownProtobufLibrary();
-}
+static CURL *CURL_HANDLE = curl_easy_init(); 
 
 void test_edges_to_string() {
 	BuildingShape building;
@@ -226,15 +37,194 @@ void test_edges_to_string() {
 	building.add_edges(0);
 	building.add_edges(0);
 	building.add_edges(0);
-	
+	// centre
 	building.add_approx_centre(1);
 	building.add_approx_centre(0);
 	std::cout << "test_edges_to_string(): " << edges_to_string(building) << std::endl;
 }
 
+void test_translate_single_point() {
+	Point p {0, 0};
+	{
+		std::ofstream test_inp(CLUSTERING_TEST_INP_PATH, std::ios::out);
+		test_inp << p.x << "," << p.y << std::endl;
+	}
+
+	BuildingShapes buildings;
+	{
+		std::ifstream input(BUILDING_SHAPES_PATH, std::ios::in | std::ios::binary);
+		buildings.ParseFromIstream(&input);
+	}
+
+	translate_point_to_building_centre(p, buildings);
+	{
+		std::ofstream test_out(CLUSTERING_TEST_OUT_PATH, std::ios::out);
+		test_out << p.x << "," << p.y << std::endl;
+	}
+	std::cout << "test_translate_single_point(): Done" << std::endl;
+}
+
+void test_translate_multiple_points() {
+	std::vector<FPoint> bng_points;
+	{
+		std::string line;
+		std::ifstream input_f(BNG_TEST_INP_PATH, std::ios::in);
+		std::string::const_iterator sep;
+		float x, y;
+		while (std::getline(input_f, line)) {
+			sep = std::find(line.cbegin(), line.cend(), ',');
+			x = std::stof(std::string(line.cbegin(), sep));
+			y = std::stof(std::string(sep+1, line.cend()));
+			bng_points.push_back({x, y});
+		}
+	}
+
+	FPoint centre = bng_points[bng_points.size()-1];
+	bng_points.pop_back();
+	CoordConverter cc(centre);
+	std::vector<Point> cell_points(bng_points.size());
+	for (int i = 0; i != bng_points.size(); i++) {
+		cc.bng_to_cell(bng_points[i], cell_points[i]);
+	}
+	{
+		std::ofstream test_inp(CLUSTERING_TEST_INP_PATH, std::ios::trunc);
+		for (const Point &p: cell_points) {
+			test_inp << p.x << "," << p.y << std::endl;
+		}
+	}
+
+	GridPosSet set;
+	std::vector<GridPos> grid_positions;
+	for (const Point &p: cell_points) {
+		GridPos gp = cc.get_tile_row_col(p);
+		if (!set.count(gp)) {
+			grid_positions.push_back(gp);
+			set.insert(gp);
+		}
+	}
+	auto buildings = get_building_shapes(
+		CURL_HANDLE, grid_positions, cc.get_centre_row(), cc.get_centre_col()
+	);
+	{
+		std::ofstream output(BUILDING_SHAPES_PATH, std::ios::out | std::ios::binary);
+		buildings.SerializeToOstream(&output);
+	}
+
+	std::ofstream test_out(CLUSTERING_TEST_OUT_PATH, std::ios::out);
+	for (Point &p: cell_points) {
+		translate_point_to_building_centre(p, buildings);
+		test_out << p.x << "," << p.y << std::endl;
+	}
+	std::cout << "test_translate_multiple_points(): Done" << std::endl;
+}
+
+void test_coord_converter() {
+	std::vector<FPoint> bng_points {
+		{580045.0,183233.0}, {580049.0,183276.0}, {580058.0,183279.0}, {580070.0,183236.0},
+		{580018.0,183235.0}, {580012.0,183258.0}, {580012.0,183258.0}, {580018.0,183275.0},
+		{580012.0,183268.0}, {580009.0,183262.0}, {580009.0,183262.0}, {580067.0,183282.0},
+		{580019.0,183227.0}, {580008.75,18326.15}, {580032.0,183292.0}, {580032.0,183292.0},
+		{580032.0,183292.0}, {580032.0,183292.0}, {580032.0,183292.0}, {580032.0,183292.0},
+		{580083.0,183238.0}, {580023.0,183217.0}, {580007.0,183283.0}, {580007.0,183283.0},
+		{580009.0,183287.0}, {580083.0,183283.0}, {580012.0,183292.0}
+	};
+	std::vector<FPoint> bng_points_cp(bng_points);
+	FPoint centre = {580044,183254};
+	std::vector<Point> cell_points(bng_points.size());
+	CoordConverter cc(centre);
+	// bng -> cell
+	for (int i = 0; i != bng_points_cp.size(); i++) {
+		cc.bng_to_cell(bng_points_cp[i], cell_points[i]);
+	}
+	// cell -> bng
+	for (int i = 0; i != cell_points.size(); i++) {
+		cc.cell_to_bng(cell_points[i], bng_points_cp[i]);
+	}
+
+	float diff_allowed = 0.125f, x_diff, y_diff;
+	for (int i = 0; i != bng_points.size(); i++) {
+		x_diff = fabs(bng_points[i].x - bng_points_cp[i].x);
+		y_diff = fabs(bng_points[i].y - bng_points_cp[i].y);
+		if (x_diff>diff_allowed || y_diff>diff_allowed) {
+			std::cout << "test_coord_converter(): FAILED" << std::endl;
+			std::cout << bng_points[i].to_string() << " != " 
+					  << bng_points_cp[i].to_string() << std::endl;
+			return;
+		}
+	}
+	std::cout << "test_coord_converter(): PASSED" << std::endl;
+}
+
+void test_get_tile_row_col() {
+	FPoint bng = {580008, 183261};
+	CoordConverter cc(bng);
+	Point cell; 
+	cc.bng_to_cell(bng, cell);
+	std::pair<int, int> rc = cc.get_tile_row_col(cell);
+	if (rc.first == 21303 && rc.second == 14613) {
+		std::cout << "test_get_row_col(): PASSED" << std::endl;
+	} else {
+		std::cout << "test_get_row_col(): FAILED" << std::endl;
+		std::cout << "tile_row_col = " << rc.first << "," << rc.second 
+				  << " EXPECTED = 21303,14613" << std::endl;
+	}
+}
+
+void test_get_tile_rows_cols() {
+	FPoint centre = {580008, 183261};
+	CoordConverter cc(centre);
+	std::vector<Point> cell_coords = {
+		{502, -1014}, {-256, -256}, {256, -256}, {786, -256},
+		{-256, 256}, {1014, 10}, {1524, 502}, {-256, 768},
+		{10, 1014}
+	};
+	std::vector<std::pair<int, int>> expected = {
+		{21301, 14613}, {21302, 14612}, {21302, 14613}, {21302, 14614},
+		{21303, 14612}, {21303, 14614}, {21303, 14615}, {21304, 14612},
+		{21304, 14613}
+	};
+	std::vector<std::pair<int, int>> res;
+	std::transform(cell_coords.begin(), cell_coords.end(), std::back_inserter(res), 
+		[&cc](const Point &p) {
+			return cc.get_tile_row_col(p);
+		});
+	bool test_passed = std::equal(res.begin(), res.end(), expected.begin(), 
+		[](const std::pair<int, int> &p1, const std::pair<int, int> &p2) {
+			return p1.first == p2.first && p1.second == p2.second;
+		});
+	if (test_passed) {
+		std::cout << "test_get_rows_cols(): PASSED" << std::endl;
+	} else {
+		std::cout << "test_get_rows_cols(): FAILED" << std::endl;
+		auto diff = std::mismatch(res.begin(), res.end(), expected.begin());
+		std::cout << diff.first->first << "," << diff.first->second << " " 
+				  << diff.second->first << "," << diff.second->second 
+				  << std::endl;
+	}
+}
+
+void test_get_building_shapes() {
+	std::vector<GridPos> grid_positions;
+	grid_positions.push_back({21303, 14613});
+	grid_positions.push_back({21302, 14613}); // above
+	grid_positions.push_back({21303, 14614}); // right
+	grid_positions.push_back({21302, 14614}); // right and above
+	BuildingShapes buildings = get_building_shapes(
+		CURL_HANDLE, grid_positions, /*centre_row=*/21303, /*centre_col=*/14613);
+	{
+		std::ofstream output(BUILDING_SHAPES_PATH, std::ios::trunc | std::ios::binary);
+		buildings.SerializeToOstream(&output);
+	}
+	std::cout << "test_get_building_shapes(): Done" << std::endl;
+}
+
 int main() {
-	GOOGLE_PROTOBUF_VERIFY_VERSION;
-	test_get_tile();
+	test_translate_single_point();
+	test_translate_multiple_points();
 	test_edges_to_string();
+	test_coord_converter();
+	test_get_tile_row_col();
+	test_get_tile_rows_cols();
+	test_get_building_shapes();
 	return 0;
 }
