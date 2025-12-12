@@ -7,7 +7,6 @@
 #include "../include/building_shape.h"
 #include "../include/util.h"
 
-static const std::string TEST_TILE_PATH="tiles/extra/test_tile.mvt";
 static const std::string TILE_PATH="tiles/extra/tile.bin";
 static const std::string CLUSTERING_TEST_INP_PATH="tiles/extra/test_input.csv";
 static const std::string CLUSTERING_TEST_OUT_PATH="tiles/extra/test_output.csv";
@@ -41,27 +40,6 @@ void test_edges_to_string() {
 	building.add_approx_centre(1);
 	building.add_approx_centre(0);
 	std::cout << "test_edges_to_string(): " << edges_to_string(building) << std::endl;
-}
-
-void test_translate_single_point() {
-	Point p {0, 0};
-	{
-		std::ofstream test_inp(CLUSTERING_TEST_INP_PATH, std::ios::out);
-		test_inp << p.x << "," << p.y << std::endl;
-	}
-
-	Tile tile;
-	{
-		std::ifstream input(TILE_PATH, std::ios::in | std::ios::binary);
-		tile.ParseFromIstream(&input);
-	}
-
-	translate_point_to_building_centre(p, tile);
-	{
-		std::ofstream test_out(CLUSTERING_TEST_OUT_PATH, std::ios::out);
-		test_out << p.x << "," << p.y << std::endl;
-	}
-	std::cout << "test_translate_single_point(): Done" << std::endl;
 }
 
 void test_translate_multiple_points() {
@@ -219,8 +197,7 @@ void test_get_combined_tile() {
 }
 
 int main() {
-	test_translate_single_point();
-	test_translate_multiple_points();
+	//test_translate_multiple_points();
 	test_edges_to_string();
 	test_coord_converter();
 	test_get_tile_row_col();

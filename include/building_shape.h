@@ -29,6 +29,12 @@ enum CommandType {
 	CLOSE = 2
 };
 
+enum EnclosureType {
+	INSIDE = 0,
+	EDGE = 1,
+	OUTSIDE = 2
+};
+
 // Stores cell space coords
 struct Point {
 	int x;
@@ -74,8 +80,24 @@ struct PairEq {
 	}
 };
 
+struct PointHash {
+	size_t operator()(const Point &p) const {
+		return std::hash<int>()(p.x) ^ std::hash<int>()(p.y);
+	}
+};
+
+struct PointEq {
+	bool operator()(const Point &p1, const Point &p2) const 
+	{
+		return p1.x == p2.x && p1.y == p2.y;
+	}
+};
+
 typedef std::pair<int, int> GridPos;
 typedef std::unordered_set<GridPos, PairHash, PairEq> GridPosSet;
+typedef std::unordered_map<
+	Point, std::vector<std::pair<Point, unsigned long long>>, PointHash, PointEq
+> ShapeGraph;
 
 /* 
  * class to convert between the BNG and
@@ -428,6 +450,127 @@ void fetch_missing_tiles(CURL *handle, char url_buff[], size_t buff_sz,
 	}
 }
 
+/*
+ * TODO write me
+ */
+void combine_building_shapes(const std::vector<int>& idxs, const Tile &tile, BuildingShape &res) {
+	// TODO delete debugging
+	std::filesystem::path output_dir = std::filesystem::relative("tiles/extra");
+	std::filesystem::path output_path;
+	if (tile.shapes(idxs[0]).osid() == "7162adaf-b4d8-44de-82fd-c79830dc6a5d") {
+		for (int idx: idxs) {
+			Tile tile_container;
+			*tile_container.add_shapes() = tile.shapes(idx);
+			output_path = output_dir / (tile.shapes(idx).osid()+"-"+std::to_string(idx)+".bin");
+			std::cout << "Writing to " << output_path << std::endl;
+			std::ofstream output(output_path, std::ios::out | std::ios::binary);
+			tile_container.SerializeToOstream(&output);
+		}
+	}
+
+	// build graph
+	ShapeGraph graph;
+	Point from, to;
+	int dx, dy;
+	unsigned long long square_dist;
+
+	for (int idx: idxs) {
+		const BuildingShape &shape = tile.shapes(idx);
+		for (int i = 0; i != shape.edges_size(); i += 4) {
+			from = {shape.edges(i), shape.edges(i+1)};
+			to = {shape.edges(i+2), shape.edges(i+3)};
+			dx = to.x-from.x;
+			dy = to.y-from.y;
+			square_dist = dx*dx + dy*dy;
+			graph[from].push_back({to, square_dist});
+			graph[to].push_back({from, square_dist});
+		}
+	}
+	// TODO delete
+	for (const auto &pr1: graph) {
+		std::cout << pr1.first.to_string() << ": ";
+		for (auto &pr2: pr1.second) {
+			std::cout << "{" <<pr2.first.to_string() << ", " << pr2.second << "}, ";
+		}
+		std::cout << std::endl;
+	}
+
+	// first cycle to find valid start
+	std::unordered_set<Point, PointHash, PointEq> visited;
+	Point prev = {INT_MAX, INT_MAX};
+	Point curr = {tile.shapes(idxs[0]).edges(0), tile.shapes(idxs[0]).edges(1)};
+	unsigned long long max_dist = 0;
+	Point next;
+	std::cout << "First cycle" << std::endl;
+	while (!visited.count(curr)) {
+		std::cout << curr.to_string() << " -> ";
+		visited.insert(curr);
+		for (const auto &gph_edge: graph[curr]) {
+			if (PointEq{}(gph_edge.first, prev)) {
+				continue; // don't backtrack
+			}
+			if (gph_edge.second > max_dist) {
+				next = gph_edge.first;
+				max_dist = gph_edge.second;
+			}
+		}
+		std::swap(curr, next);
+		std::swap(next, prev);
+		max_dist = 0;
+	}
+	std::cout << curr.to_string() << " -> ";
+	std::cout << std::endl;
+
+	std::cout << "Second cycle" << std::endl;
+	// save second cycle as combined shape
+	visited.clear();
+	prev = {INT_MAX, INT_MAX};
+	// curr stays as end of first cycle
+	max_dist = 0;
+	int min_x = INT_MAX, min_y = INT_MAX, max_x = INT_MIN, max_y = INT_MIN;
+	while (!visited.count(curr)) {
+		std::cout << curr.to_string() << " -> ";
+		visited.insert(curr);
+		for (const auto &gph_edge: graph[curr]) {
+			if (PointEq{}(gph_edge.first, prev)) { // don't backtrack
+				continue; 
+			}
+			if (gph_edge.second > max_dist) {
+				next = gph_edge.first;
+				max_dist = gph_edge.second;
+			}
+		}
+		min_x = std::min(min_x, curr.x);
+		min_y = std::min(min_y, curr.y);
+		max_x = std::max(max_x, curr.x);
+		max_y = std::max(max_y, curr.y);
+		std::swap(curr, next);
+		std::swap(next, prev);
+		res.add_edges(prev.x);
+		res.add_edges(prev.y);
+		res.add_edges(curr.x);
+		res.add_edges(curr.y);
+		max_dist = 0;
+	}
+	std::cout << curr.to_string() << " -> ";
+	std::cout << std::endl;
+	res.add_approx_centre((min_x + max_x) / 2);
+	res.add_approx_centre((min_y + max_y) / 2);
+	res.set_osid(tile.shapes(idxs[0]).osid());
+	std::cout << "approx_centre = " << res.approx_centre(0) << "," << res.approx_centre(1) << std::endl;
+	std::cout << "osid = " << res.osid() << std::endl;
+
+	// TODO remove
+	if (tile.shapes(idxs[0]).osid() == "7162adaf-b4d8-44de-82fd-c79830dc6a5d") {
+		Tile tile_container;
+		output_path = output_dir / (res.osid()+"-cmb.bin");
+		*tile_container.add_shapes() = res;
+		std::ofstream output(output_path, std::ios::out | std::ios::binary);
+		std::cout << "Writing to " << output_path << std::endl;
+		tile_container.SerializeToOstream(&output);
+	}
+}
+
 // Change in .proto, change db table name, change in this file, change DB class, change in test file
 /*
  * Get a single tile representing all of the 
@@ -442,7 +585,9 @@ Tile get_combined_tile(CURL *handle, const std::vector<GridPos> &positions,
 	BuildingShape *added;
 	char url[500];
 	BuildingShapesDB db;
-	int x_shift, y_shift;
+	int x_shift, y_shift, idx;
+	// TODO multimap
+	std::unordered_map<std::string, std::vector<int>> osid_to_idxs;
 
 	std::vector<GridPos> missing = db.missing_tiles(positions);
 	fetch_missing_tiles(handle, url, 500, db, missing);
@@ -459,6 +604,20 @@ Tile get_combined_tile(CURL *handle, const std::vector<GridPos> &positions,
 				added->add_edges(building.edges(i) + x_shift);
 				added->add_edges(building.edges(i+1) + y_shift);
 			}
+			idx = intermediate_res.shapes_size() - 1;
+			osid_to_idxs[added->osid()].push_back(idx);
+		}
+	}
+
+	for (auto &p: osid_to_idxs) {
+		std::cout << "Looking at group id = " << p.first << std::endl;
+		std::vector<int> &idxs = p.second;
+		added = res.add_shapes();
+		if (idxs.size() == 1) {
+			idx = idxs[0];
+			*added = std::move(*intermediate_res.mutable_shapes(idx));
+		} else {
+			combine_building_shapes(idxs, intermediate_res, *added);
 		}
 	}
 	return res;
