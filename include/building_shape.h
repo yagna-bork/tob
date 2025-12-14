@@ -726,6 +726,29 @@ void translate_point_to_building_centre(Point &p, const Tile &tile, std::vector<
 	}
 }
 
-void translate_points_to_building_centres(std::vector<FPoint> &bng_coords) {
+void translate_points_to_building_centres(CURL *handle, std::vector<FPoint> &bng_coords, FPoint centre) {
+	int n = bng_coords.size();
+	CoordConverter conv(centre);
+	std::vector<Point> cell_coords(n);
+	for (int i = 0; i != n; i++) {
+		conv.bng_to_cell(bng_coords[i], cell_coords[i]);
+	}
+	GridPosSet set;
+	std::vector<GridPos> grid_positions;
+	for (const Point &p: cell_coords) {
+		GridPos gp = conv.get_tile_row_col(p);
+		if (!set.count(gp)) {
+			grid_positions.push_back(gp);
+			set.insert(gp);
+		}
+	}
+	Tile tile = get_combined_tile(handle, grid_positions, conv.get_centre_row(), conv.get_centre_col());
+	std::vector<EdgeToPenaltyMap> pen_mps = edge_to_penalty_maps(tile);
+	for (Point &p: cell_coords) {
+		translate_point_to_building_centre(p, tile, pen_mps);
+	}
+	for (int i = 0; i != n; i++) {
+		conv.cell_to_bng(cell_coords[i], bng_coords[i]);
+	}
 }
 #endif
