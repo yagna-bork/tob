@@ -22,6 +22,11 @@ public:
 	SQLiteDB& operator=(SQLiteDB &&other) = delete;
 
 	bool connected() { return conn_success; }
+
+	~SQLiteDB() {
+		sqlite3_close(db);
+		delete[] query_buff;
+	}
 protected:
 	sqlite3 *db;
 	sqlite3_stmt *stmt;

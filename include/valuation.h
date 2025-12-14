@@ -11,6 +11,7 @@
 #include <utility>
 #include <sqlite3.h>
 #include "util.h"
+#include "sqlitedb.h"
 
 struct LineItem {
 	std::string floor;
@@ -63,8 +64,7 @@ struct Valuation {
 	}
 };
 
-// TODO inherit from base SQLiteDB instead
-class ValuationDB {
+class ValuationDB : public SQLiteDB {
 public:
 	struct QueryParam {
 		const char *building_name;
@@ -77,24 +77,11 @@ private:
 	typedef std::unordered_map<long, Valuation *> PkToValuationMap;
 
 public:
-	ValuationDB()
-		: query_buff_sz(1000), conn_success(false)
-	{
-		query_buff = new char[query_buff_sz];
-		init_config();
-		if (sqlite3_open(g_config["DB_PATH"].c_str(), &db) == SQLITE_OK) {
-			conn_success = true;
-		} else {
-			std::cerr << "Couldn't open database" << std::endl;
-		}
-	}
-
+	ValuationDB() : SQLiteDB() { }
 	ValuationDB(const ValuationDB &other) = delete;
 	ValuationDB(ValuationDB &&other) = delete;
 	ValuationDB& operator=(const ValuationDB &other) = delete;
 	ValuationDB& operator=(ValuationDB &&other) = delete;
-
-	bool connected() { return conn_success; }
 
 	std::vector<QueryResult> get_valuations(std::vector<QueryParam> &params) {
 		std::vector<QueryResult> results(params.size());
@@ -119,20 +106,7 @@ public:
 		get_car_parking(pks_str, pk_to_valuation);
 		return results;
 	}
-
-	~ValuationDB() {
-		sqlite3_close(db);
-		delete[] query_buff;
-	}
-
 private:
-	sqlite3 *db;
-	sqlite3_stmt *stmt;
-	// stores most recently made sql query
-	char *query_buff; 
-	size_t query_buff_sz;
-	bool conn_success;
-
 	void get_valuations(const QueryParam &param, QueryResult &result, PkToValuationMap &pk_to_valuation) {
 		long primary_key;
 		const char *primary_desc_col, *secondary_desc_col, *composite_col, *building_name_col;
