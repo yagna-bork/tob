@@ -1,3 +1,4 @@
+#include <iterator>
 #include <utility>
 #include <iterator>
 #include <cstddef>
@@ -46,10 +47,10 @@ void test_translate_multiple_points() {
 	std::vector<FPoint> bng_points;
 	{
 		std::string line;
-		std::ifstream input_f(BNG_TEST_INP_PATH, std::ios::in);
+		std::ifstream input(BNG_TEST_INP_PATH, std::ios::in);
 		std::string::const_iterator sep;
 		float x, y;
-		while (std::getline(input_f, line)) {
+		while (std::getline(input, line)) {
 			sep = std::find(line.cbegin(), line.cend(), ',');
 			x = std::stof(std::string(line.cbegin(), sep));
 			y = std::stof(std::string(sep+1, line.cend()));
@@ -89,8 +90,9 @@ void test_translate_multiple_points() {
 	}
 
 	std::ofstream test_out(CLUSTERING_TEST_OUT_PATH, std::ios::out);
+	std::vector<ShapeGraph> tile_graphs = build_graphs(tile);
 	for (Point &p: cell_points) {
-		translate_point_to_building_centre(p, tile);
+		translate_point_to_building_centre(p, tile, tile_graphs);
 		test_out << p.x << "," << p.y << std::endl;
 	}
 	std::cout << "test_translate_multiple_points(): Done" << std::endl;
@@ -188,20 +190,54 @@ void test_get_combined_tile() {
 	grid_positions.push_back({21303, 14614}); // right
 	grid_positions.push_back({21302, 14614}); // right and above
 	Tile tile = get_combined_tile(
-		CURL_HANDLE, grid_positions, /*centre_row=*/21303, /*centre_col=*/14613);
-	{
-		std::ofstream output(TILE_PATH, std::ios::trunc | std::ios::binary);
-		tile.SerializeToOstream(&output);
-	}
+		CURL_HANDLE, grid_positions, /*centre_row=*/21303, /*centre_col=*/14613
+	);
+	std::ofstream output(TILE_PATH, std::ios::trunc | std::ios::binary);
+	tile.SerializeToOstream(&output);
 	std::cout << "test_get_combined_tile(): Done" << std::endl;
 }
 
+void test_get_enclosure_type() {
+	BuildingShape shape;
+	// 0,0 -> 0,2
+	shape.add_edges(0);
+	shape.add_edges(0);
+	shape.add_edges(0);
+	shape.add_edges(2);
+	// 0,2->2,2
+	shape.add_edges(0);
+	shape.add_edges(2);
+	shape.add_edges(2);
+	shape.add_edges(2);
+	// 2,2->2,0
+	shape.add_edges(2);
+	shape.add_edges(2);
+	shape.add_edges(2);
+	shape.add_edges(0);
+	// 2,0->0,0
+	shape.add_edges(2);
+	shape.add_edges(0);
+	shape.add_edges(0);
+	shape.add_edges(0);
+	ShapeGraph graph = build_graph(shape);
+	if (get_enclosure_type({1,1}, shape, graph) != EnclosureType::INSIDE) {
+		std::cout << "test_get_enclosure_type(0): FAILED" << std::endl;
+	} else if (get_enclosure_type({2,2}, shape, graph) != EnclosureType::EDGE) {
+		std::cout << "test_get_enclosure_type(1): FAILED" << std::endl;
+	} else if (get_enclosure_type({3,3}, shape, graph) != EnclosureType::OUTSIDE) {
+		std::cout << "test_get_enclosure_type(2): FAILED" << std::endl;
+	} else {
+		std::cout << "test_get_enclosure_type(): PASSED" << std::endl;
+	}
+}
+
 int main() {
-	//test_translate_multiple_points();
+	test_translate_multiple_points();
 	test_edges_to_string();
 	test_coord_converter();
 	test_get_tile_row_col();
 	test_get_tile_rows_cols();
-	test_get_combined_tile();
+	//test_get_combined_tile();
+	test_get_enclosure_type();
 	return 0;
 }

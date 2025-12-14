@@ -6,6 +6,7 @@
 #include <cfloat>
 #include <cmath>
 #include <cstddef>
+#include <iterator>
 #include <unordered_set>
 #include <utility>
 #include <vector>
@@ -15,6 +16,7 @@
 #include <iostream>
 #include <ios>
 #include <filesystem>
+#include <limits>
 #include <curl/curl.h>
 #include "vector_tile.pb.h"
 #include "util.h"
@@ -95,9 +97,7 @@ struct PointEq {
 
 typedef std::pair<int, int> GridPos;
 typedef std::unordered_set<GridPos, PairHash, PairEq> GridPosSet;
-typedef std::unordered_map<
-	Point, std::vector<std::pair<Point, unsigned long long>>, PointHash, PointEq
-> ShapeGraph;
+typedef std::unordered_map<Point, std::array<Point, 2>, PointHash, PointEq> ShapeGraph;
 
 /* 
  * class to convert between the BNG and
@@ -255,6 +255,61 @@ private:
 	}
 };
 
+std::string value_to_string(const FullTile_Value &val) {
+	if (val.has_string_value()) {
+		return val.string_value();
+	} else if (val.has_float_value()) {
+		return std::to_string(val.float_value());
+	} else if (val.has_double_value()) {
+		return std::to_string(val.double_value());
+	} else if (val.has_int_value()) {
+		return std::to_string(val.int_value());
+	} else if (val.has_uint_value()) {
+		return std::to_string(val.has_uint_value());
+	} else if (val.has_sint_value()) {
+		return std::to_string(val.sint_value());
+	} else {
+		return std::to_string(val.bool_value());
+	}
+}
+
+/*
+ * Following funcs are for debugging. Ignore.
+ */
+void debug_print_tags(const FullTile_Feature &feat, const FullTile_Layer &layer) {
+	for (int i = 0; i != feat.tags_size(); i += 2) {
+		std::cout << "DEBUG: " << layer.keys(feat.tags(i)) << ": "
+				  << value_to_string(layer.values(feat.tags(i+1))) 
+				  << std::endl;
+	}
+}
+
+void debug_save_single_shape(const BuildingShape &shape, int idx) {
+	if (shape.osid() == "2b9b9a8b-5469-4932-a107-6e2ab7e85e54") {
+		std::filesystem::path output_path = 
+			std::filesystem::current_path() / "tiles/extra" / 
+			(shape.osid() + "-" + std::to_string(idx) + ".bin");
+		std::ofstream output(output_path, std::ios::out | std::ios::binary);
+		Tile tile;
+		*tile.add_shapes() = shape;
+		std:: cout << "DEBUG: saving tile to " << output_path << std::endl;
+		tile.SerializeToOstream(&output);
+	}
+}
+
+void debug_save_combined_shape(const BuildingShape &shape) {
+	if (shape.osid() == "2b9b9a8b-5469-4932-a107-6e2ab7e85e54") {
+		std::filesystem::path output_path = 
+			std::filesystem::current_path() / "tiles/extra" / 
+			(shape.osid() + "-cmb.bin");
+		std::ofstream output(output_path, std::ios::out | std::ios::binary);
+		Tile tile;
+		*tile.add_shapes() = shape;
+		std:: cout << "DEBUG: saving tile to " << output_path << std::endl;
+		tile.SerializeToOstream(&output);
+	}
+}
+
 bool is_building_shape_valid(const BuildingShape &b) {
 	return b.approx_centre_size() == 2;
 }
@@ -307,25 +362,19 @@ bool decode_command(unsigned int cmd, CommandType &type, unsigned int &count) {
 	return true;
 }
 
-std::string value_to_string(const FullTile_Value &val) {
-	if (val.has_string_value()) {
-		return val.string_value();
-	} else if (val.has_float_value()) {
-		return std::to_string(val.float_value());
-	} else if (val.has_double_value()) {
-		return std::to_string(val.double_value());
-	} else if (val.has_int_value()) {
-		return std::to_string(val.int_value());
-	} else if (val.has_uint_value()) {
-		return std::to_string(val.has_uint_value());
-	} else if (val.has_sint_value()) {
-		return std::to_string(val.sint_value());
-	} else {
-		return std::to_string(val.bool_value());
+bool decode_feature(const FullTile_Feature &feat, const FullTile_Layer &layer, BuildingShape &res, const GridPos& pos) { // TODO remove
+	for (int i = 0; i+1 < feat.tags_size(); i += 2) {
+		if (layer.keys(feat.tags(i)) == "osid") {
+			FullTile_Value val = layer.values(feat.tags(i+1));
+			res.set_osid(value_to_string(val));
+		}
 	}
-}
+	if (!res.has_osid()) {
+		std::cerr << "Couldn't find osid" << std::endl;
+		res.Clear();
+		return false;
+	}
 
-bool decode_feature(const FullTile_Feature &feat, const FullTile_Layer &layer, BuildingShape &res) {
 	int geometry_sz = feat.geometry_size();
 	int i = 0;
 	unsigned int cmd, count;
@@ -375,33 +424,10 @@ bool decode_feature(const FullTile_Feature &feat, const FullTile_Layer &layer, B
 	max_y = std::max(max_y, start.y);
 	res.add_approx_centre((min_x + max_x) / 2);
 	res.add_approx_centre((min_y + max_y) / 2);
-
-	for (int i = 0; i+1 < feat.tags_size(); i += 2) {
-		if (layer.keys(feat.tags(i)) == "osid") {
-			FullTile_Value val = layer.values(feat.tags(i+1));
-			res.set_osid(value_to_string(val));
-		}
-	}
-	if (!res.has_osid()) {
-		std::cerr << "Couldn't find osid" << std::endl;
-		res.Clear();
-		return false;
-	}
 	return true;
 }
 
-/*
- * Only for debugging. Ignore.
- */
-void print_tags(const FullTile_Feature &feat, const FullTile_Layer &layer) {
-	for (int i = 0; i != feat.tags_size(); i += 2) {
-		std::cout << layer.keys(feat.tags(i)) << ": "
-				  << value_to_string(layer.values(feat.tags(i+1))) 
-				  << std::endl;
-	}
-}
-
-Tile parse_tile(std::string &tile_data) 
+Tile parse_tile(std::string &tile_data, const GridPos &pos)  // TODO remove
 {
 	Tile res;
 	FullTile ftile;
@@ -416,10 +442,10 @@ Tile parse_tile(std::string &tile_data)
 	}
 	const FullTile_Layer& buildings_layer = *it;
 
-	BuildingShape *buildingp = res.add_shapes();
+	BuildingShape *added = res.add_shapes();
 	for (const FullTile_Feature &feat: buildings_layer.features()) {
-		if (decode_feature(feat, buildings_layer, *buildingp)) {
-			buildingp = res.add_shapes();
+		if (decode_feature(feat, buildings_layer, *added, pos)) {
+			added = res.add_shapes();
 		}
 	}
 	res.mutable_shapes()->RemoveLast();
@@ -443,144 +469,179 @@ void fetch_missing_tiles(CURL *handle, char url_buff[], size_t buff_sz,
 		full_tile_data.clear();
 		tile_data.clear();
 		get_tiles_api_url(url_buff, buff_sz, pos.first, pos.second);
+		std::cout << "Fetching tile from " << url_buff << std::endl;
 		make_get_request(handle, url_buff, full_tile_data);
-		Tile tile = parse_tile(full_tile_data);
+		Tile tile = parse_tile(full_tile_data, pos);
 		tile.SerializeToString(&tile_data);
 		db.insert(pos, tile_data);
 	}
 }
 
-/*
- * TODO write me
- */
-void combine_building_shapes(const std::vector<int>& idxs, const Tile &tile, BuildingShape &res) {
-	// TODO delete debugging
-	std::filesystem::path output_dir = std::filesystem::relative("tiles/extra");
-	std::filesystem::path output_path;
-	if (tile.shapes(idxs[0]).osid() == "7162adaf-b4d8-44de-82fd-c79830dc6a5d") {
-		for (int idx: idxs) {
-			Tile tile_container;
-			*tile_container.add_shapes() = tile.shapes(idx);
-			output_path = output_dir / (tile.shapes(idx).osid()+"-"+std::to_string(idx)+".bin");
-			std::cout << "Writing to " << output_path << std::endl;
-			std::ofstream output(output_path, std::ios::out | std::ios::binary);
-			tile_container.SerializeToOstream(&output);
-		}
-	}
-
-	// build graph
-	ShapeGraph graph;
-	Point from, to;
-	int dx, dy;
-	unsigned long long square_dist;
-
-	for (int idx: idxs) {
-		const BuildingShape &shape = tile.shapes(idx);
-		for (int i = 0; i != shape.edges_size(); i += 4) {
-			from = {shape.edges(i), shape.edges(i+1)};
-			to = {shape.edges(i+2), shape.edges(i+3)};
-			dx = to.x-from.x;
-			dy = to.y-from.y;
-			square_dist = dx*dx + dy*dy;
-			graph[from].push_back({to, square_dist});
-			graph[to].push_back({from, square_dist});
-		}
-	}
-	// TODO delete
-	for (const auto &pr1: graph) {
-		std::cout << pr1.first.to_string() << ": ";
-		for (auto &pr2: pr1.second) {
-			std::cout << "{" <<pr2.first.to_string() << ", " << pr2.second << "}, ";
-		}
-		std::cout << std::endl;
-	}
-
-	// first cycle to find valid start
-	std::unordered_set<Point, PointHash, PointEq> visited;
-	Point prev = {INT_MAX, INT_MAX};
-	Point curr = {tile.shapes(idxs[0]).edges(0), tile.shapes(idxs[0]).edges(1)};
-	unsigned long long max_dist = 0;
-	Point next;
-	std::cout << "First cycle" << std::endl;
-	while (!visited.count(curr)) {
-		std::cout << curr.to_string() << " -> ";
-		visited.insert(curr);
-		for (const auto &gph_edge: graph[curr]) {
-			if (PointEq{}(gph_edge.first, prev)) {
-				continue; // don't backtrack
-			}
-			if (gph_edge.second > max_dist) {
-				next = gph_edge.first;
-				max_dist = gph_edge.second;
-			}
-		}
-		std::swap(curr, next);
-		std::swap(next, prev);
-		max_dist = 0;
-	}
-	std::cout << curr.to_string() << " -> ";
-	std::cout << std::endl;
-
-	std::cout << "Second cycle" << std::endl;
-	// save second cycle as combined shape
-	visited.clear();
-	prev = {INT_MAX, INT_MAX};
-	// curr stays as end of first cycle
-	max_dist = 0;
-	int min_x = INT_MAX, min_y = INT_MAX, max_x = INT_MIN, max_y = INT_MIN;
-	while (!visited.count(curr)) {
-		std::cout << curr.to_string() << " -> ";
-		visited.insert(curr);
-		for (const auto &gph_edge: graph[curr]) {
-			if (PointEq{}(gph_edge.first, prev)) { // don't backtrack
-				continue; 
-			}
-			if (gph_edge.second > max_dist) {
-				next = gph_edge.first;
-				max_dist = gph_edge.second;
-			}
-		}
-		min_x = std::min(min_x, curr.x);
-		min_y = std::min(min_y, curr.y);
-		max_x = std::max(max_x, curr.x);
-		max_y = std::max(max_y, curr.y);
-		std::swap(curr, next);
-		std::swap(next, prev);
-		res.add_edges(prev.x);
-		res.add_edges(prev.y);
-		res.add_edges(curr.x);
-		res.add_edges(curr.y);
-		max_dist = 0;
-	}
-	std::cout << curr.to_string() << " -> ";
-	std::cout << std::endl;
-	res.add_approx_centre((min_x + max_x) / 2);
-	res.add_approx_centre((min_y + max_y) / 2);
-	res.set_osid(tile.shapes(idxs[0]).osid());
-	std::cout << "approx_centre = " << res.approx_centre(0) << "," << res.approx_centre(1) << std::endl;
-	std::cout << "osid = " << res.osid() << std::endl;
-
-	// TODO remove
-	if (tile.shapes(idxs[0]).osid() == "7162adaf-b4d8-44de-82fd-c79830dc6a5d") {
-		Tile tile_container;
-		output_path = output_dir / (res.osid()+"-cmb.bin");
-		*tile_container.add_shapes() = res;
-		std::ofstream output(output_path, std::ios::out | std::ios::binary);
-		std::cout << "Writing to " << output_path << std::endl;
-		tile_container.SerializeToOstream(&output);
+float gradient(int x1, int y1, int x2, int y2) {
+	if (x1 != x2) {
+		return (y2-y1) / (x2-x1*1.0f);
+	} else { // perfectly vertical edge
+		return std::numeric_limits<float>::infinity();
 	}
 }
 
-// Change in .proto, change db table name, change in this file, change DB class, change in test file
+Point midpoint(int x1, int y1, int x2, int y2) {
+	float grad = gradient(x1, y1, x2, y2);
+	int mid_x = (x1+x2) / 2;
+	int mid_y;
+	if (!isinf(grad)) {
+		mid_y = (mid_x - x1)*grad + y1;
+	} else {
+		mid_y = (y1 + y2) / 2;
+	}
+	return {mid_x, mid_y};
+}
+
+/*
+ * TODO write me. Write about much easier method of recalculating centre
+ * for all shapes with same osid instead of combining them but that
+ * this method is sexier and looks better on the visualiser. flex.
+ * TODO add vertical edge test case
+ */
+EnclosureType get_enclosure_type(const Point &p, const BuildingShape &shape, const ShapeGraph &graph) {
+	std::unordered_set<int> above_contacts, below_contacts;
+	int above_penalty = 0, below_penalty = 0, penalty;
+	int x1, y1, x2, y2, contact_y;
+	float grad; 
+	Point from, to, before_from, after_to;
+	bool is_before_from_left, is_after_to_left;
+	for (int i = 0; i != shape.edges_size(); i += 4) {
+		x1 = shape.edges(i); 
+		y1 = shape.edges(i+1); 
+		x2 = shape.edges(i+2); 
+		y2 = shape.edges(i+3);
+		if (std::min(x1, x2) > p.x || std::max(x1, x2) < p.x) {
+			continue;
+		}
+		grad = gradient(x1, y1, x2, y2);
+		if (!isinf(grad)) {
+			contact_y = (p.x - x1)*grad + y1;
+			if (p.y < contact_y) {
+				above_contacts.insert(contact_y);
+			}
+			if (p.y > contact_y) {
+				below_contacts.insert(contact_y);
+			}
+		} else {
+			if (std::max(y1, y2) >= p.y && std::min(y1, y2) <= p.y) {
+				return EnclosureType::EDGE;
+			} else {
+				from.x = x1; from.y = y1;
+				to.x = x2; to.y = y2;
+				before_from.x = graph.at(from)[1].x; 
+				before_from.y = graph.at(from)[1].y;
+				after_to.x = graph.at(to)[0].x;
+				after_to.y = graph.at(to)[0].y;
+				is_before_from_left = (before_from.x - from.x) < 0;
+				is_after_to_left = (after_to.x - to.x) < 0;
+				if (is_before_from_left == is_after_to_left) {
+					penalty = 2;
+				} else {
+					penalty = 1;
+				}
+				if (std::min(x1, x2) > p.x) {
+					above_contacts.insert(y1);
+					above_contacts.insert(y2);
+					above_penalty += penalty;
+				} else {
+					below_contacts.insert(y1);
+					below_contacts.insert(y2);
+					below_penalty += penalty;
+				}
+			}
+		}
+	}
+	int nabove_contact = above_contacts.size() - above_penalty;
+	int nbelow_contact = below_contacts.size() - below_penalty;
+	if ((nabove_contact % 2) != (nbelow_contact % 2)) {
+		return EnclosureType::EDGE;
+	} else if (nabove_contact % 2 == 0) {
+		return EnclosureType::OUTSIDE;
+	} else {
+		return EnclosureType::INSIDE;
+	}
+}
+
+ShapeGraph build_graph(const BuildingShape &shape) {
+	ShapeGraph res;
+	Point from, to;
+	for (int i = 0; i != shape.edges_size(); i += 4) {
+		from.x = shape.edges(i); from.y = shape.edges(i+1);
+		to.x = shape.edges(i+2); to.y = shape.edges(i+3);
+		res[from][0].x = to.x; res[from][0].y = to.y;
+		res[to][1].x = from.x; res[to][1].y = from.y;
+	}
+	return res;
+}
+
+std::vector<ShapeGraph> build_graphs(const Tile &tile) {
+	std::vector<ShapeGraph> res;
+	std::transform(tile.shapes().begin(), tile.shapes().end(), std::back_inserter(res),
+		[] (const BuildingShape &shape) {
+			return build_graph(shape);
+		});
+	return res;
+}
+
+/*
+ * TODO write me
+ */
+void combine_building_shapes(const std::vector<const BuildingShape *>& shapes, BuildingShape &res) {
+	res.set_osid(shapes[0]->osid());
+	int x1, y1, x2, y2;
+	int min_x = INT_MAX, min_y = INT_MAX, max_x = INT_MIN, max_y = INT_MIN;
+	Point mid;
+	EnclosureType enc_type;
+	bool is_boundry_edge;
+	std::vector<ShapeGraph> graphs;
+	std::transform(shapes.begin(), shapes.end(), std::back_inserter(graphs), 
+		[](const BuildingShape *shape) {
+			return build_graph(*shape);
+		});
+	for (const BuildingShape *shape: shapes) {
+		for (int n = 0; n != shape->edges_size(); n += 4) {
+			x1 = shape->edges(n); 
+			y1 = shape->edges(n+1); 
+			x2 = shape->edges(n+2); 
+			y2 = shape->edges(n+3);
+			mid = midpoint(x1, y1, x2, y2);
+			is_boundry_edge = true;
+			for (int j = 0; j != shapes.size(); j++) {
+				enc_type = get_enclosure_type(mid, *shapes[j], graphs[j]);
+				if (enc_type == EnclosureType::INSIDE) {
+					is_boundry_edge = false;
+				}
+			}
+			if (is_boundry_edge) {
+				res.add_edges(x1); 
+				res.add_edges(y1); 
+				res.add_edges(x2); 
+				res.add_edges(y2);
+				min_x = std::min(min_x, std::min(x1, x2));
+				min_y = std::min(min_y, std::min(y1, y2));
+				max_x = std::max(max_x, std::max(x1, x2));
+				max_y = std::max(max_y, std::max(y1, y2));
+			}
+		}
+	}
+	res.add_approx_centre((min_x + max_x) / 2);
+	res.add_approx_centre((min_y + max_y) / 2);
+}
+
 /*
  * Get a single tile representing all of the 
  * individual tiles in `positions`. Cell coordinates
  * in the result are relative to the centre tile at
  * (`centre_row`,`centre_col`).
  */
-Tile get_combined_tile(CURL *handle, const std::vector<GridPos> &positions, 
-					   int centre_row, int centre_col) 
-{
+Tile get_combined_tile(
+	CURL *handle, const std::vector<GridPos> &positions, int centre_row, int centre_col
+) {
 	Tile res, intermediate_res;
 	BuildingShape *added;
 	char url[500];
@@ -609,15 +670,20 @@ Tile get_combined_tile(CURL *handle, const std::vector<GridPos> &positions,
 		}
 	}
 
+	std::vector<const BuildingShape *> buildings;
 	for (auto &p: osid_to_idxs) {
-		std::cout << "Looking at group id = " << p.first << std::endl;
 		std::vector<int> &idxs = p.second;
 		added = res.add_shapes();
 		if (idxs.size() == 1) {
 			idx = idxs[0];
 			*added = std::move(*intermediate_res.mutable_shapes(idx));
 		} else {
-			combine_building_shapes(idxs, intermediate_res, *added);
+			buildings.clear();
+			std::transform(idxs.begin(), idxs.end(), std::back_inserter(buildings), 
+				[&intermediate_res] (int i) {
+					return &intermediate_res.shapes(i);
+				});
+			combine_building_shapes(buildings, *added);
 		}
 	}
 	return res;
@@ -629,31 +695,18 @@ Tile get_combined_tile(CURL *handle, const std::vector<GridPos> &positions,
  * edges of b
  * https://en.wikipedia.org/wiki/Point_in_polygon#Ray_casting_algorithm
  */
-// TODO?: make into conversion table class?
-void translate_point_to_building_centre(Point &p, const Tile &tile) {
-	int x1, y1, x2, y2, edges_passed_thru;
-	float gradient, contact_y;
-	for (const BuildingShape &building: tile.shapes()) {
-		edges_passed_thru = 0;
-		for (int i = 0; i != building.edges_size(); i += 4) {
-			x1 = building.edges(i);
-			y1 = building.edges(i+1);
-			x2 = building.edges(i+2);
-			y2 = building.edges(i+3);
-			if (std::min(x1, x2) > p.x || std::max(x1, x2) < p.x) {
-				continue;
-			}
-			gradient = (y2-y1) / (x2-x1*1.0f);
-			contact_y = (p.x - x1)*gradient + y1;
-			if (contact_y < p.y) {
-				continue;
-			}
-			edges_passed_thru++;
+// TODO?: use get_enclosure_type()
+void translate_point_to_building_centre(Point &p, const Tile &tile, std::vector<ShapeGraph> &graphs) {
+	EnclosureType enc_type;
+	for (int i = 0; i != tile.shapes_size(); i++) {
+		const BuildingShape &shape = tile.shapes(i);
+		enc_type = get_enclosure_type(p, shape, graphs[i]);
+		if (enc_type == EnclosureType::OUTSIDE) {
+			continue;
 		}
-		if (edges_passed_thru % 2 == 1) {
-			p.x = building.approx_centre(0);
-			p.y = building.approx_centre(1);
-		}
+		p.x = shape.approx_centre(0);
+		p.y = shape.approx_centre(1);
+		return;
 	}
 }
 #endif
