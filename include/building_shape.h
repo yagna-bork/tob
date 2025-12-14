@@ -17,6 +17,7 @@
 #include <ios>
 #include <filesystem>
 #include <limits>
+#include <functional>
 #include <curl/curl.h>
 #include "vector_tile.pb.h"
 #include "util.h"
@@ -67,37 +68,36 @@ struct FPoint {
 	}
 };
 
-struct PairHash {
-	template <class T, class U>
-	size_t operator()(const std::pair<T, U> &p) const {
-		return std::hash<T>()(p.first) ^ std::hash<U>()(p.second);
-	}
-};
+bool operator==(const Point &p1, const Point &p2) {
+	return p1.x == p2.x && p1.y == p2.y;
+}
 
-struct PairEq {
-	template <class X, class Y>
-	bool operator()(const std::pair<X, Y> &p1, const std::pair<X, Y> &p2) const 
-	{
-		return p1.first == p2.first && p1.second == p2.second;
-	}
-};
-
-struct PointHash {
+template<>
+struct std::hash<Point> {
 	size_t operator()(const Point &p) const {
 		return std::hash<int>()(p.x) ^ std::hash<int>()(p.y);
 	}
 };
 
-struct PointEq {
-	bool operator()(const Point &p1, const Point &p2) const 
+struct PairHash {
+	template <class U, class V>
+	size_t operator()(const std::pair<U, V> &p) const {
+		return std::hash<U>()(p.first) ^ std::hash<V>()(p.second);
+	}
+};
+
+struct PairEq {
+	template <class U, class V>
+	bool operator()(const std::pair<U, V> &p1, const std::pair<U, V> &p2) const 
 	{
-		return p1.x == p2.x && p1.y == p2.y;
+		return std::equal_to<U>()(p1.first, p2.first) && 
+			   std::equal_to<V>()(p1.second, p2.second);
 	}
 };
 
 typedef std::pair<int, int> GridPos;
 typedef std::unordered_set<GridPos, PairHash, PairEq> GridPosSet;
-typedef std::unordered_map<Point, std::array<Point, 2>, PointHash, PointEq> ShapeGraph;
+typedef std::unordered_map<std::pair<Point, Point>, int, PairHash, PairEq> EdgeToPenaltyMap;
 
 /* 
  * class to convert between the BNG and
@@ -362,7 +362,9 @@ bool decode_command(unsigned int cmd, CommandType &type, unsigned int &count) {
 	return true;
 }
 
-bool decode_feature(const FullTile_Feature &feat, const FullTile_Layer &layer, BuildingShape &res, const GridPos& pos) { // TODO remove
+bool decode_feature(
+	const FullTile_Feature &feat, const FullTile_Layer &layer, BuildingShape &res
+) {
 	for (int i = 0; i+1 < feat.tags_size(); i += 2) {
 		if (layer.keys(feat.tags(i)) == "osid") {
 			FullTile_Value val = layer.values(feat.tags(i+1));
@@ -427,8 +429,7 @@ bool decode_feature(const FullTile_Feature &feat, const FullTile_Layer &layer, B
 	return true;
 }
 
-Tile parse_tile(std::string &tile_data, const GridPos &pos)  // TODO remove
-{
+Tile parse_tile(std::string &tile_data) {
 	Tile res;
 	FullTile ftile;
 	ftile.ParseFromString(tile_data);
@@ -444,7 +445,7 @@ Tile parse_tile(std::string &tile_data, const GridPos &pos)  // TODO remove
 
 	BuildingShape *added = res.add_shapes();
 	for (const FullTile_Feature &feat: buildings_layer.features()) {
-		if (decode_feature(feat, buildings_layer, *added, pos)) {
+		if (decode_feature(feat, buildings_layer, *added)) {
 			added = res.add_shapes();
 		}
 	}
@@ -471,7 +472,7 @@ void fetch_missing_tiles(CURL *handle, char url_buff[], size_t buff_sz,
 		get_tiles_api_url(url_buff, buff_sz, pos.first, pos.second);
 		std::cout << "Fetching tile from " << url_buff << std::endl;
 		make_get_request(handle, url_buff, full_tile_data);
-		Tile tile = parse_tile(full_tile_data, pos);
+		Tile tile = parse_tile(full_tile_data);
 		tile.SerializeToString(&tile_data);
 		db.insert(pos, tile_data);
 	}
@@ -498,12 +499,14 @@ Point midpoint(int x1, int y1, int x2, int y2) {
 }
 
 /*
- * TODO write me. Write about much easier method of recalculating centre
- * for all shapes with same osid instead of combining them but that
- * this method is sexier and looks better on the visualiser. flex.
- * TODO add vertical edge test case
+ * Modified version of the ray casting algorith from:
+ * https://en.wikipedia.org/wiki/Point_in_polygon#Ray_casting_algorithm
+ * which projects two vertical rays, above and below, to 
+ * determine if a point is inside, outside or on the edge of a shape.
  */
-EnclosureType get_enclosure_type(const Point &p, const BuildingShape &shape, const ShapeGraph &graph) {
+EnclosureType get_enclosure_type(
+	const Point &p, const BuildingShape &shape, const EdgeToPenaltyMap &pen_mp
+) {
 	std::unordered_set<int> above_contacts, below_contacts;
 	int above_penalty = 0, below_penalty = 0, penalty;
 	int x1, y1, x2, y2, contact_y;
@@ -533,25 +536,14 @@ EnclosureType get_enclosure_type(const Point &p, const BuildingShape &shape, con
 			} else {
 				from.x = x1; from.y = y1;
 				to.x = x2; to.y = y2;
-				before_from.x = graph.at(from)[1].x; 
-				before_from.y = graph.at(from)[1].y;
-				after_to.x = graph.at(to)[0].x;
-				after_to.y = graph.at(to)[0].y;
-				is_before_from_left = (before_from.x - from.x) < 0;
-				is_after_to_left = (after_to.x - to.x) < 0;
-				if (is_before_from_left == is_after_to_left) {
-					penalty = 2;
-				} else {
-					penalty = 1;
-				}
-				if (std::min(x1, x2) > p.x) {
+				if (std::min(y1, y2) > p.y) {
 					above_contacts.insert(y1);
 					above_contacts.insert(y2);
-					above_penalty += penalty;
+					above_penalty += pen_mp.at({from, to});
 				} else {
 					below_contacts.insert(y1);
 					below_contacts.insert(y2);
-					below_penalty += penalty;
+					below_penalty += pen_mp.at({from, to});
 				}
 			}
 		}
@@ -567,29 +559,55 @@ EnclosureType get_enclosure_type(const Point &p, const BuildingShape &shape, con
 	}
 }
 
-ShapeGraph build_graph(const BuildingShape &shape) {
-	ShapeGraph res;
-	Point from, to;
-	for (int i = 0; i != shape.edges_size(); i += 4) {
-		from.x = shape.edges(i); from.y = shape.edges(i+1);
-		to.x = shape.edges(i+2); to.y = shape.edges(i+3);
-		res[from][0].x = to.x; res[from][0].y = to.y;
-		res[to][1].x = from.x; res[to][1].y = from.y;
+int floor_mod(int x, int y) {
+	int q = floor(x / (y*1.0f));;
+	return x - q*y;
+}
+
+EdgeToPenaltyMap edge_to_penalty_map(const BuildingShape &shape) {
+	EdgeToPenaltyMap res;
+	Point from, to, before, after;
+	bool is_before_left, is_after_left;
+	int penalty;
+	int nedge = shape.edges_size() / 4;
+	if (nedge < 3) {
+		return res;
+	}
+	for (int i = 0; i != nedge; i++) {
+		from.x = shape.edges(i*4); from.y = shape.edges(i*4 + 1);
+		to.x = shape.edges(i*4 + 2); to.y = shape.edges(i*4 + 3);
+		// check the i-1th edge using mod to wrap around
+		before.x = shape.edges(floor_mod(i-1, nedge)*4);
+		before.y = shape.edges(floor_mod(i-1, nedge)*4 + 1);
+		// check the i+1th edge using mod to wrap around
+		after.x = shape.edges(floor_mod(i+1, nedge)*4 + 2);
+		after.y = shape.edges(floor_mod(i-1, nedge)*4 + 3);
+		if (from.x != to.x) {
+			continue;
+		}
+		is_before_left = (before.x - from.x) < 0;
+		is_after_left = (after.x - to.x) < 0;
+		penalty = is_before_left==is_after_left ? 2 : 1;
+		res[{from, to}] = penalty;
 	}
 	return res;
 }
 
-std::vector<ShapeGraph> build_graphs(const Tile &tile) {
-	std::vector<ShapeGraph> res;
-	std::transform(tile.shapes().begin(), tile.shapes().end(), std::back_inserter(res),
-		[] (const BuildingShape &shape) {
-			return build_graph(shape);
+std::vector<EdgeToPenaltyMap> edge_to_penalty_maps(const Tile &tile) {
+	std::vector<EdgeToPenaltyMap> res;
+	std::transform(tile.shapes().begin(), tile.shapes().end(), std::back_inserter(res), 
+		[](const BuildingShape &sh) {
+			return edge_to_penalty_map(sh);
 		});
 	return res;
 }
 
 /*
- * TODO write me
+ * Algorithm to prune any edges that
+ * have midpoints inside of any of the given 
+ * `shapes`. These edges can't be boundry
+ * edges by definition and don't belong in 
+ * the combined result shape `res`.
  */
 void combine_building_shapes(const std::vector<const BuildingShape *>& shapes, BuildingShape &res) {
 	res.set_osid(shapes[0]->osid());
@@ -598,10 +616,10 @@ void combine_building_shapes(const std::vector<const BuildingShape *>& shapes, B
 	Point mid;
 	EnclosureType enc_type;
 	bool is_boundry_edge;
-	std::vector<ShapeGraph> graphs;
-	std::transform(shapes.begin(), shapes.end(), std::back_inserter(graphs), 
+	std::vector<EdgeToPenaltyMap> pen_mps;
+	std::transform(shapes.begin(), shapes.end(), std::back_inserter(pen_mps), 
 		[](const BuildingShape *shape) {
-			return build_graph(*shape);
+			return edge_to_penalty_map(*shape);
 		});
 	for (const BuildingShape *shape: shapes) {
 		for (int n = 0; n != shape->edges_size(); n += 4) {
@@ -612,7 +630,7 @@ void combine_building_shapes(const std::vector<const BuildingShape *>& shapes, B
 			mid = midpoint(x1, y1, x2, y2);
 			is_boundry_edge = true;
 			for (int j = 0; j != shapes.size(); j++) {
-				enc_type = get_enclosure_type(mid, *shapes[j], graphs[j]);
+				enc_type = get_enclosure_type(mid, *shapes[j], pen_mps[j]);
 				if (enc_type == EnclosureType::INSIDE) {
 					is_boundry_edge = false;
 				}
@@ -690,17 +708,15 @@ Tile get_combined_tile(
 }
 
 /*
- * Determine if Point p is in a BuildingShape b by checking if 
- * a ray projected straight up from p penetrates an odd number of
- * edges of b
- * https://en.wikipedia.org/wiki/Point_in_polygon#Ray_casting_algorithm
+ * Translate `Point p` to the centre of
+ * a building shape if it's found to be
+ * within one.
  */
-// TODO?: use get_enclosure_type()
-void translate_point_to_building_centre(Point &p, const Tile &tile, std::vector<ShapeGraph> &graphs) {
+void translate_point_to_building_centre(Point &p, const Tile &tile, std::vector<EdgeToPenaltyMap> &pen_mps) {
 	EnclosureType enc_type;
 	for (int i = 0; i != tile.shapes_size(); i++) {
 		const BuildingShape &shape = tile.shapes(i);
-		enc_type = get_enclosure_type(p, shape, graphs[i]);
+		enc_type = get_enclosure_type(p, shape, pen_mps[i]);
 		if (enc_type == EnclosureType::OUTSIDE) {
 			continue;
 		}
@@ -708,5 +724,8 @@ void translate_point_to_building_centre(Point &p, const Tile &tile, std::vector<
 		p.y = shape.approx_centre(1);
 		return;
 	}
+}
+
+void translate_points_to_building_centres(std::vector<FPoint> &bng_coords) {
 }
 #endif

@@ -8,10 +8,11 @@
 #include "../include/building_shape.h"
 #include "../include/util.h"
 
-static const std::string TILE_PATH="tiles/extra/tile.bin";
+static const std::string CLUSTERING_TEST_TILE_PATH="tiles/extra/tile.bin";
 static const std::string CLUSTERING_TEST_INP_PATH="tiles/extra/test_input.csv";
 static const std::string CLUSTERING_TEST_OUT_PATH="tiles/extra/test_output.csv";
 static const std::string BNG_TEST_INP_PATH="tiles/extra/bng_test_input.csv";
+static const std::string COMBINATION_TEST_TILE_PATH="tiles/extra/cmb-tile.bin";
 
 static CURL *CURL_HANDLE = curl_easy_init(); 
 
@@ -85,14 +86,16 @@ void test_translate_multiple_points() {
 		CURL_HANDLE, grid_positions, cc.get_centre_row(), cc.get_centre_col()
 	);
 	{
-		std::ofstream output(TILE_PATH, std::ios::out | std::ios::binary);
+		std::ofstream output(
+			CLUSTERING_TEST_TILE_PATH, std::ios::out | std::ios::binary
+		);
 		tile.SerializeToOstream(&output);
 	}
 
 	std::ofstream test_out(CLUSTERING_TEST_OUT_PATH, std::ios::out);
-	std::vector<ShapeGraph> tile_graphs = build_graphs(tile);
+	std::vector<EdgeToPenaltyMap> pen_mps = edge_to_penalty_maps(tile);
 	for (Point &p: cell_points) {
-		translate_point_to_building_centre(p, tile, tile_graphs);
+		translate_point_to_building_centre(p, tile, pen_mps);
 		test_out << p.x << "," << p.y << std::endl;
 	}
 	std::cout << "test_translate_multiple_points(): Done" << std::endl;
@@ -192,7 +195,7 @@ void test_get_combined_tile() {
 	Tile tile = get_combined_tile(
 		CURL_HANDLE, grid_positions, /*centre_row=*/21303, /*centre_col=*/14613
 	);
-	std::ofstream output(TILE_PATH, std::ios::trunc | std::ios::binary);
+	std::ofstream output(COMBINATION_TEST_TILE_PATH, std::ios::trunc | std::ios::binary);
 	tile.SerializeToOstream(&output);
 	std::cout << "test_get_combined_tile(): Done" << std::endl;
 }
@@ -219,15 +222,98 @@ void test_get_enclosure_type() {
 	shape.add_edges(0);
 	shape.add_edges(0);
 	shape.add_edges(0);
-	ShapeGraph graph = build_graph(shape);
-	if (get_enclosure_type({1,1}, shape, graph) != EnclosureType::INSIDE) {
+	EdgeToPenaltyMap pen_mp = edge_to_penalty_map(shape);
+	if (get_enclosure_type({1,1}, shape, pen_mp) != EnclosureType::INSIDE) {
 		std::cout << "test_get_enclosure_type(0): FAILED" << std::endl;
-	} else if (get_enclosure_type({2,2}, shape, graph) != EnclosureType::EDGE) {
+	} else if (get_enclosure_type({2,2}, shape, pen_mp) != EnclosureType::EDGE) {
 		std::cout << "test_get_enclosure_type(1): FAILED" << std::endl;
-	} else if (get_enclosure_type({3,3}, shape, graph) != EnclosureType::OUTSIDE) {
+	} else if (get_enclosure_type({3,3}, shape, pen_mp) != EnclosureType::OUTSIDE) {
 		std::cout << "test_get_enclosure_type(2): FAILED" << std::endl;
 	} else {
 		std::cout << "test_get_enclosure_type(): PASSED" << std::endl;
+	}
+}
+
+void test_edge_skimming() {
+	BuildingShape shape;
+	// 0,0 -> 4,0
+	shape.add_edges(0);
+	shape.add_edges(0);
+	shape.add_edges(4);
+	shape.add_edges(0);
+	// 4,0 -> 4,2
+	shape.add_edges(4);
+	shape.add_edges(0);
+	shape.add_edges(4);
+	shape.add_edges(2);
+	// 4,2 -> 2,2
+	shape.add_edges(4);
+	shape.add_edges(2);
+	shape.add_edges(2);
+	shape.add_edges(2);
+	// 2,2 -> 2,4
+	shape.add_edges(2);
+	shape.add_edges(2);
+	shape.add_edges(2);
+	shape.add_edges(4);
+	// 2,4 -> 0,4
+	shape.add_edges(2);
+	shape.add_edges(4);
+	shape.add_edges(0);
+	shape.add_edges(4);
+	// 0,4 -> 0,0
+	shape.add_edges(0);
+	shape.add_edges(4);
+	shape.add_edges(0);
+	shape.add_edges(0);
+	EdgeToPenaltyMap pen_mp = edge_to_penalty_map(shape);
+
+	bool passed = true;
+	EnclosureType t;
+	t = get_enclosure_type({2, 1}, shape, pen_mp);
+	if (t != EnclosureType::INSIDE) {
+		std::cout << "test_edge_skimming(0): FAILED" << std::endl;
+		std::cout << t << std::endl;
+		passed = false;
+	}
+	t = get_enclosure_type({2, 2}, shape, pen_mp);
+	if (t != EnclosureType::EDGE) {
+		std::cout << "test_edge_skimming(1): FAILED" << std::endl;
+		passed = false;
+	}
+	t = get_enclosure_type({2, 0}, shape, pen_mp);
+	if (t != EnclosureType::EDGE) {
+		std::cout << "test_edge_skimming(2): FAILED" << std::endl;
+		passed = false;
+	}
+	t = get_enclosure_type({2, 3}, shape, pen_mp);
+	if (t != EnclosureType::EDGE) {
+		std::cout << "test_edge_skimming(3): FAILED" << std::endl;
+		passed = false;
+	}
+	t = get_enclosure_type({2, 3}, shape, pen_mp);
+	if (t != EnclosureType::EDGE) {
+		std::cout << "test_edge_skimming(4): FAILED" << std::endl;
+		passed = false;
+	}
+	t = get_enclosure_type({2, 5}, shape, pen_mp);
+	if (t != EnclosureType::OUTSIDE) {
+		std::cout << "test_edge_skimming(5): FAILED" << std::endl;
+		passed = false;
+	}
+	t = get_enclosure_type({2, -1}, shape, pen_mp);
+	if (t != EnclosureType::OUTSIDE) {
+		std::cout << "test_edge_skimming(6): FAILED" << std::endl;
+		std::cout << t << std::endl;
+		passed = false;
+	}
+	t = get_enclosure_type({4, 3}, shape, pen_mp);
+	if (t != EnclosureType::OUTSIDE) {
+		std::cout << "test_edge_skimming(7): FAILED" << std::endl;
+		passed = false;
+	}
+	if (passed) {
+		std::cout << "test_edge_skimming(): PASSED" << std::endl;
 	}
 }
 
@@ -237,7 +323,8 @@ int main() {
 	test_coord_converter();
 	test_get_tile_row_col();
 	test_get_tile_rows_cols();
-	//test_get_combined_tile();
+	test_get_combined_tile();
 	test_get_enclosure_type();
+	test_edge_skimming();
 	return 0;
 }
