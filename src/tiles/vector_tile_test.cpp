@@ -1,20 +1,31 @@
-#include "../include/building_shape.h"
-#include "../include/util.h"
+#include "../../include/building_shape.h"
 #include <algorithm>
 #include <cstddef>
 #include <curl/curl.h>
 #include <fstream>
 #include <iterator>
+#include <string>
 #include <utility>
 
-static const std::string CLUSTERING_TEST_TILE_PATH = "tiles/extra/tile.bin";
+using namespace vector_tile;
+using BuildingShape = Tile_BuildingShape;
+
+static const std::string CLUSTERING_TEST_TILE_PATH = "src/tiles/extra/tile.bin";
 static const std::string CLUSTERING_TEST_INP_PATH =
-    "tiles/extra/test_input.csv";
+    "src/tiles/extra/test_input.csv";
 static const std::string CLUSTERING_TEST_OUT_PATH =
-    "tiles/extra/test_output.csv";
-static const std::string BNG_TEST_INP_PATH = "tiles/extra/bng_test_input.csv";
+    "src/tiles/extra/test_output.csv";
+static const std::string BNG_TEST_INP_PATH =
+    "src/tiles/extra/bng_test_input.csv";
 static const std::string COMBINATION_TEST_TILE_PATH =
-    "tiles/extra/cmb-tile.bin";
+    "src/tiles/extra/cmb-tile.bin";
+static const std::string PLANNING_BNG_PATH = "src/tiles/extra/planning_bng.csv";
+static const std::string PLANNING_TEST_INP_PATH =
+    "src/tiles/extra/planning_test_input.csv";
+static const std::string PLANNING_TEST_TILE_PATH =
+    "src/tiles/extra/planning_tile.bin";
+static const std::string PLANNING_TEST_OUT_PATH =
+    "src/tiles/extra/planning_test_out.csv";
 
 static CURL *CURL_HANDLE = curl_easy_init();
 
@@ -47,11 +58,15 @@ void test_edges_to_string() {
             << std::endl;
 }
 
-void test_translate_multiple_points() {
+void test_translate_multiple_points(const std::string &bng_inp_path,
+                                    const std::string &test_inp_path,
+                                    const std::string &tile_path,
+                                    const std::string &test_out_path,
+                                    const std::string &test_name) {
   std::vector<FPoint> bng_points;
   {
     std::string line;
-    std::ifstream input(BNG_TEST_INP_PATH, std::ios::in);
+    std::ifstream input(bng_inp_path, std::ios::in);
     std::string::const_iterator sep;
     float x, y;
     while (std::getline(input, line)) {
@@ -70,7 +85,7 @@ void test_translate_multiple_points() {
     cc.bng_to_cell(bng_points[i], cell_points[i]);
   }
   {
-    std::ofstream test_inp(CLUSTERING_TEST_INP_PATH, std::ios::trunc);
+    std::ofstream test_inp(test_inp_path, std::ios::trunc);
     for (const Point &p : cell_points) {
       test_inp << p.x << "," << p.y << std::endl;
     }
@@ -88,18 +103,18 @@ void test_translate_multiple_points() {
   Tile tile = get_combined_tile(CURL_HANDLE, grid_positions,
                                 cc.get_centre_row(), cc.get_centre_col());
   {
-    std::ofstream output(CLUSTERING_TEST_TILE_PATH,
-                         std::ios::out | std::ios::binary);
+    std::ofstream output(tile_path, std::ios::out | std::ios::binary);
     tile.SerializeToOstream(&output);
   }
 
-  std::ofstream test_out(CLUSTERING_TEST_OUT_PATH, std::ios::out);
+  std::ofstream test_out(test_out_path, std::ios::out);
   std::vector<EdgeToPenaltyMap> pen_mps = edge_to_penalty_maps(tile);
   for (Point &p : cell_points) {
     translate_point_to_building_centre(p, tile, pen_mps);
     test_out << p.x << "," << p.y << std::endl;
   }
-  std::cout << "test_translate_multiple_points(): Done" << std::endl;
+  std::cout << "test_translate_multiple_points(" << test_name << "): Done"
+            << std::endl;
 }
 
 void test_coord_converter() {
@@ -317,7 +332,10 @@ void test_edge_skimming() {
 }
 
 int main() {
-  test_translate_multiple_points();
+  // building endpoint coordinates
+  test_translate_multiple_points(BNG_TEST_INP_PATH, CLUSTERING_TEST_INP_PATH,
+                                 CLUSTERING_TEST_TILE_PATH,
+                                 CLUSTERING_TEST_OUT_PATH, "building_endpoint");
   test_edges_to_string();
   test_coord_converter();
   test_get_tile_row_col();
@@ -325,5 +343,9 @@ int main() {
   test_get_combined_tile();
   test_get_enclosure_type();
   test_edge_skimming();
+  // planning endpoint coordinates
+  test_translate_multiple_points(PLANNING_BNG_PATH, PLANNING_TEST_INP_PATH,
+                                 PLANNING_TEST_TILE_PATH,
+                                 PLANNING_TEST_OUT_PATH, "planning_endpoint");
   return 0;
 }

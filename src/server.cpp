@@ -1,7 +1,7 @@
-#include "include/building.h"
-#include "include/planning.h"
-#include "include/util.h"
-#include "include/valuation.h"
+#include "../include/building.h"
+#include "../include/planning.h"
+#include "../include/util.h"
+#include "../include/valuation.h"
 #include <algorithm>
 #include <cstdio>
 #include <cstdlib>
@@ -49,8 +49,8 @@ void building_endpoint(const httplib::Request &req, httplib::Response &resp) {
     return;
   }
 
+  // Get Buildings
   std::vector<Building> buildings = fetch_buildings(handle, x, y, rad);
-  curl_easy_cleanup(handle);
   ValuationDB db;
   if (!db.connected()) {
     resp.set_content("Failed to connect to db", "text/plain");
@@ -65,6 +65,13 @@ void building_endpoint(const httplib::Request &req, httplib::Response &resp) {
   for (int i = 0; i != buildings.size(); i++) {
     buildings[i].valuations = std::move(valuation_results[i]);
   }
+
+  // Get PlanningApplications
+  std::vector<PlanningApplication> applications =
+      fetch_planning_apps(handle, lat, lng, rad);
+  curl_easy_cleanup(handle);
+
+  // Combine both streams into result
   std::vector<Building> clustered = cluster_buildings(buildings);
 
   json resp_json = {{"results", clustered}};
@@ -93,10 +100,9 @@ void planning_endpoint(const httplib::Request &req, httplib::Response &resp) {
 }
 
 int main(int argc, char *argv[]) {
-  init_config();
   httplib::Server server;
-  std::string url = g_config["SERVER_URL"];
-  int port = atoi(g_config["SERVER_PORT"].c_str());
+  std::string url = config("SERVER_URL");
+  int port = atoi(config("SERVER_PORT").c_str());
 
   server.Get("/building", building_endpoint);
   server.Get("/planning", planning_endpoint);

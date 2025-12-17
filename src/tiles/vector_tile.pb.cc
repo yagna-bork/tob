@@ -3,7 +3,7 @@
 // source: vector_tile.proto
 // Protobuf C++ Version: 6.33.1
 
-#include "../include/vector_tile.pb.h"
+#include "../../include/vector_tile.pb.h"
 
 #include "google/protobuf/descriptor.h"
 #include "google/protobuf/extension_set.h"
@@ -1863,44 +1863,44 @@ PROTOBUF_ATTRIBUTE_WEAK const ::google::protobuf::internal::ClassData *
   return FullTile_class_data_.base();
 }
 PROTOBUF_CONSTINIT
-    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 const ::_pbi::TcParseTable<0, 1, 1, 0, 2>
-        FullTile::_table_ = {
-            {
-                PROTOBUF_FIELD_OFFSET(FullTile, _impl_._has_bits_),
-                PROTOBUF_FIELD_OFFSET(FullTile, _impl_._extensions_),
-                3,
-                0, // max_field_number, fast_idx_mask
-                offsetof(decltype(_table_), field_lookup_table),
-                4294967291, // skipmap
-                offsetof(decltype(_table_), field_entries),
-                1, // num_field_entries
-                1, // num_aux_entries
-                offsetof(decltype(_table_), aux_entries),
-                FullTile_class_data_.base(),
-                nullptr,                           // post_loop_handler
-                ::_pbi::TcParser::GenericFallback, // fallback
+PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 const ::_pbi::TcParseTable<0, 1, 1, 0, 2>
+    FullTile::_table_ = {
+        {
+            PROTOBUF_FIELD_OFFSET(FullTile, _impl_._has_bits_),
+            PROTOBUF_FIELD_OFFSET(FullTile, _impl_._extensions_),
+            3,
+            0, // max_field_number, fast_idx_mask
+            offsetof(decltype(_table_), field_lookup_table),
+            4294967291, // skipmap
+            offsetof(decltype(_table_), field_entries),
+            1, // num_field_entries
+            1, // num_aux_entries
+            offsetof(decltype(_table_), aux_entries),
+            FullTile_class_data_.base(),
+            nullptr,                           // post_loop_handler
+            ::_pbi::TcParser::GenericFallback, // fallback
 #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
-                ::_pbi::TcParser::GetTable<
-                    ::vector_tile::FullTile>(), // to_prefetch
-#endif                                          // PROTOBUF_PREFETCH_PARSE_TABLE
-            },
-            {{
-                // repeated .vector_tile.FullTile.Layer layers = 3;
-                {::_pbi::TcParser::FastMtR1,
-                 {26, 0, 0, PROTOBUF_FIELD_OFFSET(FullTile, _impl_.layers_)}},
-            }},
-            {{65535, 65535}},
-            {{
-                // repeated .vector_tile.FullTile.Layer layers = 3;
-                {PROTOBUF_FIELD_OFFSET(FullTile, _impl_.layers_),
-                 _Internal::kHasBitsOffset + 0, 0,
-                 (0 | ::_fl::kFcRepeated | ::_fl::kMessage | ::_fl::kTvTable)},
-            }},
-            {{
-                {::_pbi::TcParser::GetTable<::vector_tile::FullTile_Layer>()},
-            }},
-            {{}},
-        };
+            ::_pbi::TcParser::GetTable<
+                ::vector_tile::FullTile>(), // to_prefetch
+#endif                                      // PROTOBUF_PREFETCH_PARSE_TABLE
+        },
+        {{
+            // repeated .vector_tile.FullTile.Layer layers = 3;
+            {::_pbi::TcParser::FastMtR1,
+             {26, 0, 0, PROTOBUF_FIELD_OFFSET(FullTile, _impl_.layers_)}},
+        }},
+        {{65535, 65535}},
+        {{
+            // repeated .vector_tile.FullTile.Layer layers = 3;
+            {PROTOBUF_FIELD_OFFSET(FullTile, _impl_.layers_),
+             _Internal::kHasBitsOffset + 0, 0,
+             (0 | ::_fl::kFcRepeated | ::_fl::kMessage | ::_fl::kTvTable)},
+        }},
+        {{
+            {::_pbi::TcParser::GetTable<::vector_tile::FullTile_Layer>()},
+        }},
+        {{}},
+    };
 PROTOBUF_NOINLINE void FullTile::Clear() {
   // @@protoc_insertion_point(message_clear_start:vector_tile.FullTile)
   ::google::protobuf::internal::TSanWrite(&_impl_);
@@ -2193,62 +2193,61 @@ PROTOBUF_ATTRIBUTE_WEAK const ::google::protobuf::internal::ClassData *
   return Tile_BuildingShape_class_data_.base();
 }
 PROTOBUF_CONSTINIT
-    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 const ::_pbi::TcParseTable<2, 3, 0, 0, 2>
-        Tile_BuildingShape::_table_ = {
-            {
-                PROTOBUF_FIELD_OFFSET(Tile_BuildingShape, _impl_._has_bits_),
-                0, // no _extensions_
-                3,
-                24, // max_field_number, fast_idx_mask
-                offsetof(decltype(_table_), field_lookup_table),
-                4294967288, // skipmap
-                offsetof(decltype(_table_), field_entries),
-                3,                                        // num_field_entries
-                0,                                        // num_aux_entries
-                offsetof(decltype(_table_), field_names), // no aux_entries
-                Tile_BuildingShape_class_data_.base(),
-                nullptr,                           // post_loop_handler
-                ::_pbi::TcParser::GenericFallback, // fallback
+PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 const ::_pbi::TcParseTable<2, 3, 0, 0, 2>
+    Tile_BuildingShape::_table_ = {
+        {
+            PROTOBUF_FIELD_OFFSET(Tile_BuildingShape, _impl_._has_bits_),
+            0, // no _extensions_
+            3,
+            24, // max_field_number, fast_idx_mask
+            offsetof(decltype(_table_), field_lookup_table),
+            4294967288, // skipmap
+            offsetof(decltype(_table_), field_entries),
+            3,                                        // num_field_entries
+            0,                                        // num_aux_entries
+            offsetof(decltype(_table_), field_names), // no aux_entries
+            Tile_BuildingShape_class_data_.base(),
+            nullptr,                           // post_loop_handler
+            ::_pbi::TcParser::GenericFallback, // fallback
 #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
-                ::_pbi::TcParser::GetTable<
-                    ::vector_tile::Tile_BuildingShape>(), // to_prefetch
+            ::_pbi::TcParser::GetTable<
+                ::vector_tile::Tile_BuildingShape>(), // to_prefetch
 #endif // PROTOBUF_PREFETCH_PARSE_TABLE
-            },
-            {{
-                {::_pbi::TcParser::MiniParse, {}},
-                // required string osid = 1;
-                {::_pbi::TcParser::FastBS1,
-                 {10, 2, 0,
-                  PROTOBUF_FIELD_OFFSET(Tile_BuildingShape, _impl_.osid_)}},
-                // repeated int32 approx_centre = 2;
-                {::_pbi::TcParser::FastV32R1,
-                 {16, 0, 0,
-                  PROTOBUF_FIELD_OFFSET(Tile_BuildingShape,
-                                        _impl_.approx_centre_)}},
-                // repeated int32 edges = 3;
-                {::_pbi::TcParser::FastV32R1,
-                 {24, 1, 0,
-                  PROTOBUF_FIELD_OFFSET(Tile_BuildingShape, _impl_.edges_)}},
-            }},
-            {{65535, 65535}},
-            {{
-                // required string osid = 1;
-                {PROTOBUF_FIELD_OFFSET(Tile_BuildingShape, _impl_.osid_),
-                 _Internal::kHasBitsOffset + 2, 0,
-                 (0 | ::_fl::kFcOptional | ::_fl::kBytes | ::_fl::kRepAString)},
-                // repeated int32 approx_centre = 2;
-                {PROTOBUF_FIELD_OFFSET(Tile_BuildingShape,
-                                       _impl_.approx_centre_),
-                 _Internal::kHasBitsOffset + 0, 0,
-                 (0 | ::_fl::kFcRepeated | ::_fl::kInt32)},
-                // repeated int32 edges = 3;
-                {PROTOBUF_FIELD_OFFSET(Tile_BuildingShape, _impl_.edges_),
-                 _Internal::kHasBitsOffset + 1, 0,
-                 (0 | ::_fl::kFcRepeated | ::_fl::kInt32)},
-            }},
-            // no aux_entries
-            {{}},
-        };
+        },
+        {{
+            {::_pbi::TcParser::MiniParse, {}},
+            // required string osid = 1;
+            {::_pbi::TcParser::FastBS1,
+             {10, 2, 0,
+              PROTOBUF_FIELD_OFFSET(Tile_BuildingShape, _impl_.osid_)}},
+            // repeated int32 approx_centre = 2;
+            {::_pbi::TcParser::FastV32R1,
+             {16, 0, 0,
+              PROTOBUF_FIELD_OFFSET(Tile_BuildingShape,
+                                    _impl_.approx_centre_)}},
+            // repeated int32 edges = 3;
+            {::_pbi::TcParser::FastV32R1,
+             {24, 1, 0,
+              PROTOBUF_FIELD_OFFSET(Tile_BuildingShape, _impl_.edges_)}},
+        }},
+        {{65535, 65535}},
+        {{
+            // required string osid = 1;
+            {PROTOBUF_FIELD_OFFSET(Tile_BuildingShape, _impl_.osid_),
+             _Internal::kHasBitsOffset + 2, 0,
+             (0 | ::_fl::kFcOptional | ::_fl::kBytes | ::_fl::kRepAString)},
+            // repeated int32 approx_centre = 2;
+            {PROTOBUF_FIELD_OFFSET(Tile_BuildingShape, _impl_.approx_centre_),
+             _Internal::kHasBitsOffset + 0, 0,
+             (0 | ::_fl::kFcRepeated | ::_fl::kInt32)},
+            // repeated int32 edges = 3;
+            {PROTOBUF_FIELD_OFFSET(Tile_BuildingShape, _impl_.edges_),
+             _Internal::kHasBitsOffset + 1, 0,
+             (0 | ::_fl::kFcRepeated | ::_fl::kInt32)},
+        }},
+        // no aux_entries
+        {{}},
+    };
 PROTOBUF_NOINLINE void Tile_BuildingShape::Clear() {
   // @@protoc_insertion_point(message_clear_start:vector_tile.Tile.BuildingShape)
   ::google::protobuf::internal::TSanWrite(&_impl_);

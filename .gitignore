@@ -1,5 +1,5 @@
 api-request-examples/
-db/extra/
+src/db/extra/
 config.txt
 obj/
 bin/

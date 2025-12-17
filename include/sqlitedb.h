@@ -8,8 +8,7 @@ class SQLiteDB {
 public:
   SQLiteDB() : query_buff_sz(1000), conn_success(false) {
     query_buff = new char[query_buff_sz];
-    init_config();
-    if (sqlite3_open(g_config["DB_PATH"].c_str(), &db) == SQLITE_OK) {
+    if (sqlite3_open(config("DB_PATH").c_str(), &db) == SQLITE_OK) {
       conn_success = true;
     } else {
       std::cerr << "Couldn't open database" << std::endl;
@@ -21,12 +20,12 @@ public:
   SQLiteDB &operator=(const SQLiteDB &other) = delete;
   SQLiteDB &operator=(SQLiteDB &&other) = delete;
 
-  bool connected() { return conn_success; }
-
   ~SQLiteDB() {
     sqlite3_close(db);
     delete[] query_buff;
   }
+
+  inline bool connected() { return conn_success; }
 
 protected:
   sqlite3 *db;
