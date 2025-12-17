@@ -5,17 +5,17 @@
 
 #include "../include/vector_tile.pb.h"
 
-#include <algorithm>
-#include <type_traits>
-#include "google/protobuf/io/coded_stream.h"
-#include "google/protobuf/generated_message_tctable_impl.h"
-#include "google/protobuf/extension_set.h"
-#include "google/protobuf/generated_message_util.h"
-#include "google/protobuf/wire_format_lite.h"
 #include "google/protobuf/descriptor.h"
+#include "google/protobuf/extension_set.h"
 #include "google/protobuf/generated_message_reflection.h"
+#include "google/protobuf/generated_message_tctable_impl.h"
+#include "google/protobuf/generated_message_util.h"
+#include "google/protobuf/io/coded_stream.h"
 #include "google/protobuf/reflection_ops.h"
 #include "google/protobuf/wire_format.h"
+#include "google/protobuf/wire_format_lite.h"
+#include <algorithm>
+#include <type_traits>
 // @@protoc_insertion_point(includes)
 
 // Must be included last.
@@ -28,24 +28,23 @@ namespace vector_tile {
 
 inline constexpr Tile_BuildingShape::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
-      : _cached_size_{0},
-        approx_centre_{},
-        edges_{},
-        osid_(
-            &::google::protobuf::internal::fixed_address_empty_string,
+    : _cached_size_{0}, approx_centre_{}, edges_{},
+      osid_(&::google::protobuf::internal::fixed_address_empty_string,
             ::_pbi::ConstantInitialized()) {}
 
 template <typename>
-PROTOBUF_CONSTEXPR Tile_BuildingShape::Tile_BuildingShape(::_pbi::ConstantInitialized)
+PROTOBUF_CONSTEXPR
+Tile_BuildingShape::Tile_BuildingShape(::_pbi::ConstantInitialized)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
     : ::google::protobuf::Message(Tile_BuildingShape_class_data_.base()),
-#else   // PROTOBUF_CUSTOM_VTABLE
+#else  // PROTOBUF_CUSTOM_VTABLE
     : ::google::protobuf::Message(),
-#endif  // PROTOBUF_CUSTOM_VTABLE
+#endif // PROTOBUF_CUSTOM_VTABLE
       _impl_(::_pbi::ConstantInitialized()) {
 }
 struct Tile_BuildingShapeDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR Tile_BuildingShapeDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  PROTOBUF_CONSTEXPR Tile_BuildingShapeDefaultTypeInternal()
+      : _instance(::_pbi::ConstantInitialized{}) {}
   ~Tile_BuildingShapeDefaultTypeInternal() {}
   union {
     Tile_BuildingShape _instance;
@@ -53,32 +52,30 @@ struct Tile_BuildingShapeDefaultTypeInternal {
 };
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
-    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 Tile_BuildingShapeDefaultTypeInternal _Tile_BuildingShape_default_instance_;
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 Tile_BuildingShapeDefaultTypeInternal
+        _Tile_BuildingShape_default_instance_;
 
 inline constexpr FullTile_Value::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
-      : _cached_size_{0},
-        string_value_(
-            &::google::protobuf::internal::fixed_address_empty_string,
-            ::_pbi::ConstantInitialized()),
-        double_value_{0},
-        int_value_{::int64_t{0}},
-        float_value_{0},
-        bool_value_{false},
-        uint_value_{::uint64_t{0u}},
-        sint_value_{::int64_t{0}} {}
+    : _cached_size_{0},
+      string_value_(&::google::protobuf::internal::fixed_address_empty_string,
+                    ::_pbi::ConstantInitialized()),
+      double_value_{0}, int_value_{::int64_t{0}}, float_value_{0},
+      bool_value_{false}, uint_value_{::uint64_t{0u}},
+      sint_value_{::int64_t{0}} {}
 
 template <typename>
 PROTOBUF_CONSTEXPR FullTile_Value::FullTile_Value(::_pbi::ConstantInitialized)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
     : ::google::protobuf::Message(FullTile_Value_class_data_.base()),
-#else   // PROTOBUF_CUSTOM_VTABLE
+#else  // PROTOBUF_CUSTOM_VTABLE
     : ::google::protobuf::Message(),
-#endif  // PROTOBUF_CUSTOM_VTABLE
+#endif // PROTOBUF_CUSTOM_VTABLE
       _impl_(::_pbi::ConstantInitialized()) {
 }
 struct FullTile_ValueDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR FullTile_ValueDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  PROTOBUF_CONSTEXPR FullTile_ValueDefaultTypeInternal()
+      : _instance(::_pbi::ConstantInitialized{}) {}
   ~FullTile_ValueDefaultTypeInternal() {}
   union {
     FullTile_Value _instance;
@@ -86,29 +83,28 @@ struct FullTile_ValueDefaultTypeInternal {
 };
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
-    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 FullTile_ValueDefaultTypeInternal _FullTile_Value_default_instance_;
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 FullTile_ValueDefaultTypeInternal
+        _FullTile_Value_default_instance_;
 
 inline constexpr FullTile_Feature::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
-      : _cached_size_{0},
-        tags_{},
-        _tags_cached_byte_size_{0},
-        geometry_{},
-        _geometry_cached_byte_size_{0},
-        id_{::uint64_t{0u}},
-        type_{static_cast< ::vector_tile::FullTile_GeomType >(0)} {}
+    : _cached_size_{0}, tags_{}, _tags_cached_byte_size_{0}, geometry_{},
+      _geometry_cached_byte_size_{0}, id_{::uint64_t{0u}},
+      type_{static_cast<::vector_tile::FullTile_GeomType>(0)} {}
 
 template <typename>
-PROTOBUF_CONSTEXPR FullTile_Feature::FullTile_Feature(::_pbi::ConstantInitialized)
+PROTOBUF_CONSTEXPR
+FullTile_Feature::FullTile_Feature(::_pbi::ConstantInitialized)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
     : ::google::protobuf::Message(FullTile_Feature_class_data_.base()),
-#else   // PROTOBUF_CUSTOM_VTABLE
+#else  // PROTOBUF_CUSTOM_VTABLE
     : ::google::protobuf::Message(),
-#endif  // PROTOBUF_CUSTOM_VTABLE
+#endif // PROTOBUF_CUSTOM_VTABLE
       _impl_(::_pbi::ConstantInitialized()) {
 }
 struct FullTile_FeatureDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR FullTile_FeatureDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  PROTOBUF_CONSTEXPR FullTile_FeatureDefaultTypeInternal()
+      : _instance(::_pbi::ConstantInitialized{}) {}
   ~FullTile_FeatureDefaultTypeInternal() {}
   union {
     FullTile_Feature _instance;
@@ -116,24 +112,24 @@ struct FullTile_FeatureDefaultTypeInternal {
 };
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
-    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 FullTile_FeatureDefaultTypeInternal _FullTile_Feature_default_instance_;
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 FullTile_FeatureDefaultTypeInternal
+        _FullTile_Feature_default_instance_;
 
-inline constexpr Tile::Impl_::Impl_(
-    ::_pbi::ConstantInitialized) noexcept
-      : _cached_size_{0},
-        shapes_{} {}
+inline constexpr Tile::Impl_::Impl_(::_pbi::ConstantInitialized) noexcept
+    : _cached_size_{0}, shapes_{} {}
 
 template <typename>
 PROTOBUF_CONSTEXPR Tile::Tile(::_pbi::ConstantInitialized)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
     : ::google::protobuf::Message(Tile_class_data_.base()),
-#else   // PROTOBUF_CUSTOM_VTABLE
+#else  // PROTOBUF_CUSTOM_VTABLE
     : ::google::protobuf::Message(),
-#endif  // PROTOBUF_CUSTOM_VTABLE
+#endif // PROTOBUF_CUSTOM_VTABLE
       _impl_(::_pbi::ConstantInitialized()) {
 }
 struct TileDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR TileDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  PROTOBUF_CONSTEXPR TileDefaultTypeInternal()
+      : _instance(::_pbi::ConstantInitialized{}) {}
   ~TileDefaultTypeInternal() {}
   union {
     Tile _instance;
@@ -141,31 +137,28 @@ struct TileDefaultTypeInternal {
 };
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
-    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 TileDefaultTypeInternal _Tile_default_instance_;
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 TileDefaultTypeInternal
+        _Tile_default_instance_;
 
 inline constexpr FullTile_Layer::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
-      : _cached_size_{0},
-        features_{},
-        keys_{},
-        values_{},
-        name_(
-            &::google::protobuf::internal::fixed_address_empty_string,
+    : _cached_size_{0}, features_{}, keys_{}, values_{},
+      name_(&::google::protobuf::internal::fixed_address_empty_string,
             ::_pbi::ConstantInitialized()),
-        extent_{4096u},
-        version_{1u} {}
+      extent_{4096u}, version_{1u} {}
 
 template <typename>
 PROTOBUF_CONSTEXPR FullTile_Layer::FullTile_Layer(::_pbi::ConstantInitialized)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
     : ::google::protobuf::Message(FullTile_Layer_class_data_.base()),
-#else   // PROTOBUF_CUSTOM_VTABLE
+#else  // PROTOBUF_CUSTOM_VTABLE
     : ::google::protobuf::Message(),
-#endif  // PROTOBUF_CUSTOM_VTABLE
+#endif // PROTOBUF_CUSTOM_VTABLE
       _impl_(::_pbi::ConstantInitialized()) {
 }
 struct FullTile_LayerDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR FullTile_LayerDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  PROTOBUF_CONSTEXPR FullTile_LayerDefaultTypeInternal()
+      : _instance(::_pbi::ConstantInitialized{}) {}
   ~FullTile_LayerDefaultTypeInternal() {}
   union {
     FullTile_Layer _instance;
@@ -173,24 +166,24 @@ struct FullTile_LayerDefaultTypeInternal {
 };
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
-    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 FullTile_LayerDefaultTypeInternal _FullTile_Layer_default_instance_;
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 FullTile_LayerDefaultTypeInternal
+        _FullTile_Layer_default_instance_;
 
-inline constexpr FullTile::Impl_::Impl_(
-    ::_pbi::ConstantInitialized) noexcept
-      : _cached_size_{0},
-        layers_{} {}
+inline constexpr FullTile::Impl_::Impl_(::_pbi::ConstantInitialized) noexcept
+    : _cached_size_{0}, layers_{} {}
 
 template <typename>
 PROTOBUF_CONSTEXPR FullTile::FullTile(::_pbi::ConstantInitialized)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
     : ::google::protobuf::Message(FullTile_class_data_.base()),
-#else   // PROTOBUF_CUSTOM_VTABLE
+#else  // PROTOBUF_CUSTOM_VTABLE
     : ::google::protobuf::Message(),
-#endif  // PROTOBUF_CUSTOM_VTABLE
+#endif // PROTOBUF_CUSTOM_VTABLE
       _impl_(::_pbi::ConstantInitialized()) {
 }
 struct FullTileDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR FullTileDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  PROTOBUF_CONSTEXPR FullTileDefaultTypeInternal()
+      : _instance(::_pbi::ConstantInitialized{}) {}
   ~FullTileDefaultTypeInternal() {}
   union {
     FullTile _instance;
@@ -198,26 +191,34 @@ struct FullTileDefaultTypeInternal {
 };
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
-    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 FullTileDefaultTypeInternal _FullTile_default_instance_;
-}  // namespace vector_tile
-static const ::_pb::EnumDescriptor* PROTOBUF_NONNULL
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 FullTileDefaultTypeInternal
+        _FullTile_default_instance_;
+} // namespace vector_tile
+static const ::_pb::EnumDescriptor *PROTOBUF_NONNULL
     file_level_enum_descriptors_vector_5ftile_2eproto[1];
-static constexpr const ::_pb::ServiceDescriptor* PROTOBUF_NONNULL* PROTOBUF_NULLABLE
-    file_level_service_descriptors_vector_5ftile_2eproto = nullptr;
-const ::uint32_t
-    TableStruct_vector_5ftile_2eproto::offsets[] ABSL_ATTRIBUTE_SECTION_VARIABLE(
-        protodesc_cold) = {
+static constexpr const ::_pb::ServiceDescriptor *PROTOBUF_NONNULL
+    *PROTOBUF_NULLABLE file_level_service_descriptors_vector_5ftile_2eproto =
+        nullptr;
+const ::uint32_t TableStruct_vector_5ftile_2eproto::offsets
+    [] ABSL_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
         0x083, // bitmap
         PROTOBUF_FIELD_OFFSET(::vector_tile::FullTile_Value, _impl_._has_bits_),
-        PROTOBUF_FIELD_OFFSET(::vector_tile::FullTile_Value, _impl_._extensions_),
+        PROTOBUF_FIELD_OFFSET(::vector_tile::FullTile_Value,
+                              _impl_._extensions_),
         11, // hasbit index offset
-        PROTOBUF_FIELD_OFFSET(::vector_tile::FullTile_Value, _impl_.string_value_),
-        PROTOBUF_FIELD_OFFSET(::vector_tile::FullTile_Value, _impl_.float_value_),
-        PROTOBUF_FIELD_OFFSET(::vector_tile::FullTile_Value, _impl_.double_value_),
+        PROTOBUF_FIELD_OFFSET(::vector_tile::FullTile_Value,
+                              _impl_.string_value_),
+        PROTOBUF_FIELD_OFFSET(::vector_tile::FullTile_Value,
+                              _impl_.float_value_),
+        PROTOBUF_FIELD_OFFSET(::vector_tile::FullTile_Value,
+                              _impl_.double_value_),
         PROTOBUF_FIELD_OFFSET(::vector_tile::FullTile_Value, _impl_.int_value_),
-        PROTOBUF_FIELD_OFFSET(::vector_tile::FullTile_Value, _impl_.uint_value_),
-        PROTOBUF_FIELD_OFFSET(::vector_tile::FullTile_Value, _impl_.sint_value_),
-        PROTOBUF_FIELD_OFFSET(::vector_tile::FullTile_Value, _impl_.bool_value_),
+        PROTOBUF_FIELD_OFFSET(::vector_tile::FullTile_Value,
+                              _impl_.uint_value_),
+        PROTOBUF_FIELD_OFFSET(::vector_tile::FullTile_Value,
+                              _impl_.sint_value_),
+        PROTOBUF_FIELD_OFFSET(::vector_tile::FullTile_Value,
+                              _impl_.bool_value_),
         0,
         3,
         1,
@@ -226,19 +227,22 @@ const ::uint32_t
         6,
         4,
         0x081, // bitmap
-        PROTOBUF_FIELD_OFFSET(::vector_tile::FullTile_Feature, _impl_._has_bits_),
+        PROTOBUF_FIELD_OFFSET(::vector_tile::FullTile_Feature,
+                              _impl_._has_bits_),
         7, // hasbit index offset
         PROTOBUF_FIELD_OFFSET(::vector_tile::FullTile_Feature, _impl_.id_),
         PROTOBUF_FIELD_OFFSET(::vector_tile::FullTile_Feature, _impl_.tags_),
         PROTOBUF_FIELD_OFFSET(::vector_tile::FullTile_Feature, _impl_.type_),
-        PROTOBUF_FIELD_OFFSET(::vector_tile::FullTile_Feature, _impl_.geometry_),
+        PROTOBUF_FIELD_OFFSET(::vector_tile::FullTile_Feature,
+                              _impl_.geometry_),
         2,
         0,
         3,
         1,
         0x083, // bitmap
         PROTOBUF_FIELD_OFFSET(::vector_tile::FullTile_Layer, _impl_._has_bits_),
-        PROTOBUF_FIELD_OFFSET(::vector_tile::FullTile_Layer, _impl_._extensions_),
+        PROTOBUF_FIELD_OFFSET(::vector_tile::FullTile_Layer,
+                              _impl_._extensions_),
         10, // hasbit index offset
         PROTOBUF_FIELD_OFFSET(::vector_tile::FullTile_Layer, _impl_.version_),
         PROTOBUF_FIELD_OFFSET(::vector_tile::FullTile_Layer, _impl_.name_),
@@ -259,10 +263,12 @@ const ::uint32_t
         PROTOBUF_FIELD_OFFSET(::vector_tile::FullTile, _impl_.layers_),
         0,
         0x081, // bitmap
-        PROTOBUF_FIELD_OFFSET(::vector_tile::Tile_BuildingShape, _impl_._has_bits_),
+        PROTOBUF_FIELD_OFFSET(::vector_tile::Tile_BuildingShape,
+                              _impl_._has_bits_),
         6, // hasbit index offset
         PROTOBUF_FIELD_OFFSET(::vector_tile::Tile_BuildingShape, _impl_.osid_),
-        PROTOBUF_FIELD_OFFSET(::vector_tile::Tile_BuildingShape, _impl_.approx_centre_),
+        PROTOBUF_FIELD_OFFSET(::vector_tile::Tile_BuildingShape,
+                              _impl_.approx_centre_),
         PROTOBUF_FIELD_OFFSET(::vector_tile::Tile_BuildingShape, _impl_.edges_),
         2,
         0,
@@ -283,7 +289,7 @@ static const ::_pbi::MigrationSchema
         {51, sizeof(::vector_tile::Tile_BuildingShape)},
         {60, sizeof(::vector_tile::Tile)},
 };
-static const ::_pb::Message* PROTOBUF_NONNULL const file_default_instances[] = {
+static const ::_pb::Message *PROTOBUF_NONNULL const file_default_instances[] = {
     &::vector_tile::_FullTile_Value_default_instance_._instance,
     &::vector_tile::_FullTile_Feature_default_instance_._instance,
     &::vector_tile::_FullTile_Layer_default_instance_._instance,
@@ -291,126 +297,140 @@ static const ::_pb::Message* PROTOBUF_NONNULL const file_default_instances[] = {
     &::vector_tile::_Tile_BuildingShape_default_instance_._instance,
     &::vector_tile::_Tile_default_instance_._instance,
 };
-const char descriptor_table_protodef_vector_5ftile_2eproto[] ABSL_ATTRIBUTE_SECTION_VARIABLE(
-    protodesc_cold) = {
-    "\n\021vector_tile.proto\022\013vector_tile\"\324\004\n\010Ful"
-    "lTile\022+\n\006layers\030\003 \003(\0132\033.vector_tile.Full"
-    "Tile.Layer\032\241\001\n\005Value\022\024\n\014string_value\030\001 \001"
-    "(\t\022\023\n\013float_value\030\002 \001(\002\022\024\n\014double_value\030"
-    "\003 \001(\001\022\021\n\tint_value\030\004 \001(\003\022\022\n\nuint_value\030\005"
-    " \001(\004\022\022\n\nsint_value\030\006 \001(\022\022\022\n\nbool_value\030\007"
-    " \001(\010*\010\010\010\020\200\200\200\200\002\032w\n\007Feature\022\r\n\002id\030\001 \001(\004:\0010"
-    "\022\020\n\004tags\030\002 \003(\rB\002\020\001\0225\n\004type\030\003 \001(\0162\036.vecto"
-    "r_tile.FullTile.GeomType:\007UNKNOWN\022\024\n\010geo"
-    "metry\030\004 \003(\rB\002\020\001\032\265\001\n\005Layer\022\022\n\007version\030\017 \002"
-    "(\r:\0011\022\014\n\004name\030\001 \002(\t\022/\n\010features\030\002 \003(\0132\035."
-    "vector_tile.FullTile.Feature\022\014\n\004keys\030\003 \003"
-    "(\t\022+\n\006values\030\004 \003(\0132\033.vector_tile.FullTil"
-    "e.Value\022\024\n\006extent\030\005 \001(\r:\0044096*\010\010\020\020\200\200\200\200\002\""
-    "\?\n\010GeomType\022\013\n\007UNKNOWN\020\000\022\t\n\005POINT\020\001\022\016\n\nL"
-    "INESTRING\020\002\022\013\n\007POLYGON\020\003*\005\010\020\020\200@\"|\n\004Tile\022"
-    "/\n\006shapes\030\001 \003(\0132\037.vector_tile.Tile.Build"
-    "ingShape\032C\n\rBuildingShape\022\014\n\004osid\030\001 \002(\t\022"
-    "\025\n\rapprox_centre\030\002 \003(\005\022\r\n\005edges\030\003 \003(\005"
-};
+const char descriptor_table_protodef_vector_5ftile_2eproto
+    [] ABSL_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
+        "\n\021vector_tile.proto\022\013vector_tile\"\324\004\n\010Ful"
+        "lTile\022+\n\006layers\030\003 \003(\0132\033.vector_tile.Full"
+        "Tile.Layer\032\241\001\n\005Value\022\024\n\014string_value\030\001 "
+        "\001"
+        "(\t\022\023\n\013float_value\030\002 "
+        "\001(\002\022\024\n\014double_value\030"
+        "\003 \001(\001\022\021\n\tint_value\030\004 "
+        "\001(\003\022\022\n\nuint_value\030\005"
+        " \001(\004\022\022\n\nsint_value\030\006 "
+        "\001(\022\022\022\n\nbool_value\030\007"
+        " \001(\010*"
+        "\010\010\010\020\200\200\200\200\002\032w\n\007Feature\022\r\n\002id"
+        "\030\001 \001(\004:\0010"
+        "\022\020\n\004tags\030\002 "
+        "\003(\rB\002\020\001\0225\n\004type\030\003 \001(\0162\036.vecto"
+        "r_tile.FullTile.GeomType:\007UNKNOWN\022\024\n\010geo"
+        "metry\030\004 "
+        "\003("
+        "\rB\002\020\001\032\265\001\n\005Layer\022\022\n\007version\030\017 "
+        "\002"
+        "(\r:\0011\022\014\n\004name\030\001 "
+        "\002(\t\022/\n\010features\030\002 \003(\0132\035."
+        "vector_tile.FullTile.Feature\022\014\n\004keys\030\003 \003"
+        "(\t\022+\n\006values\030\004 \003(\0132\033.vector_tile.FullTil"
+        "e.Value\022\024\n\006extent\030\005 "
+        "\001(\r:\0044096*\010\010\020\020\200\200\200\200\002\""
+        "\?\n\010GeomType\022\013\n\007UNKNOWN\020\000\022\t\n\005POINT\020\001"
+        "\022\016\n\nL"
+        "INESTRING\020\002\022\013\n\007POLYGON\020\003*\005\010\020\020\200@"
+        "\"|\n\004Tile\022"
+        "/\n\006shapes\030\001 \003(\0132\037.vector_tile.Tile.Build"
+        "ingShape\032C\n\rBuildingShape\022\014\n\004osid\030\001 \002(\t\022"
+        "\025\n\rapprox_centre\030\002 \003(\005\022\r\n\005edges\030\003 "
+        "\003(\005"};
 static ::absl::once_flag descriptor_table_vector_5ftile_2eproto_once;
-PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_vector_5ftile_2eproto = {
-    false,
-    false,
-    757,
-    descriptor_table_protodef_vector_5ftile_2eproto,
-    "vector_tile.proto",
-    &descriptor_table_vector_5ftile_2eproto_once,
-    nullptr,
-    0,
-    6,
-    schemas,
-    file_default_instances,
-    TableStruct_vector_5ftile_2eproto::offsets,
-    file_level_enum_descriptors_vector_5ftile_2eproto,
-    file_level_service_descriptors_vector_5ftile_2eproto,
+PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable
+    descriptor_table_vector_5ftile_2eproto = {
+        false,
+        false,
+        757,
+        descriptor_table_protodef_vector_5ftile_2eproto,
+        "vector_tile.proto",
+        &descriptor_table_vector_5ftile_2eproto_once,
+        nullptr,
+        0,
+        6,
+        schemas,
+        file_default_instances,
+        TableStruct_vector_5ftile_2eproto::offsets,
+        file_level_enum_descriptors_vector_5ftile_2eproto,
+        file_level_service_descriptors_vector_5ftile_2eproto,
 };
 namespace vector_tile {
-const ::google::protobuf::EnumDescriptor* PROTOBUF_NONNULL FullTile_GeomType_descriptor() {
-  ::google::protobuf::internal::AssignDescriptors(&descriptor_table_vector_5ftile_2eproto);
+const ::google::protobuf::EnumDescriptor *PROTOBUF_NONNULL
+FullTile_GeomType_descriptor() {
+  ::google::protobuf::internal::AssignDescriptors(
+      &descriptor_table_vector_5ftile_2eproto);
   return file_level_enum_descriptors_vector_5ftile_2eproto[0];
 }
 PROTOBUF_CONSTINIT const uint32_t FullTile_GeomType_internal_data_[] = {
-    262144u, 0u, };
+    262144u,
+    0u,
+};
 // ===================================================================
 
 class FullTile_Value::_Internal {
- public:
-  using HasBits =
-      decltype(::std::declval<FullTile_Value>()._impl_._has_bits_);
+public:
+  using HasBits = decltype(::std::declval<FullTile_Value>()._impl_._has_bits_);
   static constexpr ::int32_t kHasBitsOffset =
       8 * PROTOBUF_FIELD_OFFSET(FullTile_Value, _impl_._has_bits_);
 };
 
-FullTile_Value::FullTile_Value(::google::protobuf::Arena* PROTOBUF_NULLABLE arena)
+FullTile_Value::FullTile_Value(
+    ::google::protobuf::Arena *PROTOBUF_NULLABLE arena)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
     : ::google::protobuf::Message(arena, FullTile_Value_class_data_.base()) {
-#else   // PROTOBUF_CUSTOM_VTABLE
+#else  // PROTOBUF_CUSTOM_VTABLE
     : ::google::protobuf::Message(arena) {
-#endif  // PROTOBUF_CUSTOM_VTABLE
+#endif // PROTOBUF_CUSTOM_VTABLE
   SharedCtor(arena);
   // @@protoc_insertion_point(arena_constructor:vector_tile.FullTile.Value)
 }
 PROTOBUF_NDEBUG_INLINE FullTile_Value::Impl_::Impl_(
-    [[maybe_unused]] ::google::protobuf::internal::InternalVisibility visibility,
-    [[maybe_unused]] ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const Impl_& from,
-    [[maybe_unused]] const ::vector_tile::FullTile_Value& from_msg)
-      : _extensions_{visibility, arena},
-        _has_bits_{from._has_bits_},
-        _cached_size_{0},
-        string_value_(arena, from.string_value_) {}
+    [[maybe_unused]] ::google::protobuf::internal::InternalVisibility
+        visibility,
+    [[maybe_unused]] ::google::protobuf::Arena *PROTOBUF_NULLABLE arena,
+    const Impl_ &from,
+    [[maybe_unused]] const ::vector_tile::FullTile_Value &from_msg)
+    : _extensions_{visibility, arena}, _has_bits_{from._has_bits_},
+      _cached_size_{0}, string_value_(arena, from.string_value_) {}
 
-FullTile_Value::FullTile_Value(
-    ::google::protobuf::Arena* PROTOBUF_NULLABLE arena,
-    const FullTile_Value& from)
+FullTile_Value::FullTile_Value(::google::protobuf::Arena *PROTOBUF_NULLABLE
+                                   arena,
+                               const FullTile_Value &from)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
     : ::google::protobuf::Message(arena, FullTile_Value_class_data_.base()) {
-#else   // PROTOBUF_CUSTOM_VTABLE
+#else  // PROTOBUF_CUSTOM_VTABLE
     : ::google::protobuf::Message(arena) {
-#endif  // PROTOBUF_CUSTOM_VTABLE
-  FullTile_Value* const _this = this;
+#endif // PROTOBUF_CUSTOM_VTABLE
+  FullTile_Value *const _this = this;
   (void)_this;
   _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
       from._internal_metadata_);
   new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
   _impl_._extensions_.MergeFrom(this, from._impl_._extensions_);
-  ::memcpy(reinterpret_cast<char*>(&_impl_) +
+  ::memcpy(reinterpret_cast<char *>(&_impl_) + offsetof(Impl_, double_value_),
+           reinterpret_cast<const char *>(&from._impl_) +
                offsetof(Impl_, double_value_),
-           reinterpret_cast<const char*>(&from._impl_) +
-               offsetof(Impl_, double_value_),
-           offsetof(Impl_, sint_value_) -
-               offsetof(Impl_, double_value_) +
+           offsetof(Impl_, sint_value_) - offsetof(Impl_, double_value_) +
                sizeof(Impl_::sint_value_));
 
   // @@protoc_insertion_point(copy_constructor:vector_tile.FullTile.Value)
 }
 PROTOBUF_NDEBUG_INLINE FullTile_Value::Impl_::Impl_(
-    [[maybe_unused]] ::google::protobuf::internal::InternalVisibility visibility,
-    [[maybe_unused]] ::google::protobuf::Arena* PROTOBUF_NULLABLE arena)
-      : _extensions_{visibility, arena},
-        _cached_size_{0},
-        string_value_(arena) {}
+    [[maybe_unused]] ::google::protobuf::internal::InternalVisibility
+        visibility,
+    [[maybe_unused]] ::google::protobuf::Arena *PROTOBUF_NULLABLE arena)
+    : _extensions_{visibility, arena}, _cached_size_{0}, string_value_(arena) {}
 
-inline void FullTile_Value::SharedCtor(::_pb::Arena* PROTOBUF_NULLABLE arena) {
+inline void FullTile_Value::SharedCtor(::_pb::Arena *PROTOBUF_NULLABLE arena) {
   new (&_impl_) Impl_(internal_visibility(), arena);
-  ::memset(reinterpret_cast<char*>(&_impl_) +
-               offsetof(Impl_, double_value_),
+  ::memset(reinterpret_cast<char *>(&_impl_) + offsetof(Impl_, double_value_),
            0,
-           offsetof(Impl_, sint_value_) -
-               offsetof(Impl_, double_value_) +
+           offsetof(Impl_, sint_value_) - offsetof(Impl_, double_value_) +
                sizeof(Impl_::sint_value_));
 }
 FullTile_Value::~FullTile_Value() {
   // @@protoc_insertion_point(destructor:vector_tile.FullTile.Value)
   SharedDtor(*this);
 }
-inline void FullTile_Value::SharedDtor(MessageLite& self) {
-  FullTile_Value& this_ = static_cast<FullTile_Value&>(self);
+inline void FullTile_Value::SharedDtor(MessageLite &self) {
+  FullTile_Value &this_ = static_cast<FullTile_Value &>(self);
   if constexpr (::_pbi::DebugHardenCheckHasBitConsistency()) {
     this_.CheckHasBitConsistency();
   }
@@ -420,24 +440,26 @@ inline void FullTile_Value::SharedDtor(MessageLite& self) {
   this_._impl_.~Impl_();
 }
 
-inline void* PROTOBUF_NONNULL FullTile_Value::PlacementNew_(
-    const void* PROTOBUF_NONNULL, void* PROTOBUF_NONNULL mem,
-    ::google::protobuf::Arena* PROTOBUF_NULLABLE arena) {
+inline void *PROTOBUF_NONNULL FullTile_Value::PlacementNew_(
+    const void *PROTOBUF_NONNULL, void *PROTOBUF_NONNULL mem,
+    ::google::protobuf::Arena *PROTOBUF_NULLABLE arena) {
   return ::new (mem) FullTile_Value(arena);
 }
 constexpr auto FullTile_Value::InternalNewImpl_() {
-  constexpr auto arena_bits = ::google::protobuf::internal::EncodePlacementArenaOffsets({
-      PROTOBUF_FIELD_OFFSET(FullTile_Value, _impl_._extensions_) +
-          decltype(FullTile_Value::_impl_._extensions_)::InternalGetArenaOffset(
-              ::google::protobuf::Message::internal_visibility()),
-  });
+  constexpr auto arena_bits =
+      ::google::protobuf::internal::EncodePlacementArenaOffsets({
+          PROTOBUF_FIELD_OFFSET(FullTile_Value, _impl_._extensions_) +
+              decltype(FullTile_Value::_impl_._extensions_)::
+                  InternalGetArenaOffset(
+                      ::google::protobuf::Message::internal_visibility()),
+      });
   if (arena_bits.has_value()) {
     return ::google::protobuf::internal::MessageCreator::CopyInit(
         sizeof(FullTile_Value), alignof(FullTile_Value), *arena_bits);
   } else {
-    return ::google::protobuf::internal::MessageCreator(&FullTile_Value::PlacementNew_,
-                                 sizeof(FullTile_Value),
-                                 alignof(FullTile_Value));
+    return ::google::protobuf::internal::MessageCreator(
+        &FullTile_Value::PlacementNew_, sizeof(FullTile_Value),
+        alignof(FullTile_Value));
   }
 }
 constexpr auto FullTile_Value::InternalGenerateClassData_() {
@@ -445,111 +467,134 @@ constexpr auto FullTile_Value::InternalGenerateClassData_() {
       ::google::protobuf::internal::ClassData{
           &_FullTile_Value_default_instance_._instance,
           &_table_.header,
-          nullptr,  // OnDemandRegisterArenaDtor
+          nullptr, // OnDemandRegisterArenaDtor
           FullTile_Value::IsInitializedImpl,
           &FullTile_Value::MergeImpl,
           ::google::protobuf::Message::GetNewImpl<FullTile_Value>(),
 #if defined(PROTOBUF_CUSTOM_VTABLE)
           &FullTile_Value::SharedDtor,
-          ::google::protobuf::Message::GetClearImpl<FullTile_Value>(), &FullTile_Value::ByteSizeLong,
-              &FullTile_Value::_InternalSerialize,
-#endif  // PROTOBUF_CUSTOM_VTABLE
+          ::google::protobuf::Message::GetClearImpl<FullTile_Value>(),
+          &FullTile_Value::ByteSizeLong,
+          &FullTile_Value::_InternalSerialize,
+#endif // PROTOBUF_CUSTOM_VTABLE
           PROTOBUF_FIELD_OFFSET(FullTile_Value, _impl_._cached_size_),
           false,
       },
       &FullTile_Value::kDescriptorMethods,
       &descriptor_table_vector_5ftile_2eproto,
-      nullptr,  // tracker
+      nullptr, // tracker
   };
 }
 
-PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 const
-    ::google::protobuf::internal::ClassDataFull FullTile_Value_class_data_ =
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 const ::google::protobuf::
+    internal::ClassDataFull FullTile_Value_class_data_ =
         FullTile_Value::InternalGenerateClassData_();
 
-PROTOBUF_ATTRIBUTE_WEAK const ::google::protobuf::internal::ClassData* PROTOBUF_NONNULL
-FullTile_Value::GetClassData() const {
-  ::google::protobuf::internal::PrefetchToLocalCache(&FullTile_Value_class_data_);
-  ::google::protobuf::internal::PrefetchToLocalCache(FullTile_Value_class_data_.tc_table);
+PROTOBUF_ATTRIBUTE_WEAK const ::google::protobuf::internal::ClassData *
+    PROTOBUF_NONNULL
+    FullTile_Value::GetClassData() const {
+  ::google::protobuf::internal::PrefetchToLocalCache(
+      &FullTile_Value_class_data_);
+  ::google::protobuf::internal::PrefetchToLocalCache(
+      FullTile_Value_class_data_.tc_table);
   return FullTile_Value_class_data_.base();
 }
-PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<3, 7, 0, 0, 2>
-FullTile_Value::_table_ = {
-  {
-    PROTOBUF_FIELD_OFFSET(FullTile_Value, _impl_._has_bits_),
-    PROTOBUF_FIELD_OFFSET(FullTile_Value, _impl_._extensions_),
-    7, 56,  // max_field_number, fast_idx_mask
-    offsetof(decltype(_table_), field_lookup_table),
-    4294967168,  // skipmap
-    offsetof(decltype(_table_), field_entries),
-    7,  // num_field_entries
-    0,  // num_aux_entries
-    offsetof(decltype(_table_), field_names),  // no aux_entries
-    FullTile_Value_class_data_.base(),
-    nullptr,  // post_loop_handler
-    ::_pbi::TcParser::GenericFallback,  // fallback
-    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
-    ::_pbi::TcParser::GetTable<::vector_tile::FullTile_Value>(),  // to_prefetch
-    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
-  }, {{
-    {::_pbi::TcParser::MiniParse, {}},
-    // optional string string_value = 1;
-    {::_pbi::TcParser::FastBS1,
-     {10, 0, 0,
-      PROTOBUF_FIELD_OFFSET(FullTile_Value, _impl_.string_value_)}},
-    // optional float float_value = 2;
-    {::_pbi::TcParser::FastF32S1,
-     {21, 3, 0,
-      PROTOBUF_FIELD_OFFSET(FullTile_Value, _impl_.float_value_)}},
-    // optional double double_value = 3;
-    {::_pbi::TcParser::FastF64S1,
-     {25, 1, 0,
-      PROTOBUF_FIELD_OFFSET(FullTile_Value, _impl_.double_value_)}},
-    // optional int64 int_value = 4;
-    {::_pbi::TcParser::SingularVarintNoZag1<::uint64_t, offsetof(FullTile_Value, _impl_.int_value_), 2>(),
-     {32, 2, 0,
-      PROTOBUF_FIELD_OFFSET(FullTile_Value, _impl_.int_value_)}},
-    // optional uint64 uint_value = 5;
-    {::_pbi::TcParser::SingularVarintNoZag1<::uint64_t, offsetof(FullTile_Value, _impl_.uint_value_), 5>(),
-     {40, 5, 0,
-      PROTOBUF_FIELD_OFFSET(FullTile_Value, _impl_.uint_value_)}},
-    // optional sint64 sint_value = 6;
-    {::_pbi::TcParser::FastZ64S1,
-     {48, 6, 0,
-      PROTOBUF_FIELD_OFFSET(FullTile_Value, _impl_.sint_value_)}},
-    // optional bool bool_value = 7;
-    {::_pbi::TcParser::SingularVarintNoZag1<bool, offsetof(FullTile_Value, _impl_.bool_value_), 4>(),
-     {56, 4, 0,
-      PROTOBUF_FIELD_OFFSET(FullTile_Value, _impl_.bool_value_)}},
-  }}, {{
-    65535, 65535
-  }}, {{
-    // optional string string_value = 1;
-    {PROTOBUF_FIELD_OFFSET(FullTile_Value, _impl_.string_value_), _Internal::kHasBitsOffset + 0, 0, (0 | ::_fl::kFcOptional | ::_fl::kBytes | ::_fl::kRepAString)},
-    // optional float float_value = 2;
-    {PROTOBUF_FIELD_OFFSET(FullTile_Value, _impl_.float_value_), _Internal::kHasBitsOffset + 3, 0, (0 | ::_fl::kFcOptional | ::_fl::kFloat)},
-    // optional double double_value = 3;
-    {PROTOBUF_FIELD_OFFSET(FullTile_Value, _impl_.double_value_), _Internal::kHasBitsOffset + 1, 0, (0 | ::_fl::kFcOptional | ::_fl::kDouble)},
-    // optional int64 int_value = 4;
-    {PROTOBUF_FIELD_OFFSET(FullTile_Value, _impl_.int_value_), _Internal::kHasBitsOffset + 2, 0, (0 | ::_fl::kFcOptional | ::_fl::kInt64)},
-    // optional uint64 uint_value = 5;
-    {PROTOBUF_FIELD_OFFSET(FullTile_Value, _impl_.uint_value_), _Internal::kHasBitsOffset + 5, 0, (0 | ::_fl::kFcOptional | ::_fl::kUInt64)},
-    // optional sint64 sint_value = 6;
-    {PROTOBUF_FIELD_OFFSET(FullTile_Value, _impl_.sint_value_), _Internal::kHasBitsOffset + 6, 0, (0 | ::_fl::kFcOptional | ::_fl::kSInt64)},
-    // optional bool bool_value = 7;
-    {PROTOBUF_FIELD_OFFSET(FullTile_Value, _impl_.bool_value_), _Internal::kHasBitsOffset + 4, 0, (0 | ::_fl::kFcOptional | ::_fl::kBool)},
-  }},
-  // no aux_entries
-  {{
-  }},
-};
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 const ::_pbi::TcParseTable<
+    3, 7, 0, 0, 2>
+    FullTile_Value::_table_ = {
+        {
+            PROTOBUF_FIELD_OFFSET(FullTile_Value, _impl_._has_bits_),
+            PROTOBUF_FIELD_OFFSET(FullTile_Value, _impl_._extensions_),
+            7,
+            56, // max_field_number, fast_idx_mask
+            offsetof(decltype(_table_), field_lookup_table),
+            4294967168, // skipmap
+            offsetof(decltype(_table_), field_entries),
+            7,                                        // num_field_entries
+            0,                                        // num_aux_entries
+            offsetof(decltype(_table_), field_names), // no aux_entries
+            FullTile_Value_class_data_.base(),
+            nullptr,                           // post_loop_handler
+            ::_pbi::TcParser::GenericFallback, // fallback
+#ifdef PROTOBUF_PREFETCH_PARSE_TABLE
+            ::_pbi::TcParser::GetTable<
+                ::vector_tile::FullTile_Value>(), // to_prefetch
+#endif // PROTOBUF_PREFETCH_PARSE_TABLE
+        },
+        {{
+            {::_pbi::TcParser::MiniParse, {}},
+            // optional string string_value = 1;
+            {::_pbi::TcParser::FastBS1,
+             {10, 0, 0,
+              PROTOBUF_FIELD_OFFSET(FullTile_Value, _impl_.string_value_)}},
+            // optional float float_value = 2;
+            {::_pbi::TcParser::FastF32S1,
+             {21, 3, 0,
+              PROTOBUF_FIELD_OFFSET(FullTile_Value, _impl_.float_value_)}},
+            // optional double double_value = 3;
+            {::_pbi::TcParser::FastF64S1,
+             {25, 1, 0,
+              PROTOBUF_FIELD_OFFSET(FullTile_Value, _impl_.double_value_)}},
+            // optional int64 int_value = 4;
+            {::_pbi::TcParser::SingularVarintNoZag1<
+                 ::uint64_t, offsetof(FullTile_Value, _impl_.int_value_), 2>(),
+             {32, 2, 0,
+              PROTOBUF_FIELD_OFFSET(FullTile_Value, _impl_.int_value_)}},
+            // optional uint64 uint_value = 5;
+            {::_pbi::TcParser::SingularVarintNoZag1<
+                 ::uint64_t, offsetof(FullTile_Value, _impl_.uint_value_), 5>(),
+             {40, 5, 0,
+              PROTOBUF_FIELD_OFFSET(FullTile_Value, _impl_.uint_value_)}},
+            // optional sint64 sint_value = 6;
+            {::_pbi::TcParser::FastZ64S1,
+             {48, 6, 0,
+              PROTOBUF_FIELD_OFFSET(FullTile_Value, _impl_.sint_value_)}},
+            // optional bool bool_value = 7;
+            {::_pbi::TcParser::SingularVarintNoZag1<
+                 bool, offsetof(FullTile_Value, _impl_.bool_value_), 4>(),
+             {56, 4, 0,
+              PROTOBUF_FIELD_OFFSET(FullTile_Value, _impl_.bool_value_)}},
+        }},
+        {{65535, 65535}},
+        {{
+            // optional string string_value = 1;
+            {PROTOBUF_FIELD_OFFSET(FullTile_Value, _impl_.string_value_),
+             _Internal::kHasBitsOffset + 0, 0,
+             (0 | ::_fl::kFcOptional | ::_fl::kBytes | ::_fl::kRepAString)},
+            // optional float float_value = 2;
+            {PROTOBUF_FIELD_OFFSET(FullTile_Value, _impl_.float_value_),
+             _Internal::kHasBitsOffset + 3, 0,
+             (0 | ::_fl::kFcOptional | ::_fl::kFloat)},
+            // optional double double_value = 3;
+            {PROTOBUF_FIELD_OFFSET(FullTile_Value, _impl_.double_value_),
+             _Internal::kHasBitsOffset + 1, 0,
+             (0 | ::_fl::kFcOptional | ::_fl::kDouble)},
+            // optional int64 int_value = 4;
+            {PROTOBUF_FIELD_OFFSET(FullTile_Value, _impl_.int_value_),
+             _Internal::kHasBitsOffset + 2, 0,
+             (0 | ::_fl::kFcOptional | ::_fl::kInt64)},
+            // optional uint64 uint_value = 5;
+            {PROTOBUF_FIELD_OFFSET(FullTile_Value, _impl_.uint_value_),
+             _Internal::kHasBitsOffset + 5, 0,
+             (0 | ::_fl::kFcOptional | ::_fl::kUInt64)},
+            // optional sint64 sint_value = 6;
+            {PROTOBUF_FIELD_OFFSET(FullTile_Value, _impl_.sint_value_),
+             _Internal::kHasBitsOffset + 6, 0,
+             (0 | ::_fl::kFcOptional | ::_fl::kSInt64)},
+            // optional bool bool_value = 7;
+            {PROTOBUF_FIELD_OFFSET(FullTile_Value, _impl_.bool_value_),
+             _Internal::kHasBitsOffset + 4, 0,
+             (0 | ::_fl::kFcOptional | ::_fl::kBool)},
+        }},
+        // no aux_entries
+        {{}},
+    };
 PROTOBUF_NOINLINE void FullTile_Value::Clear() {
-// @@protoc_insertion_point(message_clear_start:vector_tile.FullTile.Value)
+  // @@protoc_insertion_point(message_clear_start:vector_tile.FullTile.Value)
   ::google::protobuf::internal::TSanWrite(&_impl_);
   ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
-  (void) cached_has_bits;
+  (void)cached_has_bits;
 
   _impl_._extensions_.Clear();
   cached_has_bits = _impl_._has_bits_[0];
@@ -557,25 +602,29 @@ PROTOBUF_NOINLINE void FullTile_Value::Clear() {
     _impl_.string_value_.ClearNonDefaultToEmpty();
   }
   if (BatchCheckHasBit(cached_has_bits, 0x0000007eU)) {
-    ::memset(&_impl_.double_value_, 0, static_cast<::size_t>(
-        reinterpret_cast<char*>(&_impl_.sint_value_) -
-        reinterpret_cast<char*>(&_impl_.double_value_)) + sizeof(_impl_.sint_value_));
+    ::memset(
+        &_impl_.double_value_, 0,
+        static_cast<::size_t>(reinterpret_cast<char *>(&_impl_.sint_value_) -
+                              reinterpret_cast<char *>(&_impl_.double_value_)) +
+            sizeof(_impl_.sint_value_));
   }
   _impl_._has_bits_.Clear();
   _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
 }
 
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-::uint8_t* PROTOBUF_NONNULL FullTile_Value::_InternalSerialize(
-    const ::google::protobuf::MessageLite& base, ::uint8_t* PROTOBUF_NONNULL target,
-    ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) {
-  const FullTile_Value& this_ = static_cast<const FullTile_Value&>(base);
-#else   // PROTOBUF_CUSTOM_VTABLE
-::uint8_t* PROTOBUF_NONNULL FullTile_Value::_InternalSerialize(
-    ::uint8_t* PROTOBUF_NONNULL target,
-    ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) const {
-  const FullTile_Value& this_ = *this;
-#endif  // PROTOBUF_CUSTOM_VTABLE
+::uint8_t *PROTOBUF_NONNULL FullTile_Value::_InternalSerialize(
+    const ::google::protobuf::MessageLite &base,
+    ::uint8_t *PROTOBUF_NONNULL target,
+    ::google::protobuf::io::EpsCopyOutputStream *PROTOBUF_NONNULL stream) {
+  const FullTile_Value &this_ = static_cast<const FullTile_Value &>(base);
+#else  // PROTOBUF_CUSTOM_VTABLE
+::uint8_t *PROTOBUF_NONNULL FullTile_Value::_InternalSerialize(
+    ::uint8_t *PROTOBUF_NONNULL target,
+    ::google::protobuf::io::EpsCopyOutputStream *PROTOBUF_NONNULL
+        stream) const {
+  const FullTile_Value &this_ = *this;
+#endif // PROTOBUF_CUSTOM_VTABLE
   if constexpr (::_pbi::DebugHardenCheckHasBitConsistency()) {
     this_.CheckHasBitConsistency();
   }
@@ -586,7 +635,7 @@ PROTOBUF_NOINLINE void FullTile_Value::Clear() {
   cached_has_bits = this_._impl_._has_bits_[0];
   // optional string string_value = 1;
   if (CheckHasBit(cached_has_bits, 0x00000001U)) {
-    const ::std::string& _s = this_._internal_string_value();
+    const ::std::string &_s = this_._internal_string_value();
     target = stream->WriteStringMaybeAliased(1, _s, target);
   }
 
@@ -606,9 +655,9 @@ PROTOBUF_NOINLINE void FullTile_Value::Clear() {
 
   // optional int64 int_value = 4;
   if (CheckHasBit(cached_has_bits, 0x00000004U)) {
-    target =
-        ::google::protobuf::internal::WireFormatLite::WriteInt64ToArrayWithField<4>(
-            stream, this_._internal_int_value(), target);
+    target = ::google::protobuf::internal::WireFormatLite::
+        WriteInt64ToArrayWithField<4>(stream, this_._internal_int_value(),
+                                      target);
   }
 
   // optional uint64 uint_value = 5;
@@ -634,23 +683,25 @@ PROTOBUF_NOINLINE void FullTile_Value::Clear() {
 
   // All extensions.
   target = this_._impl_._extensions_._InternalSerializeAll(&default_instance(),
-                                                    target, stream);
+                                                           target, stream);
   if (ABSL_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
-    target =
-        ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
-            this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+        this_._internal_metadata_
+            .unknown_fields<::google::protobuf::UnknownFieldSet>(
+                ::google::protobuf::UnknownFieldSet::default_instance),
+        target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:vector_tile.FullTile.Value)
   return target;
 }
 
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-::size_t FullTile_Value::ByteSizeLong(const MessageLite& base) {
-  const FullTile_Value& this_ = static_cast<const FullTile_Value&>(base);
-#else   // PROTOBUF_CUSTOM_VTABLE
+::size_t FullTile_Value::ByteSizeLong(const MessageLite &base) {
+  const FullTile_Value &this_ = static_cast<const FullTile_Value &>(base);
+#else  // PROTOBUF_CUSTOM_VTABLE
 ::size_t FullTile_Value::ByteSizeLong() const {
-  const FullTile_Value& this_ = *this;
-#endif  // PROTOBUF_CUSTOM_VTABLE
+  const FullTile_Value &this_ = *this;
+#endif // PROTOBUF_CUSTOM_VTABLE
   // @@protoc_insertion_point(message_byte_size_start:vector_tile.FullTile.Value)
   ::size_t total_size = 0;
   total_size += this_._impl_._extensions_.ByteSize();
@@ -667,13 +718,14 @@ PROTOBUF_NOINLINE void FullTile_Value::Clear() {
   if (BatchCheckHasBit(cached_has_bits, 0x00000065U)) {
     // optional string string_value = 1;
     if (CheckHasBit(cached_has_bits, 0x00000001U)) {
-      total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
-                                      this_._internal_string_value());
+      total_size +=
+          1 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                  this_._internal_string_value());
     }
     // optional int64 int_value = 4;
     if (CheckHasBit(cached_has_bits, 0x00000004U)) {
-      total_size += ::_pbi::WireFormatLite::Int64SizePlusOne(
-          this_._internal_int_value());
+      total_size +=
+          ::_pbi::WireFormatLite::Int64SizePlusOne(this_._internal_int_value());
     }
     // optional uint64 uint_value = 5;
     if (CheckHasBit(cached_has_bits, 0x00000020U)) {
@@ -690,11 +742,11 @@ PROTOBUF_NOINLINE void FullTile_Value::Clear() {
                                              &this_._impl_._cached_size_);
 }
 
-void FullTile_Value::MergeImpl(::google::protobuf::MessageLite& to_msg,
-                            const ::google::protobuf::MessageLite& from_msg) {
-   auto* const _this =
-      static_cast<FullTile_Value*>(&to_msg);
-  auto& from = static_cast<const FullTile_Value&>(from_msg);
+void FullTile_Value::MergeImpl(
+    ::google::protobuf::MessageLite &to_msg,
+    const ::google::protobuf::MessageLite &from_msg) {
+  auto *const _this = static_cast<FullTile_Value *>(&to_msg);
+  auto &from = static_cast<const FullTile_Value &>(from_msg);
   if constexpr (::_pbi::DebugHardenCheckHasBitConsistency()) {
     from.CheckHasBitConsistency();
   }
@@ -729,41 +781,44 @@ void FullTile_Value::MergeImpl(::google::protobuf::MessageLite& to_msg,
   }
   _this->_impl_._has_bits_[0] |= cached_has_bits;
   _this->_impl_._extensions_.MergeFrom(&default_instance(),
-                                from._impl_._extensions_);
+                                       from._impl_._extensions_);
   _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
       from._internal_metadata_);
 }
 
-void FullTile_Value::CopyFrom(const FullTile_Value& from) {
+void FullTile_Value::CopyFrom(const FullTile_Value &from) {
   // @@protoc_insertion_point(class_specific_copy_from_start:vector_tile.FullTile.Value)
-  if (&from == this) return;
+  if (&from == this)
+    return;
   Clear();
   MergeFrom(from);
 }
 
-PROTOBUF_NOINLINE bool FullTile_Value::IsInitializedImpl(
-    const MessageLite& msg) {
-  auto& this_ = static_cast<const FullTile_Value&>(msg);
+PROTOBUF_NOINLINE bool
+FullTile_Value::IsInitializedImpl(const MessageLite &msg) {
+  auto &this_ = static_cast<const FullTile_Value &>(msg);
   if (!this_._impl_._extensions_.IsInitialized(&default_instance())) {
     return false;
   }
   return true;
 }
 
-void FullTile_Value::InternalSwap(FullTile_Value* PROTOBUF_RESTRICT PROTOBUF_NONNULL other) {
+void FullTile_Value::InternalSwap(
+    FullTile_Value *PROTOBUF_RESTRICT PROTOBUF_NONNULL other) {
   using ::std::swap;
   _impl_._extensions_.InternalSwap(&other->_impl_._extensions_);
-  auto* arena = GetArena();
+  auto *arena = GetArena();
   ABSL_DCHECK_EQ(arena, other->GetArena());
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
-  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.string_value_, &other->_impl_.string_value_, arena);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.string_value_,
+                                       &other->_impl_.string_value_, arena);
   ::google::protobuf::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(FullTile_Value, _impl_.sint_value_)
-      + sizeof(FullTile_Value::_impl_.sint_value_)
-      - PROTOBUF_FIELD_OFFSET(FullTile_Value, _impl_.double_value_)>(
-          reinterpret_cast<char*>(&_impl_.double_value_),
-          reinterpret_cast<char*>(&other->_impl_.double_value_));
+      PROTOBUF_FIELD_OFFSET(FullTile_Value, _impl_.sint_value_) +
+      sizeof(FullTile_Value::_impl_.sint_value_) -
+      PROTOBUF_FIELD_OFFSET(FullTile_Value, _impl_.double_value_)>(
+      reinterpret_cast<char *>(&_impl_.double_value_),
+      reinterpret_cast<char *>(&other->_impl_.double_value_));
 }
 
 ::google::protobuf::Metadata FullTile_Value::GetMetadata() const {
@@ -772,80 +827,74 @@ void FullTile_Value::InternalSwap(FullTile_Value* PROTOBUF_RESTRICT PROTOBUF_NON
 // ===================================================================
 
 class FullTile_Feature::_Internal {
- public:
+public:
   using HasBits =
       decltype(::std::declval<FullTile_Feature>()._impl_._has_bits_);
   static constexpr ::int32_t kHasBitsOffset =
       8 * PROTOBUF_FIELD_OFFSET(FullTile_Feature, _impl_._has_bits_);
 };
 
-FullTile_Feature::FullTile_Feature(::google::protobuf::Arena* PROTOBUF_NULLABLE arena)
+FullTile_Feature::FullTile_Feature(
+    ::google::protobuf::Arena *PROTOBUF_NULLABLE arena)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
     : ::google::protobuf::Message(arena, FullTile_Feature_class_data_.base()) {
-#else   // PROTOBUF_CUSTOM_VTABLE
+#else  // PROTOBUF_CUSTOM_VTABLE
     : ::google::protobuf::Message(arena) {
-#endif  // PROTOBUF_CUSTOM_VTABLE
+#endif // PROTOBUF_CUSTOM_VTABLE
   SharedCtor(arena);
   // @@protoc_insertion_point(arena_constructor:vector_tile.FullTile.Feature)
 }
 PROTOBUF_NDEBUG_INLINE FullTile_Feature::Impl_::Impl_(
-    [[maybe_unused]] ::google::protobuf::internal::InternalVisibility visibility,
-    [[maybe_unused]] ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const Impl_& from,
-    [[maybe_unused]] const ::vector_tile::FullTile_Feature& from_msg)
-      : _has_bits_{from._has_bits_},
-        _cached_size_{0},
-        tags_{visibility, arena, from.tags_},
-        _tags_cached_byte_size_{0},
-        geometry_{visibility, arena, from.geometry_},
-        _geometry_cached_byte_size_{0} {}
+    [[maybe_unused]] ::google::protobuf::internal::InternalVisibility
+        visibility,
+    [[maybe_unused]] ::google::protobuf::Arena *PROTOBUF_NULLABLE arena,
+    const Impl_ &from,
+    [[maybe_unused]] const ::vector_tile::FullTile_Feature &from_msg)
+    : _has_bits_{from._has_bits_}, _cached_size_{0},
+      tags_{visibility, arena, from.tags_}, _tags_cached_byte_size_{0},
+      geometry_{visibility, arena, from.geometry_},
+      _geometry_cached_byte_size_{0} {}
 
-FullTile_Feature::FullTile_Feature(
-    ::google::protobuf::Arena* PROTOBUF_NULLABLE arena,
-    const FullTile_Feature& from)
+FullTile_Feature::FullTile_Feature(::google::protobuf::Arena *PROTOBUF_NULLABLE
+                                       arena,
+                                   const FullTile_Feature &from)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
     : ::google::protobuf::Message(arena, FullTile_Feature_class_data_.base()) {
-#else   // PROTOBUF_CUSTOM_VTABLE
+#else  // PROTOBUF_CUSTOM_VTABLE
     : ::google::protobuf::Message(arena) {
-#endif  // PROTOBUF_CUSTOM_VTABLE
-  FullTile_Feature* const _this = this;
+#endif // PROTOBUF_CUSTOM_VTABLE
+  FullTile_Feature *const _this = this;
   (void)_this;
   _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
       from._internal_metadata_);
   new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
-  ::memcpy(reinterpret_cast<char*>(&_impl_) +
-               offsetof(Impl_, id_),
-           reinterpret_cast<const char*>(&from._impl_) +
-               offsetof(Impl_, id_),
-           offsetof(Impl_, type_) -
-               offsetof(Impl_, id_) +
+  ::memcpy(reinterpret_cast<char *>(&_impl_) + offsetof(Impl_, id_),
+           reinterpret_cast<const char *>(&from._impl_) + offsetof(Impl_, id_),
+           offsetof(Impl_, type_) - offsetof(Impl_, id_) +
                sizeof(Impl_::type_));
 
   // @@protoc_insertion_point(copy_constructor:vector_tile.FullTile.Feature)
 }
 PROTOBUF_NDEBUG_INLINE FullTile_Feature::Impl_::Impl_(
-    [[maybe_unused]] ::google::protobuf::internal::InternalVisibility visibility,
-    [[maybe_unused]] ::google::protobuf::Arena* PROTOBUF_NULLABLE arena)
-      : _cached_size_{0},
-        tags_{visibility, arena},
-        _tags_cached_byte_size_{0},
-        geometry_{visibility, arena},
-        _geometry_cached_byte_size_{0} {}
+    [[maybe_unused]] ::google::protobuf::internal::InternalVisibility
+        visibility,
+    [[maybe_unused]] ::google::protobuf::Arena *PROTOBUF_NULLABLE arena)
+    : _cached_size_{0}, tags_{visibility, arena}, _tags_cached_byte_size_{0},
+      geometry_{visibility, arena}, _geometry_cached_byte_size_{0} {}
 
-inline void FullTile_Feature::SharedCtor(::_pb::Arena* PROTOBUF_NULLABLE arena) {
+inline void
+FullTile_Feature::SharedCtor(::_pb::Arena *PROTOBUF_NULLABLE arena) {
   new (&_impl_) Impl_(internal_visibility(), arena);
-  ::memset(reinterpret_cast<char*>(&_impl_) +
-               offsetof(Impl_, id_),
-           0,
-           offsetof(Impl_, type_) -
-               offsetof(Impl_, id_) +
+  ::memset(reinterpret_cast<char *>(&_impl_) + offsetof(Impl_, id_), 0,
+           offsetof(Impl_, type_) - offsetof(Impl_, id_) +
                sizeof(Impl_::type_));
 }
 FullTile_Feature::~FullTile_Feature() {
   // @@protoc_insertion_point(destructor:vector_tile.FullTile.Feature)
   SharedDtor(*this);
 }
-inline void FullTile_Feature::SharedDtor(MessageLite& self) {
-  FullTile_Feature& this_ = static_cast<FullTile_Feature&>(self);
+inline void FullTile_Feature::SharedDtor(MessageLite &self) {
+  FullTile_Feature &this_ = static_cast<FullTile_Feature &>(self);
   if constexpr (::_pbi::DebugHardenCheckHasBitConsistency()) {
     this_.CheckHasBitConsistency();
   }
@@ -854,29 +903,29 @@ inline void FullTile_Feature::SharedDtor(MessageLite& self) {
   this_._impl_.~Impl_();
 }
 
-inline void* PROTOBUF_NONNULL FullTile_Feature::PlacementNew_(
-    const void* PROTOBUF_NONNULL, void* PROTOBUF_NONNULL mem,
-    ::google::protobuf::Arena* PROTOBUF_NULLABLE arena) {
+inline void *PROTOBUF_NONNULL FullTile_Feature::PlacementNew_(
+    const void *PROTOBUF_NONNULL, void *PROTOBUF_NONNULL mem,
+    ::google::protobuf::Arena *PROTOBUF_NULLABLE arena) {
   return ::new (mem) FullTile_Feature(arena);
 }
 constexpr auto FullTile_Feature::InternalNewImpl_() {
-  constexpr auto arena_bits = ::google::protobuf::internal::EncodePlacementArenaOffsets({
-      PROTOBUF_FIELD_OFFSET(FullTile_Feature, _impl_.tags_) +
-          decltype(FullTile_Feature::_impl_.tags_)::
-              InternalGetArenaOffset(
+  constexpr auto arena_bits =
+      ::google::protobuf::internal::EncodePlacementArenaOffsets({
+          PROTOBUF_FIELD_OFFSET(FullTile_Feature, _impl_.tags_) +
+              decltype(FullTile_Feature::_impl_.tags_)::InternalGetArenaOffset(
                   ::google::protobuf::Message::internal_visibility()),
-      PROTOBUF_FIELD_OFFSET(FullTile_Feature, _impl_.geometry_) +
-          decltype(FullTile_Feature::_impl_.geometry_)::
-              InternalGetArenaOffset(
-                  ::google::protobuf::Message::internal_visibility()),
-  });
+          PROTOBUF_FIELD_OFFSET(FullTile_Feature, _impl_.geometry_) +
+              decltype(FullTile_Feature::_impl_.geometry_)::
+                  InternalGetArenaOffset(
+                      ::google::protobuf::Message::internal_visibility()),
+      });
   if (arena_bits.has_value()) {
     return ::google::protobuf::internal::MessageCreator::ZeroInit(
         sizeof(FullTile_Feature), alignof(FullTile_Feature), *arena_bits);
   } else {
-    return ::google::protobuf::internal::MessageCreator(&FullTile_Feature::PlacementNew_,
-                                 sizeof(FullTile_Feature),
-                                 alignof(FullTile_Feature));
+    return ::google::protobuf::internal::MessageCreator(
+        &FullTile_Feature::PlacementNew_, sizeof(FullTile_Feature),
+        alignof(FullTile_Feature));
   }
 }
 constexpr auto FullTile_Feature::InternalGenerateClassData_() {
@@ -884,94 +933,108 @@ constexpr auto FullTile_Feature::InternalGenerateClassData_() {
       ::google::protobuf::internal::ClassData{
           &_FullTile_Feature_default_instance_._instance,
           &_table_.header,
-          nullptr,  // OnDemandRegisterArenaDtor
-          nullptr,  // IsInitialized
+          nullptr, // OnDemandRegisterArenaDtor
+          nullptr, // IsInitialized
           &FullTile_Feature::MergeImpl,
           ::google::protobuf::Message::GetNewImpl<FullTile_Feature>(),
 #if defined(PROTOBUF_CUSTOM_VTABLE)
           &FullTile_Feature::SharedDtor,
-          ::google::protobuf::Message::GetClearImpl<FullTile_Feature>(), &FullTile_Feature::ByteSizeLong,
-              &FullTile_Feature::_InternalSerialize,
-#endif  // PROTOBUF_CUSTOM_VTABLE
+          ::google::protobuf::Message::GetClearImpl<FullTile_Feature>(),
+          &FullTile_Feature::ByteSizeLong,
+          &FullTile_Feature::_InternalSerialize,
+#endif // PROTOBUF_CUSTOM_VTABLE
           PROTOBUF_FIELD_OFFSET(FullTile_Feature, _impl_._cached_size_),
           false,
       },
       &FullTile_Feature::kDescriptorMethods,
       &descriptor_table_vector_5ftile_2eproto,
-      nullptr,  // tracker
+      nullptr, // tracker
   };
 }
 
-PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 const
-    ::google::protobuf::internal::ClassDataFull FullTile_Feature_class_data_ =
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 const ::google::protobuf::
+    internal::ClassDataFull FullTile_Feature_class_data_ =
         FullTile_Feature::InternalGenerateClassData_();
 
-PROTOBUF_ATTRIBUTE_WEAK const ::google::protobuf::internal::ClassData* PROTOBUF_NONNULL
-FullTile_Feature::GetClassData() const {
-  ::google::protobuf::internal::PrefetchToLocalCache(&FullTile_Feature_class_data_);
-  ::google::protobuf::internal::PrefetchToLocalCache(FullTile_Feature_class_data_.tc_table);
+PROTOBUF_ATTRIBUTE_WEAK const ::google::protobuf::internal::ClassData *
+    PROTOBUF_NONNULL
+    FullTile_Feature::GetClassData() const {
+  ::google::protobuf::internal::PrefetchToLocalCache(
+      &FullTile_Feature_class_data_);
+  ::google::protobuf::internal::PrefetchToLocalCache(
+      FullTile_Feature_class_data_.tc_table);
   return FullTile_Feature_class_data_.base();
 }
-PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<2, 4, 1, 0, 2>
-FullTile_Feature::_table_ = {
-  {
-    PROTOBUF_FIELD_OFFSET(FullTile_Feature, _impl_._has_bits_),
-    0, // no _extensions_
-    4, 24,  // max_field_number, fast_idx_mask
-    offsetof(decltype(_table_), field_lookup_table),
-    4294967280,  // skipmap
-    offsetof(decltype(_table_), field_entries),
-    4,  // num_field_entries
-    1,  // num_aux_entries
-    offsetof(decltype(_table_), aux_entries),
-    FullTile_Feature_class_data_.base(),
-    nullptr,  // post_loop_handler
-    ::_pbi::TcParser::GenericFallback,  // fallback
-    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
-    ::_pbi::TcParser::GetTable<::vector_tile::FullTile_Feature>(),  // to_prefetch
-    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
-  }, {{
-    // repeated uint32 geometry = 4 [packed = true];
-    {::_pbi::TcParser::FastV32P1,
-     {34, 1, 0,
-      PROTOBUF_FIELD_OFFSET(FullTile_Feature, _impl_.geometry_)}},
-    // optional uint64 id = 1 [default = 0];
-    {::_pbi::TcParser::SingularVarintNoZag1<::uint64_t, offsetof(FullTile_Feature, _impl_.id_), 2>(),
-     {8, 2, 0,
-      PROTOBUF_FIELD_OFFSET(FullTile_Feature, _impl_.id_)}},
-    // repeated uint32 tags = 2 [packed = true];
-    {::_pbi::TcParser::FastV32P1,
-     {18, 0, 0,
-      PROTOBUF_FIELD_OFFSET(FullTile_Feature, _impl_.tags_)}},
-    // optional .vector_tile.FullTile.GeomType type = 3 [default = UNKNOWN];
-    {::_pbi::TcParser::FastEr0S1,
-     {24, 3, 3,
-      PROTOBUF_FIELD_OFFSET(FullTile_Feature, _impl_.type_)}},
-  }}, {{
-    65535, 65535
-  }}, {{
-    // optional uint64 id = 1 [default = 0];
-    {PROTOBUF_FIELD_OFFSET(FullTile_Feature, _impl_.id_), _Internal::kHasBitsOffset + 2, 0, (0 | ::_fl::kFcOptional | ::_fl::kUInt64)},
-    // repeated uint32 tags = 2 [packed = true];
-    {PROTOBUF_FIELD_OFFSET(FullTile_Feature, _impl_.tags_), _Internal::kHasBitsOffset + 0, 0, (0 | ::_fl::kFcRepeated | ::_fl::kPackedUInt32)},
-    // optional .vector_tile.FullTile.GeomType type = 3 [default = UNKNOWN];
-    {PROTOBUF_FIELD_OFFSET(FullTile_Feature, _impl_.type_), _Internal::kHasBitsOffset + 3, 0, (0 | ::_fl::kFcOptional | ::_fl::kEnumRange)},
-    // repeated uint32 geometry = 4 [packed = true];
-    {PROTOBUF_FIELD_OFFSET(FullTile_Feature, _impl_.geometry_), _Internal::kHasBitsOffset + 1, 0, (0 | ::_fl::kFcRepeated | ::_fl::kPackedUInt32)},
-  }},
-  {{
-      {0, 3},
-  }},
-  {{
-  }},
-};
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 const ::_pbi::TcParseTable<
+    2, 4, 1, 0, 2>
+    FullTile_Feature::_table_ = {
+        {
+            PROTOBUF_FIELD_OFFSET(FullTile_Feature, _impl_._has_bits_),
+            0, // no _extensions_
+            4,
+            24, // max_field_number, fast_idx_mask
+            offsetof(decltype(_table_), field_lookup_table),
+            4294967280, // skipmap
+            offsetof(decltype(_table_), field_entries),
+            4, // num_field_entries
+            1, // num_aux_entries
+            offsetof(decltype(_table_), aux_entries),
+            FullTile_Feature_class_data_.base(),
+            nullptr,                           // post_loop_handler
+            ::_pbi::TcParser::GenericFallback, // fallback
+#ifdef PROTOBUF_PREFETCH_PARSE_TABLE
+            ::_pbi::TcParser::GetTable<
+                ::vector_tile::FullTile_Feature>(), // to_prefetch
+#endif // PROTOBUF_PREFETCH_PARSE_TABLE
+        },
+        {{
+            // repeated uint32 geometry = 4 [packed = true];
+            {::_pbi::TcParser::FastV32P1,
+             {34, 1, 0,
+              PROTOBUF_FIELD_OFFSET(FullTile_Feature, _impl_.geometry_)}},
+            // optional uint64 id = 1 [default = 0];
+            {::_pbi::TcParser::SingularVarintNoZag1<
+                 ::uint64_t, offsetof(FullTile_Feature, _impl_.id_), 2>(),
+             {8, 2, 0, PROTOBUF_FIELD_OFFSET(FullTile_Feature, _impl_.id_)}},
+            // repeated uint32 tags = 2 [packed = true];
+            {::_pbi::TcParser::FastV32P1,
+             {18, 0, 0, PROTOBUF_FIELD_OFFSET(FullTile_Feature, _impl_.tags_)}},
+            // optional .vector_tile.FullTile.GeomType type = 3 [default =
+            // UNKNOWN];
+            {::_pbi::TcParser::FastEr0S1,
+             {24, 3, 3, PROTOBUF_FIELD_OFFSET(FullTile_Feature, _impl_.type_)}},
+        }},
+        {{65535, 65535}},
+        {{
+            // optional uint64 id = 1 [default = 0];
+            {PROTOBUF_FIELD_OFFSET(FullTile_Feature, _impl_.id_),
+             _Internal::kHasBitsOffset + 2, 0,
+             (0 | ::_fl::kFcOptional | ::_fl::kUInt64)},
+            // repeated uint32 tags = 2 [packed = true];
+            {PROTOBUF_FIELD_OFFSET(FullTile_Feature, _impl_.tags_),
+             _Internal::kHasBitsOffset + 0, 0,
+             (0 | ::_fl::kFcRepeated | ::_fl::kPackedUInt32)},
+            // optional .vector_tile.FullTile.GeomType type = 3 [default =
+            // UNKNOWN];
+            {PROTOBUF_FIELD_OFFSET(FullTile_Feature, _impl_.type_),
+             _Internal::kHasBitsOffset + 3, 0,
+             (0 | ::_fl::kFcOptional | ::_fl::kEnumRange)},
+            // repeated uint32 geometry = 4 [packed = true];
+            {PROTOBUF_FIELD_OFFSET(FullTile_Feature, _impl_.geometry_),
+             _Internal::kHasBitsOffset + 1, 0,
+             (0 | ::_fl::kFcRepeated | ::_fl::kPackedUInt32)},
+        }},
+        {{
+            {0, 3},
+        }},
+        {{}},
+    };
 PROTOBUF_NOINLINE void FullTile_Feature::Clear() {
-// @@protoc_insertion_point(message_clear_start:vector_tile.FullTile.Feature)
+  // @@protoc_insertion_point(message_clear_start:vector_tile.FullTile.Feature)
   ::google::protobuf::internal::TSanWrite(&_impl_);
   ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
-  (void) cached_has_bits;
+  (void)cached_has_bits;
 
   cached_has_bits = _impl_._has_bits_[0];
   if (BatchCheckHasBit(cached_has_bits, 0x00000003U)) {
@@ -983,25 +1046,28 @@ PROTOBUF_NOINLINE void FullTile_Feature::Clear() {
     }
   }
   if (BatchCheckHasBit(cached_has_bits, 0x0000000cU)) {
-    ::memset(&_impl_.id_, 0, static_cast<::size_t>(
-        reinterpret_cast<char*>(&_impl_.type_) -
-        reinterpret_cast<char*>(&_impl_.id_)) + sizeof(_impl_.type_));
+    ::memset(&_impl_.id_, 0,
+             static_cast<::size_t>(reinterpret_cast<char *>(&_impl_.type_) -
+                                   reinterpret_cast<char *>(&_impl_.id_)) +
+                 sizeof(_impl_.type_));
   }
   _impl_._has_bits_.Clear();
   _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
 }
 
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-::uint8_t* PROTOBUF_NONNULL FullTile_Feature::_InternalSerialize(
-    const ::google::protobuf::MessageLite& base, ::uint8_t* PROTOBUF_NONNULL target,
-    ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) {
-  const FullTile_Feature& this_ = static_cast<const FullTile_Feature&>(base);
-#else   // PROTOBUF_CUSTOM_VTABLE
-::uint8_t* PROTOBUF_NONNULL FullTile_Feature::_InternalSerialize(
-    ::uint8_t* PROTOBUF_NONNULL target,
-    ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) const {
-  const FullTile_Feature& this_ = *this;
-#endif  // PROTOBUF_CUSTOM_VTABLE
+::uint8_t *PROTOBUF_NONNULL FullTile_Feature::_InternalSerialize(
+    const ::google::protobuf::MessageLite &base,
+    ::uint8_t *PROTOBUF_NONNULL target,
+    ::google::protobuf::io::EpsCopyOutputStream *PROTOBUF_NONNULL stream) {
+  const FullTile_Feature &this_ = static_cast<const FullTile_Feature &>(base);
+#else  // PROTOBUF_CUSTOM_VTABLE
+::uint8_t *PROTOBUF_NONNULL FullTile_Feature::_InternalSerialize(
+    ::uint8_t *PROTOBUF_NONNULL target,
+    ::google::protobuf::io::EpsCopyOutputStream *PROTOBUF_NONNULL
+        stream) const {
+  const FullTile_Feature &this_ = *this;
+#endif // PROTOBUF_CUSTOM_VTABLE
   if constexpr (::_pbi::DebugHardenCheckHasBitConsistency()) {
     this_.CheckHasBitConsistency();
   }
@@ -1013,8 +1079,8 @@ PROTOBUF_NOINLINE void FullTile_Feature::Clear() {
   // optional uint64 id = 1 [default = 0];
   if (CheckHasBit(cached_has_bits, 0x00000004U)) {
     target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteUInt64ToArray(
-        1, this_._internal_id(), target);
+    target = ::_pbi::WireFormatLite::WriteUInt64ToArray(1, this_._internal_id(),
+                                                        target);
   }
 
   // repeated uint32 tags = 2 [packed = true];
@@ -1022,8 +1088,8 @@ PROTOBUF_NOINLINE void FullTile_Feature::Clear() {
     {
       int byte_size = this_._impl_._tags_cached_byte_size_.Get();
       if (byte_size > 0) {
-        target = stream->WriteUInt32Packed(
-            2, this_._internal_tags(), byte_size, target);
+        target = stream->WriteUInt32Packed(2, this_._internal_tags(), byte_size,
+                                           target);
       }
     }
   }
@@ -1031,8 +1097,8 @@ PROTOBUF_NOINLINE void FullTile_Feature::Clear() {
   // optional .vector_tile.FullTile.GeomType type = 3 [default = UNKNOWN];
   if (CheckHasBit(cached_has_bits, 0x00000008U)) {
     target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteEnumToArray(
-        3, this_._internal_type(), target);
+    target = ::_pbi::WireFormatLite::WriteEnumToArray(3, this_._internal_type(),
+                                                      target);
   }
 
   // repeated uint32 geometry = 4 [packed = true];
@@ -1040,28 +1106,30 @@ PROTOBUF_NOINLINE void FullTile_Feature::Clear() {
     {
       int byte_size = this_._impl_._geometry_cached_byte_size_.Get();
       if (byte_size > 0) {
-        target = stream->WriteUInt32Packed(
-            4, this_._internal_geometry(), byte_size, target);
+        target = stream->WriteUInt32Packed(4, this_._internal_geometry(),
+                                           byte_size, target);
       }
     }
   }
 
   if (ABSL_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
-    target =
-        ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
-            this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+        this_._internal_metadata_
+            .unknown_fields<::google::protobuf::UnknownFieldSet>(
+                ::google::protobuf::UnknownFieldSet::default_instance),
+        target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:vector_tile.FullTile.Feature)
   return target;
 }
 
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-::size_t FullTile_Feature::ByteSizeLong(const MessageLite& base) {
-  const FullTile_Feature& this_ = static_cast<const FullTile_Feature&>(base);
-#else   // PROTOBUF_CUSTOM_VTABLE
+::size_t FullTile_Feature::ByteSizeLong(const MessageLite &base) {
+  const FullTile_Feature &this_ = static_cast<const FullTile_Feature &>(base);
+#else  // PROTOBUF_CUSTOM_VTABLE
 ::size_t FullTile_Feature::ByteSizeLong() const {
-  const FullTile_Feature& this_ = *this;
-#endif  // PROTOBUF_CUSTOM_VTABLE
+  const FullTile_Feature &this_ = *this;
+#endif // PROTOBUF_CUSTOM_VTABLE
   // @@protoc_insertion_point(message_byte_size_start:vector_tile.FullTile.Feature)
   ::size_t total_size = 0;
 
@@ -1074,38 +1142,35 @@ PROTOBUF_NOINLINE void FullTile_Feature::Clear() {
   if (BatchCheckHasBit(cached_has_bits, 0x0000000fU)) {
     // repeated uint32 tags = 2 [packed = true];
     if (CheckHasBitForRepeated(cached_has_bits, 0x00000001U)) {
-      total_size +=
-          ::_pbi::WireFormatLite::UInt32SizeWithPackedTagSize(
-              this_._internal_tags(), 1,
-              this_._impl_._tags_cached_byte_size_);
+      total_size += ::_pbi::WireFormatLite::UInt32SizeWithPackedTagSize(
+          this_._internal_tags(), 1, this_._impl_._tags_cached_byte_size_);
     }
     // repeated uint32 geometry = 4 [packed = true];
     if (CheckHasBitForRepeated(cached_has_bits, 0x00000002U)) {
-      total_size +=
-          ::_pbi::WireFormatLite::UInt32SizeWithPackedTagSize(
-              this_._internal_geometry(), 1,
-              this_._impl_._geometry_cached_byte_size_);
+      total_size += ::_pbi::WireFormatLite::UInt32SizeWithPackedTagSize(
+          this_._internal_geometry(), 1,
+          this_._impl_._geometry_cached_byte_size_);
     }
     // optional uint64 id = 1 [default = 0];
     if (CheckHasBit(cached_has_bits, 0x00000004U)) {
-      total_size += ::_pbi::WireFormatLite::UInt64SizePlusOne(
-          this_._internal_id());
+      total_size +=
+          ::_pbi::WireFormatLite::UInt64SizePlusOne(this_._internal_id());
     }
     // optional .vector_tile.FullTile.GeomType type = 3 [default = UNKNOWN];
     if (CheckHasBit(cached_has_bits, 0x00000008U)) {
-      total_size += 1 +
-                    ::_pbi::WireFormatLite::EnumSize(this_._internal_type());
+      total_size +=
+          1 + ::_pbi::WireFormatLite::EnumSize(this_._internal_type());
     }
   }
   return this_.MaybeComputeUnknownFieldsSize(total_size,
                                              &this_._impl_._cached_size_);
 }
 
-void FullTile_Feature::MergeImpl(::google::protobuf::MessageLite& to_msg,
-                            const ::google::protobuf::MessageLite& from_msg) {
-   auto* const _this =
-      static_cast<FullTile_Feature*>(&to_msg);
-  auto& from = static_cast<const FullTile_Feature&>(from_msg);
+void FullTile_Feature::MergeImpl(
+    ::google::protobuf::MessageLite &to_msg,
+    const ::google::protobuf::MessageLite &from_msg) {
+  auto *const _this = static_cast<FullTile_Feature *>(&to_msg);
+  auto &from = static_cast<const FullTile_Feature &>(from_msg);
   if constexpr (::_pbi::DebugHardenCheckHasBitConsistency()) {
     from.CheckHasBitConsistency();
   }
@@ -1134,26 +1199,27 @@ void FullTile_Feature::MergeImpl(::google::protobuf::MessageLite& to_msg,
       from._internal_metadata_);
 }
 
-void FullTile_Feature::CopyFrom(const FullTile_Feature& from) {
+void FullTile_Feature::CopyFrom(const FullTile_Feature &from) {
   // @@protoc_insertion_point(class_specific_copy_from_start:vector_tile.FullTile.Feature)
-  if (&from == this) return;
+  if (&from == this)
+    return;
   Clear();
   MergeFrom(from);
 }
 
-
-void FullTile_Feature::InternalSwap(FullTile_Feature* PROTOBUF_RESTRICT PROTOBUF_NONNULL other) {
+void FullTile_Feature::InternalSwap(
+    FullTile_Feature *PROTOBUF_RESTRICT PROTOBUF_NONNULL other) {
   using ::std::swap;
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
   _impl_.tags_.InternalSwap(&other->_impl_.tags_);
   _impl_.geometry_.InternalSwap(&other->_impl_.geometry_);
   ::google::protobuf::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(FullTile_Feature, _impl_.type_)
-      + sizeof(FullTile_Feature::_impl_.type_)
-      - PROTOBUF_FIELD_OFFSET(FullTile_Feature, _impl_.id_)>(
-          reinterpret_cast<char*>(&_impl_.id_),
-          reinterpret_cast<char*>(&other->_impl_.id_));
+      PROTOBUF_FIELD_OFFSET(FullTile_Feature, _impl_.type_) +
+      sizeof(FullTile_Feature::_impl_.type_) -
+      PROTOBUF_FIELD_OFFSET(FullTile_Feature, _impl_.id_)>(
+      reinterpret_cast<char *>(&_impl_.id_),
+      reinterpret_cast<char *>(&other->_impl_.id_));
 }
 
 ::google::protobuf::Metadata FullTile_Feature::GetMetadata() const {
@@ -1162,82 +1228,75 @@ void FullTile_Feature::InternalSwap(FullTile_Feature* PROTOBUF_RESTRICT PROTOBUF
 // ===================================================================
 
 class FullTile_Layer::_Internal {
- public:
-  using HasBits =
-      decltype(::std::declval<FullTile_Layer>()._impl_._has_bits_);
+public:
+  using HasBits = decltype(::std::declval<FullTile_Layer>()._impl_._has_bits_);
   static constexpr ::int32_t kHasBitsOffset =
       8 * PROTOBUF_FIELD_OFFSET(FullTile_Layer, _impl_._has_bits_);
-  static bool MissingRequiredFields(const HasBits& has_bits) {
+  static bool MissingRequiredFields(const HasBits &has_bits) {
     return ((has_bits[0] & 0x00000028) ^ 0x00000028) != 0;
   }
 };
 
-FullTile_Layer::FullTile_Layer(::google::protobuf::Arena* PROTOBUF_NULLABLE arena)
+FullTile_Layer::FullTile_Layer(
+    ::google::protobuf::Arena *PROTOBUF_NULLABLE arena)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
     : ::google::protobuf::Message(arena, FullTile_Layer_class_data_.base()) {
-#else   // PROTOBUF_CUSTOM_VTABLE
+#else  // PROTOBUF_CUSTOM_VTABLE
     : ::google::protobuf::Message(arena) {
-#endif  // PROTOBUF_CUSTOM_VTABLE
+#endif // PROTOBUF_CUSTOM_VTABLE
   SharedCtor(arena);
   // @@protoc_insertion_point(arena_constructor:vector_tile.FullTile.Layer)
 }
 PROTOBUF_NDEBUG_INLINE FullTile_Layer::Impl_::Impl_(
-    [[maybe_unused]] ::google::protobuf::internal::InternalVisibility visibility,
-    [[maybe_unused]] ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const Impl_& from,
-    [[maybe_unused]] const ::vector_tile::FullTile_Layer& from_msg)
-      : _extensions_{visibility, arena},
-        _has_bits_{from._has_bits_},
-        _cached_size_{0},
-        features_{visibility, arena, from.features_},
-        keys_{visibility, arena, from.keys_},
-        values_{visibility, arena, from.values_},
-        name_(arena, from.name_) {}
+    [[maybe_unused]] ::google::protobuf::internal::InternalVisibility
+        visibility,
+    [[maybe_unused]] ::google::protobuf::Arena *PROTOBUF_NULLABLE arena,
+    const Impl_ &from,
+    [[maybe_unused]] const ::vector_tile::FullTile_Layer &from_msg)
+    : _extensions_{visibility, arena}, _has_bits_{from._has_bits_},
+      _cached_size_{0}, features_{visibility, arena, from.features_},
+      keys_{visibility, arena, from.keys_},
+      values_{visibility, arena, from.values_}, name_(arena, from.name_) {}
 
-FullTile_Layer::FullTile_Layer(
-    ::google::protobuf::Arena* PROTOBUF_NULLABLE arena,
-    const FullTile_Layer& from)
+FullTile_Layer::FullTile_Layer(::google::protobuf::Arena *PROTOBUF_NULLABLE
+                                   arena,
+                               const FullTile_Layer &from)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
     : ::google::protobuf::Message(arena, FullTile_Layer_class_data_.base()) {
-#else   // PROTOBUF_CUSTOM_VTABLE
+#else  // PROTOBUF_CUSTOM_VTABLE
     : ::google::protobuf::Message(arena) {
-#endif  // PROTOBUF_CUSTOM_VTABLE
-  FullTile_Layer* const _this = this;
+#endif // PROTOBUF_CUSTOM_VTABLE
+  FullTile_Layer *const _this = this;
   (void)_this;
   _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
       from._internal_metadata_);
   new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
   _impl_._extensions_.MergeFrom(this, from._impl_._extensions_);
-  ::memcpy(reinterpret_cast<char*>(&_impl_) +
+  ::memcpy(reinterpret_cast<char *>(&_impl_) + offsetof(Impl_, extent_),
+           reinterpret_cast<const char *>(&from._impl_) +
                offsetof(Impl_, extent_),
-           reinterpret_cast<const char*>(&from._impl_) +
-               offsetof(Impl_, extent_),
-           offsetof(Impl_, version_) -
-               offsetof(Impl_, extent_) +
+           offsetof(Impl_, version_) - offsetof(Impl_, extent_) +
                sizeof(Impl_::version_));
 
   // @@protoc_insertion_point(copy_constructor:vector_tile.FullTile.Layer)
 }
 PROTOBUF_NDEBUG_INLINE FullTile_Layer::Impl_::Impl_(
-    [[maybe_unused]] ::google::protobuf::internal::InternalVisibility visibility,
-    [[maybe_unused]] ::google::protobuf::Arena* PROTOBUF_NULLABLE arena)
-      : _extensions_{visibility, arena},
-        _cached_size_{0},
-        features_{visibility, arena},
-        keys_{visibility, arena},
-        values_{visibility, arena},
-        name_(arena),
-        extent_{4096u},
-        version_{1u} {}
+    [[maybe_unused]] ::google::protobuf::internal::InternalVisibility
+        visibility,
+    [[maybe_unused]] ::google::protobuf::Arena *PROTOBUF_NULLABLE arena)
+    : _extensions_{visibility, arena}, _cached_size_{0},
+      features_{visibility, arena}, keys_{visibility, arena},
+      values_{visibility, arena}, name_(arena), extent_{4096u}, version_{1u} {}
 
-inline void FullTile_Layer::SharedCtor(::_pb::Arena* PROTOBUF_NULLABLE arena) {
+inline void FullTile_Layer::SharedCtor(::_pb::Arena *PROTOBUF_NULLABLE arena) {
   new (&_impl_) Impl_(internal_visibility(), arena);
 }
 FullTile_Layer::~FullTile_Layer() {
   // @@protoc_insertion_point(destructor:vector_tile.FullTile.Layer)
   SharedDtor(*this);
 }
-inline void FullTile_Layer::SharedDtor(MessageLite& self) {
-  FullTile_Layer& this_ = static_cast<FullTile_Layer&>(self);
+inline void FullTile_Layer::SharedDtor(MessageLite &self) {
+  FullTile_Layer &this_ = static_cast<FullTile_Layer &>(self);
   if constexpr (::_pbi::DebugHardenCheckHasBitConsistency()) {
     this_.CheckHasBitConsistency();
   }
@@ -1247,36 +1306,36 @@ inline void FullTile_Layer::SharedDtor(MessageLite& self) {
   this_._impl_.~Impl_();
 }
 
-inline void* PROTOBUF_NONNULL FullTile_Layer::PlacementNew_(
-    const void* PROTOBUF_NONNULL, void* PROTOBUF_NONNULL mem,
-    ::google::protobuf::Arena* PROTOBUF_NULLABLE arena) {
+inline void *PROTOBUF_NONNULL FullTile_Layer::PlacementNew_(
+    const void *PROTOBUF_NONNULL, void *PROTOBUF_NONNULL mem,
+    ::google::protobuf::Arena *PROTOBUF_NULLABLE arena) {
   return ::new (mem) FullTile_Layer(arena);
 }
 constexpr auto FullTile_Layer::InternalNewImpl_() {
-  constexpr auto arena_bits = ::google::protobuf::internal::EncodePlacementArenaOffsets({
-      PROTOBUF_FIELD_OFFSET(FullTile_Layer, _impl_._extensions_) +
-          decltype(FullTile_Layer::_impl_._extensions_)::InternalGetArenaOffset(
-              ::google::protobuf::Message::internal_visibility()),
-      PROTOBUF_FIELD_OFFSET(FullTile_Layer, _impl_.features_) +
-          decltype(FullTile_Layer::_impl_.features_)::
-              InternalGetArenaOffset(
+  constexpr auto arena_bits =
+      ::google::protobuf::internal::EncodePlacementArenaOffsets({
+          PROTOBUF_FIELD_OFFSET(FullTile_Layer, _impl_._extensions_) +
+              decltype(FullTile_Layer::_impl_._extensions_)::
+                  InternalGetArenaOffset(
+                      ::google::protobuf::Message::internal_visibility()),
+          PROTOBUF_FIELD_OFFSET(FullTile_Layer, _impl_.features_) +
+              decltype(FullTile_Layer::_impl_.features_)::
+                  InternalGetArenaOffset(
+                      ::google::protobuf::Message::internal_visibility()),
+          PROTOBUF_FIELD_OFFSET(FullTile_Layer, _impl_.keys_) +
+              decltype(FullTile_Layer::_impl_.keys_)::InternalGetArenaOffset(
                   ::google::protobuf::Message::internal_visibility()),
-      PROTOBUF_FIELD_OFFSET(FullTile_Layer, _impl_.keys_) +
-          decltype(FullTile_Layer::_impl_.keys_)::
-              InternalGetArenaOffset(
+          PROTOBUF_FIELD_OFFSET(FullTile_Layer, _impl_.values_) +
+              decltype(FullTile_Layer::_impl_.values_)::InternalGetArenaOffset(
                   ::google::protobuf::Message::internal_visibility()),
-      PROTOBUF_FIELD_OFFSET(FullTile_Layer, _impl_.values_) +
-          decltype(FullTile_Layer::_impl_.values_)::
-              InternalGetArenaOffset(
-                  ::google::protobuf::Message::internal_visibility()),
-  });
+      });
   if (arena_bits.has_value()) {
     return ::google::protobuf::internal::MessageCreator::CopyInit(
         sizeof(FullTile_Layer), alignof(FullTile_Layer), *arena_bits);
   } else {
-    return ::google::protobuf::internal::MessageCreator(&FullTile_Layer::PlacementNew_,
-                                 sizeof(FullTile_Layer),
-                                 alignof(FullTile_Layer));
+    return ::google::protobuf::internal::MessageCreator(
+        &FullTile_Layer::PlacementNew_, sizeof(FullTile_Layer),
+        alignof(FullTile_Layer));
   }
 }
 constexpr auto FullTile_Layer::InternalGenerateClassData_() {
@@ -1284,109 +1343,125 @@ constexpr auto FullTile_Layer::InternalGenerateClassData_() {
       ::google::protobuf::internal::ClassData{
           &_FullTile_Layer_default_instance_._instance,
           &_table_.header,
-          nullptr,  // OnDemandRegisterArenaDtor
+          nullptr, // OnDemandRegisterArenaDtor
           FullTile_Layer::IsInitializedImpl,
           &FullTile_Layer::MergeImpl,
           ::google::protobuf::Message::GetNewImpl<FullTile_Layer>(),
 #if defined(PROTOBUF_CUSTOM_VTABLE)
           &FullTile_Layer::SharedDtor,
-          ::google::protobuf::Message::GetClearImpl<FullTile_Layer>(), &FullTile_Layer::ByteSizeLong,
-              &FullTile_Layer::_InternalSerialize,
-#endif  // PROTOBUF_CUSTOM_VTABLE
+          ::google::protobuf::Message::GetClearImpl<FullTile_Layer>(),
+          &FullTile_Layer::ByteSizeLong,
+          &FullTile_Layer::_InternalSerialize,
+#endif // PROTOBUF_CUSTOM_VTABLE
           PROTOBUF_FIELD_OFFSET(FullTile_Layer, _impl_._cached_size_),
           false,
       },
       &FullTile_Layer::kDescriptorMethods,
       &descriptor_table_vector_5ftile_2eproto,
-      nullptr,  // tracker
+      nullptr, // tracker
   };
 }
 
-PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 const
-    ::google::protobuf::internal::ClassDataFull FullTile_Layer_class_data_ =
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 const ::google::protobuf::
+    internal::ClassDataFull FullTile_Layer_class_data_ =
         FullTile_Layer::InternalGenerateClassData_();
 
-PROTOBUF_ATTRIBUTE_WEAK const ::google::protobuf::internal::ClassData* PROTOBUF_NONNULL
-FullTile_Layer::GetClassData() const {
-  ::google::protobuf::internal::PrefetchToLocalCache(&FullTile_Layer_class_data_);
-  ::google::protobuf::internal::PrefetchToLocalCache(FullTile_Layer_class_data_.tc_table);
+PROTOBUF_ATTRIBUTE_WEAK const ::google::protobuf::internal::ClassData *
+    PROTOBUF_NONNULL
+    FullTile_Layer::GetClassData() const {
+  ::google::protobuf::internal::PrefetchToLocalCache(
+      &FullTile_Layer_class_data_);
+  ::google::protobuf::internal::PrefetchToLocalCache(
+      FullTile_Layer_class_data_.tc_table);
   return FullTile_Layer_class_data_.base();
 }
-PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<3, 6, 2, 0, 2>
-FullTile_Layer::_table_ = {
-  {
-    PROTOBUF_FIELD_OFFSET(FullTile_Layer, _impl_._has_bits_),
-    PROTOBUF_FIELD_OFFSET(FullTile_Layer, _impl_._extensions_),
-    15, 56,  // max_field_number, fast_idx_mask
-    offsetof(decltype(_table_), field_lookup_table),
-    4294950880,  // skipmap
-    offsetof(decltype(_table_), field_entries),
-    6,  // num_field_entries
-    2,  // num_aux_entries
-    offsetof(decltype(_table_), aux_entries),
-    FullTile_Layer_class_data_.base(),
-    nullptr,  // post_loop_handler
-    ::_pbi::TcParser::GenericFallback,  // fallback
-    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
-    ::_pbi::TcParser::GetTable<::vector_tile::FullTile_Layer>(),  // to_prefetch
-    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
-  }, {{
-    {::_pbi::TcParser::MiniParse, {}},
-    // required string name = 1;
-    {::_pbi::TcParser::FastBS1,
-     {10, 3, 0,
-      PROTOBUF_FIELD_OFFSET(FullTile_Layer, _impl_.name_)}},
-    // repeated .vector_tile.FullTile.Feature features = 2;
-    {::_pbi::TcParser::FastMtR1,
-     {18, 0, 0,
-      PROTOBUF_FIELD_OFFSET(FullTile_Layer, _impl_.features_)}},
-    // repeated string keys = 3;
-    {::_pbi::TcParser::FastBR1,
-     {26, 1, 0,
-      PROTOBUF_FIELD_OFFSET(FullTile_Layer, _impl_.keys_)}},
-    // repeated .vector_tile.FullTile.Value values = 4;
-    {::_pbi::TcParser::FastMtR1,
-     {34, 2, 1,
-      PROTOBUF_FIELD_OFFSET(FullTile_Layer, _impl_.values_)}},
-    // optional uint32 extent = 5 [default = 4096];
-    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(FullTile_Layer, _impl_.extent_), 4>(),
-     {40, 4, 0,
-      PROTOBUF_FIELD_OFFSET(FullTile_Layer, _impl_.extent_)}},
-    {::_pbi::TcParser::MiniParse, {}},
-    // required uint32 version = 15 [default = 1];
-    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(FullTile_Layer, _impl_.version_), 5>(),
-     {120, 5, 0,
-      PROTOBUF_FIELD_OFFSET(FullTile_Layer, _impl_.version_)}},
-  }}, {{
-    65535, 65535
-  }}, {{
-    // required string name = 1;
-    {PROTOBUF_FIELD_OFFSET(FullTile_Layer, _impl_.name_), _Internal::kHasBitsOffset + 3, 0, (0 | ::_fl::kFcOptional | ::_fl::kBytes | ::_fl::kRepAString)},
-    // repeated .vector_tile.FullTile.Feature features = 2;
-    {PROTOBUF_FIELD_OFFSET(FullTile_Layer, _impl_.features_), _Internal::kHasBitsOffset + 0, 0, (0 | ::_fl::kFcRepeated | ::_fl::kMessage | ::_fl::kTvTable)},
-    // repeated string keys = 3;
-    {PROTOBUF_FIELD_OFFSET(FullTile_Layer, _impl_.keys_), _Internal::kHasBitsOffset + 1, 0, (0 | ::_fl::kFcRepeated | ::_fl::kBytes | ::_fl::kRepSString)},
-    // repeated .vector_tile.FullTile.Value values = 4;
-    {PROTOBUF_FIELD_OFFSET(FullTile_Layer, _impl_.values_), _Internal::kHasBitsOffset + 2, 1, (0 | ::_fl::kFcRepeated | ::_fl::kMessage | ::_fl::kTvTable)},
-    // optional uint32 extent = 5 [default = 4096];
-    {PROTOBUF_FIELD_OFFSET(FullTile_Layer, _impl_.extent_), _Internal::kHasBitsOffset + 4, 0, (0 | ::_fl::kFcOptional | ::_fl::kUInt32)},
-    // required uint32 version = 15 [default = 1];
-    {PROTOBUF_FIELD_OFFSET(FullTile_Layer, _impl_.version_), _Internal::kHasBitsOffset + 5, 0, (0 | ::_fl::kFcOptional | ::_fl::kUInt32)},
-  }},
-  {{
-      {::_pbi::TcParser::GetTable<::vector_tile::FullTile_Feature>()},
-      {::_pbi::TcParser::GetTable<::vector_tile::FullTile_Value>()},
-  }},
-  {{
-  }},
-};
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 const ::_pbi::TcParseTable<
+    3, 6, 2, 0, 2>
+    FullTile_Layer::_table_ = {
+        {
+            PROTOBUF_FIELD_OFFSET(FullTile_Layer, _impl_._has_bits_),
+            PROTOBUF_FIELD_OFFSET(FullTile_Layer, _impl_._extensions_),
+            15,
+            56, // max_field_number, fast_idx_mask
+            offsetof(decltype(_table_), field_lookup_table),
+            4294950880, // skipmap
+            offsetof(decltype(_table_), field_entries),
+            6, // num_field_entries
+            2, // num_aux_entries
+            offsetof(decltype(_table_), aux_entries),
+            FullTile_Layer_class_data_.base(),
+            nullptr,                           // post_loop_handler
+            ::_pbi::TcParser::GenericFallback, // fallback
+#ifdef PROTOBUF_PREFETCH_PARSE_TABLE
+            ::_pbi::TcParser::GetTable<
+                ::vector_tile::FullTile_Layer>(), // to_prefetch
+#endif // PROTOBUF_PREFETCH_PARSE_TABLE
+        },
+        {{
+            {::_pbi::TcParser::MiniParse, {}},
+            // required string name = 1;
+            {::_pbi::TcParser::FastBS1,
+             {10, 3, 0, PROTOBUF_FIELD_OFFSET(FullTile_Layer, _impl_.name_)}},
+            // repeated .vector_tile.FullTile.Feature features = 2;
+            {::_pbi::TcParser::FastMtR1,
+             {18, 0, 0,
+              PROTOBUF_FIELD_OFFSET(FullTile_Layer, _impl_.features_)}},
+            // repeated string keys = 3;
+            {::_pbi::TcParser::FastBR1,
+             {26, 1, 0, PROTOBUF_FIELD_OFFSET(FullTile_Layer, _impl_.keys_)}},
+            // repeated .vector_tile.FullTile.Value values = 4;
+            {::_pbi::TcParser::FastMtR1,
+             {34, 2, 1, PROTOBUF_FIELD_OFFSET(FullTile_Layer, _impl_.values_)}},
+            // optional uint32 extent = 5 [default = 4096];
+            {::_pbi::TcParser::SingularVarintNoZag1<
+                 ::uint32_t, offsetof(FullTile_Layer, _impl_.extent_), 4>(),
+             {40, 4, 0, PROTOBUF_FIELD_OFFSET(FullTile_Layer, _impl_.extent_)}},
+            {::_pbi::TcParser::MiniParse, {}},
+            // required uint32 version = 15 [default = 1];
+            {::_pbi::TcParser::SingularVarintNoZag1<
+                 ::uint32_t, offsetof(FullTile_Layer, _impl_.version_), 5>(),
+             {120, 5, 0,
+              PROTOBUF_FIELD_OFFSET(FullTile_Layer, _impl_.version_)}},
+        }},
+        {{65535, 65535}},
+        {{
+            // required string name = 1;
+            {PROTOBUF_FIELD_OFFSET(FullTile_Layer, _impl_.name_),
+             _Internal::kHasBitsOffset + 3, 0,
+             (0 | ::_fl::kFcOptional | ::_fl::kBytes | ::_fl::kRepAString)},
+            // repeated .vector_tile.FullTile.Feature features = 2;
+            {PROTOBUF_FIELD_OFFSET(FullTile_Layer, _impl_.features_),
+             _Internal::kHasBitsOffset + 0, 0,
+             (0 | ::_fl::kFcRepeated | ::_fl::kMessage | ::_fl::kTvTable)},
+            // repeated string keys = 3;
+            {PROTOBUF_FIELD_OFFSET(FullTile_Layer, _impl_.keys_),
+             _Internal::kHasBitsOffset + 1, 0,
+             (0 | ::_fl::kFcRepeated | ::_fl::kBytes | ::_fl::kRepSString)},
+            // repeated .vector_tile.FullTile.Value values = 4;
+            {PROTOBUF_FIELD_OFFSET(FullTile_Layer, _impl_.values_),
+             _Internal::kHasBitsOffset + 2, 1,
+             (0 | ::_fl::kFcRepeated | ::_fl::kMessage | ::_fl::kTvTable)},
+            // optional uint32 extent = 5 [default = 4096];
+            {PROTOBUF_FIELD_OFFSET(FullTile_Layer, _impl_.extent_),
+             _Internal::kHasBitsOffset + 4, 0,
+             (0 | ::_fl::kFcOptional | ::_fl::kUInt32)},
+            // required uint32 version = 15 [default = 1];
+            {PROTOBUF_FIELD_OFFSET(FullTile_Layer, _impl_.version_),
+             _Internal::kHasBitsOffset + 5, 0,
+             (0 | ::_fl::kFcOptional | ::_fl::kUInt32)},
+        }},
+        {{
+            {::_pbi::TcParser::GetTable<::vector_tile::FullTile_Feature>()},
+            {::_pbi::TcParser::GetTable<::vector_tile::FullTile_Value>()},
+        }},
+        {{}},
+    };
 PROTOBUF_NOINLINE void FullTile_Layer::Clear() {
-// @@protoc_insertion_point(message_clear_start:vector_tile.FullTile.Layer)
+  // @@protoc_insertion_point(message_clear_start:vector_tile.FullTile.Layer)
   ::google::protobuf::internal::TSanWrite(&_impl_);
   ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
-  (void) cached_has_bits;
+  (void)cached_has_bits;
 
   _impl_._extensions_.Clear();
   cached_has_bits = _impl_._has_bits_[0];
@@ -1411,16 +1486,18 @@ PROTOBUF_NOINLINE void FullTile_Layer::Clear() {
 }
 
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-::uint8_t* PROTOBUF_NONNULL FullTile_Layer::_InternalSerialize(
-    const ::google::protobuf::MessageLite& base, ::uint8_t* PROTOBUF_NONNULL target,
-    ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) {
-  const FullTile_Layer& this_ = static_cast<const FullTile_Layer&>(base);
-#else   // PROTOBUF_CUSTOM_VTABLE
-::uint8_t* PROTOBUF_NONNULL FullTile_Layer::_InternalSerialize(
-    ::uint8_t* PROTOBUF_NONNULL target,
-    ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) const {
-  const FullTile_Layer& this_ = *this;
-#endif  // PROTOBUF_CUSTOM_VTABLE
+::uint8_t *PROTOBUF_NONNULL FullTile_Layer::_InternalSerialize(
+    const ::google::protobuf::MessageLite &base,
+    ::uint8_t *PROTOBUF_NONNULL target,
+    ::google::protobuf::io::EpsCopyOutputStream *PROTOBUF_NONNULL stream) {
+  const FullTile_Layer &this_ = static_cast<const FullTile_Layer &>(base);
+#else  // PROTOBUF_CUSTOM_VTABLE
+::uint8_t *PROTOBUF_NONNULL FullTile_Layer::_InternalSerialize(
+    ::uint8_t *PROTOBUF_NONNULL target,
+    ::google::protobuf::io::EpsCopyOutputStream *PROTOBUF_NONNULL
+        stream) const {
+  const FullTile_Layer &this_ = *this;
+#endif // PROTOBUF_CUSTOM_VTABLE
   if constexpr (::_pbi::DebugHardenCheckHasBitConsistency()) {
     this_.CheckHasBitConsistency();
   }
@@ -1431,41 +1508,39 @@ PROTOBUF_NOINLINE void FullTile_Layer::Clear() {
   cached_has_bits = this_._impl_._has_bits_[0];
   // required string name = 1;
   if (CheckHasBit(cached_has_bits, 0x00000008U)) {
-    const ::std::string& _s = this_._internal_name();
+    const ::std::string &_s = this_._internal_name();
     target = stream->WriteStringMaybeAliased(1, _s, target);
   }
 
   // repeated .vector_tile.FullTile.Feature features = 2;
   if (CheckHasBitForRepeated(cached_has_bits, 0x00000001U)) {
-    for (unsigned i = 0, n = static_cast<unsigned>(
-                             this_._internal_features_size());
+    for (unsigned i = 0,
+                  n = static_cast<unsigned>(this_._internal_features_size());
          i < n; i++) {
-      const auto& repfield = this_._internal_features().Get(i);
+      const auto &repfield = this_._internal_features().Get(i);
       target =
           ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
-              2, repfield, repfield.GetCachedSize(),
-              target, stream);
+              2, repfield, repfield.GetCachedSize(), target, stream);
     }
   }
 
   // repeated string keys = 3;
   if (CheckHasBitForRepeated(cached_has_bits, 0x00000002U)) {
     for (int i = 0, n = this_._internal_keys_size(); i < n; ++i) {
-      const auto& s = this_._internal_keys().Get(i);
+      const auto &s = this_._internal_keys().Get(i);
       target = stream->WriteString(3, s, target);
     }
   }
 
   // repeated .vector_tile.FullTile.Value values = 4;
   if (CheckHasBitForRepeated(cached_has_bits, 0x00000004U)) {
-    for (unsigned i = 0, n = static_cast<unsigned>(
-                             this_._internal_values_size());
+    for (unsigned i = 0,
+                  n = static_cast<unsigned>(this_._internal_values_size());
          i < n; i++) {
-      const auto& repfield = this_._internal_values().Get(i);
+      const auto &repfield = this_._internal_values().Get(i);
       target =
           ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
-              4, repfield, repfield.GetCachedSize(),
-              target, stream);
+              4, repfield, repfield.GetCachedSize(), target, stream);
     }
   }
 
@@ -1485,23 +1560,25 @@ PROTOBUF_NOINLINE void FullTile_Layer::Clear() {
 
   // All extensions.
   target = this_._impl_._extensions_._InternalSerializeAll(&default_instance(),
-                                                    target, stream);
+                                                           target, stream);
   if (ABSL_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
-    target =
-        ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
-            this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+        this_._internal_metadata_
+            .unknown_fields<::google::protobuf::UnknownFieldSet>(
+                ::google::protobuf::UnknownFieldSet::default_instance),
+        target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:vector_tile.FullTile.Layer)
   return target;
 }
 
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-::size_t FullTile_Layer::ByteSizeLong(const MessageLite& base) {
-  const FullTile_Layer& this_ = static_cast<const FullTile_Layer&>(base);
-#else   // PROTOBUF_CUSTOM_VTABLE
+::size_t FullTile_Layer::ByteSizeLong(const MessageLite &base) {
+  const FullTile_Layer &this_ = static_cast<const FullTile_Layer &>(base);
+#else  // PROTOBUF_CUSTOM_VTABLE
 ::size_t FullTile_Layer::ByteSizeLong() const {
-  const FullTile_Layer& this_ = *this;
-#endif  // PROTOBUF_CUSTOM_VTABLE
+  const FullTile_Layer &this_ = *this;
+#endif // PROTOBUF_CUSTOM_VTABLE
   // @@protoc_insertion_point(message_byte_size_start:vector_tile.FullTile.Layer)
   ::size_t total_size = 0;
   total_size += this_._impl_._extensions_.ByteSize();
@@ -1516,14 +1593,15 @@ PROTOBUF_NOINLINE void FullTile_Layer::Clear() {
     // repeated .vector_tile.FullTile.Feature features = 2;
     if (CheckHasBitForRepeated(cached_has_bits, 0x00000001U)) {
       total_size += 1UL * this_._internal_features_size();
-      for (const auto& msg : this_._internal_features()) {
-        total_size += ::google::protobuf::internal::WireFormatLite::MessageSize(msg);
+      for (const auto &msg : this_._internal_features()) {
+        total_size +=
+            ::google::protobuf::internal::WireFormatLite::MessageSize(msg);
       }
     }
     // repeated string keys = 3;
     if (CheckHasBitForRepeated(cached_has_bits, 0x00000002U)) {
-      total_size +=
-          1 * ::google::protobuf::internal::FromIntSize(this_._internal_keys().size());
+      total_size += 1 * ::google::protobuf::internal::FromIntSize(
+                            this_._internal_keys().size());
       for (int i = 0, n = this_._internal_keys().size(); i < n; ++i) {
         total_size += ::google::protobuf::internal::WireFormatLite::StringSize(
             this_._internal_keys().Get(i));
@@ -1532,45 +1610,47 @@ PROTOBUF_NOINLINE void FullTile_Layer::Clear() {
     // repeated .vector_tile.FullTile.Value values = 4;
     if (CheckHasBitForRepeated(cached_has_bits, 0x00000004U)) {
       total_size += 1UL * this_._internal_values_size();
-      for (const auto& msg : this_._internal_values()) {
-        total_size += ::google::protobuf::internal::WireFormatLite::MessageSize(msg);
+      for (const auto &msg : this_._internal_values()) {
+        total_size +=
+            ::google::protobuf::internal::WireFormatLite::MessageSize(msg);
       }
     }
   }
-   {
+  {
     // required string name = 1;
     if (CheckHasBit(cached_has_bits, 0x00000008U)) {
-      total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
-                                      this_._internal_name());
+      total_size +=
+          1 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                  this_._internal_name());
     }
   }
-   {
+  {
     // optional uint32 extent = 5 [default = 4096];
     if (CheckHasBit(cached_has_bits, 0x00000010U)) {
-      total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(
-          this_._internal_extent());
+      total_size +=
+          ::_pbi::WireFormatLite::UInt32SizePlusOne(this_._internal_extent());
     }
   }
-   {
+  {
     // required uint32 version = 15 [default = 1];
     if (CheckHasBit(cached_has_bits, 0x00000020U)) {
-      total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(
-          this_._internal_version());
+      total_size +=
+          ::_pbi::WireFormatLite::UInt32SizePlusOne(this_._internal_version());
     }
   }
   return this_.MaybeComputeUnknownFieldsSize(total_size,
                                              &this_._impl_._cached_size_);
 }
 
-void FullTile_Layer::MergeImpl(::google::protobuf::MessageLite& to_msg,
-                            const ::google::protobuf::MessageLite& from_msg) {
-   auto* const _this =
-      static_cast<FullTile_Layer*>(&to_msg);
-  auto& from = static_cast<const FullTile_Layer&>(from_msg);
+void FullTile_Layer::MergeImpl(
+    ::google::protobuf::MessageLite &to_msg,
+    const ::google::protobuf::MessageLite &from_msg) {
+  auto *const _this = static_cast<FullTile_Layer *>(&to_msg);
+  auto &from = static_cast<const FullTile_Layer &>(from_msg);
   if constexpr (::_pbi::DebugHardenCheckHasBitConsistency()) {
     from.CheckHasBitConsistency();
   }
-  ::google::protobuf::Arena* arena = _this->GetArena();
+  ::google::protobuf::Arena *arena = _this->GetArena();
   // @@protoc_insertion_point(class_specific_merge_from_start:vector_tile.FullTile.Layer)
   ABSL_DCHECK_NE(&from, _this);
   ::uint32_t cached_has_bits = 0;
@@ -1605,49 +1685,53 @@ void FullTile_Layer::MergeImpl(::google::protobuf::MessageLite& to_msg,
   }
   _this->_impl_._has_bits_[0] |= cached_has_bits;
   _this->_impl_._extensions_.MergeFrom(&default_instance(),
-                                from._impl_._extensions_);
+                                       from._impl_._extensions_);
   _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
       from._internal_metadata_);
 }
 
-void FullTile_Layer::CopyFrom(const FullTile_Layer& from) {
+void FullTile_Layer::CopyFrom(const FullTile_Layer &from) {
   // @@protoc_insertion_point(class_specific_copy_from_start:vector_tile.FullTile.Layer)
-  if (&from == this) return;
+  if (&from == this)
+    return;
   Clear();
   MergeFrom(from);
 }
 
-PROTOBUF_NOINLINE bool FullTile_Layer::IsInitializedImpl(
-    const MessageLite& msg) {
-  auto& this_ = static_cast<const FullTile_Layer&>(msg);
+PROTOBUF_NOINLINE bool
+FullTile_Layer::IsInitializedImpl(const MessageLite &msg) {
+  auto &this_ = static_cast<const FullTile_Layer &>(msg);
   if (!this_._impl_._extensions_.IsInitialized(&default_instance())) {
     return false;
   }
   if (_Internal::MissingRequiredFields(this_._impl_._has_bits_)) {
     return false;
   }
-  if (!::google::protobuf::internal::AllAreInitialized(this_._internal_values()))
+  if (!::google::protobuf::internal::AllAreInitialized(
+          this_._internal_values()))
     return false;
   return true;
 }
 
-void FullTile_Layer::InternalSwap(FullTile_Layer* PROTOBUF_RESTRICT PROTOBUF_NONNULL other) {
+void FullTile_Layer::InternalSwap(
+    FullTile_Layer *PROTOBUF_RESTRICT PROTOBUF_NONNULL other) {
   using ::std::swap;
   _impl_._extensions_.InternalSwap(&other->_impl_._extensions_);
-  auto* arena = GetArena();
+  auto *arena = GetArena();
   ABSL_DCHECK_EQ(arena, other->GetArena());
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
   _impl_.features_.InternalSwap(&other->_impl_.features_);
   _impl_.keys_.InternalSwap(&other->_impl_.keys_);
   _impl_.values_.InternalSwap(&other->_impl_.values_);
-  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.name_, &other->_impl_.name_, arena);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.name_, &other->_impl_.name_,
+                                       arena);
   ::google::protobuf::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(FullTile_Layer, _impl_.version_)
-      + sizeof(FullTile_Layer::_impl_.version_)
-      - PROTOBUF_FIELD_OFFSET(FullTile_Layer, _impl_.extent_)>(
-          reinterpret_cast<char*>(&_impl_.extent_),
-          reinterpret_cast<char*>(&other->_impl_.extent_));
+      PROTOBUF_FIELD_OFFSET(FullTile_Layer, _impl_.version_) +
+      sizeof(FullTile_Layer::_impl_.version_) -
+      PROTOBUF_FIELD_OFFSET(FullTile_Layer, _impl_.extent_)>(
+      reinterpret_cast<char *>(&_impl_.extent_),
+      reinterpret_cast<char *>(&other->_impl_.extent_));
 }
 
 ::google::protobuf::Metadata FullTile_Layer::GetMetadata() const {
@@ -1656,40 +1740,37 @@ void FullTile_Layer::InternalSwap(FullTile_Layer* PROTOBUF_RESTRICT PROTOBUF_NON
 // ===================================================================
 
 class FullTile::_Internal {
- public:
-  using HasBits =
-      decltype(::std::declval<FullTile>()._impl_._has_bits_);
+public:
+  using HasBits = decltype(::std::declval<FullTile>()._impl_._has_bits_);
   static constexpr ::int32_t kHasBitsOffset =
       8 * PROTOBUF_FIELD_OFFSET(FullTile, _impl_._has_bits_);
 };
 
-FullTile::FullTile(::google::protobuf::Arena* PROTOBUF_NULLABLE arena)
+FullTile::FullTile(::google::protobuf::Arena *PROTOBUF_NULLABLE arena)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
     : ::google::protobuf::Message(arena, FullTile_class_data_.base()) {
-#else   // PROTOBUF_CUSTOM_VTABLE
+#else  // PROTOBUF_CUSTOM_VTABLE
     : ::google::protobuf::Message(arena) {
-#endif  // PROTOBUF_CUSTOM_VTABLE
+#endif // PROTOBUF_CUSTOM_VTABLE
   SharedCtor(arena);
   // @@protoc_insertion_point(arena_constructor:vector_tile.FullTile)
 }
 PROTOBUF_NDEBUG_INLINE FullTile::Impl_::Impl_(
-    [[maybe_unused]] ::google::protobuf::internal::InternalVisibility visibility,
-    [[maybe_unused]] ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const Impl_& from,
-    [[maybe_unused]] const ::vector_tile::FullTile& from_msg)
-      : _extensions_{visibility, arena},
-        _has_bits_{from._has_bits_},
-        _cached_size_{0},
-        layers_{visibility, arena, from.layers_} {}
+    [[maybe_unused]] ::google::protobuf::internal::InternalVisibility
+        visibility,
+    [[maybe_unused]] ::google::protobuf::Arena *PROTOBUF_NULLABLE arena,
+    const Impl_ &from, [[maybe_unused]] const ::vector_tile::FullTile &from_msg)
+    : _extensions_{visibility, arena}, _has_bits_{from._has_bits_},
+      _cached_size_{0}, layers_{visibility, arena, from.layers_} {}
 
-FullTile::FullTile(
-    ::google::protobuf::Arena* PROTOBUF_NULLABLE arena,
-    const FullTile& from)
+FullTile::FullTile(::google::protobuf::Arena *PROTOBUF_NULLABLE arena,
+                   const FullTile &from)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
     : ::google::protobuf::Message(arena, FullTile_class_data_.base()) {
-#else   // PROTOBUF_CUSTOM_VTABLE
+#else  // PROTOBUF_CUSTOM_VTABLE
     : ::google::protobuf::Message(arena) {
-#endif  // PROTOBUF_CUSTOM_VTABLE
-  FullTile* const _this = this;
+#endif // PROTOBUF_CUSTOM_VTABLE
+  FullTile *const _this = this;
   (void)_this;
   _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
       from._internal_metadata_);
@@ -1699,21 +1780,21 @@ FullTile::FullTile(
   // @@protoc_insertion_point(copy_constructor:vector_tile.FullTile)
 }
 PROTOBUF_NDEBUG_INLINE FullTile::Impl_::Impl_(
-    [[maybe_unused]] ::google::protobuf::internal::InternalVisibility visibility,
-    [[maybe_unused]] ::google::protobuf::Arena* PROTOBUF_NULLABLE arena)
-      : _extensions_{visibility, arena},
-        _cached_size_{0},
-        layers_{visibility, arena} {}
+    [[maybe_unused]] ::google::protobuf::internal::InternalVisibility
+        visibility,
+    [[maybe_unused]] ::google::protobuf::Arena *PROTOBUF_NULLABLE arena)
+    : _extensions_{visibility, arena}, _cached_size_{0},
+      layers_{visibility, arena} {}
 
-inline void FullTile::SharedCtor(::_pb::Arena* PROTOBUF_NULLABLE arena) {
+inline void FullTile::SharedCtor(::_pb::Arena *PROTOBUF_NULLABLE arena) {
   new (&_impl_) Impl_(internal_visibility(), arena);
 }
 FullTile::~FullTile() {
   // @@protoc_insertion_point(destructor:vector_tile.FullTile)
   SharedDtor(*this);
 }
-inline void FullTile::SharedDtor(MessageLite& self) {
-  FullTile& this_ = static_cast<FullTile&>(self);
+inline void FullTile::SharedDtor(MessageLite &self) {
+  FullTile &this_ = static_cast<FullTile &>(self);
   if constexpr (::_pbi::DebugHardenCheckHasBitConsistency()) {
     this_.CheckHasBitConsistency();
   }
@@ -1722,28 +1803,27 @@ inline void FullTile::SharedDtor(MessageLite& self) {
   this_._impl_.~Impl_();
 }
 
-inline void* PROTOBUF_NONNULL FullTile::PlacementNew_(
-    const void* PROTOBUF_NONNULL, void* PROTOBUF_NONNULL mem,
-    ::google::protobuf::Arena* PROTOBUF_NULLABLE arena) {
+inline void *PROTOBUF_NONNULL FullTile::PlacementNew_(
+    const void *PROTOBUF_NONNULL, void *PROTOBUF_NONNULL mem,
+    ::google::protobuf::Arena *PROTOBUF_NULLABLE arena) {
   return ::new (mem) FullTile(arena);
 }
 constexpr auto FullTile::InternalNewImpl_() {
-  constexpr auto arena_bits = ::google::protobuf::internal::EncodePlacementArenaOffsets({
-      PROTOBUF_FIELD_OFFSET(FullTile, _impl_._extensions_) +
-          decltype(FullTile::_impl_._extensions_)::InternalGetArenaOffset(
-              ::google::protobuf::Message::internal_visibility()),
-      PROTOBUF_FIELD_OFFSET(FullTile, _impl_.layers_) +
-          decltype(FullTile::_impl_.layers_)::
-              InternalGetArenaOffset(
+  constexpr auto arena_bits =
+      ::google::protobuf::internal::EncodePlacementArenaOffsets({
+          PROTOBUF_FIELD_OFFSET(FullTile, _impl_._extensions_) +
+              decltype(FullTile::_impl_._extensions_)::InternalGetArenaOffset(
                   ::google::protobuf::Message::internal_visibility()),
-  });
+          PROTOBUF_FIELD_OFFSET(FullTile, _impl_.layers_) +
+              decltype(FullTile::_impl_.layers_)::InternalGetArenaOffset(
+                  ::google::protobuf::Message::internal_visibility()),
+      });
   if (arena_bits.has_value()) {
     return ::google::protobuf::internal::MessageCreator::ZeroInit(
         sizeof(FullTile), alignof(FullTile), *arena_bits);
   } else {
-    return ::google::protobuf::internal::MessageCreator(&FullTile::PlacementNew_,
-                                 sizeof(FullTile),
-                                 alignof(FullTile));
+    return ::google::protobuf::internal::MessageCreator(
+        &FullTile::PlacementNew_, sizeof(FullTile), alignof(FullTile));
   }
 }
 constexpr auto FullTile::InternalGenerateClassData_() {
@@ -1751,76 +1831,82 @@ constexpr auto FullTile::InternalGenerateClassData_() {
       ::google::protobuf::internal::ClassData{
           &_FullTile_default_instance_._instance,
           &_table_.header,
-          nullptr,  // OnDemandRegisterArenaDtor
+          nullptr, // OnDemandRegisterArenaDtor
           FullTile::IsInitializedImpl,
           &FullTile::MergeImpl,
           ::google::protobuf::Message::GetNewImpl<FullTile>(),
 #if defined(PROTOBUF_CUSTOM_VTABLE)
           &FullTile::SharedDtor,
-          ::google::protobuf::Message::GetClearImpl<FullTile>(), &FullTile::ByteSizeLong,
-              &FullTile::_InternalSerialize,
-#endif  // PROTOBUF_CUSTOM_VTABLE
+          ::google::protobuf::Message::GetClearImpl<FullTile>(),
+          &FullTile::ByteSizeLong,
+          &FullTile::_InternalSerialize,
+#endif // PROTOBUF_CUSTOM_VTABLE
           PROTOBUF_FIELD_OFFSET(FullTile, _impl_._cached_size_),
           false,
       },
       &FullTile::kDescriptorMethods,
       &descriptor_table_vector_5ftile_2eproto,
-      nullptr,  // tracker
+      nullptr, // tracker
   };
 }
 
-PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 const
-    ::google::protobuf::internal::ClassDataFull FullTile_class_data_ =
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 const ::google::protobuf::
+    internal::ClassDataFull FullTile_class_data_ =
         FullTile::InternalGenerateClassData_();
 
-PROTOBUF_ATTRIBUTE_WEAK const ::google::protobuf::internal::ClassData* PROTOBUF_NONNULL
-FullTile::GetClassData() const {
+PROTOBUF_ATTRIBUTE_WEAK const ::google::protobuf::internal::ClassData *
+    PROTOBUF_NONNULL
+    FullTile::GetClassData() const {
   ::google::protobuf::internal::PrefetchToLocalCache(&FullTile_class_data_);
-  ::google::protobuf::internal::PrefetchToLocalCache(FullTile_class_data_.tc_table);
+  ::google::protobuf::internal::PrefetchToLocalCache(
+      FullTile_class_data_.tc_table);
   return FullTile_class_data_.base();
 }
-PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<0, 1, 1, 0, 2>
-FullTile::_table_ = {
-  {
-    PROTOBUF_FIELD_OFFSET(FullTile, _impl_._has_bits_),
-    PROTOBUF_FIELD_OFFSET(FullTile, _impl_._extensions_),
-    3, 0,  // max_field_number, fast_idx_mask
-    offsetof(decltype(_table_), field_lookup_table),
-    4294967291,  // skipmap
-    offsetof(decltype(_table_), field_entries),
-    1,  // num_field_entries
-    1,  // num_aux_entries
-    offsetof(decltype(_table_), aux_entries),
-    FullTile_class_data_.base(),
-    nullptr,  // post_loop_handler
-    ::_pbi::TcParser::GenericFallback,  // fallback
-    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
-    ::_pbi::TcParser::GetTable<::vector_tile::FullTile>(),  // to_prefetch
-    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
-  }, {{
-    // repeated .vector_tile.FullTile.Layer layers = 3;
-    {::_pbi::TcParser::FastMtR1,
-     {26, 0, 0,
-      PROTOBUF_FIELD_OFFSET(FullTile, _impl_.layers_)}},
-  }}, {{
-    65535, 65535
-  }}, {{
-    // repeated .vector_tile.FullTile.Layer layers = 3;
-    {PROTOBUF_FIELD_OFFSET(FullTile, _impl_.layers_), _Internal::kHasBitsOffset + 0, 0, (0 | ::_fl::kFcRepeated | ::_fl::kMessage | ::_fl::kTvTable)},
-  }},
-  {{
-      {::_pbi::TcParser::GetTable<::vector_tile::FullTile_Layer>()},
-  }},
-  {{
-  }},
-};
+PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 const ::_pbi::TcParseTable<0, 1, 1, 0, 2>
+        FullTile::_table_ = {
+            {
+                PROTOBUF_FIELD_OFFSET(FullTile, _impl_._has_bits_),
+                PROTOBUF_FIELD_OFFSET(FullTile, _impl_._extensions_),
+                3,
+                0, // max_field_number, fast_idx_mask
+                offsetof(decltype(_table_), field_lookup_table),
+                4294967291, // skipmap
+                offsetof(decltype(_table_), field_entries),
+                1, // num_field_entries
+                1, // num_aux_entries
+                offsetof(decltype(_table_), aux_entries),
+                FullTile_class_data_.base(),
+                nullptr,                           // post_loop_handler
+                ::_pbi::TcParser::GenericFallback, // fallback
+#ifdef PROTOBUF_PREFETCH_PARSE_TABLE
+                ::_pbi::TcParser::GetTable<
+                    ::vector_tile::FullTile>(), // to_prefetch
+#endif                                          // PROTOBUF_PREFETCH_PARSE_TABLE
+            },
+            {{
+                // repeated .vector_tile.FullTile.Layer layers = 3;
+                {::_pbi::TcParser::FastMtR1,
+                 {26, 0, 0, PROTOBUF_FIELD_OFFSET(FullTile, _impl_.layers_)}},
+            }},
+            {{65535, 65535}},
+            {{
+                // repeated .vector_tile.FullTile.Layer layers = 3;
+                {PROTOBUF_FIELD_OFFSET(FullTile, _impl_.layers_),
+                 _Internal::kHasBitsOffset + 0, 0,
+                 (0 | ::_fl::kFcRepeated | ::_fl::kMessage | ::_fl::kTvTable)},
+            }},
+            {{
+                {::_pbi::TcParser::GetTable<::vector_tile::FullTile_Layer>()},
+            }},
+            {{}},
+        };
 PROTOBUF_NOINLINE void FullTile::Clear() {
-// @@protoc_insertion_point(message_clear_start:vector_tile.FullTile)
+  // @@protoc_insertion_point(message_clear_start:vector_tile.FullTile)
   ::google::protobuf::internal::TSanWrite(&_impl_);
   ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
-  (void) cached_has_bits;
+  (void)cached_has_bits;
 
   _impl_._extensions_.Clear();
   cached_has_bits = _impl_._has_bits_[0];
@@ -1832,16 +1918,18 @@ PROTOBUF_NOINLINE void FullTile::Clear() {
 }
 
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-::uint8_t* PROTOBUF_NONNULL FullTile::_InternalSerialize(
-    const ::google::protobuf::MessageLite& base, ::uint8_t* PROTOBUF_NONNULL target,
-    ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) {
-  const FullTile& this_ = static_cast<const FullTile&>(base);
-#else   // PROTOBUF_CUSTOM_VTABLE
-::uint8_t* PROTOBUF_NONNULL FullTile::_InternalSerialize(
-    ::uint8_t* PROTOBUF_NONNULL target,
-    ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) const {
-  const FullTile& this_ = *this;
-#endif  // PROTOBUF_CUSTOM_VTABLE
+::uint8_t *PROTOBUF_NONNULL FullTile::_InternalSerialize(
+    const ::google::protobuf::MessageLite &base,
+    ::uint8_t *PROTOBUF_NONNULL target,
+    ::google::protobuf::io::EpsCopyOutputStream *PROTOBUF_NONNULL stream) {
+  const FullTile &this_ = static_cast<const FullTile &>(base);
+#else  // PROTOBUF_CUSTOM_VTABLE
+::uint8_t *PROTOBUF_NONNULL FullTile::_InternalSerialize(
+    ::uint8_t *PROTOBUF_NONNULL target,
+    ::google::protobuf::io::EpsCopyOutputStream *PROTOBUF_NONNULL
+        stream) const {
+  const FullTile &this_ = *this;
+#endif // PROTOBUF_CUSTOM_VTABLE
   if constexpr (::_pbi::DebugHardenCheckHasBitConsistency()) {
     this_.CheckHasBitConsistency();
   }
@@ -1852,36 +1940,37 @@ PROTOBUF_NOINLINE void FullTile::Clear() {
   cached_has_bits = this_._impl_._has_bits_[0];
   // repeated .vector_tile.FullTile.Layer layers = 3;
   if (CheckHasBitForRepeated(cached_has_bits, 0x00000001U)) {
-    for (unsigned i = 0, n = static_cast<unsigned>(
-                             this_._internal_layers_size());
+    for (unsigned i = 0,
+                  n = static_cast<unsigned>(this_._internal_layers_size());
          i < n; i++) {
-      const auto& repfield = this_._internal_layers().Get(i);
+      const auto &repfield = this_._internal_layers().Get(i);
       target =
           ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
-              3, repfield, repfield.GetCachedSize(),
-              target, stream);
+              3, repfield, repfield.GetCachedSize(), target, stream);
     }
   }
 
   // All extensions.
   target = this_._impl_._extensions_._InternalSerializeAll(&default_instance(),
-                                                    target, stream);
+                                                           target, stream);
   if (ABSL_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
-    target =
-        ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
-            this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+        this_._internal_metadata_
+            .unknown_fields<::google::protobuf::UnknownFieldSet>(
+                ::google::protobuf::UnknownFieldSet::default_instance),
+        target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:vector_tile.FullTile)
   return target;
 }
 
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-::size_t FullTile::ByteSizeLong(const MessageLite& base) {
-  const FullTile& this_ = static_cast<const FullTile&>(base);
-#else   // PROTOBUF_CUSTOM_VTABLE
+::size_t FullTile::ByteSizeLong(const MessageLite &base) {
+  const FullTile &this_ = static_cast<const FullTile &>(base);
+#else  // PROTOBUF_CUSTOM_VTABLE
 ::size_t FullTile::ByteSizeLong() const {
-  const FullTile& this_ = *this;
-#endif  // PROTOBUF_CUSTOM_VTABLE
+  const FullTile &this_ = *this;
+#endif // PROTOBUF_CUSTOM_VTABLE
   // @@protoc_insertion_point(message_byte_size_start:vector_tile.FullTile)
   ::size_t total_size = 0;
   total_size += this_._impl_._extensions_.ByteSize();
@@ -1891,13 +1980,14 @@ PROTOBUF_NOINLINE void FullTile::Clear() {
   (void)cached_has_bits;
 
   ::_pbi::Prefetch5LinesFrom7Lines(&this_);
-   {
+  {
     // repeated .vector_tile.FullTile.Layer layers = 3;
     cached_has_bits = this_._impl_._has_bits_[0];
     if (CheckHasBitForRepeated(cached_has_bits, 0x00000001U)) {
       total_size += 1UL * this_._internal_layers_size();
-      for (const auto& msg : this_._internal_layers()) {
-        total_size += ::google::protobuf::internal::WireFormatLite::MessageSize(msg);
+      for (const auto &msg : this_._internal_layers()) {
+        total_size +=
+            ::google::protobuf::internal::WireFormatLite::MessageSize(msg);
       }
     }
   }
@@ -1905,15 +1995,14 @@ PROTOBUF_NOINLINE void FullTile::Clear() {
                                              &this_._impl_._cached_size_);
 }
 
-void FullTile::MergeImpl(::google::protobuf::MessageLite& to_msg,
-                            const ::google::protobuf::MessageLite& from_msg) {
-   auto* const _this =
-      static_cast<FullTile*>(&to_msg);
-  auto& from = static_cast<const FullTile&>(from_msg);
+void FullTile::MergeImpl(::google::protobuf::MessageLite &to_msg,
+                         const ::google::protobuf::MessageLite &from_msg) {
+  auto *const _this = static_cast<FullTile *>(&to_msg);
+  auto &from = static_cast<const FullTile &>(from_msg);
   if constexpr (::_pbi::DebugHardenCheckHasBitConsistency()) {
     from.CheckHasBitConsistency();
   }
-  ::google::protobuf::Arena* arena = _this->GetArena();
+  ::google::protobuf::Arena *arena = _this->GetArena();
   // @@protoc_insertion_point(class_specific_merge_from_start:vector_tile.FullTile)
   ABSL_DCHECK_NE(&from, _this);
   ::uint32_t cached_has_bits = 0;
@@ -1927,30 +2016,32 @@ void FullTile::MergeImpl(::google::protobuf::MessageLite& to_msg,
   }
   _this->_impl_._has_bits_[0] |= cached_has_bits;
   _this->_impl_._extensions_.MergeFrom(&default_instance(),
-                                from._impl_._extensions_);
+                                       from._impl_._extensions_);
   _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
       from._internal_metadata_);
 }
 
-void FullTile::CopyFrom(const FullTile& from) {
+void FullTile::CopyFrom(const FullTile &from) {
   // @@protoc_insertion_point(class_specific_copy_from_start:vector_tile.FullTile)
-  if (&from == this) return;
+  if (&from == this)
+    return;
   Clear();
   MergeFrom(from);
 }
 
-PROTOBUF_NOINLINE bool FullTile::IsInitializedImpl(
-    const MessageLite& msg) {
-  auto& this_ = static_cast<const FullTile&>(msg);
+PROTOBUF_NOINLINE bool FullTile::IsInitializedImpl(const MessageLite &msg) {
+  auto &this_ = static_cast<const FullTile &>(msg);
   if (!this_._impl_._extensions_.IsInitialized(&default_instance())) {
     return false;
   }
-  if (!::google::protobuf::internal::AllAreInitialized(this_._internal_layers()))
+  if (!::google::protobuf::internal::AllAreInitialized(
+          this_._internal_layers()))
     return false;
   return true;
 }
 
-void FullTile::InternalSwap(FullTile* PROTOBUF_RESTRICT PROTOBUF_NONNULL other) {
+void FullTile::InternalSwap(
+    FullTile *PROTOBUF_RESTRICT PROTOBUF_NONNULL other) {
   using ::std::swap;
   _impl_._extensions_.InternalSwap(&other->_impl_._extensions_);
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
@@ -1964,44 +2055,47 @@ void FullTile::InternalSwap(FullTile* PROTOBUF_RESTRICT PROTOBUF_NONNULL other) 
 // ===================================================================
 
 class Tile_BuildingShape::_Internal {
- public:
+public:
   using HasBits =
       decltype(::std::declval<Tile_BuildingShape>()._impl_._has_bits_);
   static constexpr ::int32_t kHasBitsOffset =
       8 * PROTOBUF_FIELD_OFFSET(Tile_BuildingShape, _impl_._has_bits_);
-  static bool MissingRequiredFields(const HasBits& has_bits) {
+  static bool MissingRequiredFields(const HasBits &has_bits) {
     return ((has_bits[0] & 0x00000004) ^ 0x00000004) != 0;
   }
 };
 
-Tile_BuildingShape::Tile_BuildingShape(::google::protobuf::Arena* PROTOBUF_NULLABLE arena)
+Tile_BuildingShape::Tile_BuildingShape(
+    ::google::protobuf::Arena *PROTOBUF_NULLABLE arena)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::Message(arena, Tile_BuildingShape_class_data_.base()) {
-#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena,
+                                  Tile_BuildingShape_class_data_.base()) {
+#else  // PROTOBUF_CUSTOM_VTABLE
     : ::google::protobuf::Message(arena) {
-#endif  // PROTOBUF_CUSTOM_VTABLE
+#endif // PROTOBUF_CUSTOM_VTABLE
   SharedCtor(arena);
   // @@protoc_insertion_point(arena_constructor:vector_tile.Tile.BuildingShape)
 }
 PROTOBUF_NDEBUG_INLINE Tile_BuildingShape::Impl_::Impl_(
-    [[maybe_unused]] ::google::protobuf::internal::InternalVisibility visibility,
-    [[maybe_unused]] ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const Impl_& from,
-    [[maybe_unused]] const ::vector_tile::Tile_BuildingShape& from_msg)
-      : _has_bits_{from._has_bits_},
-        _cached_size_{0},
-        approx_centre_{visibility, arena, from.approx_centre_},
-        edges_{visibility, arena, from.edges_},
-        osid_(arena, from.osid_) {}
+    [[maybe_unused]] ::google::protobuf::internal::InternalVisibility
+        visibility,
+    [[maybe_unused]] ::google::protobuf::Arena *PROTOBUF_NULLABLE arena,
+    const Impl_ &from,
+    [[maybe_unused]] const ::vector_tile::Tile_BuildingShape &from_msg)
+    : _has_bits_{from._has_bits_}, _cached_size_{0},
+      approx_centre_{visibility, arena, from.approx_centre_},
+      edges_{visibility, arena, from.edges_}, osid_(arena, from.osid_) {}
 
 Tile_BuildingShape::Tile_BuildingShape(
-    ::google::protobuf::Arena* PROTOBUF_NULLABLE arena,
-    const Tile_BuildingShape& from)
+    ::google::protobuf::Arena *PROTOBUF_NULLABLE arena,
+    const Tile_BuildingShape &from)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::Message(arena, Tile_BuildingShape_class_data_.base()) {
-#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena,
+                                  Tile_BuildingShape_class_data_.base()) {
+#else  // PROTOBUF_CUSTOM_VTABLE
     : ::google::protobuf::Message(arena) {
-#endif  // PROTOBUF_CUSTOM_VTABLE
-  Tile_BuildingShape* const _this = this;
+#endif // PROTOBUF_CUSTOM_VTABLE
+  Tile_BuildingShape *const _this = this;
   (void)_this;
   _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
       from._internal_metadata_);
@@ -2010,22 +2104,22 @@ Tile_BuildingShape::Tile_BuildingShape(
   // @@protoc_insertion_point(copy_constructor:vector_tile.Tile.BuildingShape)
 }
 PROTOBUF_NDEBUG_INLINE Tile_BuildingShape::Impl_::Impl_(
-    [[maybe_unused]] ::google::protobuf::internal::InternalVisibility visibility,
-    [[maybe_unused]] ::google::protobuf::Arena* PROTOBUF_NULLABLE arena)
-      : _cached_size_{0},
-        approx_centre_{visibility, arena},
-        edges_{visibility, arena},
-        osid_(arena) {}
+    [[maybe_unused]] ::google::protobuf::internal::InternalVisibility
+        visibility,
+    [[maybe_unused]] ::google::protobuf::Arena *PROTOBUF_NULLABLE arena)
+    : _cached_size_{0}, approx_centre_{visibility, arena},
+      edges_{visibility, arena}, osid_(arena) {}
 
-inline void Tile_BuildingShape::SharedCtor(::_pb::Arena* PROTOBUF_NULLABLE arena) {
+inline void
+Tile_BuildingShape::SharedCtor(::_pb::Arena *PROTOBUF_NULLABLE arena) {
   new (&_impl_) Impl_(internal_visibility(), arena);
 }
 Tile_BuildingShape::~Tile_BuildingShape() {
   // @@protoc_insertion_point(destructor:vector_tile.Tile.BuildingShape)
   SharedDtor(*this);
 }
-inline void Tile_BuildingShape::SharedDtor(MessageLite& self) {
-  Tile_BuildingShape& this_ = static_cast<Tile_BuildingShape&>(self);
+inline void Tile_BuildingShape::SharedDtor(MessageLite &self) {
+  Tile_BuildingShape &this_ = static_cast<Tile_BuildingShape &>(self);
   if constexpr (::_pbi::DebugHardenCheckHasBitConsistency()) {
     this_.CheckHasBitConsistency();
   }
@@ -2035,29 +2129,30 @@ inline void Tile_BuildingShape::SharedDtor(MessageLite& self) {
   this_._impl_.~Impl_();
 }
 
-inline void* PROTOBUF_NONNULL Tile_BuildingShape::PlacementNew_(
-    const void* PROTOBUF_NONNULL, void* PROTOBUF_NONNULL mem,
-    ::google::protobuf::Arena* PROTOBUF_NULLABLE arena) {
+inline void *PROTOBUF_NONNULL Tile_BuildingShape::PlacementNew_(
+    const void *PROTOBUF_NONNULL, void *PROTOBUF_NONNULL mem,
+    ::google::protobuf::Arena *PROTOBUF_NULLABLE arena) {
   return ::new (mem) Tile_BuildingShape(arena);
 }
 constexpr auto Tile_BuildingShape::InternalNewImpl_() {
-  constexpr auto arena_bits = ::google::protobuf::internal::EncodePlacementArenaOffsets({
-      PROTOBUF_FIELD_OFFSET(Tile_BuildingShape, _impl_.approx_centre_) +
-          decltype(Tile_BuildingShape::_impl_.approx_centre_)::
-              InternalGetArenaOffset(
-                  ::google::protobuf::Message::internal_visibility()),
-      PROTOBUF_FIELD_OFFSET(Tile_BuildingShape, _impl_.edges_) +
-          decltype(Tile_BuildingShape::_impl_.edges_)::
-              InternalGetArenaOffset(
-                  ::google::protobuf::Message::internal_visibility()),
-  });
+  constexpr auto arena_bits =
+      ::google::protobuf::internal::EncodePlacementArenaOffsets({
+          PROTOBUF_FIELD_OFFSET(Tile_BuildingShape, _impl_.approx_centre_) +
+              decltype(Tile_BuildingShape::_impl_.approx_centre_)::
+                  InternalGetArenaOffset(
+                      ::google::protobuf::Message::internal_visibility()),
+          PROTOBUF_FIELD_OFFSET(Tile_BuildingShape, _impl_.edges_) +
+              decltype(Tile_BuildingShape::_impl_.edges_)::
+                  InternalGetArenaOffset(
+                      ::google::protobuf::Message::internal_visibility()),
+      });
   if (arena_bits.has_value()) {
     return ::google::protobuf::internal::MessageCreator::CopyInit(
         sizeof(Tile_BuildingShape), alignof(Tile_BuildingShape), *arena_bits);
   } else {
-    return ::google::protobuf::internal::MessageCreator(&Tile_BuildingShape::PlacementNew_,
-                                 sizeof(Tile_BuildingShape),
-                                 alignof(Tile_BuildingShape));
+    return ::google::protobuf::internal::MessageCreator(
+        &Tile_BuildingShape::PlacementNew_, sizeof(Tile_BuildingShape),
+        alignof(Tile_BuildingShape));
   }
 }
 constexpr auto Tile_BuildingShape::InternalGenerateClassData_() {
@@ -2065,87 +2160,101 @@ constexpr auto Tile_BuildingShape::InternalGenerateClassData_() {
       ::google::protobuf::internal::ClassData{
           &_Tile_BuildingShape_default_instance_._instance,
           &_table_.header,
-          nullptr,  // OnDemandRegisterArenaDtor
+          nullptr, // OnDemandRegisterArenaDtor
           Tile_BuildingShape::IsInitializedImpl,
           &Tile_BuildingShape::MergeImpl,
           ::google::protobuf::Message::GetNewImpl<Tile_BuildingShape>(),
 #if defined(PROTOBUF_CUSTOM_VTABLE)
           &Tile_BuildingShape::SharedDtor,
-          ::google::protobuf::Message::GetClearImpl<Tile_BuildingShape>(), &Tile_BuildingShape::ByteSizeLong,
-              &Tile_BuildingShape::_InternalSerialize,
-#endif  // PROTOBUF_CUSTOM_VTABLE
+          ::google::protobuf::Message::GetClearImpl<Tile_BuildingShape>(),
+          &Tile_BuildingShape::ByteSizeLong,
+          &Tile_BuildingShape::_InternalSerialize,
+#endif // PROTOBUF_CUSTOM_VTABLE
           PROTOBUF_FIELD_OFFSET(Tile_BuildingShape, _impl_._cached_size_),
           false,
       },
       &Tile_BuildingShape::kDescriptorMethods,
       &descriptor_table_vector_5ftile_2eproto,
-      nullptr,  // tracker
+      nullptr, // tracker
   };
 }
 
-PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 const
-    ::google::protobuf::internal::ClassDataFull Tile_BuildingShape_class_data_ =
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 const ::google::protobuf::
+    internal::ClassDataFull Tile_BuildingShape_class_data_ =
         Tile_BuildingShape::InternalGenerateClassData_();
 
-PROTOBUF_ATTRIBUTE_WEAK const ::google::protobuf::internal::ClassData* PROTOBUF_NONNULL
-Tile_BuildingShape::GetClassData() const {
-  ::google::protobuf::internal::PrefetchToLocalCache(&Tile_BuildingShape_class_data_);
-  ::google::protobuf::internal::PrefetchToLocalCache(Tile_BuildingShape_class_data_.tc_table);
+PROTOBUF_ATTRIBUTE_WEAK const ::google::protobuf::internal::ClassData *
+    PROTOBUF_NONNULL
+    Tile_BuildingShape::GetClassData() const {
+  ::google::protobuf::internal::PrefetchToLocalCache(
+      &Tile_BuildingShape_class_data_);
+  ::google::protobuf::internal::PrefetchToLocalCache(
+      Tile_BuildingShape_class_data_.tc_table);
   return Tile_BuildingShape_class_data_.base();
 }
-PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<2, 3, 0, 0, 2>
-Tile_BuildingShape::_table_ = {
-  {
-    PROTOBUF_FIELD_OFFSET(Tile_BuildingShape, _impl_._has_bits_),
-    0, // no _extensions_
-    3, 24,  // max_field_number, fast_idx_mask
-    offsetof(decltype(_table_), field_lookup_table),
-    4294967288,  // skipmap
-    offsetof(decltype(_table_), field_entries),
-    3,  // num_field_entries
-    0,  // num_aux_entries
-    offsetof(decltype(_table_), field_names),  // no aux_entries
-    Tile_BuildingShape_class_data_.base(),
-    nullptr,  // post_loop_handler
-    ::_pbi::TcParser::GenericFallback,  // fallback
-    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
-    ::_pbi::TcParser::GetTable<::vector_tile::Tile_BuildingShape>(),  // to_prefetch
-    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
-  }, {{
-    {::_pbi::TcParser::MiniParse, {}},
-    // required string osid = 1;
-    {::_pbi::TcParser::FastBS1,
-     {10, 2, 0,
-      PROTOBUF_FIELD_OFFSET(Tile_BuildingShape, _impl_.osid_)}},
-    // repeated int32 approx_centre = 2;
-    {::_pbi::TcParser::FastV32R1,
-     {16, 0, 0,
-      PROTOBUF_FIELD_OFFSET(Tile_BuildingShape, _impl_.approx_centre_)}},
-    // repeated int32 edges = 3;
-    {::_pbi::TcParser::FastV32R1,
-     {24, 1, 0,
-      PROTOBUF_FIELD_OFFSET(Tile_BuildingShape, _impl_.edges_)}},
-  }}, {{
-    65535, 65535
-  }}, {{
-    // required string osid = 1;
-    {PROTOBUF_FIELD_OFFSET(Tile_BuildingShape, _impl_.osid_), _Internal::kHasBitsOffset + 2, 0, (0 | ::_fl::kFcOptional | ::_fl::kBytes | ::_fl::kRepAString)},
-    // repeated int32 approx_centre = 2;
-    {PROTOBUF_FIELD_OFFSET(Tile_BuildingShape, _impl_.approx_centre_), _Internal::kHasBitsOffset + 0, 0, (0 | ::_fl::kFcRepeated | ::_fl::kInt32)},
-    // repeated int32 edges = 3;
-    {PROTOBUF_FIELD_OFFSET(Tile_BuildingShape, _impl_.edges_), _Internal::kHasBitsOffset + 1, 0, (0 | ::_fl::kFcRepeated | ::_fl::kInt32)},
-  }},
-  // no aux_entries
-  {{
-  }},
-};
+PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 const ::_pbi::TcParseTable<2, 3, 0, 0, 2>
+        Tile_BuildingShape::_table_ = {
+            {
+                PROTOBUF_FIELD_OFFSET(Tile_BuildingShape, _impl_._has_bits_),
+                0, // no _extensions_
+                3,
+                24, // max_field_number, fast_idx_mask
+                offsetof(decltype(_table_), field_lookup_table),
+                4294967288, // skipmap
+                offsetof(decltype(_table_), field_entries),
+                3,                                        // num_field_entries
+                0,                                        // num_aux_entries
+                offsetof(decltype(_table_), field_names), // no aux_entries
+                Tile_BuildingShape_class_data_.base(),
+                nullptr,                           // post_loop_handler
+                ::_pbi::TcParser::GenericFallback, // fallback
+#ifdef PROTOBUF_PREFETCH_PARSE_TABLE
+                ::_pbi::TcParser::GetTable<
+                    ::vector_tile::Tile_BuildingShape>(), // to_prefetch
+#endif // PROTOBUF_PREFETCH_PARSE_TABLE
+            },
+            {{
+                {::_pbi::TcParser::MiniParse, {}},
+                // required string osid = 1;
+                {::_pbi::TcParser::FastBS1,
+                 {10, 2, 0,
+                  PROTOBUF_FIELD_OFFSET(Tile_BuildingShape, _impl_.osid_)}},
+                // repeated int32 approx_centre = 2;
+                {::_pbi::TcParser::FastV32R1,
+                 {16, 0, 0,
+                  PROTOBUF_FIELD_OFFSET(Tile_BuildingShape,
+                                        _impl_.approx_centre_)}},
+                // repeated int32 edges = 3;
+                {::_pbi::TcParser::FastV32R1,
+                 {24, 1, 0,
+                  PROTOBUF_FIELD_OFFSET(Tile_BuildingShape, _impl_.edges_)}},
+            }},
+            {{65535, 65535}},
+            {{
+                // required string osid = 1;
+                {PROTOBUF_FIELD_OFFSET(Tile_BuildingShape, _impl_.osid_),
+                 _Internal::kHasBitsOffset + 2, 0,
+                 (0 | ::_fl::kFcOptional | ::_fl::kBytes | ::_fl::kRepAString)},
+                // repeated int32 approx_centre = 2;
+                {PROTOBUF_FIELD_OFFSET(Tile_BuildingShape,
+                                       _impl_.approx_centre_),
+                 _Internal::kHasBitsOffset + 0, 0,
+                 (0 | ::_fl::kFcRepeated | ::_fl::kInt32)},
+                // repeated int32 edges = 3;
+                {PROTOBUF_FIELD_OFFSET(Tile_BuildingShape, _impl_.edges_),
+                 _Internal::kHasBitsOffset + 1, 0,
+                 (0 | ::_fl::kFcRepeated | ::_fl::kInt32)},
+            }},
+            // no aux_entries
+            {{}},
+        };
 PROTOBUF_NOINLINE void Tile_BuildingShape::Clear() {
-// @@protoc_insertion_point(message_clear_start:vector_tile.Tile.BuildingShape)
+  // @@protoc_insertion_point(message_clear_start:vector_tile.Tile.BuildingShape)
   ::google::protobuf::internal::TSanWrite(&_impl_);
   ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
-  (void) cached_has_bits;
+  (void)cached_has_bits;
 
   cached_has_bits = _impl_._has_bits_[0];
   if (BatchCheckHasBit(cached_has_bits, 0x00000007U)) {
@@ -2164,16 +2273,19 @@ PROTOBUF_NOINLINE void Tile_BuildingShape::Clear() {
 }
 
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-::uint8_t* PROTOBUF_NONNULL Tile_BuildingShape::_InternalSerialize(
-    const ::google::protobuf::MessageLite& base, ::uint8_t* PROTOBUF_NONNULL target,
-    ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) {
-  const Tile_BuildingShape& this_ = static_cast<const Tile_BuildingShape&>(base);
-#else   // PROTOBUF_CUSTOM_VTABLE
-::uint8_t* PROTOBUF_NONNULL Tile_BuildingShape::_InternalSerialize(
-    ::uint8_t* PROTOBUF_NONNULL target,
-    ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) const {
-  const Tile_BuildingShape& this_ = *this;
-#endif  // PROTOBUF_CUSTOM_VTABLE
+::uint8_t *PROTOBUF_NONNULL Tile_BuildingShape::_InternalSerialize(
+    const ::google::protobuf::MessageLite &base,
+    ::uint8_t *PROTOBUF_NONNULL target,
+    ::google::protobuf::io::EpsCopyOutputStream *PROTOBUF_NONNULL stream) {
+  const Tile_BuildingShape &this_ =
+      static_cast<const Tile_BuildingShape &>(base);
+#else  // PROTOBUF_CUSTOM_VTABLE
+::uint8_t *PROTOBUF_NONNULL Tile_BuildingShape::_InternalSerialize(
+    ::uint8_t *PROTOBUF_NONNULL target,
+    ::google::protobuf::io::EpsCopyOutputStream *PROTOBUF_NONNULL
+        stream) const {
+  const Tile_BuildingShape &this_ = *this;
+#endif // PROTOBUF_CUSTOM_VTABLE
   if constexpr (::_pbi::DebugHardenCheckHasBitConsistency()) {
     this_.CheckHasBitConsistency();
   }
@@ -2184,7 +2296,7 @@ PROTOBUF_NOINLINE void Tile_BuildingShape::Clear() {
   cached_has_bits = this_._impl_._has_bits_[0];
   // required string osid = 1;
   if (CheckHasBit(cached_has_bits, 0x00000004U)) {
-    const ::std::string& _s = this_._internal_osid();
+    const ::std::string &_s = this_._internal_osid();
     target = stream->WriteStringMaybeAliased(1, _s, target);
   }
 
@@ -2207,21 +2319,24 @@ PROTOBUF_NOINLINE void Tile_BuildingShape::Clear() {
   }
 
   if (ABSL_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
-    target =
-        ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
-            this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+        this_._internal_metadata_
+            .unknown_fields<::google::protobuf::UnknownFieldSet>(
+                ::google::protobuf::UnknownFieldSet::default_instance),
+        target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:vector_tile.Tile.BuildingShape)
   return target;
 }
 
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-::size_t Tile_BuildingShape::ByteSizeLong(const MessageLite& base) {
-  const Tile_BuildingShape& this_ = static_cast<const Tile_BuildingShape&>(base);
-#else   // PROTOBUF_CUSTOM_VTABLE
+::size_t Tile_BuildingShape::ByteSizeLong(const MessageLite &base) {
+  const Tile_BuildingShape &this_ =
+      static_cast<const Tile_BuildingShape &>(base);
+#else  // PROTOBUF_CUSTOM_VTABLE
 ::size_t Tile_BuildingShape::ByteSizeLong() const {
-  const Tile_BuildingShape& this_ = *this;
-#endif  // PROTOBUF_CUSTOM_VTABLE
+  const Tile_BuildingShape &this_ = *this;
+#endif // PROTOBUF_CUSTOM_VTABLE
   // @@protoc_insertion_point(message_byte_size_start:vector_tile.Tile.BuildingShape)
   ::size_t total_size = 0;
 
@@ -2234,37 +2349,39 @@ PROTOBUF_NOINLINE void Tile_BuildingShape::Clear() {
   if (BatchCheckHasBit(cached_has_bits, 0x00000003U)) {
     // repeated int32 approx_centre = 2;
     if (CheckHasBitForRepeated(cached_has_bits, 0x00000001U)) {
-      ::size_t data_size = ::_pbi::WireFormatLite::Int32Size(
-          this_._internal_approx_centre());
-      ::size_t tag_size = ::size_t{1} *
+      ::size_t data_size =
+          ::_pbi::WireFormatLite::Int32Size(this_._internal_approx_centre());
+      ::size_t tag_size =
+          ::size_t{1} *
           ::_pbi::FromIntSize(this_._internal_approx_centre_size());
       total_size += tag_size + data_size;
     }
     // repeated int32 edges = 3;
     if (CheckHasBitForRepeated(cached_has_bits, 0x00000002U)) {
-      ::size_t data_size = ::_pbi::WireFormatLite::Int32Size(
-          this_._internal_edges());
-      ::size_t tag_size = ::size_t{1} *
-          ::_pbi::FromIntSize(this_._internal_edges_size());
+      ::size_t data_size =
+          ::_pbi::WireFormatLite::Int32Size(this_._internal_edges());
+      ::size_t tag_size =
+          ::size_t{1} * ::_pbi::FromIntSize(this_._internal_edges_size());
       total_size += tag_size + data_size;
     }
   }
-   {
+  {
     // required string osid = 1;
     if (CheckHasBit(cached_has_bits, 0x00000004U)) {
-      total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
-                                      this_._internal_osid());
+      total_size +=
+          1 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                  this_._internal_osid());
     }
   }
   return this_.MaybeComputeUnknownFieldsSize(total_size,
                                              &this_._impl_._cached_size_);
 }
 
-void Tile_BuildingShape::MergeImpl(::google::protobuf::MessageLite& to_msg,
-                            const ::google::protobuf::MessageLite& from_msg) {
-   auto* const _this =
-      static_cast<Tile_BuildingShape*>(&to_msg);
-  auto& from = static_cast<const Tile_BuildingShape&>(from_msg);
+void Tile_BuildingShape::MergeImpl(
+    ::google::protobuf::MessageLite &to_msg,
+    const ::google::protobuf::MessageLite &from_msg) {
+  auto *const _this = static_cast<Tile_BuildingShape *>(&to_msg);
+  auto &from = static_cast<const Tile_BuildingShape &>(from_msg);
   if constexpr (::_pbi::DebugHardenCheckHasBitConsistency()) {
     from.CheckHasBitConsistency();
   }
@@ -2276,7 +2393,8 @@ void Tile_BuildingShape::MergeImpl(::google::protobuf::MessageLite& to_msg,
   cached_has_bits = from._impl_._has_bits_[0];
   if (BatchCheckHasBit(cached_has_bits, 0x00000007U)) {
     if (CheckHasBitForRepeated(cached_has_bits, 0x00000001U)) {
-      _this->_internal_mutable_approx_centre()->MergeFrom(from._internal_approx_centre());
+      _this->_internal_mutable_approx_centre()->MergeFrom(
+          from._internal_approx_centre());
     }
     if (CheckHasBitForRepeated(cached_has_bits, 0x00000002U)) {
       _this->_internal_mutable_edges()->MergeFrom(from._internal_edges());
@@ -2290,31 +2408,34 @@ void Tile_BuildingShape::MergeImpl(::google::protobuf::MessageLite& to_msg,
       from._internal_metadata_);
 }
 
-void Tile_BuildingShape::CopyFrom(const Tile_BuildingShape& from) {
+void Tile_BuildingShape::CopyFrom(const Tile_BuildingShape &from) {
   // @@protoc_insertion_point(class_specific_copy_from_start:vector_tile.Tile.BuildingShape)
-  if (&from == this) return;
+  if (&from == this)
+    return;
   Clear();
   MergeFrom(from);
 }
 
-PROTOBUF_NOINLINE bool Tile_BuildingShape::IsInitializedImpl(
-    const MessageLite& msg) {
-  auto& this_ = static_cast<const Tile_BuildingShape&>(msg);
+PROTOBUF_NOINLINE bool
+Tile_BuildingShape::IsInitializedImpl(const MessageLite &msg) {
+  auto &this_ = static_cast<const Tile_BuildingShape &>(msg);
   if (_Internal::MissingRequiredFields(this_._impl_._has_bits_)) {
     return false;
   }
   return true;
 }
 
-void Tile_BuildingShape::InternalSwap(Tile_BuildingShape* PROTOBUF_RESTRICT PROTOBUF_NONNULL other) {
+void Tile_BuildingShape::InternalSwap(
+    Tile_BuildingShape *PROTOBUF_RESTRICT PROTOBUF_NONNULL other) {
   using ::std::swap;
-  auto* arena = GetArena();
+  auto *arena = GetArena();
   ABSL_DCHECK_EQ(arena, other->GetArena());
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
   _impl_.approx_centre_.InternalSwap(&other->_impl_.approx_centre_);
   _impl_.edges_.InternalSwap(&other->_impl_.edges_);
-  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.osid_, &other->_impl_.osid_, arena);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.osid_, &other->_impl_.osid_,
+                                       arena);
 }
 
 ::google::protobuf::Metadata Tile_BuildingShape::GetMetadata() const {
@@ -2323,39 +2444,36 @@ void Tile_BuildingShape::InternalSwap(Tile_BuildingShape* PROTOBUF_RESTRICT PROT
 // ===================================================================
 
 class Tile::_Internal {
- public:
-  using HasBits =
-      decltype(::std::declval<Tile>()._impl_._has_bits_);
+public:
+  using HasBits = decltype(::std::declval<Tile>()._impl_._has_bits_);
   static constexpr ::int32_t kHasBitsOffset =
       8 * PROTOBUF_FIELD_OFFSET(Tile, _impl_._has_bits_);
 };
 
-Tile::Tile(::google::protobuf::Arena* PROTOBUF_NULLABLE arena)
+Tile::Tile(::google::protobuf::Arena *PROTOBUF_NULLABLE arena)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
     : ::google::protobuf::Message(arena, Tile_class_data_.base()) {
-#else   // PROTOBUF_CUSTOM_VTABLE
+#else  // PROTOBUF_CUSTOM_VTABLE
     : ::google::protobuf::Message(arena) {
-#endif  // PROTOBUF_CUSTOM_VTABLE
+#endif // PROTOBUF_CUSTOM_VTABLE
   SharedCtor(arena);
   // @@protoc_insertion_point(arena_constructor:vector_tile.Tile)
 }
 PROTOBUF_NDEBUG_INLINE Tile::Impl_::Impl_(
-    [[maybe_unused]] ::google::protobuf::internal::InternalVisibility visibility,
-    [[maybe_unused]] ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const Impl_& from,
-    [[maybe_unused]] const ::vector_tile::Tile& from_msg)
-      : _has_bits_{from._has_bits_},
-        _cached_size_{0},
-        shapes_{visibility, arena, from.shapes_} {}
+    [[maybe_unused]] ::google::protobuf::internal::InternalVisibility
+        visibility,
+    [[maybe_unused]] ::google::protobuf::Arena *PROTOBUF_NULLABLE arena,
+    const Impl_ &from, [[maybe_unused]] const ::vector_tile::Tile &from_msg)
+    : _has_bits_{from._has_bits_}, _cached_size_{0},
+      shapes_{visibility, arena, from.shapes_} {}
 
-Tile::Tile(
-    ::google::protobuf::Arena* PROTOBUF_NULLABLE arena,
-    const Tile& from)
+Tile::Tile(::google::protobuf::Arena *PROTOBUF_NULLABLE arena, const Tile &from)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
     : ::google::protobuf::Message(arena, Tile_class_data_.base()) {
-#else   // PROTOBUF_CUSTOM_VTABLE
+#else  // PROTOBUF_CUSTOM_VTABLE
     : ::google::protobuf::Message(arena) {
-#endif  // PROTOBUF_CUSTOM_VTABLE
-  Tile* const _this = this;
+#endif // PROTOBUF_CUSTOM_VTABLE
+  Tile *const _this = this;
   (void)_this;
   _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
       from._internal_metadata_);
@@ -2364,20 +2482,20 @@ Tile::Tile(
   // @@protoc_insertion_point(copy_constructor:vector_tile.Tile)
 }
 PROTOBUF_NDEBUG_INLINE Tile::Impl_::Impl_(
-    [[maybe_unused]] ::google::protobuf::internal::InternalVisibility visibility,
-    [[maybe_unused]] ::google::protobuf::Arena* PROTOBUF_NULLABLE arena)
-      : _cached_size_{0},
-        shapes_{visibility, arena} {}
+    [[maybe_unused]] ::google::protobuf::internal::InternalVisibility
+        visibility,
+    [[maybe_unused]] ::google::protobuf::Arena *PROTOBUF_NULLABLE arena)
+    : _cached_size_{0}, shapes_{visibility, arena} {}
 
-inline void Tile::SharedCtor(::_pb::Arena* PROTOBUF_NULLABLE arena) {
+inline void Tile::SharedCtor(::_pb::Arena *PROTOBUF_NULLABLE arena) {
   new (&_impl_) Impl_(internal_visibility(), arena);
 }
 Tile::~Tile() {
   // @@protoc_insertion_point(destructor:vector_tile.Tile)
   SharedDtor(*this);
 }
-inline void Tile::SharedDtor(MessageLite& self) {
-  Tile& this_ = static_cast<Tile&>(self);
+inline void Tile::SharedDtor(MessageLite &self) {
+  Tile &this_ = static_cast<Tile &>(self);
   if constexpr (::_pbi::DebugHardenCheckHasBitConsistency()) {
     this_.CheckHasBitConsistency();
   }
@@ -2386,25 +2504,24 @@ inline void Tile::SharedDtor(MessageLite& self) {
   this_._impl_.~Impl_();
 }
 
-inline void* PROTOBUF_NONNULL Tile::PlacementNew_(
-    const void* PROTOBUF_NONNULL, void* PROTOBUF_NONNULL mem,
-    ::google::protobuf::Arena* PROTOBUF_NULLABLE arena) {
+inline void *PROTOBUF_NONNULL
+Tile::PlacementNew_(const void *PROTOBUF_NONNULL, void *PROTOBUF_NONNULL mem,
+                    ::google::protobuf::Arena *PROTOBUF_NULLABLE arena) {
   return ::new (mem) Tile(arena);
 }
 constexpr auto Tile::InternalNewImpl_() {
-  constexpr auto arena_bits = ::google::protobuf::internal::EncodePlacementArenaOffsets({
-      PROTOBUF_FIELD_OFFSET(Tile, _impl_.shapes_) +
-          decltype(Tile::_impl_.shapes_)::
-              InternalGetArenaOffset(
+  constexpr auto arena_bits =
+      ::google::protobuf::internal::EncodePlacementArenaOffsets({
+          PROTOBUF_FIELD_OFFSET(Tile, _impl_.shapes_) +
+              decltype(Tile::_impl_.shapes_)::InternalGetArenaOffset(
                   ::google::protobuf::Message::internal_visibility()),
-  });
+      });
   if (arena_bits.has_value()) {
     return ::google::protobuf::internal::MessageCreator::ZeroInit(
         sizeof(Tile), alignof(Tile), *arena_bits);
   } else {
-    return ::google::protobuf::internal::MessageCreator(&Tile::PlacementNew_,
-                                 sizeof(Tile),
-                                 alignof(Tile));
+    return ::google::protobuf::internal::MessageCreator(
+        &Tile::PlacementNew_, sizeof(Tile), alignof(Tile));
   }
 }
 constexpr auto Tile::InternalGenerateClassData_() {
@@ -2412,76 +2529,80 @@ constexpr auto Tile::InternalGenerateClassData_() {
       ::google::protobuf::internal::ClassData{
           &_Tile_default_instance_._instance,
           &_table_.header,
-          nullptr,  // OnDemandRegisterArenaDtor
+          nullptr, // OnDemandRegisterArenaDtor
           Tile::IsInitializedImpl,
           &Tile::MergeImpl,
           ::google::protobuf::Message::GetNewImpl<Tile>(),
 #if defined(PROTOBUF_CUSTOM_VTABLE)
           &Tile::SharedDtor,
-          ::google::protobuf::Message::GetClearImpl<Tile>(), &Tile::ByteSizeLong,
-              &Tile::_InternalSerialize,
-#endif  // PROTOBUF_CUSTOM_VTABLE
+          ::google::protobuf::Message::GetClearImpl<Tile>(),
+          &Tile::ByteSizeLong,
+          &Tile::_InternalSerialize,
+#endif // PROTOBUF_CUSTOM_VTABLE
           PROTOBUF_FIELD_OFFSET(Tile, _impl_._cached_size_),
           false,
       },
       &Tile::kDescriptorMethods,
       &descriptor_table_vector_5ftile_2eproto,
-      nullptr,  // tracker
+      nullptr, // tracker
   };
 }
 
-PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 const
-    ::google::protobuf::internal::ClassDataFull Tile_class_data_ =
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 const ::google::protobuf::
+    internal::ClassDataFull Tile_class_data_ =
         Tile::InternalGenerateClassData_();
 
-PROTOBUF_ATTRIBUTE_WEAK const ::google::protobuf::internal::ClassData* PROTOBUF_NONNULL
-Tile::GetClassData() const {
+PROTOBUF_ATTRIBUTE_WEAK const ::google::protobuf::internal::ClassData *
+    PROTOBUF_NONNULL
+    Tile::GetClassData() const {
   ::google::protobuf::internal::PrefetchToLocalCache(&Tile_class_data_);
   ::google::protobuf::internal::PrefetchToLocalCache(Tile_class_data_.tc_table);
   return Tile_class_data_.base();
 }
-PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<0, 1, 1, 0, 2>
-Tile::_table_ = {
-  {
-    PROTOBUF_FIELD_OFFSET(Tile, _impl_._has_bits_),
-    0, // no _extensions_
-    1, 0,  // max_field_number, fast_idx_mask
-    offsetof(decltype(_table_), field_lookup_table),
-    4294967294,  // skipmap
-    offsetof(decltype(_table_), field_entries),
-    1,  // num_field_entries
-    1,  // num_aux_entries
-    offsetof(decltype(_table_), aux_entries),
-    Tile_class_data_.base(),
-    nullptr,  // post_loop_handler
-    ::_pbi::TcParser::GenericFallback,  // fallback
-    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
-    ::_pbi::TcParser::GetTable<::vector_tile::Tile>(),  // to_prefetch
-    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
-  }, {{
-    // repeated .vector_tile.Tile.BuildingShape shapes = 1;
-    {::_pbi::TcParser::FastMtR1,
-     {10, 0, 0,
-      PROTOBUF_FIELD_OFFSET(Tile, _impl_.shapes_)}},
-  }}, {{
-    65535, 65535
-  }}, {{
-    // repeated .vector_tile.Tile.BuildingShape shapes = 1;
-    {PROTOBUF_FIELD_OFFSET(Tile, _impl_.shapes_), _Internal::kHasBitsOffset + 0, 0, (0 | ::_fl::kFcRepeated | ::_fl::kMessage | ::_fl::kTvTable)},
-  }},
-  {{
-      {::_pbi::TcParser::GetTable<::vector_tile::Tile_BuildingShape>()},
-  }},
-  {{
-  }},
-};
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 const ::_pbi::TcParseTable<
+    0, 1, 1, 0, 2>
+    Tile::_table_ = {
+        {
+            PROTOBUF_FIELD_OFFSET(Tile, _impl_._has_bits_),
+            0, // no _extensions_
+            1,
+            0, // max_field_number, fast_idx_mask
+            offsetof(decltype(_table_), field_lookup_table),
+            4294967294, // skipmap
+            offsetof(decltype(_table_), field_entries),
+            1, // num_field_entries
+            1, // num_aux_entries
+            offsetof(decltype(_table_), aux_entries),
+            Tile_class_data_.base(),
+            nullptr,                           // post_loop_handler
+            ::_pbi::TcParser::GenericFallback, // fallback
+#ifdef PROTOBUF_PREFETCH_PARSE_TABLE
+            ::_pbi::TcParser::GetTable<::vector_tile::Tile>(), // to_prefetch
+#endif // PROTOBUF_PREFETCH_PARSE_TABLE
+        },
+        {{
+            // repeated .vector_tile.Tile.BuildingShape shapes = 1;
+            {::_pbi::TcParser::FastMtR1,
+             {10, 0, 0, PROTOBUF_FIELD_OFFSET(Tile, _impl_.shapes_)}},
+        }},
+        {{65535, 65535}},
+        {{
+            // repeated .vector_tile.Tile.BuildingShape shapes = 1;
+            {PROTOBUF_FIELD_OFFSET(Tile, _impl_.shapes_),
+             _Internal::kHasBitsOffset + 0, 0,
+             (0 | ::_fl::kFcRepeated | ::_fl::kMessage | ::_fl::kTvTable)},
+        }},
+        {{
+            {::_pbi::TcParser::GetTable<::vector_tile::Tile_BuildingShape>()},
+        }},
+        {{}},
+    };
 PROTOBUF_NOINLINE void Tile::Clear() {
-// @@protoc_insertion_point(message_clear_start:vector_tile.Tile)
+  // @@protoc_insertion_point(message_clear_start:vector_tile.Tile)
   ::google::protobuf::internal::TSanWrite(&_impl_);
   ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
-  (void) cached_has_bits;
+  (void)cached_has_bits;
 
   cached_has_bits = _impl_._has_bits_[0];
   if (CheckHasBitForRepeated(cached_has_bits, 0x00000001U)) {
@@ -2492,16 +2613,18 @@ PROTOBUF_NOINLINE void Tile::Clear() {
 }
 
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-::uint8_t* PROTOBUF_NONNULL Tile::_InternalSerialize(
-    const ::google::protobuf::MessageLite& base, ::uint8_t* PROTOBUF_NONNULL target,
-    ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) {
-  const Tile& this_ = static_cast<const Tile&>(base);
-#else   // PROTOBUF_CUSTOM_VTABLE
-::uint8_t* PROTOBUF_NONNULL Tile::_InternalSerialize(
-    ::uint8_t* PROTOBUF_NONNULL target,
-    ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) const {
-  const Tile& this_ = *this;
-#endif  // PROTOBUF_CUSTOM_VTABLE
+::uint8_t *PROTOBUF_NONNULL Tile::_InternalSerialize(
+    const ::google::protobuf::MessageLite &base,
+    ::uint8_t *PROTOBUF_NONNULL target,
+    ::google::protobuf::io::EpsCopyOutputStream *PROTOBUF_NONNULL stream) {
+  const Tile &this_ = static_cast<const Tile &>(base);
+#else  // PROTOBUF_CUSTOM_VTABLE
+::uint8_t *PROTOBUF_NONNULL Tile::_InternalSerialize(
+    ::uint8_t *PROTOBUF_NONNULL target,
+    ::google::protobuf::io::EpsCopyOutputStream *PROTOBUF_NONNULL
+        stream) const {
+  const Tile &this_ = *this;
+#endif // PROTOBUF_CUSTOM_VTABLE
   if constexpr (::_pbi::DebugHardenCheckHasBitConsistency()) {
     this_.CheckHasBitConsistency();
   }
@@ -2512,33 +2635,34 @@ PROTOBUF_NOINLINE void Tile::Clear() {
   cached_has_bits = this_._impl_._has_bits_[0];
   // repeated .vector_tile.Tile.BuildingShape shapes = 1;
   if (CheckHasBitForRepeated(cached_has_bits, 0x00000001U)) {
-    for (unsigned i = 0, n = static_cast<unsigned>(
-                             this_._internal_shapes_size());
+    for (unsigned i = 0,
+                  n = static_cast<unsigned>(this_._internal_shapes_size());
          i < n; i++) {
-      const auto& repfield = this_._internal_shapes().Get(i);
+      const auto &repfield = this_._internal_shapes().Get(i);
       target =
           ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
-              1, repfield, repfield.GetCachedSize(),
-              target, stream);
+              1, repfield, repfield.GetCachedSize(), target, stream);
     }
   }
 
   if (ABSL_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
-    target =
-        ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
-            this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+        this_._internal_metadata_
+            .unknown_fields<::google::protobuf::UnknownFieldSet>(
+                ::google::protobuf::UnknownFieldSet::default_instance),
+        target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:vector_tile.Tile)
   return target;
 }
 
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-::size_t Tile::ByteSizeLong(const MessageLite& base) {
-  const Tile& this_ = static_cast<const Tile&>(base);
-#else   // PROTOBUF_CUSTOM_VTABLE
+::size_t Tile::ByteSizeLong(const MessageLite &base) {
+  const Tile &this_ = static_cast<const Tile &>(base);
+#else  // PROTOBUF_CUSTOM_VTABLE
 ::size_t Tile::ByteSizeLong() const {
-  const Tile& this_ = *this;
-#endif  // PROTOBUF_CUSTOM_VTABLE
+  const Tile &this_ = *this;
+#endif // PROTOBUF_CUSTOM_VTABLE
   // @@protoc_insertion_point(message_byte_size_start:vector_tile.Tile)
   ::size_t total_size = 0;
 
@@ -2547,13 +2671,14 @@ PROTOBUF_NOINLINE void Tile::Clear() {
   (void)cached_has_bits;
 
   ::_pbi::Prefetch5LinesFrom7Lines(&this_);
-   {
+  {
     // repeated .vector_tile.Tile.BuildingShape shapes = 1;
     cached_has_bits = this_._impl_._has_bits_[0];
     if (CheckHasBitForRepeated(cached_has_bits, 0x00000001U)) {
       total_size += 1UL * this_._internal_shapes_size();
-      for (const auto& msg : this_._internal_shapes()) {
-        total_size += ::google::protobuf::internal::WireFormatLite::MessageSize(msg);
+      for (const auto &msg : this_._internal_shapes()) {
+        total_size +=
+            ::google::protobuf::internal::WireFormatLite::MessageSize(msg);
       }
     }
   }
@@ -2561,15 +2686,14 @@ PROTOBUF_NOINLINE void Tile::Clear() {
                                              &this_._impl_._cached_size_);
 }
 
-void Tile::MergeImpl(::google::protobuf::MessageLite& to_msg,
-                            const ::google::protobuf::MessageLite& from_msg) {
-   auto* const _this =
-      static_cast<Tile*>(&to_msg);
-  auto& from = static_cast<const Tile&>(from_msg);
+void Tile::MergeImpl(::google::protobuf::MessageLite &to_msg,
+                     const ::google::protobuf::MessageLite &from_msg) {
+  auto *const _this = static_cast<Tile *>(&to_msg);
+  auto &from = static_cast<const Tile &>(from_msg);
   if constexpr (::_pbi::DebugHardenCheckHasBitConsistency()) {
     from.CheckHasBitConsistency();
   }
-  ::google::protobuf::Arena* arena = _this->GetArena();
+  ::google::protobuf::Arena *arena = _this->GetArena();
   // @@protoc_insertion_point(class_specific_merge_from_start:vector_tile.Tile)
   ABSL_DCHECK_NE(&from, _this);
   ::uint32_t cached_has_bits = 0;
@@ -2586,22 +2710,23 @@ void Tile::MergeImpl(::google::protobuf::MessageLite& to_msg,
       from._internal_metadata_);
 }
 
-void Tile::CopyFrom(const Tile& from) {
+void Tile::CopyFrom(const Tile &from) {
   // @@protoc_insertion_point(class_specific_copy_from_start:vector_tile.Tile)
-  if (&from == this) return;
+  if (&from == this)
+    return;
   Clear();
   MergeFrom(from);
 }
 
-PROTOBUF_NOINLINE bool Tile::IsInitializedImpl(
-    const MessageLite& msg) {
-  auto& this_ = static_cast<const Tile&>(msg);
-  if (!::google::protobuf::internal::AllAreInitialized(this_._internal_shapes()))
+PROTOBUF_NOINLINE bool Tile::IsInitializedImpl(const MessageLite &msg) {
+  auto &this_ = static_cast<const Tile &>(msg);
+  if (!::google::protobuf::internal::AllAreInitialized(
+          this_._internal_shapes()))
     return false;
   return true;
 }
 
-void Tile::InternalSwap(Tile* PROTOBUF_RESTRICT PROTOBUF_NONNULL other) {
+void Tile::InternalSwap(Tile *PROTOBUF_RESTRICT PROTOBUF_NONNULL other) {
   using ::std::swap;
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
@@ -2612,14 +2737,13 @@ void Tile::InternalSwap(Tile* PROTOBUF_RESTRICT PROTOBUF_NONNULL other) {
   return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
 }
 // @@protoc_insertion_point(namespace_scope)
-}  // namespace vector_tile
+} // namespace vector_tile
 namespace google {
-namespace protobuf {
-}  // namespace protobuf
-}  // namespace google
+namespace protobuf {} // namespace protobuf
+} // namespace google
 // @@protoc_insertion_point(global_scope)
-PROTOBUF_ATTRIBUTE_INIT_PRIORITY2 static ::std::false_type
-    _static_init2_ [[maybe_unused]] =
+PROTOBUF_ATTRIBUTE_INIT_PRIORITY2 static ::std::false_type _static_init2_
+    [[maybe_unused]] =
         (::_pbi::AddDescriptors(&descriptor_table_vector_5ftile_2eproto),
          ::std::false_type{});
 #include "google/protobuf/port_undef.inc"

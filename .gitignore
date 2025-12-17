@@ -3,3 +3,4 @@ db/extra/
 config.txt
 obj/
 bin/
+.clangd

@@ -17,18 +17,18 @@
 #error "Protobuf C++ headers/runtime. See"
 #error "https://protobuf.dev/support/cross-version-runtime-guarantee/#cpp"
 #endif
-#include "google/protobuf/io/coded_stream.h"
 #include "google/protobuf/arena.h"
 #include "google/protobuf/arenastring.h"
+#include "google/protobuf/extension_set.h" // IWYU pragma: export
+#include "google/protobuf/generated_enum_reflection.h"
+#include "google/protobuf/generated_message_reflection.h"
 #include "google/protobuf/generated_message_tctable_decl.h"
 #include "google/protobuf/generated_message_util.h"
-#include "google/protobuf/metadata_lite.h"
-#include "google/protobuf/generated_message_reflection.h"
+#include "google/protobuf/io/coded_stream.h"
 #include "google/protobuf/message.h"
 #include "google/protobuf/message_lite.h"
-#include "google/protobuf/repeated_field.h"  // IWYU pragma: export
-#include "google/protobuf/extension_set.h"  // IWYU pragma: export
-#include "google/protobuf/generated_enum_reflection.h"
+#include "google/protobuf/metadata_lite.h"
+#include "google/protobuf/repeated_field.h" // IWYU pragma: export
 #include "google/protobuf/unknown_field_set.h"
 // @@protoc_insertion_point(includes)
 
@@ -40,19 +40,19 @@
 namespace google {
 namespace protobuf {
 namespace internal {
-template <typename T>
-::absl::string_view GetAnyMessageName();
-}  // namespace internal
-}  // namespace protobuf
-}  // namespace google
+template <typename T>::absl::string_view GetAnyMessageName();
+} // namespace internal
+} // namespace protobuf
+} // namespace google
 
 // Internal implementation detail -- do not use these members.
 struct TableStruct_vector_5ftile_2eproto {
   static const ::uint32_t offsets[];
 };
 extern "C" {
-extern const ::google::protobuf::internal::DescriptorTable descriptor_table_vector_5ftile_2eproto;
-}  // extern "C"
+extern const ::google::protobuf::internal::DescriptorTable
+    descriptor_table_vector_5ftile_2eproto;
+} // extern "C"
 namespace vector_tile {
 enum FullTile_GeomType : int;
 extern const uint32_t FullTile_GeomType_internal_data_[];
@@ -63,31 +63,36 @@ extern const ::google::protobuf::internal::ClassDataFull FullTile_class_data_;
 class FullTile_Feature;
 struct FullTile_FeatureDefaultTypeInternal;
 extern FullTile_FeatureDefaultTypeInternal _FullTile_Feature_default_instance_;
-extern const ::google::protobuf::internal::ClassDataFull FullTile_Feature_class_data_;
+extern const ::google::protobuf::internal::ClassDataFull
+    FullTile_Feature_class_data_;
 class FullTile_Layer;
 struct FullTile_LayerDefaultTypeInternal;
 extern FullTile_LayerDefaultTypeInternal _FullTile_Layer_default_instance_;
-extern const ::google::protobuf::internal::ClassDataFull FullTile_Layer_class_data_;
+extern const ::google::protobuf::internal::ClassDataFull
+    FullTile_Layer_class_data_;
 class FullTile_Value;
 struct FullTile_ValueDefaultTypeInternal;
 extern FullTile_ValueDefaultTypeInternal _FullTile_Value_default_instance_;
-extern const ::google::protobuf::internal::ClassDataFull FullTile_Value_class_data_;
+extern const ::google::protobuf::internal::ClassDataFull
+    FullTile_Value_class_data_;
 class Tile;
 struct TileDefaultTypeInternal;
 extern TileDefaultTypeInternal _Tile_default_instance_;
 extern const ::google::protobuf::internal::ClassDataFull Tile_class_data_;
 class Tile_BuildingShape;
 struct Tile_BuildingShapeDefaultTypeInternal;
-extern Tile_BuildingShapeDefaultTypeInternal _Tile_BuildingShape_default_instance_;
-extern const ::google::protobuf::internal::ClassDataFull Tile_BuildingShape_class_data_;
-}  // namespace vector_tile
+extern Tile_BuildingShapeDefaultTypeInternal
+    _Tile_BuildingShape_default_instance_;
+extern const ::google::protobuf::internal::ClassDataFull
+    Tile_BuildingShape_class_data_;
+} // namespace vector_tile
 namespace google {
 namespace protobuf {
 template <>
 internal::EnumTraitsT<::vector_tile::FullTile_GeomType_internal_data_>
     internal::EnumTraitsImpl::value<::vector_tile::FullTile_GeomType>;
-}  // namespace protobuf
-}  // namespace google
+} // namespace protobuf
+} // namespace google
 
 namespace vector_tile {
 enum FullTile_GeomType : int {
@@ -106,56 +111,61 @@ inline bool FullTile_GeomType_IsValid(int value) {
   return 0 <= value && value <= 3;
 }
 inline constexpr int FullTile_GeomType_GeomType_ARRAYSIZE = 3 + 1;
-const ::google::protobuf::EnumDescriptor* PROTOBUF_NONNULL FullTile_GeomType_descriptor();
-template <typename T>
-const ::std::string& FullTile_GeomType_Name(T value) {
+const ::google::protobuf::EnumDescriptor *PROTOBUF_NONNULL
+FullTile_GeomType_descriptor();
+template <typename T> const ::std::string &FullTile_GeomType_Name(T value) {
   static_assert(::std::is_same<T, FullTile_GeomType>::value ||
                     ::std::is_integral<T>::value,
                 "Incorrect type passed to GeomType_Name().");
   return FullTile_GeomType_Name(static_cast<FullTile_GeomType>(value));
 }
 template <>
-inline const ::std::string& FullTile_GeomType_Name(FullTile_GeomType value) {
-  return ::google::protobuf::internal::NameOfDenseEnum<FullTile_GeomType_descriptor, 0, 3>(
-      static_cast<int>(value));
+inline const ::std::string &FullTile_GeomType_Name(FullTile_GeomType value) {
+  return ::google::protobuf::internal::NameOfDenseEnum<
+      FullTile_GeomType_descriptor, 0, 3>(static_cast<int>(value));
 }
-inline bool FullTile_GeomType_Parse(
-    ::absl::string_view name, FullTile_GeomType* PROTOBUF_NONNULL value) {
-  return ::google::protobuf::internal::ParseNamedEnum<FullTile_GeomType>(FullTile_GeomType_descriptor(), name,
-                                           value);
+inline bool FullTile_GeomType_Parse(::absl::string_view name,
+                                    FullTile_GeomType *PROTOBUF_NONNULL value) {
+  return ::google::protobuf::internal::ParseNamedEnum<FullTile_GeomType>(
+      FullTile_GeomType_descriptor(), name, value);
 }
 
 // ===================================================================
 
-
 // -------------------------------------------------------------------
 
 class Tile_BuildingShape final : public ::google::protobuf::Message
-/* @@protoc_insertion_point(class_definition:vector_tile.Tile.BuildingShape) */ {
- public:
+/* @@protoc_insertion_point(class_definition:vector_tile.Tile.BuildingShape) */
+{
+public:
   inline Tile_BuildingShape() : Tile_BuildingShape(nullptr) {}
   ~Tile_BuildingShape() PROTOBUF_FINAL;
 
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-  void operator delete(Tile_BuildingShape* PROTOBUF_NONNULL msg, ::std::destroying_delete_t) {
+  void operator delete(Tile_BuildingShape *PROTOBUF_NONNULL msg,
+                       ::std::destroying_delete_t) {
     SharedDtor(*msg);
     ::google::protobuf::internal::SizedDelete(msg, sizeof(Tile_BuildingShape));
   }
 #endif
 
   template <typename = void>
-  explicit PROTOBUF_CONSTEXPR Tile_BuildingShape(::google::protobuf::internal::ConstantInitialized);
+  explicit PROTOBUF_CONSTEXPR
+      Tile_BuildingShape(::google::protobuf::internal::ConstantInitialized);
 
-  inline Tile_BuildingShape(const Tile_BuildingShape& from) : Tile_BuildingShape(nullptr, from) {}
-  inline Tile_BuildingShape(Tile_BuildingShape&& from) noexcept
+  inline Tile_BuildingShape(const Tile_BuildingShape &from)
+      : Tile_BuildingShape(nullptr, from) {}
+  inline Tile_BuildingShape(Tile_BuildingShape &&from) noexcept
       : Tile_BuildingShape(nullptr, ::std::move(from)) {}
-  inline Tile_BuildingShape& operator=(const Tile_BuildingShape& from) {
+  inline Tile_BuildingShape &operator=(const Tile_BuildingShape &from) {
     CopyFrom(from);
     return *this;
   }
-  inline Tile_BuildingShape& operator=(Tile_BuildingShape&& from) noexcept {
-    if (this == &from) return *this;
-    if (::google::protobuf::internal::CanMoveWithInternalSwap(GetArena(), from.GetArena())) {
+  inline Tile_BuildingShape &operator=(Tile_BuildingShape &&from) noexcept {
+    if (this == &from)
+      return *this;
+    if (::google::protobuf::internal::CanMoveWithInternalSwap(
+            GetArena(), from.GetArena())) {
       InternalSwap(&from);
     } else {
       CopyFrom(from);
@@ -163,113 +173,132 @@ class Tile_BuildingShape final : public ::google::protobuf::Message
     return *this;
   }
 
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
-      ABSL_ATTRIBUTE_LIFETIME_BOUND {
-    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
+  inline const ::google::protobuf::UnknownFieldSet &
+  unknown_fields() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_
+        .unknown_fields<::google::protobuf::UnknownFieldSet>(
+            ::google::protobuf::UnknownFieldSet::default_instance);
   }
-  inline ::google::protobuf::UnknownFieldSet* PROTOBUF_NONNULL mutable_unknown_fields()
-      ABSL_ATTRIBUTE_LIFETIME_BOUND {
-    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
+  inline ::google::protobuf::UnknownFieldSet *PROTOBUF_NONNULL
+  mutable_unknown_fields() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_
+        .mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
   }
 
-  static const ::google::protobuf::Descriptor* PROTOBUF_NONNULL descriptor() {
+  static const ::google::protobuf::Descriptor *PROTOBUF_NONNULL descriptor() {
     return GetDescriptor();
   }
-  static const ::google::protobuf::Descriptor* PROTOBUF_NONNULL GetDescriptor() {
+  static const ::google::protobuf::Descriptor *PROTOBUF_NONNULL
+  GetDescriptor() {
     return default_instance().GetMetadata().descriptor;
   }
-  static const ::google::protobuf::Reflection* PROTOBUF_NONNULL GetReflection() {
+  static const ::google::protobuf::Reflection *PROTOBUF_NONNULL
+  GetReflection() {
     return default_instance().GetMetadata().reflection;
   }
-  static const Tile_BuildingShape& default_instance() {
-    return *reinterpret_cast<const Tile_BuildingShape*>(
+  static const Tile_BuildingShape &default_instance() {
+    return *reinterpret_cast<const Tile_BuildingShape *>(
         &_Tile_BuildingShape_default_instance_);
   }
   static constexpr int kIndexInFileMessages = 4;
-  friend void swap(Tile_BuildingShape& a, Tile_BuildingShape& b) { a.Swap(&b); }
-  inline void Swap(Tile_BuildingShape* PROTOBUF_NONNULL other) {
-    if (other == this) return;
-    if (::google::protobuf::internal::CanUseInternalSwap(GetArena(), other->GetArena())) {
+  friend void swap(Tile_BuildingShape &a, Tile_BuildingShape &b) { a.Swap(&b); }
+  inline void Swap(Tile_BuildingShape *PROTOBUF_NONNULL other) {
+    if (other == this)
+      return;
+    if (::google::protobuf::internal::CanUseInternalSwap(GetArena(),
+                                                         other->GetArena())) {
       InternalSwap(other);
     } else {
       ::google::protobuf::internal::GenericSwap(this, other);
     }
   }
-  void UnsafeArenaSwap(Tile_BuildingShape* PROTOBUF_NONNULL other) {
-    if (other == this) return;
+  void UnsafeArenaSwap(Tile_BuildingShape *PROTOBUF_NONNULL other) {
+    if (other == this)
+      return;
     ABSL_DCHECK(GetArena() == other->GetArena());
     InternalSwap(other);
   }
 
   // implements Message ----------------------------------------------
 
-  Tile_BuildingShape* PROTOBUF_NONNULL New(::google::protobuf::Arena* PROTOBUF_NULLABLE arena = nullptr) const {
-    return ::google::protobuf::Message::DefaultConstruct<Tile_BuildingShape>(arena);
+  Tile_BuildingShape *PROTOBUF_NONNULL
+  New(::google::protobuf::Arena *PROTOBUF_NULLABLE arena = nullptr) const {
+    return ::google::protobuf::Message::DefaultConstruct<Tile_BuildingShape>(
+        arena);
   }
   using ::google::protobuf::Message::CopyFrom;
-  void CopyFrom(const Tile_BuildingShape& from);
+  void CopyFrom(const Tile_BuildingShape &from);
   using ::google::protobuf::Message::MergeFrom;
-  void MergeFrom(const Tile_BuildingShape& from) { Tile_BuildingShape::MergeImpl(*this, from); }
-
-  private:
-  static void MergeImpl(::google::protobuf::MessageLite& to_msg,
-                        const ::google::protobuf::MessageLite& from_msg);
-
-  public:
-  bool IsInitialized() const {
-    return IsInitializedImpl(*this);
+  void MergeFrom(const Tile_BuildingShape &from) {
+    Tile_BuildingShape::MergeImpl(*this, from);
   }
 
-  private:
-  static bool IsInitializedImpl(const MessageLite& msg);
+private:
+  static void MergeImpl(::google::protobuf::MessageLite &to_msg,
+                        const ::google::protobuf::MessageLite &from_msg);
 
-  public:
+public:
+  bool IsInitialized() const { return IsInitializedImpl(*this); }
+
+private:
+  static bool IsInitializedImpl(const MessageLite &msg);
+
+public:
   ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
-  #if defined(PROTOBUF_CUSTOM_VTABLE)
-  private:
-  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
-  static ::uint8_t* PROTOBUF_NONNULL _InternalSerialize(
-      const ::google::protobuf::MessageLite& msg, ::uint8_t* PROTOBUF_NONNULL target,
-      ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream);
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+private:
+  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite &msg);
+  static ::uint8_t *PROTOBUF_NONNULL _InternalSerialize(
+      const ::google::protobuf::MessageLite &msg,
+      ::uint8_t *PROTOBUF_NONNULL target,
+      ::google::protobuf::io::EpsCopyOutputStream *PROTOBUF_NONNULL stream);
 
-  public:
+public:
   ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
-  ::uint8_t* PROTOBUF_NONNULL _InternalSerialize(
-      ::uint8_t* PROTOBUF_NONNULL target,
-      ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) const {
+  ::uint8_t *PROTOBUF_NONNULL _InternalSerialize(
+      ::uint8_t *PROTOBUF_NONNULL target,
+      ::google::protobuf::io::EpsCopyOutputStream *PROTOBUF_NONNULL
+          stream) const {
     return _InternalSerialize(*this, target, stream);
   }
-  #else   // PROTOBUF_CUSTOM_VTABLE
+#else  // PROTOBUF_CUSTOM_VTABLE
   ::size_t ByteSizeLong() const final;
-  ::uint8_t* PROTOBUF_NONNULL _InternalSerialize(
-      ::uint8_t* PROTOBUF_NONNULL target,
-      ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) const final;
-  #endif  // PROTOBUF_CUSTOM_VTABLE
+  ::uint8_t *PROTOBUF_NONNULL _InternalSerialize(
+      ::uint8_t *PROTOBUF_NONNULL target,
+      ::google::protobuf::io::EpsCopyOutputStream *PROTOBUF_NONNULL
+          stream) const final;
+#endif // PROTOBUF_CUSTOM_VTABLE
   int GetCachedSize() const { return _impl_._cached_size_.Get(); }
 
-  private:
-  void SharedCtor(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
-  static void SharedDtor(MessageLite& self);
-  void InternalSwap(Tile_BuildingShape* PROTOBUF_NONNULL other);
- private:
+private:
+  void SharedCtor(::google::protobuf::Arena *PROTOBUF_NULLABLE arena);
+  static void SharedDtor(MessageLite &self);
+  void InternalSwap(Tile_BuildingShape *PROTOBUF_NONNULL other);
+
+private:
   template <typename T>
   friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "vector_tile.Tile.BuildingShape"; }
+  static ::absl::string_view FullMessageName() {
+    return "vector_tile.Tile.BuildingShape";
+  }
 
-  explicit Tile_BuildingShape(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
-  Tile_BuildingShape(::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const Tile_BuildingShape& from);
-  Tile_BuildingShape(
-      ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, Tile_BuildingShape&& from) noexcept
+  explicit Tile_BuildingShape(
+      ::google::protobuf::Arena *PROTOBUF_NULLABLE arena);
+  Tile_BuildingShape(::google::protobuf::Arena *PROTOBUF_NULLABLE arena,
+                     const Tile_BuildingShape &from);
+  Tile_BuildingShape(::google::protobuf::Arena *PROTOBUF_NULLABLE arena,
+                     Tile_BuildingShape &&from) noexcept
       : Tile_BuildingShape(arena) {
     *this = ::std::move(from);
   }
-  const ::google::protobuf::internal::ClassData* PROTOBUF_NONNULL GetClassData() const PROTOBUF_FINAL;
-  static void* PROTOBUF_NONNULL PlacementNew_(
-      const void* PROTOBUF_NONNULL, void* PROTOBUF_NONNULL mem,
-      ::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+  const ::google::protobuf::internal::ClassData *PROTOBUF_NONNULL
+  GetClassData() const PROTOBUF_FINAL;
+  static void *PROTOBUF_NONNULL
+  PlacementNew_(const void *PROTOBUF_NONNULL, void *PROTOBUF_NONNULL mem,
+                ::google::protobuf::Arena *PROTOBUF_NULLABLE arena);
   static constexpr auto InternalNewImpl_();
 
- public:
+public:
   static constexpr auto InternalGenerateClassData_();
 
   ::google::protobuf::Metadata GetMetadata() const;
@@ -283,80 +312,85 @@ class Tile_BuildingShape final : public ::google::protobuf::Message
   };
   // repeated int32 approx_centre = 2;
   int approx_centre_size() const;
-  private:
+
+private:
   int _internal_approx_centre_size() const;
 
-  public:
-  void clear_approx_centre() ;
+public:
+  void clear_approx_centre();
   ::int32_t approx_centre(int index) const;
   void set_approx_centre(int index, ::int32_t value);
   void add_approx_centre(::int32_t value);
-  const ::google::protobuf::RepeatedField<::int32_t>& approx_centre() const;
-  ::google::protobuf::RepeatedField<::int32_t>* PROTOBUF_NONNULL mutable_approx_centre();
+  const ::google::protobuf::RepeatedField<::int32_t> &approx_centre() const;
+  ::google::protobuf::RepeatedField<::int32_t> *PROTOBUF_NONNULL
+  mutable_approx_centre();
 
-  private:
-  const ::google::protobuf::RepeatedField<::int32_t>& _internal_approx_centre() const;
-  ::google::protobuf::RepeatedField<::int32_t>* PROTOBUF_NONNULL _internal_mutable_approx_centre();
+private:
+  const ::google::protobuf::RepeatedField<::int32_t> &
+  _internal_approx_centre() const;
+  ::google::protobuf::RepeatedField<::int32_t> *PROTOBUF_NONNULL
+  _internal_mutable_approx_centre();
 
-  public:
+public:
   // repeated int32 edges = 3;
   int edges_size() const;
-  private:
+
+private:
   int _internal_edges_size() const;
 
-  public:
-  void clear_edges() ;
+public:
+  void clear_edges();
   ::int32_t edges(int index) const;
   void set_edges(int index, ::int32_t value);
   void add_edges(::int32_t value);
-  const ::google::protobuf::RepeatedField<::int32_t>& edges() const;
-  ::google::protobuf::RepeatedField<::int32_t>* PROTOBUF_NONNULL mutable_edges();
+  const ::google::protobuf::RepeatedField<::int32_t> &edges() const;
+  ::google::protobuf::RepeatedField<::int32_t> *PROTOBUF_NONNULL
+  mutable_edges();
 
-  private:
-  const ::google::protobuf::RepeatedField<::int32_t>& _internal_edges() const;
-  ::google::protobuf::RepeatedField<::int32_t>* PROTOBUF_NONNULL _internal_mutable_edges();
+private:
+  const ::google::protobuf::RepeatedField<::int32_t> &_internal_edges() const;
+  ::google::protobuf::RepeatedField<::int32_t> *PROTOBUF_NONNULL
+  _internal_mutable_edges();
 
-  public:
+public:
   // required string osid = 1;
   bool has_osid() const;
-  void clear_osid() ;
-  const ::std::string& osid() const;
-  template <typename Arg_ = const ::std::string&, typename... Args_>
-  void set_osid(Arg_&& arg, Args_... args);
-  ::std::string* PROTOBUF_NONNULL mutable_osid();
-  [[nodiscard]] ::std::string* PROTOBUF_NULLABLE release_osid();
-  void set_allocated_osid(::std::string* PROTOBUF_NULLABLE value);
+  void clear_osid();
+  const ::std::string &osid() const;
+  template <typename Arg_ = const ::std::string &, typename... Args_>
+  void set_osid(Arg_ &&arg, Args_... args);
+  ::std::string *PROTOBUF_NONNULL mutable_osid();
+  [[nodiscard]] ::std::string *PROTOBUF_NULLABLE release_osid();
+  void set_allocated_osid(::std::string *PROTOBUF_NULLABLE value);
 
-  private:
-  const ::std::string& _internal_osid() const;
-  PROTOBUF_ALWAYS_INLINE void _internal_set_osid(const ::std::string& value);
-  ::std::string* PROTOBUF_NONNULL _internal_mutable_osid();
+private:
+  const ::std::string &_internal_osid() const;
+  PROTOBUF_ALWAYS_INLINE void _internal_set_osid(const ::std::string &value);
+  ::std::string *PROTOBUF_NONNULL _internal_mutable_osid();
 
-  public:
+public:
   // @@protoc_insertion_point(class_scope:vector_tile.Tile.BuildingShape)
- private:
+private:
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
-  static const ::google::protobuf::internal::TcParseTable<2, 3,
-                                   0, 0,
-                                   2>
+  static const ::google::protobuf::internal::TcParseTable<2, 3, 0, 0, 2>
       _table_;
 
   friend class ::google::protobuf::MessageLite;
   friend class ::google::protobuf::Arena;
-  template <typename T>
-  friend class ::google::protobuf::Arena::InternalHelper;
+  template <typename T> friend class ::google::protobuf::Arena::InternalHelper;
   using InternalArenaConstructable_ = void;
   using DestructorSkippable_ = void;
   struct Impl_ {
-    inline explicit constexpr Impl_(::google::protobuf::internal::ConstantInitialized) noexcept;
+    inline explicit constexpr Impl_(
+        ::google::protobuf::internal::ConstantInitialized) noexcept;
     inline explicit Impl_(
         ::google::protobuf::internal::InternalVisibility visibility,
-        ::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+        ::google::protobuf::Arena *PROTOBUF_NULLABLE arena);
     inline explicit Impl_(
         ::google::protobuf::internal::InternalVisibility visibility,
-        ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const Impl_& from,
-        const Tile_BuildingShape& from_msg);
+        ::google::protobuf::Arena *PROTOBUF_NULLABLE arena, const Impl_ &from,
+        const Tile_BuildingShape &from_msg);
     ::google::protobuf::internal::HasBits<1> _has_bits_;
     ::google::protobuf::internal::CachedSize _cached_size_;
     ::google::protobuf::RepeatedField<::int32_t> approx_centre_;
@@ -364,39 +398,47 @@ class Tile_BuildingShape final : public ::google::protobuf::Message
     ::google::protobuf::internal::ArenaStringPtr osid_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
-  union { Impl_ _impl_; };
+  union {
+    Impl_ _impl_;
+  };
   friend struct ::TableStruct_vector_5ftile_2eproto;
 };
 
-extern const ::google::protobuf::internal::ClassDataFull Tile_BuildingShape_class_data_;
+extern const ::google::protobuf::internal::ClassDataFull
+    Tile_BuildingShape_class_data_;
 // -------------------------------------------------------------------
 
 class FullTile_Value final : public ::google::protobuf::Message
 /* @@protoc_insertion_point(class_definition:vector_tile.FullTile.Value) */ {
- public:
+public:
   inline FullTile_Value() : FullTile_Value(nullptr) {}
   ~FullTile_Value() PROTOBUF_FINAL;
 
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-  void operator delete(FullTile_Value* PROTOBUF_NONNULL msg, ::std::destroying_delete_t) {
+  void operator delete(FullTile_Value *PROTOBUF_NONNULL msg,
+                       ::std::destroying_delete_t) {
     SharedDtor(*msg);
     ::google::protobuf::internal::SizedDelete(msg, sizeof(FullTile_Value));
   }
 #endif
 
   template <typename = void>
-  explicit PROTOBUF_CONSTEXPR FullTile_Value(::google::protobuf::internal::ConstantInitialized);
+  explicit PROTOBUF_CONSTEXPR
+      FullTile_Value(::google::protobuf::internal::ConstantInitialized);
 
-  inline FullTile_Value(const FullTile_Value& from) : FullTile_Value(nullptr, from) {}
-  inline FullTile_Value(FullTile_Value&& from) noexcept
+  inline FullTile_Value(const FullTile_Value &from)
+      : FullTile_Value(nullptr, from) {}
+  inline FullTile_Value(FullTile_Value &&from) noexcept
       : FullTile_Value(nullptr, ::std::move(from)) {}
-  inline FullTile_Value& operator=(const FullTile_Value& from) {
+  inline FullTile_Value &operator=(const FullTile_Value &from) {
     CopyFrom(from);
     return *this;
   }
-  inline FullTile_Value& operator=(FullTile_Value&& from) noexcept {
-    if (this == &from) return *this;
-    if (::google::protobuf::internal::CanMoveWithInternalSwap(GetArena(), from.GetArena())) {
+  inline FullTile_Value &operator=(FullTile_Value &&from) noexcept {
+    if (this == &from)
+      return *this;
+    if (::google::protobuf::internal::CanMoveWithInternalSwap(
+            GetArena(), from.GetArena())) {
       InternalSwap(&from);
     } else {
       CopyFrom(from);
@@ -404,113 +446,130 @@ class FullTile_Value final : public ::google::protobuf::Message
     return *this;
   }
 
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
-      ABSL_ATTRIBUTE_LIFETIME_BOUND {
-    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
+  inline const ::google::protobuf::UnknownFieldSet &
+  unknown_fields() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_
+        .unknown_fields<::google::protobuf::UnknownFieldSet>(
+            ::google::protobuf::UnknownFieldSet::default_instance);
   }
-  inline ::google::protobuf::UnknownFieldSet* PROTOBUF_NONNULL mutable_unknown_fields()
-      ABSL_ATTRIBUTE_LIFETIME_BOUND {
-    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
+  inline ::google::protobuf::UnknownFieldSet *PROTOBUF_NONNULL
+  mutable_unknown_fields() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_
+        .mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
   }
 
-  static const ::google::protobuf::Descriptor* PROTOBUF_NONNULL descriptor() {
+  static const ::google::protobuf::Descriptor *PROTOBUF_NONNULL descriptor() {
     return GetDescriptor();
   }
-  static const ::google::protobuf::Descriptor* PROTOBUF_NONNULL GetDescriptor() {
+  static const ::google::protobuf::Descriptor *PROTOBUF_NONNULL
+  GetDescriptor() {
     return default_instance().GetMetadata().descriptor;
   }
-  static const ::google::protobuf::Reflection* PROTOBUF_NONNULL GetReflection() {
+  static const ::google::protobuf::Reflection *PROTOBUF_NONNULL
+  GetReflection() {
     return default_instance().GetMetadata().reflection;
   }
-  static const FullTile_Value& default_instance() {
-    return *reinterpret_cast<const FullTile_Value*>(
+  static const FullTile_Value &default_instance() {
+    return *reinterpret_cast<const FullTile_Value *>(
         &_FullTile_Value_default_instance_);
   }
   static constexpr int kIndexInFileMessages = 0;
-  friend void swap(FullTile_Value& a, FullTile_Value& b) { a.Swap(&b); }
-  inline void Swap(FullTile_Value* PROTOBUF_NONNULL other) {
-    if (other == this) return;
-    if (::google::protobuf::internal::CanUseInternalSwap(GetArena(), other->GetArena())) {
+  friend void swap(FullTile_Value &a, FullTile_Value &b) { a.Swap(&b); }
+  inline void Swap(FullTile_Value *PROTOBUF_NONNULL other) {
+    if (other == this)
+      return;
+    if (::google::protobuf::internal::CanUseInternalSwap(GetArena(),
+                                                         other->GetArena())) {
       InternalSwap(other);
     } else {
       ::google::protobuf::internal::GenericSwap(this, other);
     }
   }
-  void UnsafeArenaSwap(FullTile_Value* PROTOBUF_NONNULL other) {
-    if (other == this) return;
+  void UnsafeArenaSwap(FullTile_Value *PROTOBUF_NONNULL other) {
+    if (other == this)
+      return;
     ABSL_DCHECK(GetArena() == other->GetArena());
     InternalSwap(other);
   }
 
   // implements Message ----------------------------------------------
 
-  FullTile_Value* PROTOBUF_NONNULL New(::google::protobuf::Arena* PROTOBUF_NULLABLE arena = nullptr) const {
+  FullTile_Value *PROTOBUF_NONNULL
+  New(::google::protobuf::Arena *PROTOBUF_NULLABLE arena = nullptr) const {
     return ::google::protobuf::Message::DefaultConstruct<FullTile_Value>(arena);
   }
   using ::google::protobuf::Message::CopyFrom;
-  void CopyFrom(const FullTile_Value& from);
+  void CopyFrom(const FullTile_Value &from);
   using ::google::protobuf::Message::MergeFrom;
-  void MergeFrom(const FullTile_Value& from) { FullTile_Value::MergeImpl(*this, from); }
-
-  private:
-  static void MergeImpl(::google::protobuf::MessageLite& to_msg,
-                        const ::google::protobuf::MessageLite& from_msg);
-
-  public:
-  bool IsInitialized() const {
-    return IsInitializedImpl(*this);
+  void MergeFrom(const FullTile_Value &from) {
+    FullTile_Value::MergeImpl(*this, from);
   }
 
-  private:
-  static bool IsInitializedImpl(const MessageLite& msg);
+private:
+  static void MergeImpl(::google::protobuf::MessageLite &to_msg,
+                        const ::google::protobuf::MessageLite &from_msg);
 
-  public:
+public:
+  bool IsInitialized() const { return IsInitializedImpl(*this); }
+
+private:
+  static bool IsInitializedImpl(const MessageLite &msg);
+
+public:
   ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
-  #if defined(PROTOBUF_CUSTOM_VTABLE)
-  private:
-  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
-  static ::uint8_t* PROTOBUF_NONNULL _InternalSerialize(
-      const ::google::protobuf::MessageLite& msg, ::uint8_t* PROTOBUF_NONNULL target,
-      ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream);
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+private:
+  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite &msg);
+  static ::uint8_t *PROTOBUF_NONNULL _InternalSerialize(
+      const ::google::protobuf::MessageLite &msg,
+      ::uint8_t *PROTOBUF_NONNULL target,
+      ::google::protobuf::io::EpsCopyOutputStream *PROTOBUF_NONNULL stream);
 
-  public:
+public:
   ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
-  ::uint8_t* PROTOBUF_NONNULL _InternalSerialize(
-      ::uint8_t* PROTOBUF_NONNULL target,
-      ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) const {
+  ::uint8_t *PROTOBUF_NONNULL _InternalSerialize(
+      ::uint8_t *PROTOBUF_NONNULL target,
+      ::google::protobuf::io::EpsCopyOutputStream *PROTOBUF_NONNULL
+          stream) const {
     return _InternalSerialize(*this, target, stream);
   }
-  #else   // PROTOBUF_CUSTOM_VTABLE
+#else  // PROTOBUF_CUSTOM_VTABLE
   ::size_t ByteSizeLong() const final;
-  ::uint8_t* PROTOBUF_NONNULL _InternalSerialize(
-      ::uint8_t* PROTOBUF_NONNULL target,
-      ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) const final;
-  #endif  // PROTOBUF_CUSTOM_VTABLE
+  ::uint8_t *PROTOBUF_NONNULL _InternalSerialize(
+      ::uint8_t *PROTOBUF_NONNULL target,
+      ::google::protobuf::io::EpsCopyOutputStream *PROTOBUF_NONNULL
+          stream) const final;
+#endif // PROTOBUF_CUSTOM_VTABLE
   int GetCachedSize() const { return _impl_._cached_size_.Get(); }
 
-  private:
-  void SharedCtor(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
-  static void SharedDtor(MessageLite& self);
-  void InternalSwap(FullTile_Value* PROTOBUF_NONNULL other);
- private:
+private:
+  void SharedCtor(::google::protobuf::Arena *PROTOBUF_NULLABLE arena);
+  static void SharedDtor(MessageLite &self);
+  void InternalSwap(FullTile_Value *PROTOBUF_NONNULL other);
+
+private:
   template <typename T>
   friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "vector_tile.FullTile.Value"; }
+  static ::absl::string_view FullMessageName() {
+    return "vector_tile.FullTile.Value";
+  }
 
-  explicit FullTile_Value(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
-  FullTile_Value(::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const FullTile_Value& from);
-  FullTile_Value(
-      ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, FullTile_Value&& from) noexcept
+  explicit FullTile_Value(::google::protobuf::Arena *PROTOBUF_NULLABLE arena);
+  FullTile_Value(::google::protobuf::Arena *PROTOBUF_NULLABLE arena,
+                 const FullTile_Value &from);
+  FullTile_Value(::google::protobuf::Arena *PROTOBUF_NULLABLE arena,
+                 FullTile_Value &&from) noexcept
       : FullTile_Value(arena) {
     *this = ::std::move(from);
   }
-  const ::google::protobuf::internal::ClassData* PROTOBUF_NONNULL GetClassData() const PROTOBUF_FINAL;
-  static void* PROTOBUF_NONNULL PlacementNew_(
-      const void* PROTOBUF_NONNULL, void* PROTOBUF_NONNULL mem,
-      ::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+  const ::google::protobuf::internal::ClassData *PROTOBUF_NONNULL
+  GetClassData() const PROTOBUF_FINAL;
+  static void *PROTOBUF_NONNULL
+  PlacementNew_(const void *PROTOBUF_NONNULL, void *PROTOBUF_NONNULL mem,
+                ::google::protobuf::Arena *PROTOBUF_NULLABLE arena);
   static constexpr auto InternalNewImpl_();
 
- public:
+public:
   static constexpr auto InternalGenerateClassData_();
 
   ::google::protobuf::Metadata GetMetadata() const;
@@ -528,295 +587,320 @@ class FullTile_Value final : public ::google::protobuf::Message
   };
   // optional string string_value = 1;
   bool has_string_value() const;
-  void clear_string_value() ;
-  const ::std::string& string_value() const;
-  template <typename Arg_ = const ::std::string&, typename... Args_>
-  void set_string_value(Arg_&& arg, Args_... args);
-  ::std::string* PROTOBUF_NONNULL mutable_string_value();
-  [[nodiscard]] ::std::string* PROTOBUF_NULLABLE release_string_value();
-  void set_allocated_string_value(::std::string* PROTOBUF_NULLABLE value);
+  void clear_string_value();
+  const ::std::string &string_value() const;
+  template <typename Arg_ = const ::std::string &, typename... Args_>
+  void set_string_value(Arg_ &&arg, Args_... args);
+  ::std::string *PROTOBUF_NONNULL mutable_string_value();
+  [[nodiscard]] ::std::string *PROTOBUF_NULLABLE release_string_value();
+  void set_allocated_string_value(::std::string *PROTOBUF_NULLABLE value);
 
-  private:
-  const ::std::string& _internal_string_value() const;
-  PROTOBUF_ALWAYS_INLINE void _internal_set_string_value(const ::std::string& value);
-  ::std::string* PROTOBUF_NONNULL _internal_mutable_string_value();
+private:
+  const ::std::string &_internal_string_value() const;
+  PROTOBUF_ALWAYS_INLINE void
+  _internal_set_string_value(const ::std::string &value);
+  ::std::string *PROTOBUF_NONNULL _internal_mutable_string_value();
 
-  public:
+public:
   // optional double double_value = 3;
   bool has_double_value() const;
-  void clear_double_value() ;
+  void clear_double_value();
   double double_value() const;
   void set_double_value(double value);
 
-  private:
+private:
   double _internal_double_value() const;
   void _internal_set_double_value(double value);
 
-  public:
+public:
   // optional int64 int_value = 4;
   bool has_int_value() const;
-  void clear_int_value() ;
+  void clear_int_value();
   ::int64_t int_value() const;
   void set_int_value(::int64_t value);
 
-  private:
+private:
   ::int64_t _internal_int_value() const;
   void _internal_set_int_value(::int64_t value);
 
-  public:
+public:
   // optional float float_value = 2;
   bool has_float_value() const;
-  void clear_float_value() ;
+  void clear_float_value();
   float float_value() const;
   void set_float_value(float value);
 
-  private:
+private:
   float _internal_float_value() const;
   void _internal_set_float_value(float value);
 
-  public:
+public:
   // optional bool bool_value = 7;
   bool has_bool_value() const;
-  void clear_bool_value() ;
+  void clear_bool_value();
   bool bool_value() const;
   void set_bool_value(bool value);
 
-  private:
+private:
   bool _internal_bool_value() const;
   void _internal_set_bool_value(bool value);
 
-  public:
+public:
   // optional uint64 uint_value = 5;
   bool has_uint_value() const;
-  void clear_uint_value() ;
+  void clear_uint_value();
   ::uint64_t uint_value() const;
   void set_uint_value(::uint64_t value);
 
-  private:
+private:
   ::uint64_t _internal_uint_value() const;
   void _internal_set_uint_value(::uint64_t value);
 
-  public:
+public:
   // optional sint64 sint_value = 6;
   bool has_sint_value() const;
-  void clear_sint_value() ;
+  void clear_sint_value();
   ::int64_t sint_value() const;
   void set_sint_value(::int64_t value);
 
-  private:
+private:
   ::int64_t _internal_sint_value() const;
   void _internal_set_sint_value(::int64_t value);
 
-  public:
-  template <typename _proto_TypeTraits, ::google::protobuf::internal::FieldType _field_type,
-            bool _is_packed,
-            typename = typename _proto_TypeTraits::Singular>
-  PROTOBUF_FUTURE_ADD_NODISCARD inline bool HasExtension(
-      const ::google::protobuf::internal::ExtensionIdentifier<FullTile_Value, _proto_TypeTraits,
-                                       _field_type, _is_packed>& id) const {
+public:
+  template <typename _proto_TypeTraits,
+            ::google::protobuf::internal::FieldType _field_type,
+            bool _is_packed, typename = typename _proto_TypeTraits::Singular>
+  PROTOBUF_FUTURE_ADD_NODISCARD inline bool
+  HasExtension(const ::google::protobuf::internal::ExtensionIdentifier<
+               FullTile_Value, _proto_TypeTraits, _field_type, _is_packed> &id)
+      const {
     return _impl_._extensions_.Has(id.number());
   }
 
-  template <typename _proto_TypeTraits, ::google::protobuf::internal::FieldType _field_type,
+  template <typename _proto_TypeTraits,
+            ::google::protobuf::internal::FieldType _field_type,
             bool _is_packed>
   inline void ClearExtension(
-      const ::google::protobuf::internal::ExtensionIdentifier<FullTile_Value, _proto_TypeTraits,
-                                       _field_type, _is_packed>& id) {
+      const ::google::protobuf::internal::ExtensionIdentifier<
+          FullTile_Value, _proto_TypeTraits, _field_type, _is_packed> &id) {
     _impl_._extensions_.ClearExtension(id.number());
   }
 
-  template <typename _proto_TypeTraits, ::google::protobuf::internal::FieldType _field_type,
-            bool _is_packed,
-            typename = typename _proto_TypeTraits::Repeated>
-  PROTOBUF_FUTURE_ADD_NODISCARD inline int ExtensionSize(
-      const ::google::protobuf::internal::ExtensionIdentifier<FullTile_Value, _proto_TypeTraits,
-                                       _field_type, _is_packed>& id) const {
+  template <typename _proto_TypeTraits,
+            ::google::protobuf::internal::FieldType _field_type,
+            bool _is_packed, typename = typename _proto_TypeTraits::Repeated>
+  PROTOBUF_FUTURE_ADD_NODISCARD inline int
+  ExtensionSize(const ::google::protobuf::internal::ExtensionIdentifier<
+                FullTile_Value, _proto_TypeTraits, _field_type, _is_packed> &id)
+      const {
     return _impl_._extensions_.ExtensionSize(id.number());
   }
 
-  template <typename _proto_TypeTraits, ::google::protobuf::internal::FieldType _field_type,
+  template <typename _proto_TypeTraits,
+            ::google::protobuf::internal::FieldType _field_type,
             bool _is_packed,
             ::std::enable_if_t<!_proto_TypeTraits::kLifetimeBound, int> = 0>
   PROTOBUF_FUTURE_ADD_NODISCARD inline
       typename _proto_TypeTraits::Singular::ConstType
       GetExtension(const ::google::protobuf::internal::ExtensionIdentifier<
-                   FullTile_Value, _proto_TypeTraits, _field_type, _is_packed>& id)
-          const {
-    return _proto_TypeTraits::Get(id.number(), _impl_._extensions_, id.default_value());
+                   FullTile_Value, _proto_TypeTraits, _field_type, _is_packed>
+                       &id) const {
+    return _proto_TypeTraits::Get(id.number(), _impl_._extensions_,
+                                  id.default_value());
   }
 
-  template <typename _proto_TypeTraits, ::google::protobuf::internal::FieldType _field_type,
+  template <typename _proto_TypeTraits,
+            ::google::protobuf::internal::FieldType _field_type,
             bool _is_packed,
             ::std::enable_if_t<_proto_TypeTraits::kLifetimeBound, int> = 0>
   PROTOBUF_FUTURE_ADD_NODISCARD inline
       typename _proto_TypeTraits::Singular::ConstType
       GetExtension(const ::google::protobuf::internal::ExtensionIdentifier<
-                   FullTile_Value, _proto_TypeTraits, _field_type, _is_packed>& id)
-          const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-    return _proto_TypeTraits::Get(id.number(), _impl_._extensions_, id.default_value());
+                   FullTile_Value, _proto_TypeTraits, _field_type, _is_packed>
+                       &id) const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _proto_TypeTraits::Get(id.number(), _impl_._extensions_,
+                                  id.default_value());
   }
 
-  template <typename _proto_TypeTraits, ::google::protobuf::internal::FieldType _field_type,
+  template <typename _proto_TypeTraits,
+            ::google::protobuf::internal::FieldType _field_type,
             bool _is_packed>
   inline typename _proto_TypeTraits::Singular::MutableType MutableExtension(
-      const ::google::protobuf::internal::ExtensionIdentifier<FullTile_Value, _proto_TypeTraits,
-                                       _field_type, _is_packed>& id)
+      const ::google::protobuf::internal::ExtensionIdentifier<
+          FullTile_Value, _proto_TypeTraits, _field_type, _is_packed> &id)
       ABSL_ATTRIBUTE_LIFETIME_BOUND {
-    return _proto_TypeTraits::Mutable(id.number(), _field_type, &_impl_._extensions_);
+    return _proto_TypeTraits::Mutable(id.number(), _field_type,
+                                      &_impl_._extensions_);
   }
 
-  template <typename _proto_TypeTraits, ::google::protobuf::internal::FieldType _field_type,
+  template <typename _proto_TypeTraits,
+            ::google::protobuf::internal::FieldType _field_type,
             bool _is_packed>
   inline void SetExtension(
-      const ::google::protobuf::internal::ExtensionIdentifier<FullTile_Value, _proto_TypeTraits,
-                                       _field_type, _is_packed>& id,
+      const ::google::protobuf::internal::ExtensionIdentifier<
+          FullTile_Value, _proto_TypeTraits, _field_type, _is_packed> &id,
       typename _proto_TypeTraits::Singular::ConstType value) {
-    _proto_TypeTraits::Set(id.number(), _field_type, value, &_impl_._extensions_);
+    _proto_TypeTraits::Set(id.number(), _field_type, value,
+                           &_impl_._extensions_);
   }
 
-  template <typename _proto_TypeTraits, ::google::protobuf::internal::FieldType _field_type,
+  template <typename _proto_TypeTraits,
+            ::google::protobuf::internal::FieldType _field_type,
             bool _is_packed>
   inline void SetAllocatedExtension(
-      const ::google::protobuf::internal::ExtensionIdentifier<FullTile_Value, _proto_TypeTraits,
-                                       _field_type, _is_packed>& id,
+      const ::google::protobuf::internal::ExtensionIdentifier<
+          FullTile_Value, _proto_TypeTraits, _field_type, _is_packed> &id,
       typename _proto_TypeTraits::Singular::MutableType value) {
     _proto_TypeTraits::SetAllocated(id.number(), _field_type, value,
                                     &_impl_._extensions_);
   }
-  template <typename _proto_TypeTraits, ::google::protobuf::internal::FieldType _field_type,
+  template <typename _proto_TypeTraits,
+            ::google::protobuf::internal::FieldType _field_type,
             bool _is_packed>
   inline void UnsafeArenaSetAllocatedExtension(
-      const ::google::protobuf::internal::ExtensionIdentifier<FullTile_Value, _proto_TypeTraits,
-                                       _field_type, _is_packed>& id,
+      const ::google::protobuf::internal::ExtensionIdentifier<
+          FullTile_Value, _proto_TypeTraits, _field_type, _is_packed> &id,
       typename _proto_TypeTraits::Singular::MutableType value) {
-    _proto_TypeTraits::UnsafeArenaSetAllocated(id.number(), _field_type,
-                                               value, &_impl_._extensions_);
+    _proto_TypeTraits::UnsafeArenaSetAllocated(id.number(), _field_type, value,
+                                               &_impl_._extensions_);
   }
-  template <typename _proto_TypeTraits, ::google::protobuf::internal::FieldType _field_type,
+  template <typename _proto_TypeTraits,
+            ::google::protobuf::internal::FieldType _field_type,
             bool _is_packed>
   [[nodiscard]] inline typename _proto_TypeTraits::Singular::MutableType
-  ReleaseExtension(const ::google::protobuf::internal::ExtensionIdentifier<
-                   FullTile_Value, _proto_TypeTraits, _field_type, _is_packed>& id) {
-    return _proto_TypeTraits::Release(id.number(), _field_type, &_impl_._extensions_);
+  ReleaseExtension(
+      const ::google::protobuf::internal::ExtensionIdentifier<
+          FullTile_Value, _proto_TypeTraits, _field_type, _is_packed> &id) {
+    return _proto_TypeTraits::Release(id.number(), _field_type,
+                                      &_impl_._extensions_);
   }
-  template <typename _proto_TypeTraits, ::google::protobuf::internal::FieldType _field_type,
+  template <typename _proto_TypeTraits,
+            ::google::protobuf::internal::FieldType _field_type,
             bool _is_packed>
   inline typename _proto_TypeTraits::Singular::MutableType
   UnsafeArenaReleaseExtension(
-      const ::google::protobuf::internal::ExtensionIdentifier<FullTile_Value, _proto_TypeTraits,
-                                       _field_type, _is_packed>& id) {
+      const ::google::protobuf::internal::ExtensionIdentifier<
+          FullTile_Value, _proto_TypeTraits, _field_type, _is_packed> &id) {
     return _proto_TypeTraits::UnsafeArenaRelease(id.number(), _field_type,
                                                  &_impl_._extensions_);
   }
 
-  template <typename _proto_TypeTraits, ::google::protobuf::internal::FieldType _field_type,
+  template <typename _proto_TypeTraits,
+            ::google::protobuf::internal::FieldType _field_type,
             bool _is_packed,
             ::std::enable_if_t<!_proto_TypeTraits::kLifetimeBound, int> = 0>
   PROTOBUF_FUTURE_ADD_NODISCARD inline
       typename _proto_TypeTraits::Repeated::ConstType
       GetExtension(
-          const ::google::protobuf::internal::ExtensionIdentifier<FullTile_Value, _proto_TypeTraits,
-                                           _field_type, _is_packed>& id,
+          const ::google::protobuf::internal::ExtensionIdentifier<
+              FullTile_Value, _proto_TypeTraits, _field_type, _is_packed> &id,
           int index) const {
     return _proto_TypeTraits::Get(id.number(), _impl_._extensions_, index);
   }
 
-  template <typename _proto_TypeTraits, ::google::protobuf::internal::FieldType _field_type,
+  template <typename _proto_TypeTraits,
+            ::google::protobuf::internal::FieldType _field_type,
             bool _is_packed,
             ::std::enable_if_t<_proto_TypeTraits::kLifetimeBound, int> = 0>
   PROTOBUF_FUTURE_ADD_NODISCARD inline
       typename _proto_TypeTraits::Repeated::ConstType
       GetExtension(
-          const ::google::protobuf::internal::ExtensionIdentifier<FullTile_Value, _proto_TypeTraits,
-                                           _field_type, _is_packed>& id,
+          const ::google::protobuf::internal::ExtensionIdentifier<
+              FullTile_Value, _proto_TypeTraits, _field_type, _is_packed> &id,
           int index) const ABSL_ATTRIBUTE_LIFETIME_BOUND {
     return _proto_TypeTraits::Get(id.number(), _impl_._extensions_, index);
   }
 
-  template <typename _proto_TypeTraits, ::google::protobuf::internal::FieldType _field_type,
+  template <typename _proto_TypeTraits,
+            ::google::protobuf::internal::FieldType _field_type,
             bool _is_packed>
   inline typename _proto_TypeTraits::Repeated::MutableType MutableExtension(
-      const ::google::protobuf::internal::ExtensionIdentifier<FullTile_Value, _proto_TypeTraits,
-                                       _field_type, _is_packed>& id,
+      const ::google::protobuf::internal::ExtensionIdentifier<
+          FullTile_Value, _proto_TypeTraits, _field_type, _is_packed> &id,
       int index) ABSL_ATTRIBUTE_LIFETIME_BOUND {
     return _proto_TypeTraits::Mutable(id.number(), index, &_impl_._extensions_);
   }
 
-  template <typename _proto_TypeTraits, ::google::protobuf::internal::FieldType _field_type,
+  template <typename _proto_TypeTraits,
+            ::google::protobuf::internal::FieldType _field_type,
             bool _is_packed>
   inline void SetExtension(
-      const ::google::protobuf::internal::ExtensionIdentifier<FullTile_Value, _proto_TypeTraits,
-                                       _field_type, _is_packed>& id,
+      const ::google::protobuf::internal::ExtensionIdentifier<
+          FullTile_Value, _proto_TypeTraits, _field_type, _is_packed> &id,
       int index, typename _proto_TypeTraits::Repeated::ConstType value) {
     _proto_TypeTraits::Set(id.number(), index, value, &_impl_._extensions_);
   }
 
-  template <typename _proto_TypeTraits, ::google::protobuf::internal::FieldType _field_type,
+  template <typename _proto_TypeTraits,
+            ::google::protobuf::internal::FieldType _field_type,
             bool _is_packed>
-  inline typename _proto_TypeTraits::Repeated::MutableType AddExtension(
-      const ::google::protobuf::internal::ExtensionIdentifier<FullTile_Value, _proto_TypeTraits,
-                                       _field_type, _is_packed>& id)
+  inline typename _proto_TypeTraits::Repeated::MutableType
+  AddExtension(const ::google::protobuf::internal::ExtensionIdentifier<
+               FullTile_Value, _proto_TypeTraits, _field_type, _is_packed> &id)
       ABSL_ATTRIBUTE_LIFETIME_BOUND {
     typename _proto_TypeTraits::Repeated::MutableType to_add =
         _proto_TypeTraits::Add(id.number(), _field_type, &_impl_._extensions_);
     return to_add;
   }
 
-  template <typename _proto_TypeTraits, ::google::protobuf::internal::FieldType _field_type,
+  template <typename _proto_TypeTraits,
+            ::google::protobuf::internal::FieldType _field_type,
             bool _is_packed>
   inline void AddExtension(
-      const ::google::protobuf::internal::ExtensionIdentifier<FullTile_Value, _proto_TypeTraits,
-                                       _field_type, _is_packed>& id,
+      const ::google::protobuf::internal::ExtensionIdentifier<
+          FullTile_Value, _proto_TypeTraits, _field_type, _is_packed> &id,
       typename _proto_TypeTraits::Repeated::ConstType value) {
     _proto_TypeTraits::Add(id.number(), _field_type, _is_packed, value,
                            &_impl_._extensions_);
   }
 
-  template <typename _proto_TypeTraits, ::google::protobuf::internal::FieldType _field_type,
+  template <typename _proto_TypeTraits,
+            ::google::protobuf::internal::FieldType _field_type,
             bool _is_packed>
   PROTOBUF_FUTURE_ADD_NODISCARD inline const typename _proto_TypeTraits::
-      Repeated::RepeatedFieldType&
+      Repeated::RepeatedFieldType &
       GetRepeatedExtension(
-          const ::google::protobuf::internal::ExtensionIdentifier<FullTile_Value, _proto_TypeTraits,
-                                           _field_type, _is_packed>& id)
+          const ::google::protobuf::internal::ExtensionIdentifier<
+              FullTile_Value, _proto_TypeTraits, _field_type, _is_packed> &id)
           const ABSL_ATTRIBUTE_LIFETIME_BOUND {
     return _proto_TypeTraits::GetRepeated(id.number(), _impl_._extensions_);
   }
 
-  template <typename _proto_TypeTraits, ::google::protobuf::internal::FieldType _field_type,
+  template <typename _proto_TypeTraits,
+            ::google::protobuf::internal::FieldType _field_type,
             bool _is_packed>
-  inline typename _proto_TypeTraits::Repeated::RepeatedFieldType* PROTOBUF_NONNULL
-  MutableRepeatedExtension(
-      const ::google::protobuf::internal::ExtensionIdentifier<FullTile_Value, _proto_TypeTraits,
-                                       _field_type, _is_packed>& id)
-      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  inline
+      typename _proto_TypeTraits::Repeated::RepeatedFieldType *PROTOBUF_NONNULL
+      MutableRepeatedExtension(
+          const ::google::protobuf::internal::ExtensionIdentifier<
+              FullTile_Value, _proto_TypeTraits, _field_type, _is_packed> &id)
+          ABSL_ATTRIBUTE_LIFETIME_BOUND {
     return _proto_TypeTraits::MutableRepeated(id.number(), _field_type,
                                               _is_packed, &_impl_._extensions_);
   }
   // @@protoc_insertion_point(class_scope:vector_tile.FullTile.Value)
- private:
+private:
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
-  static const ::google::protobuf::internal::TcParseTable<3, 7,
-                                   0, 0,
-                                   2>
+  static const ::google::protobuf::internal::TcParseTable<3, 7, 0, 0, 2>
       _table_;
 
   friend class ::google::protobuf::MessageLite;
   friend class ::google::protobuf::Arena;
-  template <typename T>
-  friend class ::google::protobuf::Arena::InternalHelper;
+  template <typename T> friend class ::google::protobuf::Arena::InternalHelper;
   using InternalArenaConstructable_ = void;
   using DestructorSkippable_ = void;
   struct Impl_ {
-    inline explicit constexpr Impl_(::google::protobuf::internal::ConstantInitialized) noexcept;
+    inline explicit constexpr Impl_(
+        ::google::protobuf::internal::ConstantInitialized) noexcept;
     inline explicit Impl_(
         ::google::protobuf::internal::InternalVisibility visibility,
-        ::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+        ::google::protobuf::Arena *PROTOBUF_NULLABLE arena);
     inline explicit Impl_(
         ::google::protobuf::internal::InternalVisibility visibility,
-        ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const Impl_& from,
-        const FullTile_Value& from_msg);
+        ::google::protobuf::Arena *PROTOBUF_NULLABLE arena, const Impl_ &from,
+        const FullTile_Value &from_msg);
     ::google::protobuf::internal::ExtensionSet _extensions_;
     ::google::protobuf::internal::HasBits<1> _has_bits_;
     ::google::protobuf::internal::CachedSize _cached_size_;
@@ -829,39 +913,47 @@ class FullTile_Value final : public ::google::protobuf::Message
     ::int64_t sint_value_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
-  union { Impl_ _impl_; };
+  union {
+    Impl_ _impl_;
+  };
   friend struct ::TableStruct_vector_5ftile_2eproto;
 };
 
-extern const ::google::protobuf::internal::ClassDataFull FullTile_Value_class_data_;
+extern const ::google::protobuf::internal::ClassDataFull
+    FullTile_Value_class_data_;
 // -------------------------------------------------------------------
 
 class FullTile_Feature final : public ::google::protobuf::Message
 /* @@protoc_insertion_point(class_definition:vector_tile.FullTile.Feature) */ {
- public:
+public:
   inline FullTile_Feature() : FullTile_Feature(nullptr) {}
   ~FullTile_Feature() PROTOBUF_FINAL;
 
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-  void operator delete(FullTile_Feature* PROTOBUF_NONNULL msg, ::std::destroying_delete_t) {
+  void operator delete(FullTile_Feature *PROTOBUF_NONNULL msg,
+                       ::std::destroying_delete_t) {
     SharedDtor(*msg);
     ::google::protobuf::internal::SizedDelete(msg, sizeof(FullTile_Feature));
   }
 #endif
 
   template <typename = void>
-  explicit PROTOBUF_CONSTEXPR FullTile_Feature(::google::protobuf::internal::ConstantInitialized);
+  explicit PROTOBUF_CONSTEXPR
+      FullTile_Feature(::google::protobuf::internal::ConstantInitialized);
 
-  inline FullTile_Feature(const FullTile_Feature& from) : FullTile_Feature(nullptr, from) {}
-  inline FullTile_Feature(FullTile_Feature&& from) noexcept
+  inline FullTile_Feature(const FullTile_Feature &from)
+      : FullTile_Feature(nullptr, from) {}
+  inline FullTile_Feature(FullTile_Feature &&from) noexcept
       : FullTile_Feature(nullptr, ::std::move(from)) {}
-  inline FullTile_Feature& operator=(const FullTile_Feature& from) {
+  inline FullTile_Feature &operator=(const FullTile_Feature &from) {
     CopyFrom(from);
     return *this;
   }
-  inline FullTile_Feature& operator=(FullTile_Feature&& from) noexcept {
-    if (this == &from) return *this;
-    if (::google::protobuf::internal::CanMoveWithInternalSwap(GetArena(), from.GetArena())) {
+  inline FullTile_Feature &operator=(FullTile_Feature &&from) noexcept {
+    if (this == &from)
+      return *this;
+    if (::google::protobuf::internal::CanMoveWithInternalSwap(
+            GetArena(), from.GetArena())) {
       InternalSwap(&from);
     } else {
       CopyFrom(from);
@@ -869,108 +961,126 @@ class FullTile_Feature final : public ::google::protobuf::Message
     return *this;
   }
 
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
-      ABSL_ATTRIBUTE_LIFETIME_BOUND {
-    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
+  inline const ::google::protobuf::UnknownFieldSet &
+  unknown_fields() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_
+        .unknown_fields<::google::protobuf::UnknownFieldSet>(
+            ::google::protobuf::UnknownFieldSet::default_instance);
   }
-  inline ::google::protobuf::UnknownFieldSet* PROTOBUF_NONNULL mutable_unknown_fields()
-      ABSL_ATTRIBUTE_LIFETIME_BOUND {
-    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
+  inline ::google::protobuf::UnknownFieldSet *PROTOBUF_NONNULL
+  mutable_unknown_fields() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_
+        .mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
   }
 
-  static const ::google::protobuf::Descriptor* PROTOBUF_NONNULL descriptor() {
+  static const ::google::protobuf::Descriptor *PROTOBUF_NONNULL descriptor() {
     return GetDescriptor();
   }
-  static const ::google::protobuf::Descriptor* PROTOBUF_NONNULL GetDescriptor() {
+  static const ::google::protobuf::Descriptor *PROTOBUF_NONNULL
+  GetDescriptor() {
     return default_instance().GetMetadata().descriptor;
   }
-  static const ::google::protobuf::Reflection* PROTOBUF_NONNULL GetReflection() {
+  static const ::google::protobuf::Reflection *PROTOBUF_NONNULL
+  GetReflection() {
     return default_instance().GetMetadata().reflection;
   }
-  static const FullTile_Feature& default_instance() {
-    return *reinterpret_cast<const FullTile_Feature*>(
+  static const FullTile_Feature &default_instance() {
+    return *reinterpret_cast<const FullTile_Feature *>(
         &_FullTile_Feature_default_instance_);
   }
   static constexpr int kIndexInFileMessages = 1;
-  friend void swap(FullTile_Feature& a, FullTile_Feature& b) { a.Swap(&b); }
-  inline void Swap(FullTile_Feature* PROTOBUF_NONNULL other) {
-    if (other == this) return;
-    if (::google::protobuf::internal::CanUseInternalSwap(GetArena(), other->GetArena())) {
+  friend void swap(FullTile_Feature &a, FullTile_Feature &b) { a.Swap(&b); }
+  inline void Swap(FullTile_Feature *PROTOBUF_NONNULL other) {
+    if (other == this)
+      return;
+    if (::google::protobuf::internal::CanUseInternalSwap(GetArena(),
+                                                         other->GetArena())) {
       InternalSwap(other);
     } else {
       ::google::protobuf::internal::GenericSwap(this, other);
     }
   }
-  void UnsafeArenaSwap(FullTile_Feature* PROTOBUF_NONNULL other) {
-    if (other == this) return;
+  void UnsafeArenaSwap(FullTile_Feature *PROTOBUF_NONNULL other) {
+    if (other == this)
+      return;
     ABSL_DCHECK(GetArena() == other->GetArena());
     InternalSwap(other);
   }
 
   // implements Message ----------------------------------------------
 
-  FullTile_Feature* PROTOBUF_NONNULL New(::google::protobuf::Arena* PROTOBUF_NULLABLE arena = nullptr) const {
-    return ::google::protobuf::Message::DefaultConstruct<FullTile_Feature>(arena);
+  FullTile_Feature *PROTOBUF_NONNULL
+  New(::google::protobuf::Arena *PROTOBUF_NULLABLE arena = nullptr) const {
+    return ::google::protobuf::Message::DefaultConstruct<FullTile_Feature>(
+        arena);
   }
   using ::google::protobuf::Message::CopyFrom;
-  void CopyFrom(const FullTile_Feature& from);
+  void CopyFrom(const FullTile_Feature &from);
   using ::google::protobuf::Message::MergeFrom;
-  void MergeFrom(const FullTile_Feature& from) { FullTile_Feature::MergeImpl(*this, from); }
-
-  private:
-  static void MergeImpl(::google::protobuf::MessageLite& to_msg,
-                        const ::google::protobuf::MessageLite& from_msg);
-
-  public:
-  bool IsInitialized() const {
-    return true;
+  void MergeFrom(const FullTile_Feature &from) {
+    FullTile_Feature::MergeImpl(*this, from);
   }
-  ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
-  #if defined(PROTOBUF_CUSTOM_VTABLE)
-  private:
-  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
-  static ::uint8_t* PROTOBUF_NONNULL _InternalSerialize(
-      const ::google::protobuf::MessageLite& msg, ::uint8_t* PROTOBUF_NONNULL target,
-      ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream);
 
-  public:
+private:
+  static void MergeImpl(::google::protobuf::MessageLite &to_msg,
+                        const ::google::protobuf::MessageLite &from_msg);
+
+public:
+  bool IsInitialized() const { return true; }
+  ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+private:
+  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite &msg);
+  static ::uint8_t *PROTOBUF_NONNULL _InternalSerialize(
+      const ::google::protobuf::MessageLite &msg,
+      ::uint8_t *PROTOBUF_NONNULL target,
+      ::google::protobuf::io::EpsCopyOutputStream *PROTOBUF_NONNULL stream);
+
+public:
   ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
-  ::uint8_t* PROTOBUF_NONNULL _InternalSerialize(
-      ::uint8_t* PROTOBUF_NONNULL target,
-      ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) const {
+  ::uint8_t *PROTOBUF_NONNULL _InternalSerialize(
+      ::uint8_t *PROTOBUF_NONNULL target,
+      ::google::protobuf::io::EpsCopyOutputStream *PROTOBUF_NONNULL
+          stream) const {
     return _InternalSerialize(*this, target, stream);
   }
-  #else   // PROTOBUF_CUSTOM_VTABLE
+#else  // PROTOBUF_CUSTOM_VTABLE
   ::size_t ByteSizeLong() const final;
-  ::uint8_t* PROTOBUF_NONNULL _InternalSerialize(
-      ::uint8_t* PROTOBUF_NONNULL target,
-      ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) const final;
-  #endif  // PROTOBUF_CUSTOM_VTABLE
+  ::uint8_t *PROTOBUF_NONNULL _InternalSerialize(
+      ::uint8_t *PROTOBUF_NONNULL target,
+      ::google::protobuf::io::EpsCopyOutputStream *PROTOBUF_NONNULL
+          stream) const final;
+#endif // PROTOBUF_CUSTOM_VTABLE
   int GetCachedSize() const { return _impl_._cached_size_.Get(); }
 
-  private:
-  void SharedCtor(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
-  static void SharedDtor(MessageLite& self);
-  void InternalSwap(FullTile_Feature* PROTOBUF_NONNULL other);
- private:
+private:
+  void SharedCtor(::google::protobuf::Arena *PROTOBUF_NULLABLE arena);
+  static void SharedDtor(MessageLite &self);
+  void InternalSwap(FullTile_Feature *PROTOBUF_NONNULL other);
+
+private:
   template <typename T>
   friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "vector_tile.FullTile.Feature"; }
+  static ::absl::string_view FullMessageName() {
+    return "vector_tile.FullTile.Feature";
+  }
 
-  explicit FullTile_Feature(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
-  FullTile_Feature(::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const FullTile_Feature& from);
-  FullTile_Feature(
-      ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, FullTile_Feature&& from) noexcept
+  explicit FullTile_Feature(::google::protobuf::Arena *PROTOBUF_NULLABLE arena);
+  FullTile_Feature(::google::protobuf::Arena *PROTOBUF_NULLABLE arena,
+                   const FullTile_Feature &from);
+  FullTile_Feature(::google::protobuf::Arena *PROTOBUF_NULLABLE arena,
+                   FullTile_Feature &&from) noexcept
       : FullTile_Feature(arena) {
     *this = ::std::move(from);
   }
-  const ::google::protobuf::internal::ClassData* PROTOBUF_NONNULL GetClassData() const PROTOBUF_FINAL;
-  static void* PROTOBUF_NONNULL PlacementNew_(
-      const void* PROTOBUF_NONNULL, void* PROTOBUF_NONNULL mem,
-      ::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+  const ::google::protobuf::internal::ClassData *PROTOBUF_NONNULL
+  GetClassData() const PROTOBUF_FINAL;
+  static void *PROTOBUF_NONNULL
+  PlacementNew_(const void *PROTOBUF_NONNULL, void *PROTOBUF_NONNULL mem,
+                ::google::protobuf::Arena *PROTOBUF_NULLABLE arena);
   static constexpr auto InternalNewImpl_();
 
- public:
+public:
   static constexpr auto InternalGenerateClassData_();
 
   ::google::protobuf::Metadata GetMetadata() const;
@@ -985,86 +1095,91 @@ class FullTile_Feature final : public ::google::protobuf::Message
   };
   // repeated uint32 tags = 2 [packed = true];
   int tags_size() const;
-  private:
+
+private:
   int _internal_tags_size() const;
 
-  public:
-  void clear_tags() ;
+public:
+  void clear_tags();
   ::uint32_t tags(int index) const;
   void set_tags(int index, ::uint32_t value);
   void add_tags(::uint32_t value);
-  const ::google::protobuf::RepeatedField<::uint32_t>& tags() const;
-  ::google::protobuf::RepeatedField<::uint32_t>* PROTOBUF_NONNULL mutable_tags();
+  const ::google::protobuf::RepeatedField<::uint32_t> &tags() const;
+  ::google::protobuf::RepeatedField<::uint32_t> *PROTOBUF_NONNULL
+  mutable_tags();
 
-  private:
-  const ::google::protobuf::RepeatedField<::uint32_t>& _internal_tags() const;
-  ::google::protobuf::RepeatedField<::uint32_t>* PROTOBUF_NONNULL _internal_mutable_tags();
+private:
+  const ::google::protobuf::RepeatedField<::uint32_t> &_internal_tags() const;
+  ::google::protobuf::RepeatedField<::uint32_t> *PROTOBUF_NONNULL
+  _internal_mutable_tags();
 
-  public:
+public:
   // repeated uint32 geometry = 4 [packed = true];
   int geometry_size() const;
-  private:
+
+private:
   int _internal_geometry_size() const;
 
-  public:
-  void clear_geometry() ;
+public:
+  void clear_geometry();
   ::uint32_t geometry(int index) const;
   void set_geometry(int index, ::uint32_t value);
   void add_geometry(::uint32_t value);
-  const ::google::protobuf::RepeatedField<::uint32_t>& geometry() const;
-  ::google::protobuf::RepeatedField<::uint32_t>* PROTOBUF_NONNULL mutable_geometry();
+  const ::google::protobuf::RepeatedField<::uint32_t> &geometry() const;
+  ::google::protobuf::RepeatedField<::uint32_t> *PROTOBUF_NONNULL
+  mutable_geometry();
 
-  private:
-  const ::google::protobuf::RepeatedField<::uint32_t>& _internal_geometry() const;
-  ::google::protobuf::RepeatedField<::uint32_t>* PROTOBUF_NONNULL _internal_mutable_geometry();
+private:
+  const ::google::protobuf::RepeatedField<::uint32_t> &
+  _internal_geometry() const;
+  ::google::protobuf::RepeatedField<::uint32_t> *PROTOBUF_NONNULL
+  _internal_mutable_geometry();
 
-  public:
+public:
   // optional uint64 id = 1 [default = 0];
   bool has_id() const;
-  void clear_id() ;
+  void clear_id();
   ::uint64_t id() const;
   void set_id(::uint64_t value);
 
-  private:
+private:
   ::uint64_t _internal_id() const;
   void _internal_set_id(::uint64_t value);
 
-  public:
+public:
   // optional .vector_tile.FullTile.GeomType type = 3 [default = UNKNOWN];
   bool has_type() const;
-  void clear_type() ;
+  void clear_type();
   ::vector_tile::FullTile_GeomType type() const;
   void set_type(::vector_tile::FullTile_GeomType value);
 
-  private:
+private:
   ::vector_tile::FullTile_GeomType _internal_type() const;
   void _internal_set_type(::vector_tile::FullTile_GeomType value);
 
-  public:
+public:
   // @@protoc_insertion_point(class_scope:vector_tile.FullTile.Feature)
- private:
+private:
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
-  static const ::google::protobuf::internal::TcParseTable<2, 4,
-                                   1, 0,
-                                   2>
+  static const ::google::protobuf::internal::TcParseTable<2, 4, 1, 0, 2>
       _table_;
 
   friend class ::google::protobuf::MessageLite;
   friend class ::google::protobuf::Arena;
-  template <typename T>
-  friend class ::google::protobuf::Arena::InternalHelper;
+  template <typename T> friend class ::google::protobuf::Arena::InternalHelper;
   using InternalArenaConstructable_ = void;
   using DestructorSkippable_ = void;
   struct Impl_ {
-    inline explicit constexpr Impl_(::google::protobuf::internal::ConstantInitialized) noexcept;
+    inline explicit constexpr Impl_(
+        ::google::protobuf::internal::ConstantInitialized) noexcept;
     inline explicit Impl_(
         ::google::protobuf::internal::InternalVisibility visibility,
-        ::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+        ::google::protobuf::Arena *PROTOBUF_NULLABLE arena);
     inline explicit Impl_(
         ::google::protobuf::internal::InternalVisibility visibility,
-        ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const Impl_& from,
-        const FullTile_Feature& from_msg);
+        ::google::protobuf::Arena *PROTOBUF_NULLABLE arena, const Impl_ &from,
+        const FullTile_Feature &from_msg);
     ::google::protobuf::internal::HasBits<1> _has_bits_;
     ::google::protobuf::internal::CachedSize _cached_size_;
     ::google::protobuf::RepeatedField<::uint32_t> tags_;
@@ -1075,39 +1190,44 @@ class FullTile_Feature final : public ::google::protobuf::Message
     int type_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
-  union { Impl_ _impl_; };
+  union {
+    Impl_ _impl_;
+  };
   friend struct ::TableStruct_vector_5ftile_2eproto;
 };
 
-extern const ::google::protobuf::internal::ClassDataFull FullTile_Feature_class_data_;
+extern const ::google::protobuf::internal::ClassDataFull
+    FullTile_Feature_class_data_;
 // -------------------------------------------------------------------
 
 class Tile final : public ::google::protobuf::Message
 /* @@protoc_insertion_point(class_definition:vector_tile.Tile) */ {
- public:
+public:
   inline Tile() : Tile(nullptr) {}
   ~Tile() PROTOBUF_FINAL;
 
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-  void operator delete(Tile* PROTOBUF_NONNULL msg, ::std::destroying_delete_t) {
+  void operator delete(Tile *PROTOBUF_NONNULL msg, ::std::destroying_delete_t) {
     SharedDtor(*msg);
     ::google::protobuf::internal::SizedDelete(msg, sizeof(Tile));
   }
 #endif
 
   template <typename = void>
-  explicit PROTOBUF_CONSTEXPR Tile(::google::protobuf::internal::ConstantInitialized);
+  explicit PROTOBUF_CONSTEXPR
+      Tile(::google::protobuf::internal::ConstantInitialized);
 
-  inline Tile(const Tile& from) : Tile(nullptr, from) {}
-  inline Tile(Tile&& from) noexcept
-      : Tile(nullptr, ::std::move(from)) {}
-  inline Tile& operator=(const Tile& from) {
+  inline Tile(const Tile &from) : Tile(nullptr, from) {}
+  inline Tile(Tile &&from) noexcept : Tile(nullptr, ::std::move(from)) {}
+  inline Tile &operator=(const Tile &from) {
     CopyFrom(from);
     return *this;
   }
-  inline Tile& operator=(Tile&& from) noexcept {
-    if (this == &from) return *this;
-    if (::google::protobuf::internal::CanMoveWithInternalSwap(GetArena(), from.GetArena())) {
+  inline Tile &operator=(Tile &&from) noexcept {
+    if (this == &from)
+      return *this;
+    if (::google::protobuf::internal::CanMoveWithInternalSwap(
+            GetArena(), from.GetArena())) {
       InternalSwap(&from);
     } else {
       CopyFrom(from);
@@ -1115,113 +1235,123 @@ class Tile final : public ::google::protobuf::Message
     return *this;
   }
 
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
-      ABSL_ATTRIBUTE_LIFETIME_BOUND {
-    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
+  inline const ::google::protobuf::UnknownFieldSet &
+  unknown_fields() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_
+        .unknown_fields<::google::protobuf::UnknownFieldSet>(
+            ::google::protobuf::UnknownFieldSet::default_instance);
   }
-  inline ::google::protobuf::UnknownFieldSet* PROTOBUF_NONNULL mutable_unknown_fields()
-      ABSL_ATTRIBUTE_LIFETIME_BOUND {
-    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
+  inline ::google::protobuf::UnknownFieldSet *PROTOBUF_NONNULL
+  mutable_unknown_fields() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_
+        .mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
   }
 
-  static const ::google::protobuf::Descriptor* PROTOBUF_NONNULL descriptor() {
+  static const ::google::protobuf::Descriptor *PROTOBUF_NONNULL descriptor() {
     return GetDescriptor();
   }
-  static const ::google::protobuf::Descriptor* PROTOBUF_NONNULL GetDescriptor() {
+  static const ::google::protobuf::Descriptor *PROTOBUF_NONNULL
+  GetDescriptor() {
     return default_instance().GetMetadata().descriptor;
   }
-  static const ::google::protobuf::Reflection* PROTOBUF_NONNULL GetReflection() {
+  static const ::google::protobuf::Reflection *PROTOBUF_NONNULL
+  GetReflection() {
     return default_instance().GetMetadata().reflection;
   }
-  static const Tile& default_instance() {
-    return *reinterpret_cast<const Tile*>(
-        &_Tile_default_instance_);
+  static const Tile &default_instance() {
+    return *reinterpret_cast<const Tile *>(&_Tile_default_instance_);
   }
   static constexpr int kIndexInFileMessages = 5;
-  friend void swap(Tile& a, Tile& b) { a.Swap(&b); }
-  inline void Swap(Tile* PROTOBUF_NONNULL other) {
-    if (other == this) return;
-    if (::google::protobuf::internal::CanUseInternalSwap(GetArena(), other->GetArena())) {
+  friend void swap(Tile &a, Tile &b) { a.Swap(&b); }
+  inline void Swap(Tile *PROTOBUF_NONNULL other) {
+    if (other == this)
+      return;
+    if (::google::protobuf::internal::CanUseInternalSwap(GetArena(),
+                                                         other->GetArena())) {
       InternalSwap(other);
     } else {
       ::google::protobuf::internal::GenericSwap(this, other);
     }
   }
-  void UnsafeArenaSwap(Tile* PROTOBUF_NONNULL other) {
-    if (other == this) return;
+  void UnsafeArenaSwap(Tile *PROTOBUF_NONNULL other) {
+    if (other == this)
+      return;
     ABSL_DCHECK(GetArena() == other->GetArena());
     InternalSwap(other);
   }
 
   // implements Message ----------------------------------------------
 
-  Tile* PROTOBUF_NONNULL New(::google::protobuf::Arena* PROTOBUF_NULLABLE arena = nullptr) const {
+  Tile *PROTOBUF_NONNULL
+  New(::google::protobuf::Arena *PROTOBUF_NULLABLE arena = nullptr) const {
     return ::google::protobuf::Message::DefaultConstruct<Tile>(arena);
   }
   using ::google::protobuf::Message::CopyFrom;
-  void CopyFrom(const Tile& from);
+  void CopyFrom(const Tile &from);
   using ::google::protobuf::Message::MergeFrom;
-  void MergeFrom(const Tile& from) { Tile::MergeImpl(*this, from); }
+  void MergeFrom(const Tile &from) { Tile::MergeImpl(*this, from); }
 
-  private:
-  static void MergeImpl(::google::protobuf::MessageLite& to_msg,
-                        const ::google::protobuf::MessageLite& from_msg);
+private:
+  static void MergeImpl(::google::protobuf::MessageLite &to_msg,
+                        const ::google::protobuf::MessageLite &from_msg);
 
-  public:
-  bool IsInitialized() const {
-    return IsInitializedImpl(*this);
-  }
+public:
+  bool IsInitialized() const { return IsInitializedImpl(*this); }
 
-  private:
-  static bool IsInitializedImpl(const MessageLite& msg);
+private:
+  static bool IsInitializedImpl(const MessageLite &msg);
 
-  public:
+public:
   ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
-  #if defined(PROTOBUF_CUSTOM_VTABLE)
-  private:
-  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
-  static ::uint8_t* PROTOBUF_NONNULL _InternalSerialize(
-      const ::google::protobuf::MessageLite& msg, ::uint8_t* PROTOBUF_NONNULL target,
-      ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream);
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+private:
+  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite &msg);
+  static ::uint8_t *PROTOBUF_NONNULL _InternalSerialize(
+      const ::google::protobuf::MessageLite &msg,
+      ::uint8_t *PROTOBUF_NONNULL target,
+      ::google::protobuf::io::EpsCopyOutputStream *PROTOBUF_NONNULL stream);
 
-  public:
+public:
   ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
-  ::uint8_t* PROTOBUF_NONNULL _InternalSerialize(
-      ::uint8_t* PROTOBUF_NONNULL target,
-      ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) const {
+  ::uint8_t *PROTOBUF_NONNULL _InternalSerialize(
+      ::uint8_t *PROTOBUF_NONNULL target,
+      ::google::protobuf::io::EpsCopyOutputStream *PROTOBUF_NONNULL
+          stream) const {
     return _InternalSerialize(*this, target, stream);
   }
-  #else   // PROTOBUF_CUSTOM_VTABLE
+#else  // PROTOBUF_CUSTOM_VTABLE
   ::size_t ByteSizeLong() const final;
-  ::uint8_t* PROTOBUF_NONNULL _InternalSerialize(
-      ::uint8_t* PROTOBUF_NONNULL target,
-      ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) const final;
-  #endif  // PROTOBUF_CUSTOM_VTABLE
+  ::uint8_t *PROTOBUF_NONNULL _InternalSerialize(
+      ::uint8_t *PROTOBUF_NONNULL target,
+      ::google::protobuf::io::EpsCopyOutputStream *PROTOBUF_NONNULL
+          stream) const final;
+#endif // PROTOBUF_CUSTOM_VTABLE
   int GetCachedSize() const { return _impl_._cached_size_.Get(); }
 
-  private:
-  void SharedCtor(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
-  static void SharedDtor(MessageLite& self);
-  void InternalSwap(Tile* PROTOBUF_NONNULL other);
- private:
+private:
+  void SharedCtor(::google::protobuf::Arena *PROTOBUF_NULLABLE arena);
+  static void SharedDtor(MessageLite &self);
+  void InternalSwap(Tile *PROTOBUF_NONNULL other);
+
+private:
   template <typename T>
   friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
   static ::absl::string_view FullMessageName() { return "vector_tile.Tile"; }
 
-  explicit Tile(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
-  Tile(::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const Tile& from);
-  Tile(
-      ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, Tile&& from) noexcept
+  explicit Tile(::google::protobuf::Arena *PROTOBUF_NULLABLE arena);
+  Tile(::google::protobuf::Arena *PROTOBUF_NULLABLE arena, const Tile &from);
+  Tile(::google::protobuf::Arena *PROTOBUF_NULLABLE arena, Tile &&from) noexcept
       : Tile(arena) {
     *this = ::std::move(from);
   }
-  const ::google::protobuf::internal::ClassData* PROTOBUF_NONNULL GetClassData() const PROTOBUF_FINAL;
-  static void* PROTOBUF_NONNULL PlacementNew_(
-      const void* PROTOBUF_NONNULL, void* PROTOBUF_NONNULL mem,
-      ::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+  const ::google::protobuf::internal::ClassData *PROTOBUF_NONNULL
+  GetClassData() const PROTOBUF_FINAL;
+  static void *PROTOBUF_NONNULL
+  PlacementNew_(const void *PROTOBUF_NONNULL, void *PROTOBUF_NONNULL mem,
+                ::google::protobuf::Arena *PROTOBUF_NULLABLE arena);
   static constexpr auto InternalNewImpl_();
 
- public:
+public:
   static constexpr auto InternalGenerateClassData_();
 
   ::google::protobuf::Metadata GetMetadata() const;
@@ -1234,51 +1364,62 @@ class Tile final : public ::google::protobuf::Message
   };
   // repeated .vector_tile.Tile.BuildingShape shapes = 1;
   int shapes_size() const;
-  private:
+
+private:
   int _internal_shapes_size() const;
 
-  public:
-  void clear_shapes() ;
-  ::vector_tile::Tile_BuildingShape* PROTOBUF_NONNULL mutable_shapes(int index);
-  ::google::protobuf::RepeatedPtrField<::vector_tile::Tile_BuildingShape>* PROTOBUF_NONNULL mutable_shapes();
+public:
+  void clear_shapes();
+  ::vector_tile::Tile_BuildingShape *PROTOBUF_NONNULL mutable_shapes(int index);
+  ::google::protobuf::RepeatedPtrField<::vector_tile::Tile_BuildingShape> *
+      PROTOBUF_NONNULL
+      mutable_shapes();
 
-  private:
-  const ::google::protobuf::RepeatedPtrField<::vector_tile::Tile_BuildingShape>& _internal_shapes() const;
-  ::google::protobuf::RepeatedPtrField<::vector_tile::Tile_BuildingShape>* PROTOBUF_NONNULL _internal_mutable_shapes();
-  public:
-  const ::vector_tile::Tile_BuildingShape& shapes(int index) const;
-  ::vector_tile::Tile_BuildingShape* PROTOBUF_NONNULL add_shapes();
-  const ::google::protobuf::RepeatedPtrField<::vector_tile::Tile_BuildingShape>& shapes() const;
+private:
+  const ::google::protobuf::RepeatedPtrField<
+      ::vector_tile::Tile_BuildingShape> &
+  _internal_shapes() const;
+  ::google::protobuf::RepeatedPtrField<::vector_tile::Tile_BuildingShape> *
+      PROTOBUF_NONNULL
+      _internal_mutable_shapes();
+
+public:
+  const ::vector_tile::Tile_BuildingShape &shapes(int index) const;
+  ::vector_tile::Tile_BuildingShape *PROTOBUF_NONNULL add_shapes();
+  const ::google::protobuf::RepeatedPtrField<
+      ::vector_tile::Tile_BuildingShape> &
+  shapes() const;
   // @@protoc_insertion_point(class_scope:vector_tile.Tile)
- private:
+private:
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
-  static const ::google::protobuf::internal::TcParseTable<0, 1,
-                                   1, 0,
-                                   2>
+  static const ::google::protobuf::internal::TcParseTable<0, 1, 1, 0, 2>
       _table_;
 
   friend class ::google::protobuf::MessageLite;
   friend class ::google::protobuf::Arena;
-  template <typename T>
-  friend class ::google::protobuf::Arena::InternalHelper;
+  template <typename T> friend class ::google::protobuf::Arena::InternalHelper;
   using InternalArenaConstructable_ = void;
   using DestructorSkippable_ = void;
   struct Impl_ {
-    inline explicit constexpr Impl_(::google::protobuf::internal::ConstantInitialized) noexcept;
+    inline explicit constexpr Impl_(
+        ::google::protobuf::internal::ConstantInitialized) noexcept;
     inline explicit Impl_(
         ::google::protobuf::internal::InternalVisibility visibility,
-        ::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+        ::google::protobuf::Arena *PROTOBUF_NULLABLE arena);
     inline explicit Impl_(
         ::google::protobuf::internal::InternalVisibility visibility,
-        ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const Impl_& from,
-        const Tile& from_msg);
+        ::google::protobuf::Arena *PROTOBUF_NULLABLE arena, const Impl_ &from,
+        const Tile &from_msg);
     ::google::protobuf::internal::HasBits<1> _has_bits_;
     ::google::protobuf::internal::CachedSize _cached_size_;
-    ::google::protobuf::RepeatedPtrField< ::vector_tile::Tile_BuildingShape > shapes_;
+    ::google::protobuf::RepeatedPtrField<::vector_tile::Tile_BuildingShape>
+        shapes_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
-  union { Impl_ _impl_; };
+  union {
+    Impl_ _impl_;
+  };
   friend struct ::TableStruct_vector_5ftile_2eproto;
 };
 
@@ -1287,30 +1428,35 @@ extern const ::google::protobuf::internal::ClassDataFull Tile_class_data_;
 
 class FullTile_Layer final : public ::google::protobuf::Message
 /* @@protoc_insertion_point(class_definition:vector_tile.FullTile.Layer) */ {
- public:
+public:
   inline FullTile_Layer() : FullTile_Layer(nullptr) {}
   ~FullTile_Layer() PROTOBUF_FINAL;
 
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-  void operator delete(FullTile_Layer* PROTOBUF_NONNULL msg, ::std::destroying_delete_t) {
+  void operator delete(FullTile_Layer *PROTOBUF_NONNULL msg,
+                       ::std::destroying_delete_t) {
     SharedDtor(*msg);
     ::google::protobuf::internal::SizedDelete(msg, sizeof(FullTile_Layer));
   }
 #endif
 
   template <typename = void>
-  explicit PROTOBUF_CONSTEXPR FullTile_Layer(::google::protobuf::internal::ConstantInitialized);
+  explicit PROTOBUF_CONSTEXPR
+      FullTile_Layer(::google::protobuf::internal::ConstantInitialized);
 
-  inline FullTile_Layer(const FullTile_Layer& from) : FullTile_Layer(nullptr, from) {}
-  inline FullTile_Layer(FullTile_Layer&& from) noexcept
+  inline FullTile_Layer(const FullTile_Layer &from)
+      : FullTile_Layer(nullptr, from) {}
+  inline FullTile_Layer(FullTile_Layer &&from) noexcept
       : FullTile_Layer(nullptr, ::std::move(from)) {}
-  inline FullTile_Layer& operator=(const FullTile_Layer& from) {
+  inline FullTile_Layer &operator=(const FullTile_Layer &from) {
     CopyFrom(from);
     return *this;
   }
-  inline FullTile_Layer& operator=(FullTile_Layer&& from) noexcept {
-    if (this == &from) return *this;
-    if (::google::protobuf::internal::CanMoveWithInternalSwap(GetArena(), from.GetArena())) {
+  inline FullTile_Layer &operator=(FullTile_Layer &&from) noexcept {
+    if (this == &from)
+      return *this;
+    if (::google::protobuf::internal::CanMoveWithInternalSwap(
+            GetArena(), from.GetArena())) {
       InternalSwap(&from);
     } else {
       CopyFrom(from);
@@ -1318,113 +1464,130 @@ class FullTile_Layer final : public ::google::protobuf::Message
     return *this;
   }
 
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
-      ABSL_ATTRIBUTE_LIFETIME_BOUND {
-    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
+  inline const ::google::protobuf::UnknownFieldSet &
+  unknown_fields() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_
+        .unknown_fields<::google::protobuf::UnknownFieldSet>(
+            ::google::protobuf::UnknownFieldSet::default_instance);
   }
-  inline ::google::protobuf::UnknownFieldSet* PROTOBUF_NONNULL mutable_unknown_fields()
-      ABSL_ATTRIBUTE_LIFETIME_BOUND {
-    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
+  inline ::google::protobuf::UnknownFieldSet *PROTOBUF_NONNULL
+  mutable_unknown_fields() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_
+        .mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
   }
 
-  static const ::google::protobuf::Descriptor* PROTOBUF_NONNULL descriptor() {
+  static const ::google::protobuf::Descriptor *PROTOBUF_NONNULL descriptor() {
     return GetDescriptor();
   }
-  static const ::google::protobuf::Descriptor* PROTOBUF_NONNULL GetDescriptor() {
+  static const ::google::protobuf::Descriptor *PROTOBUF_NONNULL
+  GetDescriptor() {
     return default_instance().GetMetadata().descriptor;
   }
-  static const ::google::protobuf::Reflection* PROTOBUF_NONNULL GetReflection() {
+  static const ::google::protobuf::Reflection *PROTOBUF_NONNULL
+  GetReflection() {
     return default_instance().GetMetadata().reflection;
   }
-  static const FullTile_Layer& default_instance() {
-    return *reinterpret_cast<const FullTile_Layer*>(
+  static const FullTile_Layer &default_instance() {
+    return *reinterpret_cast<const FullTile_Layer *>(
         &_FullTile_Layer_default_instance_);
   }
   static constexpr int kIndexInFileMessages = 2;
-  friend void swap(FullTile_Layer& a, FullTile_Layer& b) { a.Swap(&b); }
-  inline void Swap(FullTile_Layer* PROTOBUF_NONNULL other) {
-    if (other == this) return;
-    if (::google::protobuf::internal::CanUseInternalSwap(GetArena(), other->GetArena())) {
+  friend void swap(FullTile_Layer &a, FullTile_Layer &b) { a.Swap(&b); }
+  inline void Swap(FullTile_Layer *PROTOBUF_NONNULL other) {
+    if (other == this)
+      return;
+    if (::google::protobuf::internal::CanUseInternalSwap(GetArena(),
+                                                         other->GetArena())) {
       InternalSwap(other);
     } else {
       ::google::protobuf::internal::GenericSwap(this, other);
     }
   }
-  void UnsafeArenaSwap(FullTile_Layer* PROTOBUF_NONNULL other) {
-    if (other == this) return;
+  void UnsafeArenaSwap(FullTile_Layer *PROTOBUF_NONNULL other) {
+    if (other == this)
+      return;
     ABSL_DCHECK(GetArena() == other->GetArena());
     InternalSwap(other);
   }
 
   // implements Message ----------------------------------------------
 
-  FullTile_Layer* PROTOBUF_NONNULL New(::google::protobuf::Arena* PROTOBUF_NULLABLE arena = nullptr) const {
+  FullTile_Layer *PROTOBUF_NONNULL
+  New(::google::protobuf::Arena *PROTOBUF_NULLABLE arena = nullptr) const {
     return ::google::protobuf::Message::DefaultConstruct<FullTile_Layer>(arena);
   }
   using ::google::protobuf::Message::CopyFrom;
-  void CopyFrom(const FullTile_Layer& from);
+  void CopyFrom(const FullTile_Layer &from);
   using ::google::protobuf::Message::MergeFrom;
-  void MergeFrom(const FullTile_Layer& from) { FullTile_Layer::MergeImpl(*this, from); }
-
-  private:
-  static void MergeImpl(::google::protobuf::MessageLite& to_msg,
-                        const ::google::protobuf::MessageLite& from_msg);
-
-  public:
-  bool IsInitialized() const {
-    return IsInitializedImpl(*this);
+  void MergeFrom(const FullTile_Layer &from) {
+    FullTile_Layer::MergeImpl(*this, from);
   }
 
-  private:
-  static bool IsInitializedImpl(const MessageLite& msg);
+private:
+  static void MergeImpl(::google::protobuf::MessageLite &to_msg,
+                        const ::google::protobuf::MessageLite &from_msg);
 
-  public:
+public:
+  bool IsInitialized() const { return IsInitializedImpl(*this); }
+
+private:
+  static bool IsInitializedImpl(const MessageLite &msg);
+
+public:
   ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
-  #if defined(PROTOBUF_CUSTOM_VTABLE)
-  private:
-  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
-  static ::uint8_t* PROTOBUF_NONNULL _InternalSerialize(
-      const ::google::protobuf::MessageLite& msg, ::uint8_t* PROTOBUF_NONNULL target,
-      ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream);
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+private:
+  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite &msg);
+  static ::uint8_t *PROTOBUF_NONNULL _InternalSerialize(
+      const ::google::protobuf::MessageLite &msg,
+      ::uint8_t *PROTOBUF_NONNULL target,
+      ::google::protobuf::io::EpsCopyOutputStream *PROTOBUF_NONNULL stream);
 
-  public:
+public:
   ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
-  ::uint8_t* PROTOBUF_NONNULL _InternalSerialize(
-      ::uint8_t* PROTOBUF_NONNULL target,
-      ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) const {
+  ::uint8_t *PROTOBUF_NONNULL _InternalSerialize(
+      ::uint8_t *PROTOBUF_NONNULL target,
+      ::google::protobuf::io::EpsCopyOutputStream *PROTOBUF_NONNULL
+          stream) const {
     return _InternalSerialize(*this, target, stream);
   }
-  #else   // PROTOBUF_CUSTOM_VTABLE
+#else  // PROTOBUF_CUSTOM_VTABLE
   ::size_t ByteSizeLong() const final;
-  ::uint8_t* PROTOBUF_NONNULL _InternalSerialize(
-      ::uint8_t* PROTOBUF_NONNULL target,
-      ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) const final;
-  #endif  // PROTOBUF_CUSTOM_VTABLE
+  ::uint8_t *PROTOBUF_NONNULL _InternalSerialize(
+      ::uint8_t *PROTOBUF_NONNULL target,
+      ::google::protobuf::io::EpsCopyOutputStream *PROTOBUF_NONNULL
+          stream) const final;
+#endif // PROTOBUF_CUSTOM_VTABLE
   int GetCachedSize() const { return _impl_._cached_size_.Get(); }
 
-  private:
-  void SharedCtor(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
-  static void SharedDtor(MessageLite& self);
-  void InternalSwap(FullTile_Layer* PROTOBUF_NONNULL other);
- private:
+private:
+  void SharedCtor(::google::protobuf::Arena *PROTOBUF_NULLABLE arena);
+  static void SharedDtor(MessageLite &self);
+  void InternalSwap(FullTile_Layer *PROTOBUF_NONNULL other);
+
+private:
   template <typename T>
   friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "vector_tile.FullTile.Layer"; }
+  static ::absl::string_view FullMessageName() {
+    return "vector_tile.FullTile.Layer";
+  }
 
-  explicit FullTile_Layer(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
-  FullTile_Layer(::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const FullTile_Layer& from);
-  FullTile_Layer(
-      ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, FullTile_Layer&& from) noexcept
+  explicit FullTile_Layer(::google::protobuf::Arena *PROTOBUF_NULLABLE arena);
+  FullTile_Layer(::google::protobuf::Arena *PROTOBUF_NULLABLE arena,
+                 const FullTile_Layer &from);
+  FullTile_Layer(::google::protobuf::Arena *PROTOBUF_NULLABLE arena,
+                 FullTile_Layer &&from) noexcept
       : FullTile_Layer(arena) {
     *this = ::std::move(from);
   }
-  const ::google::protobuf::internal::ClassData* PROTOBUF_NONNULL GetClassData() const PROTOBUF_FINAL;
-  static void* PROTOBUF_NONNULL PlacementNew_(
-      const void* PROTOBUF_NONNULL, void* PROTOBUF_NONNULL mem,
-      ::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+  const ::google::protobuf::internal::ClassData *PROTOBUF_NONNULL
+  GetClassData() const PROTOBUF_FINAL;
+  static void *PROTOBUF_NONNULL
+  PlacementNew_(const void *PROTOBUF_NONNULL, void *PROTOBUF_NONNULL mem,
+                ::google::protobuf::Arena *PROTOBUF_NULLABLE arena);
   static constexpr auto InternalNewImpl_();
 
- public:
+public:
   static constexpr auto InternalGenerateClassData_();
 
   ::google::protobuf::Metadata GetMetadata() const;
@@ -1441,351 +1604,403 @@ class FullTile_Layer final : public ::google::protobuf::Message
   };
   // repeated .vector_tile.FullTile.Feature features = 2;
   int features_size() const;
-  private:
+
+private:
   int _internal_features_size() const;
 
-  public:
-  void clear_features() ;
-  ::vector_tile::FullTile_Feature* PROTOBUF_NONNULL mutable_features(int index);
-  ::google::protobuf::RepeatedPtrField<::vector_tile::FullTile_Feature>* PROTOBUF_NONNULL mutable_features();
+public:
+  void clear_features();
+  ::vector_tile::FullTile_Feature *PROTOBUF_NONNULL mutable_features(int index);
+  ::google::protobuf::RepeatedPtrField<::vector_tile::FullTile_Feature> *
+      PROTOBUF_NONNULL
+      mutable_features();
 
-  private:
-  const ::google::protobuf::RepeatedPtrField<::vector_tile::FullTile_Feature>& _internal_features() const;
-  ::google::protobuf::RepeatedPtrField<::vector_tile::FullTile_Feature>* PROTOBUF_NONNULL _internal_mutable_features();
-  public:
-  const ::vector_tile::FullTile_Feature& features(int index) const;
-  ::vector_tile::FullTile_Feature* PROTOBUF_NONNULL add_features();
-  const ::google::protobuf::RepeatedPtrField<::vector_tile::FullTile_Feature>& features() const;
+private:
+  const ::google::protobuf::RepeatedPtrField<::vector_tile::FullTile_Feature> &
+  _internal_features() const;
+  ::google::protobuf::RepeatedPtrField<::vector_tile::FullTile_Feature> *
+      PROTOBUF_NONNULL
+      _internal_mutable_features();
+
+public:
+  const ::vector_tile::FullTile_Feature &features(int index) const;
+  ::vector_tile::FullTile_Feature *PROTOBUF_NONNULL add_features();
+  const ::google::protobuf::RepeatedPtrField<::vector_tile::FullTile_Feature> &
+  features() const;
   // repeated string keys = 3;
   int keys_size() const;
-  private:
+
+private:
   int _internal_keys_size() const;
 
-  public:
-  void clear_keys() ;
-  const ::std::string& keys(int index) const;
-  ::std::string* PROTOBUF_NONNULL mutable_keys(int index);
-  template <typename Arg_ = const ::std::string&, typename... Args_>
-  void set_keys(int index, Arg_&& value, Args_... args);
-  ::std::string* PROTOBUF_NONNULL add_keys();
-  template <typename Arg_ = const ::std::string&, typename... Args_>
-  void add_keys(Arg_&& value, Args_... args);
-  const ::google::protobuf::RepeatedPtrField<::std::string>& keys() const;
-  ::google::protobuf::RepeatedPtrField<::std::string>* PROTOBUF_NONNULL mutable_keys();
+public:
+  void clear_keys();
+  const ::std::string &keys(int index) const;
+  ::std::string *PROTOBUF_NONNULL mutable_keys(int index);
+  template <typename Arg_ = const ::std::string &, typename... Args_>
+  void set_keys(int index, Arg_ &&value, Args_... args);
+  ::std::string *PROTOBUF_NONNULL add_keys();
+  template <typename Arg_ = const ::std::string &, typename... Args_>
+  void add_keys(Arg_ &&value, Args_... args);
+  const ::google::protobuf::RepeatedPtrField<::std::string> &keys() const;
+  ::google::protobuf::RepeatedPtrField<::std::string> *PROTOBUF_NONNULL
+  mutable_keys();
 
-  private:
-  const ::google::protobuf::RepeatedPtrField<::std::string>& _internal_keys() const;
-  ::google::protobuf::RepeatedPtrField<::std::string>* PROTOBUF_NONNULL _internal_mutable_keys();
+private:
+  const ::google::protobuf::RepeatedPtrField<::std::string> &
+  _internal_keys() const;
+  ::google::protobuf::RepeatedPtrField<::std::string> *PROTOBUF_NONNULL
+  _internal_mutable_keys();
 
-  public:
+public:
   // repeated .vector_tile.FullTile.Value values = 4;
   int values_size() const;
-  private:
+
+private:
   int _internal_values_size() const;
 
-  public:
-  void clear_values() ;
-  ::vector_tile::FullTile_Value* PROTOBUF_NONNULL mutable_values(int index);
-  ::google::protobuf::RepeatedPtrField<::vector_tile::FullTile_Value>* PROTOBUF_NONNULL mutable_values();
+public:
+  void clear_values();
+  ::vector_tile::FullTile_Value *PROTOBUF_NONNULL mutable_values(int index);
+  ::google::protobuf::RepeatedPtrField<::vector_tile::FullTile_Value> *
+      PROTOBUF_NONNULL
+      mutable_values();
 
-  private:
-  const ::google::protobuf::RepeatedPtrField<::vector_tile::FullTile_Value>& _internal_values() const;
-  ::google::protobuf::RepeatedPtrField<::vector_tile::FullTile_Value>* PROTOBUF_NONNULL _internal_mutable_values();
-  public:
-  const ::vector_tile::FullTile_Value& values(int index) const;
-  ::vector_tile::FullTile_Value* PROTOBUF_NONNULL add_values();
-  const ::google::protobuf::RepeatedPtrField<::vector_tile::FullTile_Value>& values() const;
+private:
+  const ::google::protobuf::RepeatedPtrField<::vector_tile::FullTile_Value> &
+  _internal_values() const;
+  ::google::protobuf::RepeatedPtrField<::vector_tile::FullTile_Value> *
+      PROTOBUF_NONNULL
+      _internal_mutable_values();
+
+public:
+  const ::vector_tile::FullTile_Value &values(int index) const;
+  ::vector_tile::FullTile_Value *PROTOBUF_NONNULL add_values();
+  const ::google::protobuf::RepeatedPtrField<::vector_tile::FullTile_Value> &
+  values() const;
   // required string name = 1;
   bool has_name() const;
-  void clear_name() ;
-  const ::std::string& name() const;
-  template <typename Arg_ = const ::std::string&, typename... Args_>
-  void set_name(Arg_&& arg, Args_... args);
-  ::std::string* PROTOBUF_NONNULL mutable_name();
-  [[nodiscard]] ::std::string* PROTOBUF_NULLABLE release_name();
-  void set_allocated_name(::std::string* PROTOBUF_NULLABLE value);
+  void clear_name();
+  const ::std::string &name() const;
+  template <typename Arg_ = const ::std::string &, typename... Args_>
+  void set_name(Arg_ &&arg, Args_... args);
+  ::std::string *PROTOBUF_NONNULL mutable_name();
+  [[nodiscard]] ::std::string *PROTOBUF_NULLABLE release_name();
+  void set_allocated_name(::std::string *PROTOBUF_NULLABLE value);
 
-  private:
-  const ::std::string& _internal_name() const;
-  PROTOBUF_ALWAYS_INLINE void _internal_set_name(const ::std::string& value);
-  ::std::string* PROTOBUF_NONNULL _internal_mutable_name();
+private:
+  const ::std::string &_internal_name() const;
+  PROTOBUF_ALWAYS_INLINE void _internal_set_name(const ::std::string &value);
+  ::std::string *PROTOBUF_NONNULL _internal_mutable_name();
 
-  public:
+public:
   // optional uint32 extent = 5 [default = 4096];
   bool has_extent() const;
-  void clear_extent() ;
+  void clear_extent();
   ::uint32_t extent() const;
   void set_extent(::uint32_t value);
 
-  private:
+private:
   ::uint32_t _internal_extent() const;
   void _internal_set_extent(::uint32_t value);
 
-  public:
+public:
   // required uint32 version = 15 [default = 1];
   bool has_version() const;
-  void clear_version() ;
+  void clear_version();
   ::uint32_t version() const;
   void set_version(::uint32_t value);
 
-  private:
+private:
   ::uint32_t _internal_version() const;
   void _internal_set_version(::uint32_t value);
 
-  public:
-  template <typename _proto_TypeTraits, ::google::protobuf::internal::FieldType _field_type,
-            bool _is_packed,
-            typename = typename _proto_TypeTraits::Singular>
-  PROTOBUF_FUTURE_ADD_NODISCARD inline bool HasExtension(
-      const ::google::protobuf::internal::ExtensionIdentifier<FullTile_Layer, _proto_TypeTraits,
-                                       _field_type, _is_packed>& id) const {
+public:
+  template <typename _proto_TypeTraits,
+            ::google::protobuf::internal::FieldType _field_type,
+            bool _is_packed, typename = typename _proto_TypeTraits::Singular>
+  PROTOBUF_FUTURE_ADD_NODISCARD inline bool
+  HasExtension(const ::google::protobuf::internal::ExtensionIdentifier<
+               FullTile_Layer, _proto_TypeTraits, _field_type, _is_packed> &id)
+      const {
     return _impl_._extensions_.Has(id.number());
   }
 
-  template <typename _proto_TypeTraits, ::google::protobuf::internal::FieldType _field_type,
+  template <typename _proto_TypeTraits,
+            ::google::protobuf::internal::FieldType _field_type,
             bool _is_packed>
   inline void ClearExtension(
-      const ::google::protobuf::internal::ExtensionIdentifier<FullTile_Layer, _proto_TypeTraits,
-                                       _field_type, _is_packed>& id) {
+      const ::google::protobuf::internal::ExtensionIdentifier<
+          FullTile_Layer, _proto_TypeTraits, _field_type, _is_packed> &id) {
     _impl_._extensions_.ClearExtension(id.number());
   }
 
-  template <typename _proto_TypeTraits, ::google::protobuf::internal::FieldType _field_type,
-            bool _is_packed,
-            typename = typename _proto_TypeTraits::Repeated>
-  PROTOBUF_FUTURE_ADD_NODISCARD inline int ExtensionSize(
-      const ::google::protobuf::internal::ExtensionIdentifier<FullTile_Layer, _proto_TypeTraits,
-                                       _field_type, _is_packed>& id) const {
+  template <typename _proto_TypeTraits,
+            ::google::protobuf::internal::FieldType _field_type,
+            bool _is_packed, typename = typename _proto_TypeTraits::Repeated>
+  PROTOBUF_FUTURE_ADD_NODISCARD inline int
+  ExtensionSize(const ::google::protobuf::internal::ExtensionIdentifier<
+                FullTile_Layer, _proto_TypeTraits, _field_type, _is_packed> &id)
+      const {
     return _impl_._extensions_.ExtensionSize(id.number());
   }
 
-  template <typename _proto_TypeTraits, ::google::protobuf::internal::FieldType _field_type,
+  template <typename _proto_TypeTraits,
+            ::google::protobuf::internal::FieldType _field_type,
             bool _is_packed,
             ::std::enable_if_t<!_proto_TypeTraits::kLifetimeBound, int> = 0>
   PROTOBUF_FUTURE_ADD_NODISCARD inline
       typename _proto_TypeTraits::Singular::ConstType
       GetExtension(const ::google::protobuf::internal::ExtensionIdentifier<
-                   FullTile_Layer, _proto_TypeTraits, _field_type, _is_packed>& id)
-          const {
-    return _proto_TypeTraits::Get(id.number(), _impl_._extensions_, id.default_value());
+                   FullTile_Layer, _proto_TypeTraits, _field_type, _is_packed>
+                       &id) const {
+    return _proto_TypeTraits::Get(id.number(), _impl_._extensions_,
+                                  id.default_value());
   }
 
-  template <typename _proto_TypeTraits, ::google::protobuf::internal::FieldType _field_type,
+  template <typename _proto_TypeTraits,
+            ::google::protobuf::internal::FieldType _field_type,
             bool _is_packed,
             ::std::enable_if_t<_proto_TypeTraits::kLifetimeBound, int> = 0>
   PROTOBUF_FUTURE_ADD_NODISCARD inline
       typename _proto_TypeTraits::Singular::ConstType
       GetExtension(const ::google::protobuf::internal::ExtensionIdentifier<
-                   FullTile_Layer, _proto_TypeTraits, _field_type, _is_packed>& id)
-          const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-    return _proto_TypeTraits::Get(id.number(), _impl_._extensions_, id.default_value());
+                   FullTile_Layer, _proto_TypeTraits, _field_type, _is_packed>
+                       &id) const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _proto_TypeTraits::Get(id.number(), _impl_._extensions_,
+                                  id.default_value());
   }
 
-  template <typename _proto_TypeTraits, ::google::protobuf::internal::FieldType _field_type,
+  template <typename _proto_TypeTraits,
+            ::google::protobuf::internal::FieldType _field_type,
             bool _is_packed>
   inline typename _proto_TypeTraits::Singular::MutableType MutableExtension(
-      const ::google::protobuf::internal::ExtensionIdentifier<FullTile_Layer, _proto_TypeTraits,
-                                       _field_type, _is_packed>& id)
+      const ::google::protobuf::internal::ExtensionIdentifier<
+          FullTile_Layer, _proto_TypeTraits, _field_type, _is_packed> &id)
       ABSL_ATTRIBUTE_LIFETIME_BOUND {
-    return _proto_TypeTraits::Mutable(id.number(), _field_type, &_impl_._extensions_);
+    return _proto_TypeTraits::Mutable(id.number(), _field_type,
+                                      &_impl_._extensions_);
   }
 
-  template <typename _proto_TypeTraits, ::google::protobuf::internal::FieldType _field_type,
+  template <typename _proto_TypeTraits,
+            ::google::protobuf::internal::FieldType _field_type,
             bool _is_packed>
   inline void SetExtension(
-      const ::google::protobuf::internal::ExtensionIdentifier<FullTile_Layer, _proto_TypeTraits,
-                                       _field_type, _is_packed>& id,
+      const ::google::protobuf::internal::ExtensionIdentifier<
+          FullTile_Layer, _proto_TypeTraits, _field_type, _is_packed> &id,
       typename _proto_TypeTraits::Singular::ConstType value) {
-    _proto_TypeTraits::Set(id.number(), _field_type, value, &_impl_._extensions_);
+    _proto_TypeTraits::Set(id.number(), _field_type, value,
+                           &_impl_._extensions_);
   }
 
-  template <typename _proto_TypeTraits, ::google::protobuf::internal::FieldType _field_type,
+  template <typename _proto_TypeTraits,
+            ::google::protobuf::internal::FieldType _field_type,
             bool _is_packed>
   inline void SetAllocatedExtension(
-      const ::google::protobuf::internal::ExtensionIdentifier<FullTile_Layer, _proto_TypeTraits,
-                                       _field_type, _is_packed>& id,
+      const ::google::protobuf::internal::ExtensionIdentifier<
+          FullTile_Layer, _proto_TypeTraits, _field_type, _is_packed> &id,
       typename _proto_TypeTraits::Singular::MutableType value) {
     _proto_TypeTraits::SetAllocated(id.number(), _field_type, value,
                                     &_impl_._extensions_);
   }
-  template <typename _proto_TypeTraits, ::google::protobuf::internal::FieldType _field_type,
+  template <typename _proto_TypeTraits,
+            ::google::protobuf::internal::FieldType _field_type,
             bool _is_packed>
   inline void UnsafeArenaSetAllocatedExtension(
-      const ::google::protobuf::internal::ExtensionIdentifier<FullTile_Layer, _proto_TypeTraits,
-                                       _field_type, _is_packed>& id,
+      const ::google::protobuf::internal::ExtensionIdentifier<
+          FullTile_Layer, _proto_TypeTraits, _field_type, _is_packed> &id,
       typename _proto_TypeTraits::Singular::MutableType value) {
-    _proto_TypeTraits::UnsafeArenaSetAllocated(id.number(), _field_type,
-                                               value, &_impl_._extensions_);
+    _proto_TypeTraits::UnsafeArenaSetAllocated(id.number(), _field_type, value,
+                                               &_impl_._extensions_);
   }
-  template <typename _proto_TypeTraits, ::google::protobuf::internal::FieldType _field_type,
+  template <typename _proto_TypeTraits,
+            ::google::protobuf::internal::FieldType _field_type,
             bool _is_packed>
   [[nodiscard]] inline typename _proto_TypeTraits::Singular::MutableType
-  ReleaseExtension(const ::google::protobuf::internal::ExtensionIdentifier<
-                   FullTile_Layer, _proto_TypeTraits, _field_type, _is_packed>& id) {
-    return _proto_TypeTraits::Release(id.number(), _field_type, &_impl_._extensions_);
+  ReleaseExtension(
+      const ::google::protobuf::internal::ExtensionIdentifier<
+          FullTile_Layer, _proto_TypeTraits, _field_type, _is_packed> &id) {
+    return _proto_TypeTraits::Release(id.number(), _field_type,
+                                      &_impl_._extensions_);
   }
-  template <typename _proto_TypeTraits, ::google::protobuf::internal::FieldType _field_type,
+  template <typename _proto_TypeTraits,
+            ::google::protobuf::internal::FieldType _field_type,
             bool _is_packed>
   inline typename _proto_TypeTraits::Singular::MutableType
   UnsafeArenaReleaseExtension(
-      const ::google::protobuf::internal::ExtensionIdentifier<FullTile_Layer, _proto_TypeTraits,
-                                       _field_type, _is_packed>& id) {
+      const ::google::protobuf::internal::ExtensionIdentifier<
+          FullTile_Layer, _proto_TypeTraits, _field_type, _is_packed> &id) {
     return _proto_TypeTraits::UnsafeArenaRelease(id.number(), _field_type,
                                                  &_impl_._extensions_);
   }
 
-  template <typename _proto_TypeTraits, ::google::protobuf::internal::FieldType _field_type,
+  template <typename _proto_TypeTraits,
+            ::google::protobuf::internal::FieldType _field_type,
             bool _is_packed,
             ::std::enable_if_t<!_proto_TypeTraits::kLifetimeBound, int> = 0>
   PROTOBUF_FUTURE_ADD_NODISCARD inline
       typename _proto_TypeTraits::Repeated::ConstType
       GetExtension(
-          const ::google::protobuf::internal::ExtensionIdentifier<FullTile_Layer, _proto_TypeTraits,
-                                           _field_type, _is_packed>& id,
+          const ::google::protobuf::internal::ExtensionIdentifier<
+              FullTile_Layer, _proto_TypeTraits, _field_type, _is_packed> &id,
           int index) const {
     return _proto_TypeTraits::Get(id.number(), _impl_._extensions_, index);
   }
 
-  template <typename _proto_TypeTraits, ::google::protobuf::internal::FieldType _field_type,
+  template <typename _proto_TypeTraits,
+            ::google::protobuf::internal::FieldType _field_type,
             bool _is_packed,
             ::std::enable_if_t<_proto_TypeTraits::kLifetimeBound, int> = 0>
   PROTOBUF_FUTURE_ADD_NODISCARD inline
       typename _proto_TypeTraits::Repeated::ConstType
       GetExtension(
-          const ::google::protobuf::internal::ExtensionIdentifier<FullTile_Layer, _proto_TypeTraits,
-                                           _field_type, _is_packed>& id,
+          const ::google::protobuf::internal::ExtensionIdentifier<
+              FullTile_Layer, _proto_TypeTraits, _field_type, _is_packed> &id,
           int index) const ABSL_ATTRIBUTE_LIFETIME_BOUND {
     return _proto_TypeTraits::Get(id.number(), _impl_._extensions_, index);
   }
 
-  template <typename _proto_TypeTraits, ::google::protobuf::internal::FieldType _field_type,
+  template <typename _proto_TypeTraits,
+            ::google::protobuf::internal::FieldType _field_type,
             bool _is_packed>
   inline typename _proto_TypeTraits::Repeated::MutableType MutableExtension(
-      const ::google::protobuf::internal::ExtensionIdentifier<FullTile_Layer, _proto_TypeTraits,
-                                       _field_type, _is_packed>& id,
+      const ::google::protobuf::internal::ExtensionIdentifier<
+          FullTile_Layer, _proto_TypeTraits, _field_type, _is_packed> &id,
       int index) ABSL_ATTRIBUTE_LIFETIME_BOUND {
     return _proto_TypeTraits::Mutable(id.number(), index, &_impl_._extensions_);
   }
 
-  template <typename _proto_TypeTraits, ::google::protobuf::internal::FieldType _field_type,
+  template <typename _proto_TypeTraits,
+            ::google::protobuf::internal::FieldType _field_type,
             bool _is_packed>
   inline void SetExtension(
-      const ::google::protobuf::internal::ExtensionIdentifier<FullTile_Layer, _proto_TypeTraits,
-                                       _field_type, _is_packed>& id,
+      const ::google::protobuf::internal::ExtensionIdentifier<
+          FullTile_Layer, _proto_TypeTraits, _field_type, _is_packed> &id,
       int index, typename _proto_TypeTraits::Repeated::ConstType value) {
     _proto_TypeTraits::Set(id.number(), index, value, &_impl_._extensions_);
   }
 
-  template <typename _proto_TypeTraits, ::google::protobuf::internal::FieldType _field_type,
+  template <typename _proto_TypeTraits,
+            ::google::protobuf::internal::FieldType _field_type,
             bool _is_packed>
-  inline typename _proto_TypeTraits::Repeated::MutableType AddExtension(
-      const ::google::protobuf::internal::ExtensionIdentifier<FullTile_Layer, _proto_TypeTraits,
-                                       _field_type, _is_packed>& id)
+  inline typename _proto_TypeTraits::Repeated::MutableType
+  AddExtension(const ::google::protobuf::internal::ExtensionIdentifier<
+               FullTile_Layer, _proto_TypeTraits, _field_type, _is_packed> &id)
       ABSL_ATTRIBUTE_LIFETIME_BOUND {
     typename _proto_TypeTraits::Repeated::MutableType to_add =
         _proto_TypeTraits::Add(id.number(), _field_type, &_impl_._extensions_);
     return to_add;
   }
 
-  template <typename _proto_TypeTraits, ::google::protobuf::internal::FieldType _field_type,
+  template <typename _proto_TypeTraits,
+            ::google::protobuf::internal::FieldType _field_type,
             bool _is_packed>
   inline void AddExtension(
-      const ::google::protobuf::internal::ExtensionIdentifier<FullTile_Layer, _proto_TypeTraits,
-                                       _field_type, _is_packed>& id,
+      const ::google::protobuf::internal::ExtensionIdentifier<
+          FullTile_Layer, _proto_TypeTraits, _field_type, _is_packed> &id,
       typename _proto_TypeTraits::Repeated::ConstType value) {
     _proto_TypeTraits::Add(id.number(), _field_type, _is_packed, value,
                            &_impl_._extensions_);
   }
 
-  template <typename _proto_TypeTraits, ::google::protobuf::internal::FieldType _field_type,
+  template <typename _proto_TypeTraits,
+            ::google::protobuf::internal::FieldType _field_type,
             bool _is_packed>
   PROTOBUF_FUTURE_ADD_NODISCARD inline const typename _proto_TypeTraits::
-      Repeated::RepeatedFieldType&
+      Repeated::RepeatedFieldType &
       GetRepeatedExtension(
-          const ::google::protobuf::internal::ExtensionIdentifier<FullTile_Layer, _proto_TypeTraits,
-                                           _field_type, _is_packed>& id)
+          const ::google::protobuf::internal::ExtensionIdentifier<
+              FullTile_Layer, _proto_TypeTraits, _field_type, _is_packed> &id)
           const ABSL_ATTRIBUTE_LIFETIME_BOUND {
     return _proto_TypeTraits::GetRepeated(id.number(), _impl_._extensions_);
   }
 
-  template <typename _proto_TypeTraits, ::google::protobuf::internal::FieldType _field_type,
+  template <typename _proto_TypeTraits,
+            ::google::protobuf::internal::FieldType _field_type,
             bool _is_packed>
-  inline typename _proto_TypeTraits::Repeated::RepeatedFieldType* PROTOBUF_NONNULL
-  MutableRepeatedExtension(
-      const ::google::protobuf::internal::ExtensionIdentifier<FullTile_Layer, _proto_TypeTraits,
-                                       _field_type, _is_packed>& id)
-      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  inline
+      typename _proto_TypeTraits::Repeated::RepeatedFieldType *PROTOBUF_NONNULL
+      MutableRepeatedExtension(
+          const ::google::protobuf::internal::ExtensionIdentifier<
+              FullTile_Layer, _proto_TypeTraits, _field_type, _is_packed> &id)
+          ABSL_ATTRIBUTE_LIFETIME_BOUND {
     return _proto_TypeTraits::MutableRepeated(id.number(), _field_type,
                                               _is_packed, &_impl_._extensions_);
   }
   // @@protoc_insertion_point(class_scope:vector_tile.FullTile.Layer)
- private:
+private:
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
-  static const ::google::protobuf::internal::TcParseTable<3, 6,
-                                   2, 0,
-                                   2>
+  static const ::google::protobuf::internal::TcParseTable<3, 6, 2, 0, 2>
       _table_;
 
   friend class ::google::protobuf::MessageLite;
   friend class ::google::protobuf::Arena;
-  template <typename T>
-  friend class ::google::protobuf::Arena::InternalHelper;
+  template <typename T> friend class ::google::protobuf::Arena::InternalHelper;
   using InternalArenaConstructable_ = void;
   using DestructorSkippable_ = void;
   struct Impl_ {
-    inline explicit constexpr Impl_(::google::protobuf::internal::ConstantInitialized) noexcept;
+    inline explicit constexpr Impl_(
+        ::google::protobuf::internal::ConstantInitialized) noexcept;
     inline explicit Impl_(
         ::google::protobuf::internal::InternalVisibility visibility,
-        ::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+        ::google::protobuf::Arena *PROTOBUF_NULLABLE arena);
     inline explicit Impl_(
         ::google::protobuf::internal::InternalVisibility visibility,
-        ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const Impl_& from,
-        const FullTile_Layer& from_msg);
+        ::google::protobuf::Arena *PROTOBUF_NULLABLE arena, const Impl_ &from,
+        const FullTile_Layer &from_msg);
     ::google::protobuf::internal::ExtensionSet _extensions_;
     ::google::protobuf::internal::HasBits<1> _has_bits_;
     ::google::protobuf::internal::CachedSize _cached_size_;
-    ::google::protobuf::RepeatedPtrField< ::vector_tile::FullTile_Feature > features_;
+    ::google::protobuf::RepeatedPtrField<::vector_tile::FullTile_Feature>
+        features_;
     ::google::protobuf::RepeatedPtrField<::std::string> keys_;
-    ::google::protobuf::RepeatedPtrField< ::vector_tile::FullTile_Value > values_;
+    ::google::protobuf::RepeatedPtrField<::vector_tile::FullTile_Value> values_;
     ::google::protobuf::internal::ArenaStringPtr name_;
     ::uint32_t extent_;
     ::uint32_t version_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
-  union { Impl_ _impl_; };
+  union {
+    Impl_ _impl_;
+  };
   friend struct ::TableStruct_vector_5ftile_2eproto;
 };
 
-extern const ::google::protobuf::internal::ClassDataFull FullTile_Layer_class_data_;
+extern const ::google::protobuf::internal::ClassDataFull
+    FullTile_Layer_class_data_;
 // -------------------------------------------------------------------
 
 class FullTile final : public ::google::protobuf::Message
 /* @@protoc_insertion_point(class_definition:vector_tile.FullTile) */ {
- public:
+public:
   inline FullTile() : FullTile(nullptr) {}
   ~FullTile() PROTOBUF_FINAL;
 
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-  void operator delete(FullTile* PROTOBUF_NONNULL msg, ::std::destroying_delete_t) {
+  void operator delete(FullTile *PROTOBUF_NONNULL msg,
+                       ::std::destroying_delete_t) {
     SharedDtor(*msg);
     ::google::protobuf::internal::SizedDelete(msg, sizeof(FullTile));
   }
 #endif
 
   template <typename = void>
-  explicit PROTOBUF_CONSTEXPR FullTile(::google::protobuf::internal::ConstantInitialized);
+  explicit PROTOBUF_CONSTEXPR
+      FullTile(::google::protobuf::internal::ConstantInitialized);
 
-  inline FullTile(const FullTile& from) : FullTile(nullptr, from) {}
-  inline FullTile(FullTile&& from) noexcept
+  inline FullTile(const FullTile &from) : FullTile(nullptr, from) {}
+  inline FullTile(FullTile &&from) noexcept
       : FullTile(nullptr, ::std::move(from)) {}
-  inline FullTile& operator=(const FullTile& from) {
+  inline FullTile &operator=(const FullTile &from) {
     CopyFrom(from);
     return *this;
   }
-  inline FullTile& operator=(FullTile&& from) noexcept {
-    if (this == &from) return *this;
-    if (::google::protobuf::internal::CanMoveWithInternalSwap(GetArena(), from.GetArena())) {
+  inline FullTile &operator=(FullTile &&from) noexcept {
+    if (this == &from)
+      return *this;
+    if (::google::protobuf::internal::CanMoveWithInternalSwap(
+            GetArena(), from.GetArena())) {
       InternalSwap(&from);
     } else {
       CopyFrom(from);
@@ -1793,113 +2008,127 @@ class FullTile final : public ::google::protobuf::Message
     return *this;
   }
 
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
-      ABSL_ATTRIBUTE_LIFETIME_BOUND {
-    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
+  inline const ::google::protobuf::UnknownFieldSet &
+  unknown_fields() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_
+        .unknown_fields<::google::protobuf::UnknownFieldSet>(
+            ::google::protobuf::UnknownFieldSet::default_instance);
   }
-  inline ::google::protobuf::UnknownFieldSet* PROTOBUF_NONNULL mutable_unknown_fields()
-      ABSL_ATTRIBUTE_LIFETIME_BOUND {
-    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
+  inline ::google::protobuf::UnknownFieldSet *PROTOBUF_NONNULL
+  mutable_unknown_fields() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_
+        .mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
   }
 
-  static const ::google::protobuf::Descriptor* PROTOBUF_NONNULL descriptor() {
+  static const ::google::protobuf::Descriptor *PROTOBUF_NONNULL descriptor() {
     return GetDescriptor();
   }
-  static const ::google::protobuf::Descriptor* PROTOBUF_NONNULL GetDescriptor() {
+  static const ::google::protobuf::Descriptor *PROTOBUF_NONNULL
+  GetDescriptor() {
     return default_instance().GetMetadata().descriptor;
   }
-  static const ::google::protobuf::Reflection* PROTOBUF_NONNULL GetReflection() {
+  static const ::google::protobuf::Reflection *PROTOBUF_NONNULL
+  GetReflection() {
     return default_instance().GetMetadata().reflection;
   }
-  static const FullTile& default_instance() {
-    return *reinterpret_cast<const FullTile*>(
-        &_FullTile_default_instance_);
+  static const FullTile &default_instance() {
+    return *reinterpret_cast<const FullTile *>(&_FullTile_default_instance_);
   }
   static constexpr int kIndexInFileMessages = 3;
-  friend void swap(FullTile& a, FullTile& b) { a.Swap(&b); }
-  inline void Swap(FullTile* PROTOBUF_NONNULL other) {
-    if (other == this) return;
-    if (::google::protobuf::internal::CanUseInternalSwap(GetArena(), other->GetArena())) {
+  friend void swap(FullTile &a, FullTile &b) { a.Swap(&b); }
+  inline void Swap(FullTile *PROTOBUF_NONNULL other) {
+    if (other == this)
+      return;
+    if (::google::protobuf::internal::CanUseInternalSwap(GetArena(),
+                                                         other->GetArena())) {
       InternalSwap(other);
     } else {
       ::google::protobuf::internal::GenericSwap(this, other);
     }
   }
-  void UnsafeArenaSwap(FullTile* PROTOBUF_NONNULL other) {
-    if (other == this) return;
+  void UnsafeArenaSwap(FullTile *PROTOBUF_NONNULL other) {
+    if (other == this)
+      return;
     ABSL_DCHECK(GetArena() == other->GetArena());
     InternalSwap(other);
   }
 
   // implements Message ----------------------------------------------
 
-  FullTile* PROTOBUF_NONNULL New(::google::protobuf::Arena* PROTOBUF_NULLABLE arena = nullptr) const {
+  FullTile *PROTOBUF_NONNULL
+  New(::google::protobuf::Arena *PROTOBUF_NULLABLE arena = nullptr) const {
     return ::google::protobuf::Message::DefaultConstruct<FullTile>(arena);
   }
   using ::google::protobuf::Message::CopyFrom;
-  void CopyFrom(const FullTile& from);
+  void CopyFrom(const FullTile &from);
   using ::google::protobuf::Message::MergeFrom;
-  void MergeFrom(const FullTile& from) { FullTile::MergeImpl(*this, from); }
+  void MergeFrom(const FullTile &from) { FullTile::MergeImpl(*this, from); }
 
-  private:
-  static void MergeImpl(::google::protobuf::MessageLite& to_msg,
-                        const ::google::protobuf::MessageLite& from_msg);
+private:
+  static void MergeImpl(::google::protobuf::MessageLite &to_msg,
+                        const ::google::protobuf::MessageLite &from_msg);
 
-  public:
-  bool IsInitialized() const {
-    return IsInitializedImpl(*this);
-  }
+public:
+  bool IsInitialized() const { return IsInitializedImpl(*this); }
 
-  private:
-  static bool IsInitializedImpl(const MessageLite& msg);
+private:
+  static bool IsInitializedImpl(const MessageLite &msg);
 
-  public:
+public:
   ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
-  #if defined(PROTOBUF_CUSTOM_VTABLE)
-  private:
-  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
-  static ::uint8_t* PROTOBUF_NONNULL _InternalSerialize(
-      const ::google::protobuf::MessageLite& msg, ::uint8_t* PROTOBUF_NONNULL target,
-      ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream);
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+private:
+  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite &msg);
+  static ::uint8_t *PROTOBUF_NONNULL _InternalSerialize(
+      const ::google::protobuf::MessageLite &msg,
+      ::uint8_t *PROTOBUF_NONNULL target,
+      ::google::protobuf::io::EpsCopyOutputStream *PROTOBUF_NONNULL stream);
 
-  public:
+public:
   ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
-  ::uint8_t* PROTOBUF_NONNULL _InternalSerialize(
-      ::uint8_t* PROTOBUF_NONNULL target,
-      ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) const {
+  ::uint8_t *PROTOBUF_NONNULL _InternalSerialize(
+      ::uint8_t *PROTOBUF_NONNULL target,
+      ::google::protobuf::io::EpsCopyOutputStream *PROTOBUF_NONNULL
+          stream) const {
     return _InternalSerialize(*this, target, stream);
   }
-  #else   // PROTOBUF_CUSTOM_VTABLE
+#else  // PROTOBUF_CUSTOM_VTABLE
   ::size_t ByteSizeLong() const final;
-  ::uint8_t* PROTOBUF_NONNULL _InternalSerialize(
-      ::uint8_t* PROTOBUF_NONNULL target,
-      ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) const final;
-  #endif  // PROTOBUF_CUSTOM_VTABLE
+  ::uint8_t *PROTOBUF_NONNULL _InternalSerialize(
+      ::uint8_t *PROTOBUF_NONNULL target,
+      ::google::protobuf::io::EpsCopyOutputStream *PROTOBUF_NONNULL
+          stream) const final;
+#endif // PROTOBUF_CUSTOM_VTABLE
   int GetCachedSize() const { return _impl_._cached_size_.Get(); }
 
-  private:
-  void SharedCtor(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
-  static void SharedDtor(MessageLite& self);
-  void InternalSwap(FullTile* PROTOBUF_NONNULL other);
- private:
+private:
+  void SharedCtor(::google::protobuf::Arena *PROTOBUF_NULLABLE arena);
+  static void SharedDtor(MessageLite &self);
+  void InternalSwap(FullTile *PROTOBUF_NONNULL other);
+
+private:
   template <typename T>
   friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "vector_tile.FullTile"; }
+  static ::absl::string_view FullMessageName() {
+    return "vector_tile.FullTile";
+  }
 
-  explicit FullTile(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
-  FullTile(::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const FullTile& from);
-  FullTile(
-      ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, FullTile&& from) noexcept
+  explicit FullTile(::google::protobuf::Arena *PROTOBUF_NULLABLE arena);
+  FullTile(::google::protobuf::Arena *PROTOBUF_NULLABLE arena,
+           const FullTile &from);
+  FullTile(::google::protobuf::Arena *PROTOBUF_NULLABLE arena,
+           FullTile &&from) noexcept
       : FullTile(arena) {
     *this = ::std::move(from);
   }
-  const ::google::protobuf::internal::ClassData* PROTOBUF_NONNULL GetClassData() const PROTOBUF_FINAL;
-  static void* PROTOBUF_NONNULL PlacementNew_(
-      const void* PROTOBUF_NONNULL, void* PROTOBUF_NONNULL mem,
-      ::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+  const ::google::protobuf::internal::ClassData *PROTOBUF_NONNULL
+  GetClassData() const PROTOBUF_FINAL;
+  static void *PROTOBUF_NONNULL
+  PlacementNew_(const void *PROTOBUF_NONNULL, void *PROTOBUF_NONNULL mem,
+                ::google::protobuf::Arena *PROTOBUF_NULLABLE arena);
   static constexpr auto InternalNewImpl_();
 
- public:
+public:
   static constexpr auto InternalGenerateClassData_();
 
   ::google::protobuf::Metadata GetMetadata() const;
@@ -1917,16 +2146,18 @@ class FullTile final : public ::google::protobuf::Message
   }
   static constexpr GeomType GeomType_MIN = FullTile_GeomType_GeomType_MIN;
   static constexpr GeomType GeomType_MAX = FullTile_GeomType_GeomType_MAX;
-  static constexpr int GeomType_ARRAYSIZE = FullTile_GeomType_GeomType_ARRAYSIZE;
-  static inline const ::google::protobuf::EnumDescriptor* PROTOBUF_NONNULL GeomType_descriptor() {
+  static constexpr int GeomType_ARRAYSIZE =
+      FullTile_GeomType_GeomType_ARRAYSIZE;
+  static inline const ::google::protobuf::EnumDescriptor *PROTOBUF_NONNULL
+  GeomType_descriptor() {
     return FullTile_GeomType_descriptor();
   }
   template <typename T>
-  static inline const ::std::string& GeomType_Name(T value) {
+  static inline const ::std::string &GeomType_Name(T value) {
     return FullTile_GeomType_Name(value);
   }
-  static inline bool GeomType_Parse(
-      ::absl::string_view name, GeomType* PROTOBUF_NONNULL value) {
+  static inline bool GeomType_Parse(::absl::string_view name,
+                                    GeomType *PROTOBUF_NONNULL value) {
     return FullTile_GeomType_Parse(name, value);
   }
 
@@ -1936,237 +2167,269 @@ class FullTile final : public ::google::protobuf::Message
   };
   // repeated .vector_tile.FullTile.Layer layers = 3;
   int layers_size() const;
-  private:
+
+private:
   int _internal_layers_size() const;
 
-  public:
-  void clear_layers() ;
-  ::vector_tile::FullTile_Layer* PROTOBUF_NONNULL mutable_layers(int index);
-  ::google::protobuf::RepeatedPtrField<::vector_tile::FullTile_Layer>* PROTOBUF_NONNULL mutable_layers();
+public:
+  void clear_layers();
+  ::vector_tile::FullTile_Layer *PROTOBUF_NONNULL mutable_layers(int index);
+  ::google::protobuf::RepeatedPtrField<::vector_tile::FullTile_Layer> *
+      PROTOBUF_NONNULL
+      mutable_layers();
 
-  private:
-  const ::google::protobuf::RepeatedPtrField<::vector_tile::FullTile_Layer>& _internal_layers() const;
-  ::google::protobuf::RepeatedPtrField<::vector_tile::FullTile_Layer>* PROTOBUF_NONNULL _internal_mutable_layers();
-  public:
-  const ::vector_tile::FullTile_Layer& layers(int index) const;
-  ::vector_tile::FullTile_Layer* PROTOBUF_NONNULL add_layers();
-  const ::google::protobuf::RepeatedPtrField<::vector_tile::FullTile_Layer>& layers() const;
-  template <typename _proto_TypeTraits, ::google::protobuf::internal::FieldType _field_type,
-            bool _is_packed,
-            typename = typename _proto_TypeTraits::Singular>
+private:
+  const ::google::protobuf::RepeatedPtrField<::vector_tile::FullTile_Layer> &
+  _internal_layers() const;
+  ::google::protobuf::RepeatedPtrField<::vector_tile::FullTile_Layer> *
+      PROTOBUF_NONNULL
+      _internal_mutable_layers();
+
+public:
+  const ::vector_tile::FullTile_Layer &layers(int index) const;
+  ::vector_tile::FullTile_Layer *PROTOBUF_NONNULL add_layers();
+  const ::google::protobuf::RepeatedPtrField<::vector_tile::FullTile_Layer> &
+  layers() const;
+  template <typename _proto_TypeTraits,
+            ::google::protobuf::internal::FieldType _field_type,
+            bool _is_packed, typename = typename _proto_TypeTraits::Singular>
   PROTOBUF_FUTURE_ADD_NODISCARD inline bool HasExtension(
-      const ::google::protobuf::internal::ExtensionIdentifier<FullTile, _proto_TypeTraits,
-                                       _field_type, _is_packed>& id) const {
+      const ::google::protobuf::internal::ExtensionIdentifier<
+          FullTile, _proto_TypeTraits, _field_type, _is_packed> &id) const {
     return _impl_._extensions_.Has(id.number());
   }
 
-  template <typename _proto_TypeTraits, ::google::protobuf::internal::FieldType _field_type,
+  template <typename _proto_TypeTraits,
+            ::google::protobuf::internal::FieldType _field_type,
             bool _is_packed>
-  inline void ClearExtension(
-      const ::google::protobuf::internal::ExtensionIdentifier<FullTile, _proto_TypeTraits,
-                                       _field_type, _is_packed>& id) {
+  inline void
+  ClearExtension(const ::google::protobuf::internal::ExtensionIdentifier<
+                 FullTile, _proto_TypeTraits, _field_type, _is_packed> &id) {
     _impl_._extensions_.ClearExtension(id.number());
   }
 
-  template <typename _proto_TypeTraits, ::google::protobuf::internal::FieldType _field_type,
-            bool _is_packed,
-            typename = typename _proto_TypeTraits::Repeated>
+  template <typename _proto_TypeTraits,
+            ::google::protobuf::internal::FieldType _field_type,
+            bool _is_packed, typename = typename _proto_TypeTraits::Repeated>
   PROTOBUF_FUTURE_ADD_NODISCARD inline int ExtensionSize(
-      const ::google::protobuf::internal::ExtensionIdentifier<FullTile, _proto_TypeTraits,
-                                       _field_type, _is_packed>& id) const {
+      const ::google::protobuf::internal::ExtensionIdentifier<
+          FullTile, _proto_TypeTraits, _field_type, _is_packed> &id) const {
     return _impl_._extensions_.ExtensionSize(id.number());
   }
 
-  template <typename _proto_TypeTraits, ::google::protobuf::internal::FieldType _field_type,
+  template <typename _proto_TypeTraits,
+            ::google::protobuf::internal::FieldType _field_type,
             bool _is_packed,
             ::std::enable_if_t<!_proto_TypeTraits::kLifetimeBound, int> = 0>
   PROTOBUF_FUTURE_ADD_NODISCARD inline
       typename _proto_TypeTraits::Singular::ConstType
-      GetExtension(const ::google::protobuf::internal::ExtensionIdentifier<
-                   FullTile, _proto_TypeTraits, _field_type, _is_packed>& id)
-          const {
-    return _proto_TypeTraits::Get(id.number(), _impl_._extensions_, id.default_value());
+      GetExtension(
+          const ::google::protobuf::internal::ExtensionIdentifier<
+              FullTile, _proto_TypeTraits, _field_type, _is_packed> &id) const {
+    return _proto_TypeTraits::Get(id.number(), _impl_._extensions_,
+                                  id.default_value());
   }
 
-  template <typename _proto_TypeTraits, ::google::protobuf::internal::FieldType _field_type,
+  template <typename _proto_TypeTraits,
+            ::google::protobuf::internal::FieldType _field_type,
             bool _is_packed,
             ::std::enable_if_t<_proto_TypeTraits::kLifetimeBound, int> = 0>
   PROTOBUF_FUTURE_ADD_NODISCARD inline
       typename _proto_TypeTraits::Singular::ConstType
       GetExtension(const ::google::protobuf::internal::ExtensionIdentifier<
-                   FullTile, _proto_TypeTraits, _field_type, _is_packed>& id)
+                   FullTile, _proto_TypeTraits, _field_type, _is_packed> &id)
           const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-    return _proto_TypeTraits::Get(id.number(), _impl_._extensions_, id.default_value());
+    return _proto_TypeTraits::Get(id.number(), _impl_._extensions_,
+                                  id.default_value());
   }
 
-  template <typename _proto_TypeTraits, ::google::protobuf::internal::FieldType _field_type,
+  template <typename _proto_TypeTraits,
+            ::google::protobuf::internal::FieldType _field_type,
             bool _is_packed>
-  inline typename _proto_TypeTraits::Singular::MutableType MutableExtension(
-      const ::google::protobuf::internal::ExtensionIdentifier<FullTile, _proto_TypeTraits,
-                                       _field_type, _is_packed>& id)
+  inline typename _proto_TypeTraits::Singular::MutableType
+  MutableExtension(const ::google::protobuf::internal::ExtensionIdentifier<
+                   FullTile, _proto_TypeTraits, _field_type, _is_packed> &id)
       ABSL_ATTRIBUTE_LIFETIME_BOUND {
-    return _proto_TypeTraits::Mutable(id.number(), _field_type, &_impl_._extensions_);
+    return _proto_TypeTraits::Mutable(id.number(), _field_type,
+                                      &_impl_._extensions_);
   }
 
-  template <typename _proto_TypeTraits, ::google::protobuf::internal::FieldType _field_type,
+  template <typename _proto_TypeTraits,
+            ::google::protobuf::internal::FieldType _field_type,
             bool _is_packed>
-  inline void SetExtension(
-      const ::google::protobuf::internal::ExtensionIdentifier<FullTile, _proto_TypeTraits,
-                                       _field_type, _is_packed>& id,
-      typename _proto_TypeTraits::Singular::ConstType value) {
-    _proto_TypeTraits::Set(id.number(), _field_type, value, &_impl_._extensions_);
+  inline void
+  SetExtension(const ::google::protobuf::internal::ExtensionIdentifier<
+                   FullTile, _proto_TypeTraits, _field_type, _is_packed> &id,
+               typename _proto_TypeTraits::Singular::ConstType value) {
+    _proto_TypeTraits::Set(id.number(), _field_type, value,
+                           &_impl_._extensions_);
   }
 
-  template <typename _proto_TypeTraits, ::google::protobuf::internal::FieldType _field_type,
+  template <typename _proto_TypeTraits,
+            ::google::protobuf::internal::FieldType _field_type,
             bool _is_packed>
   inline void SetAllocatedExtension(
-      const ::google::protobuf::internal::ExtensionIdentifier<FullTile, _proto_TypeTraits,
-                                       _field_type, _is_packed>& id,
+      const ::google::protobuf::internal::ExtensionIdentifier<
+          FullTile, _proto_TypeTraits, _field_type, _is_packed> &id,
       typename _proto_TypeTraits::Singular::MutableType value) {
     _proto_TypeTraits::SetAllocated(id.number(), _field_type, value,
                                     &_impl_._extensions_);
   }
-  template <typename _proto_TypeTraits, ::google::protobuf::internal::FieldType _field_type,
+  template <typename _proto_TypeTraits,
+            ::google::protobuf::internal::FieldType _field_type,
             bool _is_packed>
   inline void UnsafeArenaSetAllocatedExtension(
-      const ::google::protobuf::internal::ExtensionIdentifier<FullTile, _proto_TypeTraits,
-                                       _field_type, _is_packed>& id,
+      const ::google::protobuf::internal::ExtensionIdentifier<
+          FullTile, _proto_TypeTraits, _field_type, _is_packed> &id,
       typename _proto_TypeTraits::Singular::MutableType value) {
-    _proto_TypeTraits::UnsafeArenaSetAllocated(id.number(), _field_type,
-                                               value, &_impl_._extensions_);
+    _proto_TypeTraits::UnsafeArenaSetAllocated(id.number(), _field_type, value,
+                                               &_impl_._extensions_);
   }
-  template <typename _proto_TypeTraits, ::google::protobuf::internal::FieldType _field_type,
+  template <typename _proto_TypeTraits,
+            ::google::protobuf::internal::FieldType _field_type,
             bool _is_packed>
   [[nodiscard]] inline typename _proto_TypeTraits::Singular::MutableType
   ReleaseExtension(const ::google::protobuf::internal::ExtensionIdentifier<
-                   FullTile, _proto_TypeTraits, _field_type, _is_packed>& id) {
-    return _proto_TypeTraits::Release(id.number(), _field_type, &_impl_._extensions_);
+                   FullTile, _proto_TypeTraits, _field_type, _is_packed> &id) {
+    return _proto_TypeTraits::Release(id.number(), _field_type,
+                                      &_impl_._extensions_);
   }
-  template <typename _proto_TypeTraits, ::google::protobuf::internal::FieldType _field_type,
+  template <typename _proto_TypeTraits,
+            ::google::protobuf::internal::FieldType _field_type,
             bool _is_packed>
   inline typename _proto_TypeTraits::Singular::MutableType
   UnsafeArenaReleaseExtension(
-      const ::google::protobuf::internal::ExtensionIdentifier<FullTile, _proto_TypeTraits,
-                                       _field_type, _is_packed>& id) {
+      const ::google::protobuf::internal::ExtensionIdentifier<
+          FullTile, _proto_TypeTraits, _field_type, _is_packed> &id) {
     return _proto_TypeTraits::UnsafeArenaRelease(id.number(), _field_type,
                                                  &_impl_._extensions_);
   }
 
-  template <typename _proto_TypeTraits, ::google::protobuf::internal::FieldType _field_type,
+  template <typename _proto_TypeTraits,
+            ::google::protobuf::internal::FieldType _field_type,
             bool _is_packed,
             ::std::enable_if_t<!_proto_TypeTraits::kLifetimeBound, int> = 0>
   PROTOBUF_FUTURE_ADD_NODISCARD inline
       typename _proto_TypeTraits::Repeated::ConstType
       GetExtension(
-          const ::google::protobuf::internal::ExtensionIdentifier<FullTile, _proto_TypeTraits,
-                                           _field_type, _is_packed>& id,
+          const ::google::protobuf::internal::ExtensionIdentifier<
+              FullTile, _proto_TypeTraits, _field_type, _is_packed> &id,
           int index) const {
     return _proto_TypeTraits::Get(id.number(), _impl_._extensions_, index);
   }
 
-  template <typename _proto_TypeTraits, ::google::protobuf::internal::FieldType _field_type,
+  template <typename _proto_TypeTraits,
+            ::google::protobuf::internal::FieldType _field_type,
             bool _is_packed,
             ::std::enable_if_t<_proto_TypeTraits::kLifetimeBound, int> = 0>
   PROTOBUF_FUTURE_ADD_NODISCARD inline
       typename _proto_TypeTraits::Repeated::ConstType
       GetExtension(
-          const ::google::protobuf::internal::ExtensionIdentifier<FullTile, _proto_TypeTraits,
-                                           _field_type, _is_packed>& id,
+          const ::google::protobuf::internal::ExtensionIdentifier<
+              FullTile, _proto_TypeTraits, _field_type, _is_packed> &id,
           int index) const ABSL_ATTRIBUTE_LIFETIME_BOUND {
     return _proto_TypeTraits::Get(id.number(), _impl_._extensions_, index);
   }
 
-  template <typename _proto_TypeTraits, ::google::protobuf::internal::FieldType _field_type,
+  template <typename _proto_TypeTraits,
+            ::google::protobuf::internal::FieldType _field_type,
             bool _is_packed>
   inline typename _proto_TypeTraits::Repeated::MutableType MutableExtension(
-      const ::google::protobuf::internal::ExtensionIdentifier<FullTile, _proto_TypeTraits,
-                                       _field_type, _is_packed>& id,
+      const ::google::protobuf::internal::ExtensionIdentifier<
+          FullTile, _proto_TypeTraits, _field_type, _is_packed> &id,
       int index) ABSL_ATTRIBUTE_LIFETIME_BOUND {
     return _proto_TypeTraits::Mutable(id.number(), index, &_impl_._extensions_);
   }
 
-  template <typename _proto_TypeTraits, ::google::protobuf::internal::FieldType _field_type,
+  template <typename _proto_TypeTraits,
+            ::google::protobuf::internal::FieldType _field_type,
             bool _is_packed>
-  inline void SetExtension(
-      const ::google::protobuf::internal::ExtensionIdentifier<FullTile, _proto_TypeTraits,
-                                       _field_type, _is_packed>& id,
-      int index, typename _proto_TypeTraits::Repeated::ConstType value) {
+  inline void
+  SetExtension(const ::google::protobuf::internal::ExtensionIdentifier<
+                   FullTile, _proto_TypeTraits, _field_type, _is_packed> &id,
+               int index,
+               typename _proto_TypeTraits::Repeated::ConstType value) {
     _proto_TypeTraits::Set(id.number(), index, value, &_impl_._extensions_);
   }
 
-  template <typename _proto_TypeTraits, ::google::protobuf::internal::FieldType _field_type,
+  template <typename _proto_TypeTraits,
+            ::google::protobuf::internal::FieldType _field_type,
             bool _is_packed>
-  inline typename _proto_TypeTraits::Repeated::MutableType AddExtension(
-      const ::google::protobuf::internal::ExtensionIdentifier<FullTile, _proto_TypeTraits,
-                                       _field_type, _is_packed>& id)
+  inline typename _proto_TypeTraits::Repeated::MutableType
+  AddExtension(const ::google::protobuf::internal::ExtensionIdentifier<
+               FullTile, _proto_TypeTraits, _field_type, _is_packed> &id)
       ABSL_ATTRIBUTE_LIFETIME_BOUND {
     typename _proto_TypeTraits::Repeated::MutableType to_add =
         _proto_TypeTraits::Add(id.number(), _field_type, &_impl_._extensions_);
     return to_add;
   }
 
-  template <typename _proto_TypeTraits, ::google::protobuf::internal::FieldType _field_type,
+  template <typename _proto_TypeTraits,
+            ::google::protobuf::internal::FieldType _field_type,
             bool _is_packed>
-  inline void AddExtension(
-      const ::google::protobuf::internal::ExtensionIdentifier<FullTile, _proto_TypeTraits,
-                                       _field_type, _is_packed>& id,
-      typename _proto_TypeTraits::Repeated::ConstType value) {
+  inline void
+  AddExtension(const ::google::protobuf::internal::ExtensionIdentifier<
+                   FullTile, _proto_TypeTraits, _field_type, _is_packed> &id,
+               typename _proto_TypeTraits::Repeated::ConstType value) {
     _proto_TypeTraits::Add(id.number(), _field_type, _is_packed, value,
                            &_impl_._extensions_);
   }
 
-  template <typename _proto_TypeTraits, ::google::protobuf::internal::FieldType _field_type,
+  template <typename _proto_TypeTraits,
+            ::google::protobuf::internal::FieldType _field_type,
             bool _is_packed>
   PROTOBUF_FUTURE_ADD_NODISCARD inline const typename _proto_TypeTraits::
-      Repeated::RepeatedFieldType&
+      Repeated::RepeatedFieldType &
       GetRepeatedExtension(
-          const ::google::protobuf::internal::ExtensionIdentifier<FullTile, _proto_TypeTraits,
-                                           _field_type, _is_packed>& id)
-          const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+          const ::google::protobuf::internal::ExtensionIdentifier<
+              FullTile, _proto_TypeTraits, _field_type, _is_packed> &id) const
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
     return _proto_TypeTraits::GetRepeated(id.number(), _impl_._extensions_);
   }
 
-  template <typename _proto_TypeTraits, ::google::protobuf::internal::FieldType _field_type,
+  template <typename _proto_TypeTraits,
+            ::google::protobuf::internal::FieldType _field_type,
             bool _is_packed>
-  inline typename _proto_TypeTraits::Repeated::RepeatedFieldType* PROTOBUF_NONNULL
-  MutableRepeatedExtension(
-      const ::google::protobuf::internal::ExtensionIdentifier<FullTile, _proto_TypeTraits,
-                                       _field_type, _is_packed>& id)
-      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  inline
+      typename _proto_TypeTraits::Repeated::RepeatedFieldType *PROTOBUF_NONNULL
+      MutableRepeatedExtension(
+          const ::google::protobuf::internal::ExtensionIdentifier<
+              FullTile, _proto_TypeTraits, _field_type, _is_packed> &id)
+          ABSL_ATTRIBUTE_LIFETIME_BOUND {
     return _proto_TypeTraits::MutableRepeated(id.number(), _field_type,
                                               _is_packed, &_impl_._extensions_);
   }
   // @@protoc_insertion_point(class_scope:vector_tile.FullTile)
- private:
+private:
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
-  static const ::google::protobuf::internal::TcParseTable<0, 1,
-                                   1, 0,
-                                   2>
+  static const ::google::protobuf::internal::TcParseTable<0, 1, 1, 0, 2>
       _table_;
 
   friend class ::google::protobuf::MessageLite;
   friend class ::google::protobuf::Arena;
-  template <typename T>
-  friend class ::google::protobuf::Arena::InternalHelper;
+  template <typename T> friend class ::google::protobuf::Arena::InternalHelper;
   using InternalArenaConstructable_ = void;
   using DestructorSkippable_ = void;
   struct Impl_ {
-    inline explicit constexpr Impl_(::google::protobuf::internal::ConstantInitialized) noexcept;
+    inline explicit constexpr Impl_(
+        ::google::protobuf::internal::ConstantInitialized) noexcept;
     inline explicit Impl_(
         ::google::protobuf::internal::InternalVisibility visibility,
-        ::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+        ::google::protobuf::Arena *PROTOBUF_NULLABLE arena);
     inline explicit Impl_(
         ::google::protobuf::internal::InternalVisibility visibility,
-        ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const Impl_& from,
-        const FullTile& from_msg);
+        ::google::protobuf::Arena *PROTOBUF_NULLABLE arena, const Impl_ &from,
+        const FullTile &from_msg);
     ::google::protobuf::internal::ExtensionSet _extensions_;
     ::google::protobuf::internal::HasBits<1> _has_bits_;
     ::google::protobuf::internal::CachedSize _cached_size_;
-    ::google::protobuf::RepeatedPtrField< ::vector_tile::FullTile_Layer > layers_;
+    ::google::protobuf::RepeatedPtrField<::vector_tile::FullTile_Layer> layers_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
-  union { Impl_ _impl_; };
+  union {
+    Impl_ _impl_;
+  };
   friend struct ::TableStruct_vector_5ftile_2eproto;
 };
 
@@ -2174,16 +2437,12 @@ extern const ::google::protobuf::internal::ClassDataFull FullTile_class_data_;
 
 // ===================================================================
 
-
-
-
 // ===================================================================
-
 
 #ifdef __GNUC__
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wstrict-aliasing"
-#endif  // __GNUC__
+#endif // __GNUC__
 // -------------------------------------------------------------------
 
 // FullTile_Value
@@ -2196,54 +2455,57 @@ inline bool FullTile_Value::has_string_value() const {
 inline void FullTile_Value::clear_string_value() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.string_value_.ClearToEmpty();
-  ClearHasBit(_impl_._has_bits_[0],
-                  0x00000001U);
+  ClearHasBit(_impl_._has_bits_[0], 0x00000001U);
 }
-inline const ::std::string& FullTile_Value::string_value() const
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+inline const ::std::string &
+FullTile_Value::string_value() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
   // @@protoc_insertion_point(field_get:vector_tile.FullTile.Value.string_value)
   return _internal_string_value();
 }
 template <typename Arg_, typename... Args_>
-PROTOBUF_ALWAYS_INLINE void FullTile_Value::set_string_value(Arg_&& arg, Args_... args) {
+PROTOBUF_ALWAYS_INLINE void FullTile_Value::set_string_value(Arg_ &&arg,
+                                                             Args_... args) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   SetHasBit(_impl_._has_bits_[0], 0x00000001U);
-  _impl_.string_value_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
+  _impl_.string_value_.Set(static_cast<Arg_ &&>(arg), args..., GetArena());
   // @@protoc_insertion_point(field_set:vector_tile.FullTile.Value.string_value)
 }
-inline ::std::string* PROTOBUF_NONNULL FullTile_Value::mutable_string_value()
+inline ::std::string *PROTOBUF_NONNULL FullTile_Value::mutable_string_value()
     ABSL_ATTRIBUTE_LIFETIME_BOUND {
   SetHasBit(_impl_._has_bits_[0], 0x00000001U);
-  ::std::string* _s = _internal_mutable_string_value();
+  ::std::string *_s = _internal_mutable_string_value();
   // @@protoc_insertion_point(field_mutable:vector_tile.FullTile.Value.string_value)
   return _s;
 }
-inline const ::std::string& FullTile_Value::_internal_string_value() const {
+inline const ::std::string &FullTile_Value::_internal_string_value() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
   return _impl_.string_value_.Get();
 }
-inline void FullTile_Value::_internal_set_string_value(const ::std::string& value) {
+inline void
+FullTile_Value::_internal_set_string_value(const ::std::string &value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.string_value_.Set(value, GetArena());
 }
-inline ::std::string* PROTOBUF_NONNULL FullTile_Value::_internal_mutable_string_value() {
+inline ::std::string *PROTOBUF_NONNULL
+FullTile_Value::_internal_mutable_string_value() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  return _impl_.string_value_.Mutable( GetArena());
+  return _impl_.string_value_.Mutable(GetArena());
 }
-inline ::std::string* PROTOBUF_NULLABLE FullTile_Value::release_string_value() {
+inline ::std::string *PROTOBUF_NULLABLE FullTile_Value::release_string_value() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   // @@protoc_insertion_point(field_release:vector_tile.FullTile.Value.string_value)
   if (!CheckHasBit(_impl_._has_bits_[0], 0x00000001U)) {
     return nullptr;
   }
   ClearHasBit(_impl_._has_bits_[0], 0x00000001U);
-  auto* released = _impl_.string_value_.Release();
+  auto *released = _impl_.string_value_.Release();
   if (::google::protobuf::internal::DebugHardenForceCopyDefaultString()) {
     _impl_.string_value_.Set("", GetArena());
   }
   return released;
 }
-inline void FullTile_Value::set_allocated_string_value(::std::string* PROTOBUF_NULLABLE value) {
+inline void FullTile_Value::set_allocated_string_value(
+    ::std::string *PROTOBUF_NULLABLE value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   if (value != nullptr) {
     SetHasBit(_impl_._has_bits_[0], 0x00000001U);
@@ -2251,7 +2513,8 @@ inline void FullTile_Value::set_allocated_string_value(::std::string* PROTOBUF_N
     ClearHasBit(_impl_._has_bits_[0], 0x00000001U);
   }
   _impl_.string_value_.SetAllocated(value, GetArena());
-  if (::google::protobuf::internal::DebugHardenForceCopyDefaultString() && _impl_.string_value_.IsDefault()) {
+  if (::google::protobuf::internal::DebugHardenForceCopyDefaultString() &&
+      _impl_.string_value_.IsDefault()) {
     _impl_.string_value_.Set("", GetArena());
   }
   // @@protoc_insertion_point(field_set_allocated:vector_tile.FullTile.Value.string_value)
@@ -2265,8 +2528,7 @@ inline bool FullTile_Value::has_float_value() const {
 inline void FullTile_Value::clear_float_value() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.float_value_ = 0;
-  ClearHasBit(_impl_._has_bits_[0],
-                  0x00000008U);
+  ClearHasBit(_impl_._has_bits_[0], 0x00000008U);
 }
 inline float FullTile_Value::float_value() const {
   // @@protoc_insertion_point(field_get:vector_tile.FullTile.Value.float_value)
@@ -2294,8 +2556,7 @@ inline bool FullTile_Value::has_double_value() const {
 inline void FullTile_Value::clear_double_value() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.double_value_ = 0;
-  ClearHasBit(_impl_._has_bits_[0],
-                  0x00000002U);
+  ClearHasBit(_impl_._has_bits_[0], 0x00000002U);
 }
 inline double FullTile_Value::double_value() const {
   // @@protoc_insertion_point(field_get:vector_tile.FullTile.Value.double_value)
@@ -2323,8 +2584,7 @@ inline bool FullTile_Value::has_int_value() const {
 inline void FullTile_Value::clear_int_value() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.int_value_ = ::int64_t{0};
-  ClearHasBit(_impl_._has_bits_[0],
-                  0x00000004U);
+  ClearHasBit(_impl_._has_bits_[0], 0x00000004U);
 }
 inline ::int64_t FullTile_Value::int_value() const {
   // @@protoc_insertion_point(field_get:vector_tile.FullTile.Value.int_value)
@@ -2352,8 +2612,7 @@ inline bool FullTile_Value::has_uint_value() const {
 inline void FullTile_Value::clear_uint_value() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.uint_value_ = ::uint64_t{0u};
-  ClearHasBit(_impl_._has_bits_[0],
-                  0x00000020U);
+  ClearHasBit(_impl_._has_bits_[0], 0x00000020U);
 }
 inline ::uint64_t FullTile_Value::uint_value() const {
   // @@protoc_insertion_point(field_get:vector_tile.FullTile.Value.uint_value)
@@ -2381,8 +2640,7 @@ inline bool FullTile_Value::has_sint_value() const {
 inline void FullTile_Value::clear_sint_value() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.sint_value_ = ::int64_t{0};
-  ClearHasBit(_impl_._has_bits_[0],
-                  0x00000040U);
+  ClearHasBit(_impl_._has_bits_[0], 0x00000040U);
 }
 inline ::int64_t FullTile_Value::sint_value() const {
   // @@protoc_insertion_point(field_get:vector_tile.FullTile.Value.sint_value)
@@ -2410,8 +2668,7 @@ inline bool FullTile_Value::has_bool_value() const {
 inline void FullTile_Value::clear_bool_value() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.bool_value_ = false;
-  ClearHasBit(_impl_._has_bits_[0],
-                  0x00000010U);
+  ClearHasBit(_impl_._has_bits_[0], 0x00000010U);
 }
 inline bool FullTile_Value::bool_value() const {
   // @@protoc_insertion_point(field_get:vector_tile.FullTile.Value.bool_value)
@@ -2443,8 +2700,7 @@ inline bool FullTile_Feature::has_id() const {
 inline void FullTile_Feature::clear_id() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.id_ = ::uint64_t{0u};
-  ClearHasBit(_impl_._has_bits_[0],
-                  0x00000004U);
+  ClearHasBit(_impl_._has_bits_[0], 0x00000004U);
 }
 inline ::uint64_t FullTile_Feature::id() const {
   // @@protoc_insertion_point(field_get:vector_tile.FullTile.Feature.id)
@@ -2468,14 +2724,11 @@ inline void FullTile_Feature::_internal_set_id(::uint64_t value) {
 inline int FullTile_Feature::_internal_tags_size() const {
   return _internal_tags().size();
 }
-inline int FullTile_Feature::tags_size() const {
-  return _internal_tags_size();
-}
+inline int FullTile_Feature::tags_size() const { return _internal_tags_size(); }
 inline void FullTile_Feature::clear_tags() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.tags_.Clear();
-  ClearHasBitForRepeated(_impl_._has_bits_[0],
-                  0x00000001U);
+  ClearHasBitForRepeated(_impl_._has_bits_[0], 0x00000001U);
 }
 inline ::uint32_t FullTile_Feature::tags(int index) const {
   // @@protoc_insertion_point(field_get:vector_tile.FullTile.Feature.tags)
@@ -2491,24 +2744,24 @@ inline void FullTile_Feature::add_tags(::uint32_t value) {
   SetHasBitForRepeated(_impl_._has_bits_[0], 0x00000001U);
   // @@protoc_insertion_point(field_add:vector_tile.FullTile.Feature.tags)
 }
-inline const ::google::protobuf::RepeatedField<::uint32_t>& FullTile_Feature::tags() const
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+inline const ::google::protobuf::RepeatedField<::uint32_t> &
+FullTile_Feature::tags() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
   // @@protoc_insertion_point(field_list:vector_tile.FullTile.Feature.tags)
   return _internal_tags();
 }
-inline ::google::protobuf::RepeatedField<::uint32_t>* PROTOBUF_NONNULL FullTile_Feature::mutable_tags()
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+inline ::google::protobuf::RepeatedField<::uint32_t> *PROTOBUF_NONNULL
+FullTile_Feature::mutable_tags() ABSL_ATTRIBUTE_LIFETIME_BOUND {
   SetHasBitForRepeated(_impl_._has_bits_[0], 0x00000001U);
   // @@protoc_insertion_point(field_mutable_list:vector_tile.FullTile.Feature.tags)
   ::google::protobuf::internal::TSanWrite(&_impl_);
   return _internal_mutable_tags();
 }
-inline const ::google::protobuf::RepeatedField<::uint32_t>&
+inline const ::google::protobuf::RepeatedField<::uint32_t> &
 FullTile_Feature::_internal_tags() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
   return _impl_.tags_;
 }
-inline ::google::protobuf::RepeatedField<::uint32_t>* PROTOBUF_NONNULL
+inline ::google::protobuf::RepeatedField<::uint32_t> *PROTOBUF_NONNULL
 FullTile_Feature::_internal_mutable_tags() {
   ::google::protobuf::internal::TSanRead(&_impl_);
   return &_impl_.tags_;
@@ -2522,8 +2775,7 @@ inline bool FullTile_Feature::has_type() const {
 inline void FullTile_Feature::clear_type() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.type_ = 0;
-  ClearHasBit(_impl_._has_bits_[0],
-                  0x00000008U);
+  ClearHasBit(_impl_._has_bits_[0], 0x00000008U);
 }
 inline ::vector_tile::FullTile_GeomType FullTile_Feature::type() const {
   // @@protoc_insertion_point(field_get:vector_tile.FullTile.Feature.type)
@@ -2534,16 +2786,18 @@ inline void FullTile_Feature::set_type(::vector_tile::FullTile_GeomType value) {
   SetHasBit(_impl_._has_bits_[0], 0x00000008U);
   // @@protoc_insertion_point(field_set:vector_tile.FullTile.Feature.type)
 }
-inline ::vector_tile::FullTile_GeomType FullTile_Feature::_internal_type() const {
+inline ::vector_tile::FullTile_GeomType
+FullTile_Feature::_internal_type() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
   return static_cast<::vector_tile::FullTile_GeomType>(_impl_.type_);
 }
-inline void FullTile_Feature::_internal_set_type(::vector_tile::FullTile_GeomType value) {
+inline void
+FullTile_Feature::_internal_set_type(::vector_tile::FullTile_GeomType value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
 
-                                          assert(::google::protobuf::internal::ValidateEnum(
-                                              value, ::vector_tile::FullTile_GeomType_internal_data_));
-                                          _impl_.type_ = value;
+  assert(::google::protobuf::internal::ValidateEnum(
+      value, ::vector_tile::FullTile_GeomType_internal_data_));
+  _impl_.type_ = value;
 }
 
 // repeated uint32 geometry = 4 [packed = true];
@@ -2556,8 +2810,7 @@ inline int FullTile_Feature::geometry_size() const {
 inline void FullTile_Feature::clear_geometry() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.geometry_.Clear();
-  ClearHasBitForRepeated(_impl_._has_bits_[0],
-                  0x00000002U);
+  ClearHasBitForRepeated(_impl_._has_bits_[0], 0x00000002U);
 }
 inline ::uint32_t FullTile_Feature::geometry(int index) const {
   // @@protoc_insertion_point(field_get:vector_tile.FullTile.Feature.geometry)
@@ -2573,24 +2826,24 @@ inline void FullTile_Feature::add_geometry(::uint32_t value) {
   SetHasBitForRepeated(_impl_._has_bits_[0], 0x00000002U);
   // @@protoc_insertion_point(field_add:vector_tile.FullTile.Feature.geometry)
 }
-inline const ::google::protobuf::RepeatedField<::uint32_t>& FullTile_Feature::geometry() const
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+inline const ::google::protobuf::RepeatedField<::uint32_t> &
+FullTile_Feature::geometry() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
   // @@protoc_insertion_point(field_list:vector_tile.FullTile.Feature.geometry)
   return _internal_geometry();
 }
-inline ::google::protobuf::RepeatedField<::uint32_t>* PROTOBUF_NONNULL FullTile_Feature::mutable_geometry()
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+inline ::google::protobuf::RepeatedField<::uint32_t> *PROTOBUF_NONNULL
+FullTile_Feature::mutable_geometry() ABSL_ATTRIBUTE_LIFETIME_BOUND {
   SetHasBitForRepeated(_impl_._has_bits_[0], 0x00000002U);
   // @@protoc_insertion_point(field_mutable_list:vector_tile.FullTile.Feature.geometry)
   ::google::protobuf::internal::TSanWrite(&_impl_);
   return _internal_mutable_geometry();
 }
-inline const ::google::protobuf::RepeatedField<::uint32_t>&
+inline const ::google::protobuf::RepeatedField<::uint32_t> &
 FullTile_Feature::_internal_geometry() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
   return _impl_.geometry_;
 }
-inline ::google::protobuf::RepeatedField<::uint32_t>* PROTOBUF_NONNULL
+inline ::google::protobuf::RepeatedField<::uint32_t> *PROTOBUF_NONNULL
 FullTile_Feature::_internal_mutable_geometry() {
   ::google::protobuf::internal::TSanRead(&_impl_);
   return &_impl_.geometry_;
@@ -2608,8 +2861,7 @@ inline bool FullTile_Layer::has_version() const {
 inline void FullTile_Layer::clear_version() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.version_ = 1u;
-  ClearHasBit(_impl_._has_bits_[0],
-                  0x00000020U);
+  ClearHasBit(_impl_._has_bits_[0], 0x00000020U);
 }
 inline ::uint32_t FullTile_Layer::version() const {
   // @@protoc_insertion_point(field_get:vector_tile.FullTile.Layer.version)
@@ -2637,54 +2889,56 @@ inline bool FullTile_Layer::has_name() const {
 inline void FullTile_Layer::clear_name() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.name_.ClearToEmpty();
-  ClearHasBit(_impl_._has_bits_[0],
-                  0x00000008U);
+  ClearHasBit(_impl_._has_bits_[0], 0x00000008U);
 }
-inline const ::std::string& FullTile_Layer::name() const
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+inline const ::std::string &
+FullTile_Layer::name() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
   // @@protoc_insertion_point(field_get:vector_tile.FullTile.Layer.name)
   return _internal_name();
 }
 template <typename Arg_, typename... Args_>
-PROTOBUF_ALWAYS_INLINE void FullTile_Layer::set_name(Arg_&& arg, Args_... args) {
+PROTOBUF_ALWAYS_INLINE void FullTile_Layer::set_name(Arg_ &&arg,
+                                                     Args_... args) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   SetHasBit(_impl_._has_bits_[0], 0x00000008U);
-  _impl_.name_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
+  _impl_.name_.Set(static_cast<Arg_ &&>(arg), args..., GetArena());
   // @@protoc_insertion_point(field_set:vector_tile.FullTile.Layer.name)
 }
-inline ::std::string* PROTOBUF_NONNULL FullTile_Layer::mutable_name()
+inline ::std::string *PROTOBUF_NONNULL FullTile_Layer::mutable_name()
     ABSL_ATTRIBUTE_LIFETIME_BOUND {
   SetHasBit(_impl_._has_bits_[0], 0x00000008U);
-  ::std::string* _s = _internal_mutable_name();
+  ::std::string *_s = _internal_mutable_name();
   // @@protoc_insertion_point(field_mutable:vector_tile.FullTile.Layer.name)
   return _s;
 }
-inline const ::std::string& FullTile_Layer::_internal_name() const {
+inline const ::std::string &FullTile_Layer::_internal_name() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
   return _impl_.name_.Get();
 }
-inline void FullTile_Layer::_internal_set_name(const ::std::string& value) {
+inline void FullTile_Layer::_internal_set_name(const ::std::string &value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.name_.Set(value, GetArena());
 }
-inline ::std::string* PROTOBUF_NONNULL FullTile_Layer::_internal_mutable_name() {
+inline ::std::string *PROTOBUF_NONNULL
+FullTile_Layer::_internal_mutable_name() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  return _impl_.name_.Mutable( GetArena());
+  return _impl_.name_.Mutable(GetArena());
 }
-inline ::std::string* PROTOBUF_NULLABLE FullTile_Layer::release_name() {
+inline ::std::string *PROTOBUF_NULLABLE FullTile_Layer::release_name() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   // @@protoc_insertion_point(field_release:vector_tile.FullTile.Layer.name)
   if (!CheckHasBit(_impl_._has_bits_[0], 0x00000008U)) {
     return nullptr;
   }
   ClearHasBit(_impl_._has_bits_[0], 0x00000008U);
-  auto* released = _impl_.name_.Release();
+  auto *released = _impl_.name_.Release();
   if (::google::protobuf::internal::DebugHardenForceCopyDefaultString()) {
     _impl_.name_.Set("", GetArena());
   }
   return released;
 }
-inline void FullTile_Layer::set_allocated_name(::std::string* PROTOBUF_NULLABLE value) {
+inline void
+FullTile_Layer::set_allocated_name(::std::string *PROTOBUF_NULLABLE value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   if (value != nullptr) {
     SetHasBit(_impl_._has_bits_[0], 0x00000008U);
@@ -2692,7 +2946,8 @@ inline void FullTile_Layer::set_allocated_name(::std::string* PROTOBUF_NULLABLE 
     ClearHasBit(_impl_._has_bits_[0], 0x00000008U);
   }
   _impl_.name_.SetAllocated(value, GetArena());
-  if (::google::protobuf::internal::DebugHardenForceCopyDefaultString() && _impl_.name_.IsDefault()) {
+  if (::google::protobuf::internal::DebugHardenForceCopyDefaultString() &&
+      _impl_.name_.IsDefault()) {
     _impl_.name_.Set("", GetArena());
   }
   // @@protoc_insertion_point(field_set_allocated:vector_tile.FullTile.Layer.name)
@@ -2708,48 +2963,51 @@ inline int FullTile_Layer::features_size() const {
 inline void FullTile_Layer::clear_features() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.features_.Clear();
-  ClearHasBitForRepeated(_impl_._has_bits_[0],
-                  0x00000001U);
+  ClearHasBitForRepeated(_impl_._has_bits_[0], 0x00000001U);
 }
-inline ::vector_tile::FullTile_Feature* PROTOBUF_NONNULL FullTile_Layer::mutable_features(int index)
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+inline ::vector_tile::FullTile_Feature *PROTOBUF_NONNULL
+FullTile_Layer::mutable_features(int index) ABSL_ATTRIBUTE_LIFETIME_BOUND {
   // @@protoc_insertion_point(field_mutable:vector_tile.FullTile.Layer.features)
   return _internal_mutable_features()->Mutable(index);
 }
-inline ::google::protobuf::RepeatedPtrField<::vector_tile::FullTile_Feature>* PROTOBUF_NONNULL FullTile_Layer::mutable_features()
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+inline ::google::protobuf::RepeatedPtrField<::vector_tile::FullTile_Feature> *
+    PROTOBUF_NONNULL
+    FullTile_Layer::mutable_features() ABSL_ATTRIBUTE_LIFETIME_BOUND {
   SetHasBitForRepeated(_impl_._has_bits_[0], 0x00000001U);
   // @@protoc_insertion_point(field_mutable_list:vector_tile.FullTile.Layer.features)
   ::google::protobuf::internal::TSanWrite(&_impl_);
   return _internal_mutable_features();
 }
-inline const ::vector_tile::FullTile_Feature& FullTile_Layer::features(int index) const
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+inline const ::vector_tile::FullTile_Feature &
+FullTile_Layer::features(int index) const ABSL_ATTRIBUTE_LIFETIME_BOUND {
   // @@protoc_insertion_point(field_get:vector_tile.FullTile.Layer.features)
   return _internal_features().Get(index);
 }
-inline ::vector_tile::FullTile_Feature* PROTOBUF_NONNULL FullTile_Layer::add_features()
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+inline ::vector_tile::FullTile_Feature *PROTOBUF_NONNULL
+FullTile_Layer::add_features() ABSL_ATTRIBUTE_LIFETIME_BOUND {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  ::vector_tile::FullTile_Feature* _add =
+  ::vector_tile::FullTile_Feature *_add =
       _internal_mutable_features()->InternalAddWithArena(
           ::google::protobuf::MessageLite::internal_visibility(), GetArena());
   SetHasBitForRepeated(_impl_._has_bits_[0], 0x00000001U);
   // @@protoc_insertion_point(field_add:vector_tile.FullTile.Layer.features)
   return _add;
 }
-inline const ::google::protobuf::RepeatedPtrField<::vector_tile::FullTile_Feature>& FullTile_Layer::features() const
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+inline const ::google::protobuf::RepeatedPtrField<
+    ::vector_tile::FullTile_Feature> &
+FullTile_Layer::features() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
   // @@protoc_insertion_point(field_list:vector_tile.FullTile.Layer.features)
   return _internal_features();
 }
-inline const ::google::protobuf::RepeatedPtrField<::vector_tile::FullTile_Feature>&
+inline const ::google::protobuf::RepeatedPtrField<
+    ::vector_tile::FullTile_Feature> &
 FullTile_Layer::_internal_features() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
   return _impl_.features_;
 }
-inline ::google::protobuf::RepeatedPtrField<::vector_tile::FullTile_Feature>* PROTOBUF_NONNULL
-FullTile_Layer::_internal_mutable_features() {
+inline ::google::protobuf::RepeatedPtrField<::vector_tile::FullTile_Feature> *
+    PROTOBUF_NONNULL
+    FullTile_Layer::_internal_mutable_features() {
   ::google::protobuf::internal::TSanRead(&_impl_);
   return &_impl_.features_;
 }
@@ -2758,69 +3016,65 @@ FullTile_Layer::_internal_mutable_features() {
 inline int FullTile_Layer::_internal_keys_size() const {
   return _internal_keys().size();
 }
-inline int FullTile_Layer::keys_size() const {
-  return _internal_keys_size();
-}
+inline int FullTile_Layer::keys_size() const { return _internal_keys_size(); }
 inline void FullTile_Layer::clear_keys() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.keys_.Clear();
-  ClearHasBitForRepeated(_impl_._has_bits_[0],
-                  0x00000002U);
+  ClearHasBitForRepeated(_impl_._has_bits_[0], 0x00000002U);
 }
-inline ::std::string* PROTOBUF_NONNULL FullTile_Layer::add_keys()
+inline ::std::string *PROTOBUF_NONNULL FullTile_Layer::add_keys()
     ABSL_ATTRIBUTE_LIFETIME_BOUND {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  ::std::string* _s =
-      _internal_mutable_keys()->InternalAddWithArena(
-          ::google::protobuf::MessageLite::internal_visibility(), GetArena());
+  ::std::string *_s = _internal_mutable_keys()->InternalAddWithArena(
+      ::google::protobuf::MessageLite::internal_visibility(), GetArena());
   SetHasBitForRepeated(_impl_._has_bits_[0], 0x00000002U);
   // @@protoc_insertion_point(field_add_mutable:vector_tile.FullTile.Layer.keys)
   return _s;
 }
-inline const ::std::string& FullTile_Layer::keys(int index) const
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+inline const ::std::string &
+FullTile_Layer::keys(int index) const ABSL_ATTRIBUTE_LIFETIME_BOUND {
   // @@protoc_insertion_point(field_get:vector_tile.FullTile.Layer.keys)
   return _internal_keys().Get(index);
 }
-inline ::std::string* PROTOBUF_NONNULL FullTile_Layer::mutable_keys(int index)
+inline ::std::string *PROTOBUF_NONNULL FullTile_Layer::mutable_keys(int index)
     ABSL_ATTRIBUTE_LIFETIME_BOUND {
   // @@protoc_insertion_point(field_mutable:vector_tile.FullTile.Layer.keys)
   return _internal_mutable_keys()->Mutable(index);
 }
 template <typename Arg_, typename... Args_>
-inline void FullTile_Layer::set_keys(int index, Arg_&& value, Args_... args) {
-  ::google::protobuf::internal::AssignToString(*_internal_mutable_keys()->Mutable(index), ::std::forward<Arg_>(value),
-                        args... );
+inline void FullTile_Layer::set_keys(int index, Arg_ &&value, Args_... args) {
+  ::google::protobuf::internal::AssignToString(
+      *_internal_mutable_keys()->Mutable(index), ::std::forward<Arg_>(value),
+      args...);
   // @@protoc_insertion_point(field_set:vector_tile.FullTile.Layer.keys)
 }
 template <typename Arg_, typename... Args_>
-inline void FullTile_Layer::add_keys(Arg_&& value, Args_... args) {
+inline void FullTile_Layer::add_keys(Arg_ &&value, Args_... args) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   ::google::protobuf::internal::AddToRepeatedPtrField(
       ::google::protobuf::MessageLite::internal_visibility(), GetArena(),
-      *_internal_mutable_keys(), ::std::forward<Arg_>(value),
-      args... );
+      *_internal_mutable_keys(), ::std::forward<Arg_>(value), args...);
   SetHasBitForRepeated(_impl_._has_bits_[0], 0x00000002U);
   // @@protoc_insertion_point(field_add:vector_tile.FullTile.Layer.keys)
 }
-inline const ::google::protobuf::RepeatedPtrField<::std::string>& FullTile_Layer::keys()
-    const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+inline const ::google::protobuf::RepeatedPtrField<::std::string> &
+FullTile_Layer::keys() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
   // @@protoc_insertion_point(field_list:vector_tile.FullTile.Layer.keys)
   return _internal_keys();
 }
-inline ::google::protobuf::RepeatedPtrField<::std::string>* PROTOBUF_NONNULL
+inline ::google::protobuf::RepeatedPtrField<::std::string> *PROTOBUF_NONNULL
 FullTile_Layer::mutable_keys() ABSL_ATTRIBUTE_LIFETIME_BOUND {
   SetHasBitForRepeated(_impl_._has_bits_[0], 0x00000002U);
   // @@protoc_insertion_point(field_mutable_list:vector_tile.FullTile.Layer.keys)
   ::google::protobuf::internal::TSanWrite(&_impl_);
   return _internal_mutable_keys();
 }
-inline const ::google::protobuf::RepeatedPtrField<::std::string>&
+inline const ::google::protobuf::RepeatedPtrField<::std::string> &
 FullTile_Layer::_internal_keys() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
   return _impl_.keys_;
 }
-inline ::google::protobuf::RepeatedPtrField<::std::string>* PROTOBUF_NONNULL
+inline ::google::protobuf::RepeatedPtrField<::std::string> *PROTOBUF_NONNULL
 FullTile_Layer::_internal_mutable_keys() {
   ::google::protobuf::internal::TSanRead(&_impl_);
   return &_impl_.keys_;
@@ -2836,48 +3090,51 @@ inline int FullTile_Layer::values_size() const {
 inline void FullTile_Layer::clear_values() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.values_.Clear();
-  ClearHasBitForRepeated(_impl_._has_bits_[0],
-                  0x00000004U);
+  ClearHasBitForRepeated(_impl_._has_bits_[0], 0x00000004U);
 }
-inline ::vector_tile::FullTile_Value* PROTOBUF_NONNULL FullTile_Layer::mutable_values(int index)
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+inline ::vector_tile::FullTile_Value *PROTOBUF_NONNULL
+FullTile_Layer::mutable_values(int index) ABSL_ATTRIBUTE_LIFETIME_BOUND {
   // @@protoc_insertion_point(field_mutable:vector_tile.FullTile.Layer.values)
   return _internal_mutable_values()->Mutable(index);
 }
-inline ::google::protobuf::RepeatedPtrField<::vector_tile::FullTile_Value>* PROTOBUF_NONNULL FullTile_Layer::mutable_values()
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+inline ::google::protobuf::RepeatedPtrField<::vector_tile::FullTile_Value> *
+    PROTOBUF_NONNULL
+    FullTile_Layer::mutable_values() ABSL_ATTRIBUTE_LIFETIME_BOUND {
   SetHasBitForRepeated(_impl_._has_bits_[0], 0x00000004U);
   // @@protoc_insertion_point(field_mutable_list:vector_tile.FullTile.Layer.values)
   ::google::protobuf::internal::TSanWrite(&_impl_);
   return _internal_mutable_values();
 }
-inline const ::vector_tile::FullTile_Value& FullTile_Layer::values(int index) const
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+inline const ::vector_tile::FullTile_Value &
+FullTile_Layer::values(int index) const ABSL_ATTRIBUTE_LIFETIME_BOUND {
   // @@protoc_insertion_point(field_get:vector_tile.FullTile.Layer.values)
   return _internal_values().Get(index);
 }
-inline ::vector_tile::FullTile_Value* PROTOBUF_NONNULL FullTile_Layer::add_values()
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+inline ::vector_tile::FullTile_Value *PROTOBUF_NONNULL
+FullTile_Layer::add_values() ABSL_ATTRIBUTE_LIFETIME_BOUND {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  ::vector_tile::FullTile_Value* _add =
+  ::vector_tile::FullTile_Value *_add =
       _internal_mutable_values()->InternalAddWithArena(
           ::google::protobuf::MessageLite::internal_visibility(), GetArena());
   SetHasBitForRepeated(_impl_._has_bits_[0], 0x00000004U);
   // @@protoc_insertion_point(field_add:vector_tile.FullTile.Layer.values)
   return _add;
 }
-inline const ::google::protobuf::RepeatedPtrField<::vector_tile::FullTile_Value>& FullTile_Layer::values() const
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+inline const ::google::protobuf::RepeatedPtrField<
+    ::vector_tile::FullTile_Value> &
+FullTile_Layer::values() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
   // @@protoc_insertion_point(field_list:vector_tile.FullTile.Layer.values)
   return _internal_values();
 }
-inline const ::google::protobuf::RepeatedPtrField<::vector_tile::FullTile_Value>&
+inline const ::google::protobuf::RepeatedPtrField<
+    ::vector_tile::FullTile_Value> &
 FullTile_Layer::_internal_values() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
   return _impl_.values_;
 }
-inline ::google::protobuf::RepeatedPtrField<::vector_tile::FullTile_Value>* PROTOBUF_NONNULL
-FullTile_Layer::_internal_mutable_values() {
+inline ::google::protobuf::RepeatedPtrField<::vector_tile::FullTile_Value> *
+    PROTOBUF_NONNULL
+    FullTile_Layer::_internal_mutable_values() {
   ::google::protobuf::internal::TSanRead(&_impl_);
   return &_impl_.values_;
 }
@@ -2890,8 +3147,7 @@ inline bool FullTile_Layer::has_extent() const {
 inline void FullTile_Layer::clear_extent() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.extent_ = 4096u;
-  ClearHasBit(_impl_._has_bits_[0],
-                  0x00000010U);
+  ClearHasBit(_impl_._has_bits_[0], 0x00000010U);
 }
 inline ::uint32_t FullTile_Layer::extent() const {
   // @@protoc_insertion_point(field_get:vector_tile.FullTile.Layer.extent)
@@ -2919,54 +3175,55 @@ inline void FullTile_Layer::_internal_set_extent(::uint32_t value) {
 inline int FullTile::_internal_layers_size() const {
   return _internal_layers().size();
 }
-inline int FullTile::layers_size() const {
-  return _internal_layers_size();
-}
+inline int FullTile::layers_size() const { return _internal_layers_size(); }
 inline void FullTile::clear_layers() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.layers_.Clear();
-  ClearHasBitForRepeated(_impl_._has_bits_[0],
-                  0x00000001U);
+  ClearHasBitForRepeated(_impl_._has_bits_[0], 0x00000001U);
 }
-inline ::vector_tile::FullTile_Layer* PROTOBUF_NONNULL FullTile::mutable_layers(int index)
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+inline ::vector_tile::FullTile_Layer *PROTOBUF_NONNULL
+FullTile::mutable_layers(int index) ABSL_ATTRIBUTE_LIFETIME_BOUND {
   // @@protoc_insertion_point(field_mutable:vector_tile.FullTile.layers)
   return _internal_mutable_layers()->Mutable(index);
 }
-inline ::google::protobuf::RepeatedPtrField<::vector_tile::FullTile_Layer>* PROTOBUF_NONNULL FullTile::mutable_layers()
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+inline ::google::protobuf::RepeatedPtrField<::vector_tile::FullTile_Layer> *
+    PROTOBUF_NONNULL
+    FullTile::mutable_layers() ABSL_ATTRIBUTE_LIFETIME_BOUND {
   SetHasBitForRepeated(_impl_._has_bits_[0], 0x00000001U);
   // @@protoc_insertion_point(field_mutable_list:vector_tile.FullTile.layers)
   ::google::protobuf::internal::TSanWrite(&_impl_);
   return _internal_mutable_layers();
 }
-inline const ::vector_tile::FullTile_Layer& FullTile::layers(int index) const
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+inline const ::vector_tile::FullTile_Layer &
+FullTile::layers(int index) const ABSL_ATTRIBUTE_LIFETIME_BOUND {
   // @@protoc_insertion_point(field_get:vector_tile.FullTile.layers)
   return _internal_layers().Get(index);
 }
-inline ::vector_tile::FullTile_Layer* PROTOBUF_NONNULL FullTile::add_layers()
+inline ::vector_tile::FullTile_Layer *PROTOBUF_NONNULL FullTile::add_layers()
     ABSL_ATTRIBUTE_LIFETIME_BOUND {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  ::vector_tile::FullTile_Layer* _add =
+  ::vector_tile::FullTile_Layer *_add =
       _internal_mutable_layers()->InternalAddWithArena(
           ::google::protobuf::MessageLite::internal_visibility(), GetArena());
   SetHasBitForRepeated(_impl_._has_bits_[0], 0x00000001U);
   // @@protoc_insertion_point(field_add:vector_tile.FullTile.layers)
   return _add;
 }
-inline const ::google::protobuf::RepeatedPtrField<::vector_tile::FullTile_Layer>& FullTile::layers() const
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+inline const ::google::protobuf::RepeatedPtrField<
+    ::vector_tile::FullTile_Layer> &
+FullTile::layers() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
   // @@protoc_insertion_point(field_list:vector_tile.FullTile.layers)
   return _internal_layers();
 }
-inline const ::google::protobuf::RepeatedPtrField<::vector_tile::FullTile_Layer>&
+inline const ::google::protobuf::RepeatedPtrField<
+    ::vector_tile::FullTile_Layer> &
 FullTile::_internal_layers() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
   return _impl_.layers_;
 }
-inline ::google::protobuf::RepeatedPtrField<::vector_tile::FullTile_Layer>* PROTOBUF_NONNULL
-FullTile::_internal_mutable_layers() {
+inline ::google::protobuf::RepeatedPtrField<::vector_tile::FullTile_Layer> *
+    PROTOBUF_NONNULL
+    FullTile::_internal_mutable_layers() {
   ::google::protobuf::internal::TSanRead(&_impl_);
   return &_impl_.layers_;
 }
@@ -2983,54 +3240,56 @@ inline bool Tile_BuildingShape::has_osid() const {
 inline void Tile_BuildingShape::clear_osid() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.osid_.ClearToEmpty();
-  ClearHasBit(_impl_._has_bits_[0],
-                  0x00000004U);
+  ClearHasBit(_impl_._has_bits_[0], 0x00000004U);
 }
-inline const ::std::string& Tile_BuildingShape::osid() const
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+inline const ::std::string &
+Tile_BuildingShape::osid() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
   // @@protoc_insertion_point(field_get:vector_tile.Tile.BuildingShape.osid)
   return _internal_osid();
 }
 template <typename Arg_, typename... Args_>
-PROTOBUF_ALWAYS_INLINE void Tile_BuildingShape::set_osid(Arg_&& arg, Args_... args) {
+PROTOBUF_ALWAYS_INLINE void Tile_BuildingShape::set_osid(Arg_ &&arg,
+                                                         Args_... args) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   SetHasBit(_impl_._has_bits_[0], 0x00000004U);
-  _impl_.osid_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
+  _impl_.osid_.Set(static_cast<Arg_ &&>(arg), args..., GetArena());
   // @@protoc_insertion_point(field_set:vector_tile.Tile.BuildingShape.osid)
 }
-inline ::std::string* PROTOBUF_NONNULL Tile_BuildingShape::mutable_osid()
+inline ::std::string *PROTOBUF_NONNULL Tile_BuildingShape::mutable_osid()
     ABSL_ATTRIBUTE_LIFETIME_BOUND {
   SetHasBit(_impl_._has_bits_[0], 0x00000004U);
-  ::std::string* _s = _internal_mutable_osid();
+  ::std::string *_s = _internal_mutable_osid();
   // @@protoc_insertion_point(field_mutable:vector_tile.Tile.BuildingShape.osid)
   return _s;
 }
-inline const ::std::string& Tile_BuildingShape::_internal_osid() const {
+inline const ::std::string &Tile_BuildingShape::_internal_osid() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
   return _impl_.osid_.Get();
 }
-inline void Tile_BuildingShape::_internal_set_osid(const ::std::string& value) {
+inline void Tile_BuildingShape::_internal_set_osid(const ::std::string &value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.osid_.Set(value, GetArena());
 }
-inline ::std::string* PROTOBUF_NONNULL Tile_BuildingShape::_internal_mutable_osid() {
+inline ::std::string *PROTOBUF_NONNULL
+Tile_BuildingShape::_internal_mutable_osid() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  return _impl_.osid_.Mutable( GetArena());
+  return _impl_.osid_.Mutable(GetArena());
 }
-inline ::std::string* PROTOBUF_NULLABLE Tile_BuildingShape::release_osid() {
+inline ::std::string *PROTOBUF_NULLABLE Tile_BuildingShape::release_osid() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   // @@protoc_insertion_point(field_release:vector_tile.Tile.BuildingShape.osid)
   if (!CheckHasBit(_impl_._has_bits_[0], 0x00000004U)) {
     return nullptr;
   }
   ClearHasBit(_impl_._has_bits_[0], 0x00000004U);
-  auto* released = _impl_.osid_.Release();
+  auto *released = _impl_.osid_.Release();
   if (::google::protobuf::internal::DebugHardenForceCopyDefaultString()) {
     _impl_.osid_.Set("", GetArena());
   }
   return released;
 }
-inline void Tile_BuildingShape::set_allocated_osid(::std::string* PROTOBUF_NULLABLE value) {
+inline void
+Tile_BuildingShape::set_allocated_osid(::std::string *PROTOBUF_NULLABLE value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   if (value != nullptr) {
     SetHasBit(_impl_._has_bits_[0], 0x00000004U);
@@ -3038,7 +3297,8 @@ inline void Tile_BuildingShape::set_allocated_osid(::std::string* PROTOBUF_NULLA
     ClearHasBit(_impl_._has_bits_[0], 0x00000004U);
   }
   _impl_.osid_.SetAllocated(value, GetArena());
-  if (::google::protobuf::internal::DebugHardenForceCopyDefaultString() && _impl_.osid_.IsDefault()) {
+  if (::google::protobuf::internal::DebugHardenForceCopyDefaultString() &&
+      _impl_.osid_.IsDefault()) {
     _impl_.osid_.Set("", GetArena());
   }
   // @@protoc_insertion_point(field_set_allocated:vector_tile.Tile.BuildingShape.osid)
@@ -3054,8 +3314,7 @@ inline int Tile_BuildingShape::approx_centre_size() const {
 inline void Tile_BuildingShape::clear_approx_centre() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.approx_centre_.Clear();
-  ClearHasBitForRepeated(_impl_._has_bits_[0],
-                  0x00000001U);
+  ClearHasBitForRepeated(_impl_._has_bits_[0], 0x00000001U);
 }
 inline ::int32_t Tile_BuildingShape::approx_centre(int index) const {
   // @@protoc_insertion_point(field_get:vector_tile.Tile.BuildingShape.approx_centre)
@@ -3071,24 +3330,24 @@ inline void Tile_BuildingShape::add_approx_centre(::int32_t value) {
   SetHasBitForRepeated(_impl_._has_bits_[0], 0x00000001U);
   // @@protoc_insertion_point(field_add:vector_tile.Tile.BuildingShape.approx_centre)
 }
-inline const ::google::protobuf::RepeatedField<::int32_t>& Tile_BuildingShape::approx_centre() const
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+inline const ::google::protobuf::RepeatedField<::int32_t> &
+Tile_BuildingShape::approx_centre() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
   // @@protoc_insertion_point(field_list:vector_tile.Tile.BuildingShape.approx_centre)
   return _internal_approx_centre();
 }
-inline ::google::protobuf::RepeatedField<::int32_t>* PROTOBUF_NONNULL Tile_BuildingShape::mutable_approx_centre()
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+inline ::google::protobuf::RepeatedField<::int32_t> *PROTOBUF_NONNULL
+Tile_BuildingShape::mutable_approx_centre() ABSL_ATTRIBUTE_LIFETIME_BOUND {
   SetHasBitForRepeated(_impl_._has_bits_[0], 0x00000001U);
   // @@protoc_insertion_point(field_mutable_list:vector_tile.Tile.BuildingShape.approx_centre)
   ::google::protobuf::internal::TSanWrite(&_impl_);
   return _internal_mutable_approx_centre();
 }
-inline const ::google::protobuf::RepeatedField<::int32_t>&
+inline const ::google::protobuf::RepeatedField<::int32_t> &
 Tile_BuildingShape::_internal_approx_centre() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
   return _impl_.approx_centre_;
 }
-inline ::google::protobuf::RepeatedField<::int32_t>* PROTOBUF_NONNULL
+inline ::google::protobuf::RepeatedField<::int32_t> *PROTOBUF_NONNULL
 Tile_BuildingShape::_internal_mutable_approx_centre() {
   ::google::protobuf::internal::TSanRead(&_impl_);
   return &_impl_.approx_centre_;
@@ -3104,8 +3363,7 @@ inline int Tile_BuildingShape::edges_size() const {
 inline void Tile_BuildingShape::clear_edges() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.edges_.Clear();
-  ClearHasBitForRepeated(_impl_._has_bits_[0],
-                  0x00000002U);
+  ClearHasBitForRepeated(_impl_._has_bits_[0], 0x00000002U);
 }
 inline ::int32_t Tile_BuildingShape::edges(int index) const {
   // @@protoc_insertion_point(field_get:vector_tile.Tile.BuildingShape.edges)
@@ -3121,24 +3379,24 @@ inline void Tile_BuildingShape::add_edges(::int32_t value) {
   SetHasBitForRepeated(_impl_._has_bits_[0], 0x00000002U);
   // @@protoc_insertion_point(field_add:vector_tile.Tile.BuildingShape.edges)
 }
-inline const ::google::protobuf::RepeatedField<::int32_t>& Tile_BuildingShape::edges() const
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+inline const ::google::protobuf::RepeatedField<::int32_t> &
+Tile_BuildingShape::edges() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
   // @@protoc_insertion_point(field_list:vector_tile.Tile.BuildingShape.edges)
   return _internal_edges();
 }
-inline ::google::protobuf::RepeatedField<::int32_t>* PROTOBUF_NONNULL Tile_BuildingShape::mutable_edges()
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+inline ::google::protobuf::RepeatedField<::int32_t> *PROTOBUF_NONNULL
+Tile_BuildingShape::mutable_edges() ABSL_ATTRIBUTE_LIFETIME_BOUND {
   SetHasBitForRepeated(_impl_._has_bits_[0], 0x00000002U);
   // @@protoc_insertion_point(field_mutable_list:vector_tile.Tile.BuildingShape.edges)
   ::google::protobuf::internal::TSanWrite(&_impl_);
   return _internal_mutable_edges();
 }
-inline const ::google::protobuf::RepeatedField<::int32_t>&
+inline const ::google::protobuf::RepeatedField<::int32_t> &
 Tile_BuildingShape::_internal_edges() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
   return _impl_.edges_;
 }
-inline ::google::protobuf::RepeatedField<::int32_t>* PROTOBUF_NONNULL
+inline ::google::protobuf::RepeatedField<::int32_t> *PROTOBUF_NONNULL
 Tile_BuildingShape::_internal_mutable_edges() {
   ::google::protobuf::internal::TSanRead(&_impl_);
   return &_impl_.edges_;
@@ -3152,65 +3410,65 @@ Tile_BuildingShape::_internal_mutable_edges() {
 inline int Tile::_internal_shapes_size() const {
   return _internal_shapes().size();
 }
-inline int Tile::shapes_size() const {
-  return _internal_shapes_size();
-}
+inline int Tile::shapes_size() const { return _internal_shapes_size(); }
 inline void Tile::clear_shapes() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.shapes_.Clear();
-  ClearHasBitForRepeated(_impl_._has_bits_[0],
-                  0x00000001U);
+  ClearHasBitForRepeated(_impl_._has_bits_[0], 0x00000001U);
 }
-inline ::vector_tile::Tile_BuildingShape* PROTOBUF_NONNULL Tile::mutable_shapes(int index)
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+inline ::vector_tile::Tile_BuildingShape *PROTOBUF_NONNULL
+Tile::mutable_shapes(int index) ABSL_ATTRIBUTE_LIFETIME_BOUND {
   // @@protoc_insertion_point(field_mutable:vector_tile.Tile.shapes)
   return _internal_mutable_shapes()->Mutable(index);
 }
-inline ::google::protobuf::RepeatedPtrField<::vector_tile::Tile_BuildingShape>* PROTOBUF_NONNULL Tile::mutable_shapes()
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+inline ::google::protobuf::RepeatedPtrField<::vector_tile::Tile_BuildingShape> *
+    PROTOBUF_NONNULL
+    Tile::mutable_shapes() ABSL_ATTRIBUTE_LIFETIME_BOUND {
   SetHasBitForRepeated(_impl_._has_bits_[0], 0x00000001U);
   // @@protoc_insertion_point(field_mutable_list:vector_tile.Tile.shapes)
   ::google::protobuf::internal::TSanWrite(&_impl_);
   return _internal_mutable_shapes();
 }
-inline const ::vector_tile::Tile_BuildingShape& Tile::shapes(int index) const
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+inline const ::vector_tile::Tile_BuildingShape &
+Tile::shapes(int index) const ABSL_ATTRIBUTE_LIFETIME_BOUND {
   // @@protoc_insertion_point(field_get:vector_tile.Tile.shapes)
   return _internal_shapes().Get(index);
 }
-inline ::vector_tile::Tile_BuildingShape* PROTOBUF_NONNULL Tile::add_shapes()
+inline ::vector_tile::Tile_BuildingShape *PROTOBUF_NONNULL Tile::add_shapes()
     ABSL_ATTRIBUTE_LIFETIME_BOUND {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  ::vector_tile::Tile_BuildingShape* _add =
+  ::vector_tile::Tile_BuildingShape *_add =
       _internal_mutable_shapes()->InternalAddWithArena(
           ::google::protobuf::MessageLite::internal_visibility(), GetArena());
   SetHasBitForRepeated(_impl_._has_bits_[0], 0x00000001U);
   // @@protoc_insertion_point(field_add:vector_tile.Tile.shapes)
   return _add;
 }
-inline const ::google::protobuf::RepeatedPtrField<::vector_tile::Tile_BuildingShape>& Tile::shapes() const
-    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+inline const ::google::protobuf::RepeatedPtrField<
+    ::vector_tile::Tile_BuildingShape> &
+Tile::shapes() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
   // @@protoc_insertion_point(field_list:vector_tile.Tile.shapes)
   return _internal_shapes();
 }
-inline const ::google::protobuf::RepeatedPtrField<::vector_tile::Tile_BuildingShape>&
+inline const ::google::protobuf::RepeatedPtrField<
+    ::vector_tile::Tile_BuildingShape> &
 Tile::_internal_shapes() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
   return _impl_.shapes_;
 }
-inline ::google::protobuf::RepeatedPtrField<::vector_tile::Tile_BuildingShape>* PROTOBUF_NONNULL
-Tile::_internal_mutable_shapes() {
+inline ::google::protobuf::RepeatedPtrField<::vector_tile::Tile_BuildingShape> *
+    PROTOBUF_NONNULL
+    Tile::_internal_mutable_shapes() {
   ::google::protobuf::internal::TSanRead(&_impl_);
   return &_impl_.shapes_;
 }
 
 #ifdef __GNUC__
 #pragma GCC diagnostic pop
-#endif  // __GNUC__
+#endif // __GNUC__
 
 // @@protoc_insertion_point(namespace_scope)
-}  // namespace vector_tile
-
+} // namespace vector_tile
 
 namespace google {
 namespace protobuf {
@@ -3218,15 +3476,16 @@ namespace protobuf {
 template <>
 struct is_proto_enum<::vector_tile::FullTile_GeomType> : std::true_type {};
 template <>
-inline const EnumDescriptor* PROTOBUF_NONNULL GetEnumDescriptor<::vector_tile::FullTile_GeomType>() {
+inline const EnumDescriptor *PROTOBUF_NONNULL
+GetEnumDescriptor<::vector_tile::FullTile_GeomType>() {
   return ::vector_tile::FullTile_GeomType_descriptor();
 }
 
-}  // namespace protobuf
-}  // namespace google
+} // namespace protobuf
+} // namespace google
 
 // @@protoc_insertion_point(global_scope)
 
 #include "google/protobuf/port_undef.inc"
 
-#endif  // vector_5ftile_2eproto_2epb_2eh
+#endif // vector_5ftile_2eproto_2epb_2eh
