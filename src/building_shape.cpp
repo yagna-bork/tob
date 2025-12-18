@@ -588,7 +588,12 @@ void translate_point_to_building_centre(
   for (int i = 0; i != tile.shapes_size(); i++) {
     const BuildingShape &shape = tile.shapes(i);
     enc_type = get_enclosure_type(p, shape, pen_mps[i]);
-    if (enc_type == EnclosureType::OUTSIDE) {
+    // TODO fix bug where builings incorrectly grouped
+    // using radius = 30 and location = office
+    // so we can count EDGE points as inside again
+    // look for osid 92c806a7-2179-4878-9c77-339c233af051
+    // as problematic building grouping
+    if (enc_type != EnclosureType::INSIDE) {
       continue;
     }
     p.x = shape.approx_centre(0);

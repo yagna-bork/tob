@@ -51,7 +51,8 @@ std::vector<PlanningApplication> fetch_planning_apps(CURL *handle, double lat,
         }
       }
       applications.push_back(
-          {std::move(app["address"]), std::move(app["description"]),
+          {std::move(app["address"]),
+           std::move(app["description"]),
            get_json_field<std::string>(app, "app_size"),
            get_json_field<std::string>(app, "app_state"),
            get_json_field<std::string>(app["other_fields"], "date_received"),
@@ -59,7 +60,7 @@ std::vector<PlanningApplication> fetch_planning_apps(CURL *handle, double lat,
            get_json_field<std::string>(app["other_fields"], "decision_date"),
            get_json_field<std::string>(app["other_fields"],
                                        "decision_issued_date"),
-           x, y});
+           {x, y}});
     }
     index = jdata["to"].get<int>() + 1;
   } while (index < jdata["total"]);

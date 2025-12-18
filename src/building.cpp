@@ -8,7 +8,8 @@
 #include <unordered_map>
 #include <vector>
 
-static std::string TOB_TO_STR[] = {"Commercial", "Residential", "Mixed"};
+static std::string TOB_TO_STR[] = {"Commercial", "Residential", "Mixed",
+                                   "Development"};
 
 std::string tob_to_string(TypeOfBuilding t) { return TOB_TO_STR[t]; }
 
@@ -96,14 +97,13 @@ std::vector<Building> fetch_buildings(CURL *handle, float x, float y,
           get_json_field<std::string>(jb["DPA"], "THOROUGHFARE_NAME");
       std::string key = building_name + street;
       if (!idxs.count(key)) {
-        buildings.push_back({
-            building_name,
-            street,
-            get_json_field<std::string>(jb["DPA"], "POST_TOWN"),
-            get_json_field<std::string>(jb["DPA"], "POSTCODE"),
-            get_json_field<float>(jb["DPA"], "X_COORDINATE"),
-            get_json_field<float>(jb["DPA"], "Y_COORDINATE"),
-        });
+        buildings.push_back(
+            {building_name,
+             street,
+             get_json_field<std::string>(jb["DPA"], "POST_TOWN"),
+             get_json_field<std::string>(jb["DPA"], "POSTCODE"),
+             {get_json_field<float>(jb["DPA"], "X_COORDINATE"),
+              get_json_field<float>(jb["DPA"], "Y_COORDINATE")}});
         idxs[key] = buildings.size() - 1;
       }
       std::string classification_code =
@@ -131,7 +131,7 @@ void combine_buildings(Building &x, Building &y) {
             std::back_inserter(x.subunits));
   std::move(y.valuations.begin(), y.valuations.end(),
             std::back_inserter(x.valuations));
-  if (x.tob != y.tob) {
+  if ((x.tob != TypeOfBuilding::MIXED) && (x.tob != y.tob)) {
     x.tob = TypeOfBuilding::MIXED;
   }
   x.name = longest_common_substr(x.name, y.name);
@@ -140,19 +140,11 @@ void combine_buildings(Building &x, Building &y) {
   }
 }
 
-std::vector<Building> cluster_buildings(std::vector<Building> &buildings) {
-  std::vector<Building> combined_buildings;
-  std::unordered_map<std::string, std::vector<Building *>> clusters;
-  for (Building &b : buildings) {
-    clusters[get_location_key(b.x, b.y)].push_back(&b);
-  }
-  for (const auto &p : clusters) {
-    const std::vector<Building *> &cluster = p.second;
-    Building *combined_building = cluster[0];
-    for (int i = 1; i != cluster.size(); i++) {
-      combine_buildings(*combined_building, *cluster[i]);
-    }
-    combined_buildings.push_back(std::move(*combined_building));
-  }
-  return combined_buildings;
+Building make_development(PlanningApplication &&plan_app) {
+  Building development;
+  development.name = plan_app.address;
+  development.location = plan_app.location;
+  development.plan_apps.push_back(plan_app);
+  development.tob = TypeOfBuilding::DEVELOPMENT;
+  return development;
 }

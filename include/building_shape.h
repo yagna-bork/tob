@@ -51,7 +51,7 @@ template <> struct std::hash<Point> {
 };
 
 template <> struct std::hash<FPoint> {
-  size_t operator()(const Point &p) const {
+  size_t operator()(const FPoint &p) const {
     return std::hash<float>()(p.x) ^ std::hash<float>()(p.y);
   }
 };
@@ -223,4 +223,6 @@ void translate_point_to_building_centre(Point &p, const vector_tile::Tile &tile,
 void translate_points_to_building_centres(CURL *handle,
                                           std::vector<FPoint *> &bng_coords,
                                           FPoint centre);
+
+NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(FPoint, x, y)
 #endif
