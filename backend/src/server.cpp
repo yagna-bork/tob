@@ -1,4 +1,5 @@
 #include "../include/building.h"
+#include "../include/httplib.h"
 #include "../include/planning.h"
 #include "../include/util.h"
 #include "../include/valuation.h"
@@ -7,7 +8,6 @@
 #include <cstdio>
 #include <cstdlib>
 #include <float.h>
-#include <httplib.h>
 #include <iostream>
 #include <iterator>
 #include <unordered_map>
